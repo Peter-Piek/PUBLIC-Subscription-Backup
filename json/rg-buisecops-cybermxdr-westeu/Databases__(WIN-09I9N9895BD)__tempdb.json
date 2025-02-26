@@ -1,0 +1,36 @@
+{
+  "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-buisecops-cybermxdr-westeu/providers/Microsoft.AzureArcData/sqlServerInstances/WIN-09I9N9895BD/databases/tempdb",
+  "name": "tempdb",
+  "type": "microsoft.azurearcdata/sqlserverinstances/databases",
+  "location": "westeurope",
+  "systemData": {
+    "createdBy": "a12e8ccb-0fcd-46f8-b6a1-b9df7a9d7231",
+    "createdByType": "Application",
+    "createdAt": "2024-09-04T17:51:51.966869Z",
+    "lastModifiedBy": "a12e8ccb-0fcd-46f8-b6a1-b9df7a9d7231",
+    "lastModifiedByType": "Application",
+    "lastModifiedAt": "2024-09-06T09:55:09.6137258Z"
+  },
+  "properties": {
+    "collationName": "SQL_Latin1_General_CP1_CI_AS",
+    "databaseCreationDate": "2024-09-06T09:52:12Z",
+    "compatibilityLevel": 160,
+    "sizeMB": 16.0,
+    "spaceAvailableMB": 12.875,
+    "state": "Online",
+    "isReadOnly": false,
+    "recoveryMode": "Simple",
+    "databaseOptions": {
+      "isAutoCloseOn": false,
+      "isAutoShrinkOn": false,
+      "isAutoCreateStatsOn": true,
+      "isAutoUpdateStatsOn": true,
+      "isMemoryOptimizationEnabled": true,
+      "isEncrypted": false,
+      "isTrustworthyOn": false
+    },
+    "backupInformation": {},
+    "provisioningState": "Succeeded",
+    "lastDatabaseUploadTime": "2024-09-06T09:55:05.6042188Z"
+  }
+}

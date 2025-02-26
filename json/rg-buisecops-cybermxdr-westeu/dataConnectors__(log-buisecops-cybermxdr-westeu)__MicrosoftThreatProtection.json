@@ -1,0 +1,194 @@
+{
+  "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-buisecops-cybermxdr-westeu/providers/Microsoft.OperationalInsights/workspaces/log-buisecops-cybermxdr-westeu/providers/Microsoft.SecurityInsights/dataConnectors/MicrosoftThreatProtection",
+  "name": "MicrosoftThreatProtection",
+  "type": "Microsoft.SecurityInsights/dataConnectors",
+  "kind": "StaticUI",
+  "properties": {
+    "connectorUiConfig": {
+      "title": "Microsoft Defender XDR",
+      "publisher": "Microsoft",
+      "descriptionMarkdown": "Microsoft Defender XDR is a unified, natively integrated, pre- and post-breach enterprise defense suite that protects endpoint, identity, email, and applications and helps you detect, prevent, investigate, and automatically respond to sophisticated threats.\n\nMicrosoft Defender XDR suite includes: \n- Microsoft Defender for Endpoint\n- Microsoft Defender for Identity\n- Microsoft Defender for Office 365\n- Threat & Vulnerability Management\n- Microsoft Defender for Cloud Apps\n\nFor more information, see the [Microsoft Sentinel documentation](https://go.microsoft.com/fwlink/p/?linkid=2220004&wt.mc_id=sentinel_dataconnectordocs_content_cnl_csasci).",
+      "graphQueries": [
+        {
+          "metricName": "Total data received",
+          "legend": "Incidents",
+          "baseQuery": "SecurityIncident \n| where ProviderName == \"Microsoft 365 Defender\""
+        },
+        {
+          "metricName": "Total data received",
+          "legend": "Alerts",
+          "baseQuery": "SecurityAlert \n| where ProductName in(\"Microsoft Defender Advanced Threat Protection\",\"Office 365 Advanced Threat Protection\",\"Azure Advanced Threat Protection\",\"Microsoft Cloud App Security\",\"Microsoft 365 Defender\")"
+        },
+        {
+          "metricName": "Total data received",
+          "legend": "Endpoint Events",
+          "baseQuery": "DeviceEvents| union isfuzzy=true DeviceFileEvents| union isfuzzy=true DeviceImageLoadEvents| union isfuzzy=true DeviceInfo| union isfuzzy=true DeviceLogonEvents| union isfuzzy=true DeviceNetworkEvents| union isfuzzy=true DeviceNetworkInfo| union isfuzzy=true DeviceProcessEvents| union isfuzzy=true DeviceRegistryEvents| union isfuzzy=true DeviceFileCertificateInfo"
+        },
+        {
+          "metricName": "Total data received",
+          "legend": "Office Events",
+          "baseQuery": "EmailEvents| union isfuzzy=true EmailUrlInfo| union isfuzzy=true EmailAttachmentInfo| union isfuzzy=true EmailPostDeliveryEvents"
+        },
+        {
+          "metricName": "Total data received",
+          "legend": "Identity Events",
+          "baseQuery": "IdentityLogonEvents| union isfuzzy=true IdentityQueryEvents| union isfuzzy=true IdentityDirectoryEvents"
+        },
+        {
+          "metricName": "Total data received",
+          "legend": "Cloud app Events",
+          "baseQuery": "CloudAppEvents"
+        },
+        {
+          "metricName": "Total data received",
+          "legend": "Defender Alert Evidence",
+          "baseQuery": "AlertEvidence"
+        }
+      ],
+      "dataTypes": [
+        {
+          "name": "SecurityIncident",
+          "lastDataReceivedQuery": "SecurityIncident \n| where ProviderName == \"Microsoft 365 Defender\"\n            | summarize Time = max(TimeGenerated)\n            | where isnotempty(Time)"
+        },
+        {
+          "name": "SecurityAlert",
+          "lastDataReceivedQuery": "SecurityAlert \n| where ProductName in(\"Microsoft Defender Advanced Threat Protection\",\"Office 365 Advanced Threat Protection\",\"Azure Advanced Threat Protection\",\"Microsoft Cloud App Security\",\"Microsoft 365 Defender\")\n            | summarize Time = max(TimeGenerated)\n            | where isnotempty(Time)"
+        },
+        {
+          "name": "DeviceEvents",
+          "lastDataReceivedQuery": "DeviceEvents\n            | summarize Time = max(TimeGenerated)\n            | where isnotempty(Time)"
+        },
+        {
+          "name": "DeviceFileEvents",
+          "lastDataReceivedQuery": "DeviceFileEvents\n            | summarize Time = max(TimeGenerated)\n            | where isnotempty(Time)"
+        },
+        {
+          "name": "DeviceImageLoadEvents",
+          "lastDataReceivedQuery": "DeviceImageLoadEvents\n            | summarize Time = max(TimeGenerated)\n            | where isnotempty(Time)"
+        },
+        {
+          "name": "DeviceInfo",
+          "lastDataReceivedQuery": "DeviceInfo\n            | summarize Time = max(TimeGenerated)\n            | where isnotempty(Time)"
+        },
+        {
+          "name": "DeviceLogonEvents",
+          "lastDataReceivedQuery": "DeviceLogonEvents\n            | summarize Time = max(TimeGenerated)\n            | where isnotempty(Time)"
+        },
+        {
+          "name": "DeviceNetworkEvents",
+          "lastDataReceivedQuery": "DeviceNetworkEvents\n            | summarize Time = max(TimeGenerated)\n            | where isnotempty(Time)"
+        },
+        {
+          "name": "DeviceNetworkInfo",
+          "lastDataReceivedQuery": "DeviceNetworkInfo\n            | summarize Time = max(TimeGenerated)\n            | where isnotempty(Time)"
+        },
+        {
+          "name": "DeviceProcessEvents",
+          "lastDataReceivedQuery": "DeviceProcessEvents\n            | summarize Time = max(TimeGenerated)\n            | where isnotempty(Time)"
+        },
+        {
+          "name": "DeviceRegistryEvents",
+          "lastDataReceivedQuery": "DeviceRegistryEvents\n            | summarize Time = max(TimeGenerated)\n            | where isnotempty(Time)"
+        },
+        {
+          "name": "DeviceFileCertificateInfo",
+          "lastDataReceivedQuery": "DeviceFileCertificateInfo\n            | summarize Time = max(TimeGenerated)\n            | where isnotempty(Time)"
+        },
+        {
+          "name": "EmailEvents",
+          "lastDataReceivedQuery": "EmailEvents\n            | summarize Time = max(TimeGenerated)\n            | where isnotempty(Time)"
+        },
+        {
+          "name": "EmailUrlInfo",
+          "lastDataReceivedQuery": "EmailUrlInfo\n            | summarize Time = max(TimeGenerated)\n            | where isnotempty(Time)"
+        },
+        {
+          "name": "EmailAttachmentInfo",
+          "lastDataReceivedQuery": "EmailAttachmentInfo\n            | summarize Time = max(TimeGenerated)\n            | where isnotempty(Time)"
+        },
+        {
+          "name": "EmailPostDeliveryEvents",
+          "lastDataReceivedQuery": "EmailPostDeliveryEvents\n            | summarize Time = max(TimeGenerated)\n            | where isnotempty(Time)"
+        },
+        {
+          "name": "UrlClickEvents",
+          "lastDataReceivedQuery": "UrlClickEvents\n            | summarize Time = max(TimeGenerated)\n            | where isnotempty(Time)"
+        },
+        {
+          "name": "IdentityLogonEvents",
+          "lastDataReceivedQuery": "IdentityLogonEvents\n            | summarize Time = max(TimeGenerated)\n            | where isnotempty(Time)"
+        },
+        {
+          "name": "IdentityQueryEvents",
+          "lastDataReceivedQuery": "IdentityQueryEvents\n            | summarize Time = max(TimeGenerated)\n            | where isnotempty(Time)"
+        },
+        {
+          "name": "IdentityDirectoryEvents",
+          "lastDataReceivedQuery": "IdentityDirectoryEvents\n            | summarize Time = max(TimeGenerated)\n            | where isnotempty(Time)"
+        },
+        {
+          "name": "CloudAppEvents",
+          "lastDataReceivedQuery": "CloudAppEvents\n            | summarize Time = max(TimeGenerated)\n            | where isnotempty(Time)"
+        },
+        {
+          "name": "AlertEvidence",
+          "lastDataReceivedQuery": "AlertEvidence\n            | summarize Time = max(TimeGenerated)\n            | where isnotempty(Time)"
+        }
+      ],
+      "connectivityCriterias": [
+        {
+          "type": "SentinelKinds",
+          "value": [
+            "MicrosoftThreatProtection"
+          ]
+        },
+        {
+          "type": "IsConnectedQuery",
+          "value": [
+            "DeviceEvents\n            | summarize LastLogReceived = max(TimeGenerated)\n            | project IsConnected = LastLogReceived > ago(7d)",
+            "DeviceFileEvents\n            | summarize LastLogReceived = max(TimeGenerated)\n            | project IsConnected = LastLogReceived > ago(7d)",
+            "DeviceImageLoadEvents\n            | summarize LastLogReceived = max(TimeGenerated)\n            | project IsConnected = LastLogReceived > ago(7d)",
+            "DeviceInfo\n            | summarize LastLogReceived = max(TimeGenerated)\n            | project IsConnected = LastLogReceived > ago(7d)",
+            "DeviceLogonEvents\n            | summarize LastLogReceived = max(TimeGenerated)\n            | project IsConnected = LastLogReceived > ago(7d)",
+            "DeviceNetworkEvents\n            | summarize LastLogReceived = max(TimeGenerated)\n            | project IsConnected = LastLogReceived > ago(7d)",
+            "DeviceNetworkInfo\n            | summarize LastLogReceived = max(TimeGenerated)\n            | project IsConnected = LastLogReceived > ago(7d)",
+            "DeviceProcessEvents\n            | summarize LastLogReceived = max(TimeGenerated)\n            | project IsConnected = LastLogReceived > ago(7d)",
+            "DeviceRegistryEvents\n            | summarize LastLogReceived = max(TimeGenerated)\n            | project IsConnected = LastLogReceived > ago(7d)",
+            "DeviceFileCertificateInfo\n            | summarize LastLogReceived = max(TimeGenerated)\n            | project IsConnected = LastLogReceived > ago(7d)"
+          ]
+        },
+        {
+          "type": "IsConnectedQuery",
+          "value": [
+            "EmailEvents\n            | summarize LastLogReceived = max(TimeGenerated)\n            | project IsConnected = LastLogReceived > ago(7d)",
+            "EmailUrlInfo\n            | summarize LastLogReceived = max(TimeGenerated)\n            | project IsConnected = LastLogReceived > ago(7d)",
+            "EmailAttachmentInfo\n            | summarize LastLogReceived = max(TimeGenerated)\n            | project IsConnected = LastLogReceived > ago(7d)",
+            "EmailPostDeliveryEvents\n            | summarize LastLogReceived = max(TimeGenerated)\n            | project IsConnected = LastLogReceived > ago(7d)",
+            "UrlClickEvents\n            | summarize LastLogReceived = max(TimeGenerated)\n            | project IsConnected = LastLogReceived > ago(7d)"
+          ]
+        },
+        {
+          "type": "IsConnectedQuery",
+          "value": [
+            "IdentityLogonEvents\n            | summarize LastLogReceived = max(TimeGenerated)\n            | project IsConnected = LastLogReceived > ago(7d)",
+            "IdentityQueryEvents\n            | summarize LastLogReceived = max(TimeGenerated)\n            | project IsConnected = LastLogReceived > ago(7d)",
+            "IdentityDirectoryEvents\n            | summarize LastLogReceived = max(TimeGenerated)\n            | project IsConnected = LastLogReceived > ago(7d)"
+          ]
+        },
+        {
+          "type": "IsConnectedQuery",
+          "value": [
+            "CloudAppEvents\n            | summarize LastLogReceived = max(TimeGenerated)\n            | project IsConnected = LastLogReceived > ago(7d)"
+          ]
+        },
+        {
+          "type": "IsConnectedQuery",
+          "value": [
+            "AlertEvidence\n            | summarize LastLogReceived = max(TimeGenerated)\n            | project IsConnected = LastLogReceived > ago(7d)"
+          ]
+        }
+      ],
+      "id": "MicrosoftThreatProtection"
+    }
+  }
+}

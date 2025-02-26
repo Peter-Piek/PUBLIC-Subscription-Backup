@@ -1,0 +1,79 @@
+{
+  "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourcegroups/rg-secops-n8n-us/providers/Microsoft.AlertsManagement/prometheusRuleGroups/NodeRecordingRulesRuleGroup-Win-n8n-cluster",
+  "name": "NodeRecordingRulesRuleGroup-Win-n8n-cluster",
+  "type": "Microsoft.AlertsManagement/prometheusRuleGroups",
+  "location": "eastus",
+  "tags": {},
+  "properties": {
+    "rules": [
+      {
+        "record": "node:windows_node:sum",
+        "expression": "count (windows_system_system_up_time{job=\"windows-exporter\"})"
+      },
+      {
+        "record": "node:windows_node_num_cpu:sum",
+        "expression": "count by (instance) (sum by (instance, core) (windows_cpu_time_total{job=\"windows-exporter\"}))"
+      },
+      {
+        "record": ":windows_node_cpu_utilisation:avg5m",
+        "expression": "1 - avg(rate(windows_cpu_time_total{job=\"windows-exporter\",mode=\"idle\"}[5m]))"
+      },
+      {
+        "record": "node:windows_node_cpu_utilisation:avg5m",
+        "expression": "1 - avg by (instance) (rate(windows_cpu_time_total{job=\"windows-exporter\",mode=\"idle\"}[5m]))"
+      },
+      {
+        "record": ":windows_node_memory_utilisation:",
+        "expression": "1 -sum(windows_memory_available_bytes{job=\"windows-exporter\"})/sum(windows_os_visible_memory_bytes{job=\"windows-exporter\"})"
+      },
+      {
+        "record": ":windows_node_memory_MemFreeCached_bytes:sum",
+        "expression": "sum(windows_memory_available_bytes{job=\"windows-exporter\"} + windows_memory_cache_bytes{job=\"windows-exporter\"})"
+      },
+      {
+        "record": "node:windows_node_memory_totalCached_bytes:sum",
+        "expression": "(windows_memory_cache_bytes{job=\"windows-exporter\"} + windows_memory_modified_page_list_bytes{job=\"windows-exporter\"} + windows_memory_standby_cache_core_bytes{job=\"windows-exporter\"} + windows_memory_standby_cache_normal_priority_bytes{job=\"windows-exporter\"} + windows_memory_standby_cache_reserve_bytes{job=\"windows-exporter\"})"
+      },
+      {
+        "record": ":windows_node_memory_MemTotal_bytes:sum",
+        "expression": "sum(windows_os_visible_memory_bytes{job=\"windows-exporter\"})"
+      },
+      {
+        "record": "node:windows_node_memory_bytes_available:sum",
+        "expression": "sum by (instance) ((windows_memory_available_bytes{job=\"windows-exporter\"}))"
+      },
+      {
+        "record": "node:windows_node_memory_bytes_total:sum",
+        "expression": "sum by (instance) (windows_os_visible_memory_bytes{job=\"windows-exporter\"})"
+      },
+      {
+        "record": "node:windows_node_memory_utilisation:ratio",
+        "expression": "(node:windows_node_memory_bytes_total:sum - node:windows_node_memory_bytes_available:sum) / scalar(sum(node:windows_node_memory_bytes_total:sum))"
+      },
+      {
+        "record": "node:windows_node_memory_utilisation:",
+        "expression": "1 - (node:windows_node_memory_bytes_available:sum / node:windows_node_memory_bytes_total:sum)"
+      },
+      {
+        "record": "node:windows_node_memory_swap_io_pages:irate",
+        "expression": "irate(windows_memory_swap_page_operations_total{job=\"windows-exporter\"}[5m])"
+      },
+      {
+        "record": ":windows_node_disk_utilisation:avg_irate",
+        "expression": "avg(irate(windows_logical_disk_read_seconds_total{job=\"windows-exporter\"}[5m]) + irate(windows_logical_disk_write_seconds_total{job=\"windows-exporter\"}[5m]))"
+      },
+      {
+        "record": "node:windows_node_disk_utilisation:avg_irate",
+        "expression": "avg by (instance) ((irate(windows_logical_disk_read_seconds_total{job=\"windows-exporter\"}[5m]) + irate(windows_logical_disk_write_seconds_total{job=\"windows-exporter\"}[5m])))"
+      }
+    ],
+    "enabled": false,
+    "description": "Node Recording Rules RuleGroup for Windows",
+    "clusterName": "n8n-cluster",
+    "scopes": [
+      "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourcegroups/rg-secops-n8n-us/providers/Microsoft.monitor/accounts/defaultazuremonitorworkspace-eus",
+      "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-secops-n8n-us/providers/Microsoft.ContainerService/managedClusters/n8n-cluster"
+    ],
+    "interval": "PT1M"
+  }
+}

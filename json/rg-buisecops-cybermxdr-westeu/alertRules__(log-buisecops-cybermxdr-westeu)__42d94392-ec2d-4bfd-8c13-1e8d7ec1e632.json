@@ -1,0 +1,102 @@
+{
+  "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-buisecops-cybermxdr-westeu/providers/Microsoft.OperationalInsights/workspaces/log-buisecops-cybermxdr-westeu/providers/Microsoft.SecurityInsights/alertRules/42d94392-ec2d-4bfd-8c13-1e8d7ec1e632",
+  "name": "42d94392-ec2d-4bfd-8c13-1e8d7ec1e632",
+  "type": "Microsoft.SecurityInsights/alertRules",
+  "kind": "Scheduled",
+  "properties": {
+    "queryFrequency": "P1D",
+    "queryPeriod": "P1D",
+    "triggerOperator": "GreaterThan",
+    "triggerThreshold": 0,
+    "severity": "Medium",
+    "query": "let SunburstURL=dynamic([\"panhardware.com\",\"databasegalore.com\",\"avsvmcloud.com\",\"freescanonline.com\",\"thedoccloud.com\",\"deftsecurity.com\"]);\nDeviceNetworkEvents\n| where ActionType == \"ConnectionSuccess\"\n| where RemoteUrl in(SunburstURL)\n| extend timestamp = TimeGenerated,AccountEntity = iff(isnotempty(InitiatingProcessAccountUpn), InitiatingProcessAccountUpn, InitiatingProcessAccountName),HashAlgorithm = 'MD5'\n| extend HostName = tostring(split(DeviceName, '.', 0)[0]), DnsDomain = tostring(strcat_array(array_slice(split(DeviceName, '.'), 1, -1), '.'))",
+    "suppressionDuration": "PT5H",
+    "suppressionEnabled": false,
+    "incidentConfiguration": {
+      "createIncident": true,
+      "groupingConfiguration": {
+        "enabled": false,
+        "reopenClosedIncident": false,
+        "lookbackDuration": "PT5M",
+        "matchingMethod": "AllEntities",
+        "groupByEntities": [],
+        "groupByAlertDetails": null,
+        "groupByCustomDetails": null
+      }
+    },
+    "entityMappings": [
+      {
+        "entityType": "Account",
+        "fieldMappings": [
+          {
+            "identifier": "Name",
+            "columnName": "AccountEntity"
+          }
+        ]
+      },
+      {
+        "entityType": "Host",
+        "fieldMappings": [
+          {
+            "identifier": "HostName",
+            "columnName": "HostName"
+          },
+          {
+            "identifier": "DnsDomain",
+            "columnName": "DnsDomain"
+          }
+        ]
+      },
+      {
+        "entityType": "IP",
+        "fieldMappings": [
+          {
+            "identifier": "Address",
+            "columnName": "RemoteIP"
+          }
+        ]
+      },
+      {
+        "entityType": "URL",
+        "fieldMappings": [
+          {
+            "identifier": "Url",
+            "columnName": "RemoteUrl"
+          }
+        ]
+      },
+      {
+        "entityType": "FileHash",
+        "fieldMappings": [
+          {
+            "identifier": "Algorithm",
+            "columnName": "HashAlgorithm"
+          },
+          {
+            "identifier": "Value",
+            "columnName": "InitiatingProcessMD5"
+          }
+        ]
+      }
+    ],
+    "eventGroupingSettings": {
+      "aggregationKind": "SingleAlert"
+    },
+    "tactics": [
+      "Execution",
+      "Persistence",
+      "InitialAccess"
+    ],
+    "techniques": [
+      "T1195",
+      "T1059",
+      "T1546"
+    ],
+    "subTechniques": null,
+    "displayName": "SUNBURST network beacons",
+    "enabled": true,
+    "description": "Identifies SolarWinds SUNBURST domain beacon IOCs in DeviceNetworkEvents\nReferences:\n- https://www.fireeye.com/blog/threat-research/2020/12/evasive-attacker-leverages-solarwinds-supply-chain-compromises-with-sunburst-backdoor.html\n- https://gist.github.com/olafhartong/71ffdd4cab4b6acd5cbcd1a0691ff82f",
+    "alertRuleTemplateName": "ce1e7025-866c-41f3-9b08-ec170e05e73e",
+    "lastModifiedUtc": "2024-10-30T13:02:29.335649Z"
+  }
+}

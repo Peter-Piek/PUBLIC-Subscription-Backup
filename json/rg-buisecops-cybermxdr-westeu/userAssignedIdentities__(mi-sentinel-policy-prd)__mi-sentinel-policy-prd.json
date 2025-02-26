@@ -1,0 +1,12 @@
+{
+  "location": "eastus",
+  "tags": {},
+  "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourcegroups/rg-buisecops-cybermxdr-westeu/providers/Microsoft.ManagedIdentity/userAssignedIdentities/mi-sentinel-policy-prd",
+  "name": "mi-sentinel-policy-prd",
+  "type": "Microsoft.ManagedIdentity/userAssignedIdentities",
+  "properties": {
+    "tenantId": "27909b42-a095-40f2-be50-76c52e13b8f3",
+    "principalId": "de7e9545-77fc-47bd-aada-7650f584e2dd",
+    "clientId": "a3abf83b-a270-4f57-aebc-4702fdeb4625"
+  }
+}

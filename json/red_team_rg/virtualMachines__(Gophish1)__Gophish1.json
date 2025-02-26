@@ -1,0 +1,80 @@
+{
+  "name": "Gophish1",
+  "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/Red_Team_RG/providers/Microsoft.Compute/virtualMachines/Gophish1",
+  "type": "Microsoft.Compute/virtualMachines",
+  "location": "southafricanorth",
+  "properties": {
+    "hardwareProfile": {
+      "vmSize": "Standard_B2ms"
+    },
+    "provisioningState": "Succeeded",
+    "vmId": "df3d757c-b85d-42ca-82b6-cb9c53c93b71",
+    "additionalCapabilities": {
+      "hibernationEnabled": false
+    },
+    "storageProfile": {
+      "imageReference": {
+        "publisher": "microsoftwindowsdesktop",
+        "offer": "windows-11",
+        "sku": "win11-24h2-pro",
+        "version": "latest",
+        "exactVersion": "26100.2894.250113"
+      },
+      "osDisk": {
+        "osType": "Windows",
+        "name": "Gophish1_OsDisk_1_42c06400dbf5493cbc29a0b9d7e0748d",
+        "createOption": "FromImage",
+        "caching": "ReadWrite",
+        "managedDisk": {
+          "storageAccountType": "Premium_LRS",
+          "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/Red_Team_RG/providers/Microsoft.Compute/disks/Gophish1_OsDisk_1_42c06400dbf5493cbc29a0b9d7e0748d"
+        },
+        "deleteOption": "Delete",
+        "diskSizeGB": 127
+      },
+      "dataDisks": [],
+      "diskControllerType": "SCSI"
+    },
+    "osProfile": {
+      "computerName": "Gophish1",
+      "adminUsername": "VisVang",
+      "windowsConfiguration": {
+        "provisionVMAgent": true,
+        "enableAutomaticUpdates": true,
+        "patchSettings": {
+          "patchMode": "AutomaticByOS",
+          "assessmentMode": "ImageDefault",
+          "enableHotpatching": false
+        }
+      },
+      "secrets": [],
+      "allowExtensionOperations": true,
+      "requireGuestProvisionSignal": true
+    },
+    "securityProfile": {
+      "uefiSettings": {
+        "secureBootEnabled": true,
+        "vTpmEnabled": true
+      },
+      "securityType": "TrustedLaunch"
+    },
+    "networkProfile": {
+      "networkInterfaces": [
+        {
+          "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/Red_Team_RG/providers/Microsoft.Network/networkInterfaces/gophish1621",
+          "properties": {
+            "deleteOption": "Detach"
+          }
+        }
+      ]
+    },
+    "diagnosticsProfile": {
+      "bootDiagnostics": {
+        "enabled": true
+      }
+    },
+    "licenseType": "Windows_Client",
+    "timeCreated": "2025-02-05T13:11:54.2673655+00:00"
+  },
+  "etag": "\"2\""
+}

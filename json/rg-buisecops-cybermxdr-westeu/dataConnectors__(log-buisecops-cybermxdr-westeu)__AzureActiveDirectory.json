@@ -1,0 +1,145 @@
+{
+  "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-buisecops-cybermxdr-westeu/providers/Microsoft.OperationalInsights/workspaces/log-buisecops-cybermxdr-westeu/providers/Microsoft.SecurityInsights/dataConnectors/AzureActiveDirectory",
+  "name": "AzureActiveDirectory",
+  "type": "Microsoft.SecurityInsights/dataConnectors",
+  "kind": "StaticUI",
+  "properties": {
+    "connectorUiConfig": {
+      "id": "AzureActiveDirectory",
+      "title": "Microsoft Entra ID",
+      "publisher": "Microsoft",
+      "descriptionMarkdown": "Gain insights into Microsoft Entra ID by connecting Audit and Sign-in logs to Microsoft Sentinel to gather insights around Microsoft Entra ID scenarios. You can learn about app usage, conditional access policies, legacy auth relate details using our Sign-in logs. You can get information on your Self Service Password Reset (SSPR) usage, Microsoft Entra ID Management activities like user, group, role, app management using our Audit logs table. For more information, see the [Microsoft Sentinel documentation](https://go.microsoft.com/fwlink/?linkid=2219715&wt.mc_id=sentinel_dataconnectordocs_content_cnl_csasci).",
+      "graphQueries": [
+        {
+          "metricName": "Total data received",
+          "legend": "SigninLogs",
+          "baseQuery": "SigninLogs"
+        },
+        {
+          "metricName": "Total data received",
+          "legend": "AuditLogs",
+          "baseQuery": "AuditLogs"
+        },
+        {
+          "metricName": "Total data received",
+          "legend": "AADNonInteractiveUserSignInLogs",
+          "baseQuery": "AADNonInteractiveUserSignInLogs"
+        },
+        {
+          "metricName": "Total data received",
+          "legend": "AADServicePrincipalSignInLogs",
+          "baseQuery": "AADServicePrincipalSignInLogs"
+        },
+        {
+          "metricName": "Total data received",
+          "legend": "AADManagedIdentitySignInLogs",
+          "baseQuery": "AADManagedIdentitySignInLogs"
+        },
+        {
+          "metricName": "Total data received",
+          "legend": "AADProvisioningLogs",
+          "baseQuery": "AADProvisioningLogs"
+        },
+        {
+          "metricName": "Total data received",
+          "legend": "ADFSSignInLogs",
+          "baseQuery": "ADFSSignInLogs"
+        },
+        {
+          "metricName": "Total data received",
+          "legend": "AADUserRiskEvents",
+          "baseQuery": "AADUserRiskEvents"
+        },
+        {
+          "metricName": "Total data received",
+          "legend": "AADRiskyUsers",
+          "baseQuery": "AADRiskyUsers"
+        },
+        {
+          "metricName": "Total data received",
+          "legend": "NetworkAccessTraffic",
+          "baseQuery": "NetworkAccessTraffic"
+        },
+        {
+          "metricName": "Total data received",
+          "legend": "AADRiskyServicePrincipals",
+          "baseQuery": "AADRiskyServicePrincipals"
+        },
+        {
+          "metricName": "Total data received",
+          "legend": "AADServicePrincipalRiskEvents",
+          "baseQuery": "AADServicePrincipalRiskEvents"
+        }
+      ],
+      "connectivityCriterias": [
+        {
+          "type": "IsConnectedQuery",
+          "value": [
+            "SigninLogs\n            | summarize LastLogReceived = max(TimeGenerated)\n            | project IsConnected = LastLogReceived > ago(7d)",
+            "AuditLogs\n            | summarize LastLogReceived = max(TimeGenerated)\n            | project IsConnected = LastLogReceived > ago(7d)",
+            "AADNonInteractiveUserSignInLogs\n            | summarize LastLogReceived = max(TimeGenerated)\n            | project IsConnected = LastLogReceived > ago(7d)",
+            "AADServicePrincipalSignInLogs\n            | summarize LastLogReceived = max(TimeGenerated)\n            | project IsConnected = LastLogReceived > ago(7d)",
+            "AADManagedIdentitySignInLogs\n            | summarize LastLogReceived = max(TimeGenerated)\n            | project IsConnected = LastLogReceived > ago(7d)",
+            "AADProvisioningLogs\n            | summarize LastLogReceived = max(TimeGenerated)\n            | project IsConnected = LastLogReceived > ago(7d)",
+            "ADFSSignInLogs\n            | summarize LastLogReceived = max(TimeGenerated)\n            | project IsConnected = LastLogReceived > ago(7d)",
+            "AADUserRiskEvents\n            | summarize LastLogReceived = max(TimeGenerated)\n            | project IsConnected = LastLogReceived > ago(7d)",
+            "AADRiskyUsers\n            | summarize LastLogReceived = max(TimeGenerated)\n            | project IsConnected = LastLogReceived > ago(7d)",
+            "NetworkAccessTraffic\n            | summarize LastLogReceived = max(TimeGenerated)\n            | project IsConnected = LastLogReceived > ago(7d)",
+            "AADRiskyServicePrincipals\n            | summarize LastLogReceived = max(TimeGenerated)\n            | project IsConnected = LastLogReceived > ago(7d)",
+            "AADServicePrincipalRiskEvents\n            | summarize LastLogReceived = max(TimeGenerated)\n            | project IsConnected = LastLogReceived > ago(7d)"
+          ]
+        }
+      ],
+      "dataTypes": [
+        {
+          "name": "SigninLogs",
+          "lastDataReceivedQuery": "SigninLogs\n            | summarize Time = max(TimeGenerated)\n            | where isnotempty(Time)"
+        },
+        {
+          "name": "AuditLogs",
+          "lastDataReceivedQuery": "AuditLogs\n            | summarize Time = max(TimeGenerated)\n            | where isnotempty(Time)"
+        },
+        {
+          "name": "AADNonInteractiveUserSignInLogs",
+          "lastDataReceivedQuery": "AADNonInteractiveUserSignInLogs\n            | summarize Time = max(TimeGenerated)\n            | where isnotempty(Time)"
+        },
+        {
+          "name": "AADServicePrincipalSignInLogs",
+          "lastDataReceivedQuery": "AADServicePrincipalSignInLogs\n            | summarize Time = max(TimeGenerated)\n            | where isnotempty(Time)"
+        },
+        {
+          "name": "AADManagedIdentitySignInLogs",
+          "lastDataReceivedQuery": "AADManagedIdentitySignInLogs\n            | summarize Time = max(TimeGenerated)\n            | where isnotempty(Time)"
+        },
+        {
+          "name": "AADProvisioningLogs",
+          "lastDataReceivedQuery": "AADProvisioningLogs\n            | summarize Time = max(TimeGenerated)\n            | where isnotempty(Time)"
+        },
+        {
+          "name": "ADFSSignInLogs",
+          "lastDataReceivedQuery": "ADFSSignInLogs\n            | summarize Time = max(TimeGenerated)\n            | where isnotempty(Time)"
+        },
+        {
+          "name": "AADUserRiskEvents",
+          "lastDataReceivedQuery": "AADUserRiskEvents\n            | summarize Time = max(TimeGenerated)\n            | where isnotempty(Time)"
+        },
+        {
+          "name": "AADRiskyUsers",
+          "lastDataReceivedQuery": "AADRiskyUsers\n            | summarize Time = max(TimeGenerated)\n            | where isnotempty(Time)"
+        },
+        {
+          "name": "NetworkAccessTraffic",
+          "lastDataReceivedQuery": "NetworkAccessTraffic\n            | summarize Time = max(TimeGenerated)\n            | where isnotempty(Time)"
+        },
+        {
+          "name": "AADRiskyServicePrincipals",
+          "lastDataReceivedQuery": "AADRiskyServicePrincipals\n            | summarize Time = max(TimeGenerated)\n            | where isnotempty(Time)"
+        },
+        {
+          "name": "AADServicePrincipalRiskEvents",
+          "lastDataReceivedQuery": "AADServicePrincipalRiskEvents\n            | summarize Time = max(TimeGenerated)\n            | where isnotempty(Time)"
+        }
+      ]
+    }
+  }
+}

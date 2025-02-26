@@ -1,0 +1,16 @@
+{
+  "name": "default",
+  "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-tpot/providers/Microsoft.Network/virtualNetworks/t-pot-hive-vnet/subnets/default",
+  "properties": {
+    "addressPrefix": "10.2.0.0/24",
+    "ipConfigurations": [
+      {
+        "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/RG-TPOT/providers/Microsoft.Network/networkInterfaces/T-POT-HIVE28/ipConfigurations/IPCONFIG1"
+      }
+    ],
+    "delegations": [],
+    "privateEndpointNetworkPolicies": "Disabled",
+    "privateLinkServiceNetworkPolicies": "Enabled"
+  },
+  "type": "Microsoft.Network/virtualNetworks/subnets"
+}

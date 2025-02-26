@@ -1,0 +1,26 @@
+{
+  "name": "t-pot-hive-ip",
+  "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-tpot/providers/Microsoft.Network/publicIPAddresses/t-pot-hive-ip",
+  "location": "westeurope",
+  "properties": {
+    "publicIPAddressVersion": "IPv4",
+    "publicIPAllocationMethod": "Static",
+    "idleTimeoutInMinutes": 4,
+    "dnsSettings": {
+      "domainNameLabel": "tpot",
+      "fqdn": "tpot.westeurope.cloudapp.azure.com"
+    },
+    "ipTags": [],
+    "ipConfiguration": {
+      "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-tpot/providers/Microsoft.Network/networkInterfaces/t-pot-hive28/ipConfigurations/ipconfig1"
+    },
+    "ddosSettings": {
+      "protectionMode": "VirtualNetworkInherited"
+    }
+  },
+  "type": "Microsoft.Network/publicIPAddresses",
+  "sku": {
+    "name": "Standard",
+    "tier": "Regional"
+  }
+}

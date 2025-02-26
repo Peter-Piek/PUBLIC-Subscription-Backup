@@ -1,0 +1,41 @@
+{
+  "name": "Gophish1_OsDisk_1_42c06400dbf5493cbc29a0b9d7e0748d",
+  "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/RED_TEAM_RG/providers/Microsoft.Compute/disks/Gophish1_OsDisk_1_42c06400dbf5493cbc29a0b9d7e0748d",
+  "type": "Microsoft.Compute/disks",
+  "location": "southafricanorth",
+  "managedBy": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/Red_Team_RG/providers/Microsoft.Compute/virtualMachines/Gophish1",
+  "sku": {
+    "name": "Premium_LRS",
+    "tier": "Premium"
+  },
+  "properties": {
+    "osType": "Windows",
+    "hyperVGeneration": "V2",
+    "supportsHibernation": true,
+    "supportedCapabilities": {
+      "diskControllerTypes": "SCSI, NVMe",
+      "acceleratedNetwork": true,
+      "architecture": "x64"
+    },
+    "creationData": {
+      "createOption": "FromImage",
+      "imageReference": {
+        "id": "/Subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/Providers/Microsoft.Compute/Locations/SouthAfricaNorth/Publishers/microsoftwindowsdesktop/ArtifactTypes/VMImage/Offers/windows-11/Skus/win11-24h2-pro/Versions/26100.2894.250113"
+      }
+    },
+    "diskSizeGB": 127,
+    "diskIOPSReadWrite": 500,
+    "diskMBpsReadWrite": 100,
+    "encryption": {
+      "type": "EncryptionAtRestWithPlatformKey"
+    },
+    "networkAccessPolicy": "AllowAll",
+    "securityProfile": {
+      "securityType": "TrustedLaunch"
+    },
+    "publicNetworkAccess": "Enabled",
+    "diskState": "Attached",
+    "LastOwnershipUpdateTime": "2025-02-05T13:11:55.9383958+00:00",
+    "tier": "P10"
+  }
+}

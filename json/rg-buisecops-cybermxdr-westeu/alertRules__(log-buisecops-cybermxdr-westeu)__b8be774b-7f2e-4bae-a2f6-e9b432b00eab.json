@@ -1,0 +1,63 @@
+{
+  "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-buisecops-cybermxdr-westeu/providers/Microsoft.OperationalInsights/workspaces/log-buisecops-cybermxdr-westeu/providers/Microsoft.SecurityInsights/alertRules/b8be774b-7f2e-4bae-a2f6-e9b432b00eab",
+  "name": "b8be774b-7f2e-4bae-a2f6-e9b432b00eab",
+  "type": "Microsoft.SecurityInsights/alertRules",
+  "kind": "Scheduled",
+  "properties": {
+    "queryFrequency": "P1D",
+    "queryPeriod": "P7D",
+    "triggerOperator": "GreaterThan",
+    "triggerThreshold": 0,
+    "severity": "Low",
+    "query": "let known_locations = (SigninLogs\n  | where TimeGenerated between(ago(7d)..ago(1d))\n  | where ResultType == 0\n  | extend LocationDetail = strcat(Location, \"-\", LocationDetails.state)\n  | summarize by LocationDetail);\n  let known_asn = (SigninLogs\n  | where TimeGenerated between(ago(7d)..ago(1d))\n  | where ResultType == 0\n  | summarize by AutonomousSystemNumber);\n  SigninLogs\n  | where TimeGenerated > ago(1d)\n  | where ResultType == 0\n  | where isempty(DeviceDetail.deviceId)\n  | where AuthenticationRequirement == \"singleFactorAuthentication\"\n  | extend LocationDetail = strcat(Location, \"-\", LocationDetails.state)\n  | where AutonomousSystemNumber !in (known_asn) and LocationDetail !in (known_locations)",
+    "suppressionDuration": "PT5H",
+    "suppressionEnabled": false,
+    "incidentConfiguration": {
+      "createIncident": true,
+      "groupingConfiguration": {
+        "enabled": false,
+        "reopenClosedIncident": false,
+        "lookbackDuration": "PT5M",
+        "matchingMethod": "AllEntities",
+        "groupByEntities": [],
+        "groupByAlertDetails": null,
+        "groupByCustomDetails": null
+      }
+    },
+    "entityMappings": [
+      {
+        "entityType": "Account",
+        "fieldMappings": [
+          {
+            "identifier": "FullName",
+            "columnName": "UserPrincipalName"
+          }
+        ]
+      },
+      {
+        "entityType": "IP",
+        "fieldMappings": [
+          {
+            "identifier": "Address",
+            "columnName": "IPAddress"
+          }
+        ]
+      }
+    ],
+    "eventGroupingSettings": {
+      "aggregationKind": "SingleAlert"
+    },
+    "tactics": [
+      "InitialAccess"
+    ],
+    "techniques": [
+      "T1078"
+    ],
+    "subTechniques": null,
+    "displayName": "Anomolous Single Factor Signin",
+    "enabled": true,
+    "description": "Detects successful signins using single factor authentication where the device, location, and ASN are abnormal.\n  Single factor authentications pose an opportunity to access compromised accounts, investigate these for anomalous occurrencess.\n  Ref: https://docs.microsoft.com/azure/active-directory/fundamentals/security-operations-devices#non-compliant-device-sign-in",
+    "alertRuleTemplateName": "f7c3f5c8-71ea-49ff-b8b3-148f0e346291",
+    "lastModifiedUtc": "2024-10-30T13:03:57.7071163Z"
+  }
+}

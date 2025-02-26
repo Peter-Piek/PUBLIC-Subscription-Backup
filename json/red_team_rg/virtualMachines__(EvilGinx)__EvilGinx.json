@@ -1,0 +1,78 @@
+{
+  "name": "EvilGinx",
+  "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/Red_Team_RG/providers/Microsoft.Compute/virtualMachines/EvilGinx",
+  "type": "Microsoft.Compute/virtualMachines",
+  "location": "southafricanorth",
+  "properties": {
+    "hardwareProfile": {
+      "vmSize": "Standard_B2ms"
+    },
+    "provisioningState": "Succeeded",
+    "vmId": "26b5bbd3-9c92-4209-a9e2-a17a2d27e291",
+    "additionalCapabilities": {
+      "hibernationEnabled": false
+    },
+    "storageProfile": {
+      "imageReference": {
+        "publisher": "canonical",
+        "offer": "ubuntu-24_04-lts",
+        "sku": "server",
+        "version": "latest",
+        "exactVersion": "24.04.202502040"
+      },
+      "osDisk": {
+        "osType": "Linux",
+        "name": "EvilGinx_OsDisk_1_f48ef4fd8c9f491b9c0042f5dc83ca7f",
+        "createOption": "FromImage",
+        "caching": "ReadWrite",
+        "managedDisk": {
+          "storageAccountType": "Premium_LRS",
+          "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/Red_Team_RG/providers/Microsoft.Compute/disks/EvilGinx_OsDisk_1_f48ef4fd8c9f491b9c0042f5dc83ca7f"
+        },
+        "deleteOption": "Delete",
+        "diskSizeGB": 30
+      },
+      "dataDisks": [],
+      "diskControllerType": "SCSI"
+    },
+    "osProfile": {
+      "computerName": "EvilGinx",
+      "adminUsername": "visvang",
+      "linuxConfiguration": {
+        "disablePasswordAuthentication": false,
+        "provisionVMAgent": true,
+        "patchSettings": {
+          "patchMode": "ImageDefault",
+          "assessmentMode": "ImageDefault"
+        }
+      },
+      "secrets": [],
+      "allowExtensionOperations": true,
+      "requireGuestProvisionSignal": true
+    },
+    "securityProfile": {
+      "uefiSettings": {
+        "secureBootEnabled": true,
+        "vTpmEnabled": true
+      },
+      "securityType": "TrustedLaunch"
+    },
+    "networkProfile": {
+      "networkInterfaces": [
+        {
+          "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/Red_Team_RG/providers/Microsoft.Network/networkInterfaces/evilginx166",
+          "properties": {
+            "deleteOption": "Detach"
+          }
+        }
+      ]
+    },
+    "diagnosticsProfile": {
+      "bootDiagnostics": {
+        "enabled": true
+      }
+    },
+    "timeCreated": "2025-02-05T13:43:54.3088644+00:00"
+  },
+  "etag": "\"2\""
+}

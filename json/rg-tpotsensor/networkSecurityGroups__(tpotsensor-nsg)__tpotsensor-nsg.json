@@ -1,0 +1,198 @@
+{
+  "name": "tpotsensor-nsg",
+  "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-tpotsensor/providers/Microsoft.Network/networkSecurityGroups/tpotsensor-nsg",
+  "type": "Microsoft.Network/networkSecurityGroups",
+  "location": "westeurope",
+  "properties": {
+    "securityRules": [
+      {
+        "name": "AllowCidrBlockSSHInbound",
+        "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-tpotsensor/providers/Microsoft.Network/networkSecurityGroups/tpotsensor-nsg/securityRules/AllowCidrBlockSSHInbound",
+        "type": "Microsoft.Network/networkSecurityGroups/securityRules",
+        "properties": {
+          "protocol": "TCP",
+          "sourcePortRange": "*",
+          "destinationPortRange": "22",
+          "destinationAddressPrefix": "*",
+          "access": "Allow",
+          "priority": 100,
+          "direction": "Inbound",
+          "sourcePortRanges": [],
+          "destinationPortRanges": [],
+          "sourceAddressPrefixes": [
+            "41.1.65.93/32",
+            "20.71.158.224"
+          ],
+          "destinationAddressPrefixes": []
+        }
+      },
+      {
+        "name": "AllowCidrBlockCustom64295Inbound",
+        "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-tpotsensor/providers/Microsoft.Network/networkSecurityGroups/tpotsensor-nsg/securityRules/AllowCidrBlockCustom64295Inbound",
+        "type": "Microsoft.Network/networkSecurityGroups/securityRules",
+        "properties": {
+          "protocol": "*",
+          "sourcePortRange": "*",
+          "destinationPortRange": "64295",
+          "destinationAddressPrefix": "*",
+          "access": "Allow",
+          "priority": 110,
+          "direction": "Inbound",
+          "sourcePortRanges": [],
+          "destinationPortRanges": [],
+          "sourceAddressPrefixes": [
+            "41.1.65.93/32",
+            "20.71.158.224"
+          ],
+          "destinationAddressPrefixes": []
+        }
+      },
+      {
+        "name": "AllowCidrBlockCustom1-10000Inbound",
+        "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-tpotsensor/providers/Microsoft.Network/networkSecurityGroups/tpotsensor-nsg/securityRules/AllowCidrBlockCustom1-10000Inbound",
+        "type": "Microsoft.Network/networkSecurityGroups/securityRules",
+        "properties": {
+          "protocol": "*",
+          "sourcePortRange": "*",
+          "destinationPortRange": "1-10000",
+          "sourceAddressPrefix": "41.1.65.93/32",
+          "destinationAddressPrefix": "*",
+          "access": "Allow",
+          "priority": 120,
+          "direction": "Inbound",
+          "sourcePortRanges": [],
+          "destinationPortRanges": [],
+          "sourceAddressPrefixes": [],
+          "destinationAddressPrefixes": []
+        }
+      }
+    ],
+    "defaultSecurityRules": [
+      {
+        "name": "AllowVnetInBound",
+        "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-tpotsensor/providers/Microsoft.Network/networkSecurityGroups/tpotsensor-nsg/defaultSecurityRules/AllowVnetInBound",
+        "type": "Microsoft.Network/networkSecurityGroups/defaultSecurityRules",
+        "properties": {
+          "description": "Allow inbound traffic from all VMs in VNET",
+          "protocol": "*",
+          "sourcePortRange": "*",
+          "destinationPortRange": "*",
+          "sourceAddressPrefix": "VirtualNetwork",
+          "destinationAddressPrefix": "VirtualNetwork",
+          "access": "Allow",
+          "priority": 65000,
+          "direction": "Inbound",
+          "sourcePortRanges": [],
+          "destinationPortRanges": [],
+          "sourceAddressPrefixes": [],
+          "destinationAddressPrefixes": []
+        }
+      },
+      {
+        "name": "AllowAzureLoadBalancerInBound",
+        "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-tpotsensor/providers/Microsoft.Network/networkSecurityGroups/tpotsensor-nsg/defaultSecurityRules/AllowAzureLoadBalancerInBound",
+        "type": "Microsoft.Network/networkSecurityGroups/defaultSecurityRules",
+        "properties": {
+          "description": "Allow inbound traffic from azure load balancer",
+          "protocol": "*",
+          "sourcePortRange": "*",
+          "destinationPortRange": "*",
+          "sourceAddressPrefix": "AzureLoadBalancer",
+          "destinationAddressPrefix": "*",
+          "access": "Allow",
+          "priority": 65001,
+          "direction": "Inbound",
+          "sourcePortRanges": [],
+          "destinationPortRanges": [],
+          "sourceAddressPrefixes": [],
+          "destinationAddressPrefixes": []
+        }
+      },
+      {
+        "name": "DenyAllInBound",
+        "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-tpotsensor/providers/Microsoft.Network/networkSecurityGroups/tpotsensor-nsg/defaultSecurityRules/DenyAllInBound",
+        "type": "Microsoft.Network/networkSecurityGroups/defaultSecurityRules",
+        "properties": {
+          "description": "Deny all inbound traffic",
+          "protocol": "*",
+          "sourcePortRange": "*",
+          "destinationPortRange": "*",
+          "sourceAddressPrefix": "*",
+          "destinationAddressPrefix": "*",
+          "access": "Deny",
+          "priority": 65500,
+          "direction": "Inbound",
+          "sourcePortRanges": [],
+          "destinationPortRanges": [],
+          "sourceAddressPrefixes": [],
+          "destinationAddressPrefixes": []
+        }
+      },
+      {
+        "name": "AllowVnetOutBound",
+        "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-tpotsensor/providers/Microsoft.Network/networkSecurityGroups/tpotsensor-nsg/defaultSecurityRules/AllowVnetOutBound",
+        "type": "Microsoft.Network/networkSecurityGroups/defaultSecurityRules",
+        "properties": {
+          "description": "Allow outbound traffic from all VMs to all VMs in VNET",
+          "protocol": "*",
+          "sourcePortRange": "*",
+          "destinationPortRange": "*",
+          "sourceAddressPrefix": "VirtualNetwork",
+          "destinationAddressPrefix": "VirtualNetwork",
+          "access": "Allow",
+          "priority": 65000,
+          "direction": "Outbound",
+          "sourcePortRanges": [],
+          "destinationPortRanges": [],
+          "sourceAddressPrefixes": [],
+          "destinationAddressPrefixes": []
+        }
+      },
+      {
+        "name": "AllowInternetOutBound",
+        "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-tpotsensor/providers/Microsoft.Network/networkSecurityGroups/tpotsensor-nsg/defaultSecurityRules/AllowInternetOutBound",
+        "type": "Microsoft.Network/networkSecurityGroups/defaultSecurityRules",
+        "properties": {
+          "description": "Allow outbound traffic from all VMs to Internet",
+          "protocol": "*",
+          "sourcePortRange": "*",
+          "destinationPortRange": "*",
+          "sourceAddressPrefix": "*",
+          "destinationAddressPrefix": "Internet",
+          "access": "Allow",
+          "priority": 65001,
+          "direction": "Outbound",
+          "sourcePortRanges": [],
+          "destinationPortRanges": [],
+          "sourceAddressPrefixes": [],
+          "destinationAddressPrefixes": []
+        }
+      },
+      {
+        "name": "DenyAllOutBound",
+        "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-tpotsensor/providers/Microsoft.Network/networkSecurityGroups/tpotsensor-nsg/defaultSecurityRules/DenyAllOutBound",
+        "type": "Microsoft.Network/networkSecurityGroups/defaultSecurityRules",
+        "properties": {
+          "description": "Deny all outbound traffic",
+          "protocol": "*",
+          "sourcePortRange": "*",
+          "destinationPortRange": "*",
+          "sourceAddressPrefix": "*",
+          "destinationAddressPrefix": "*",
+          "access": "Deny",
+          "priority": 65500,
+          "direction": "Outbound",
+          "sourcePortRanges": [],
+          "destinationPortRanges": [],
+          "sourceAddressPrefixes": [],
+          "destinationAddressPrefixes": []
+        }
+      }
+    ],
+    "networkInterfaces": [
+      {
+        "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-tpotsensor/providers/Microsoft.Network/networkInterfaces/tpotsensor429"
+      }
+    ]
+  }
+}

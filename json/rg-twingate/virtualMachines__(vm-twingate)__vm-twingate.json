@@ -1,0 +1,76 @@
+{
+  "name": "vm-twingate",
+  "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-twingate/providers/Microsoft.Compute/virtualMachines/vm-twingate",
+  "type": "Microsoft.Compute/virtualMachines",
+  "location": "westeurope",
+  "properties": {
+    "hardwareProfile": {
+      "vmSize": "Standard_DS1_v2"
+    },
+    "provisioningState": "Succeeded",
+    "vmId": "ef4b522c-8cb3-4e7c-a569-da9cab0c2650",
+    "additionalCapabilities": {
+      "hibernationEnabled": false
+    },
+    "storageProfile": {
+      "imageReference": {
+        "publisher": "canonical",
+        "offer": "ubuntu-24_04-lts",
+        "sku": "server",
+        "version": "latest",
+        "exactVersion": "24.04.202410170"
+      },
+      "osDisk": {
+        "osType": "Linux",
+        "name": "vm-twingate_OsDisk_1_95d785be7c3b4e929e41591d4c554a6d",
+        "createOption": "FromImage",
+        "caching": "ReadWrite",
+        "managedDisk": {
+          "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-twingate/providers/Microsoft.Compute/disks/vm-twingate_OsDisk_1_95d785be7c3b4e929e41591d4c554a6d"
+        },
+        "deleteOption": "Delete"
+      },
+      "dataDisks": [],
+      "diskControllerType": "SCSI"
+    },
+    "osProfile": {
+      "computerName": "vm-twingate",
+      "adminUsername": "buiadmin",
+      "linuxConfiguration": {
+        "disablePasswordAuthentication": false,
+        "provisionVMAgent": true,
+        "patchSettings": {
+          "patchMode": "ImageDefault",
+          "assessmentMode": "ImageDefault"
+        }
+      },
+      "secrets": [],
+      "allowExtensionOperations": true,
+      "requireGuestProvisionSignal": true
+    },
+    "securityProfile": {
+      "uefiSettings": {
+        "secureBootEnabled": true,
+        "vTpmEnabled": true
+      },
+      "securityType": "TrustedLaunch"
+    },
+    "networkProfile": {
+      "networkInterfaces": [
+        {
+          "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-twingate/providers/Microsoft.Network/networkInterfaces/vm-twingate257",
+          "properties": {
+            "deleteOption": "Detach"
+          }
+        }
+      ]
+    },
+    "diagnosticsProfile": {
+      "bootDiagnostics": {
+        "enabled": true
+      }
+    },
+    "timeCreated": "2024-10-24T07:58:03.0920197+00:00"
+  },
+  "etag": "\"5\""
+}

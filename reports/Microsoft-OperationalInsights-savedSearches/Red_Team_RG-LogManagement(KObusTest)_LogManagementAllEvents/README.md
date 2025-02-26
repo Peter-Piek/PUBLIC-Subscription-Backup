@@ -1,0 +1,21 @@
+# All Events
+
+```
+--- 
+ properties: 
+   category: 'Log Management' 
+   displayName: 'All Events' 
+   version: 2 
+   query: >
+    Event | sort by TimeGenerated desc
+    // Oql: Type=Event // Args: {OQ: True; WorkspaceId: 00000000-0000-0000-0000-0000
+    00000000} // Settings: {PTT: True; SortI: True; SortF: True} // Version: 0.1.122
+ 
+ id: >
+  /subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/Red_Team_RG/p
+  roviders/Microsoft.OperationalInsights/workspaces/KObusTest/savedSearches/LogMan
+  agement(KObusTest)_LogManagement|AllEvents
+ 
+ name: 'LogManagement(KObusTest)_LogManagement|AllEvents' 
+ type: 'Microsoft.OperationalInsights/savedSearches'
+```

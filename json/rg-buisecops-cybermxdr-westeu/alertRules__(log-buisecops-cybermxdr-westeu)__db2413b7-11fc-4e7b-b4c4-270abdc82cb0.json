@@ -1,0 +1,63 @@
+{
+  "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-buisecops-cybermxdr-westeu/providers/Microsoft.OperationalInsights/workspaces/log-buisecops-cybermxdr-westeu/providers/Microsoft.SecurityInsights/alertRules/db2413b7-11fc-4e7b-b4c4-270abdc82cb0",
+  "name": "db2413b7-11fc-4e7b-b4c4-270abdc82cb0",
+  "type": "Microsoft.SecurityInsights/alertRules",
+  "kind": "Scheduled",
+  "properties": {
+    "queryFrequency": "PT1H",
+    "queryPeriod": "PT1H",
+    "triggerOperator": "GreaterThan",
+    "triggerThreshold": 0,
+    "severity": "High",
+    "query": "SecurityEvent\n// Look for specific Directory Service Changes and parse data\n| where EventID == 5136\n| extend EventData = parse_xml(EventData).EventData.Data\n| mv-expand bagexpansion = array EventData\n| evaluate bag_unpack(EventData)\n| extend Key = tostring(column_ifexists('@Name', \"\")), Value = column_ifexists('#text', \"\")\n| evaluate pivot(Key, any(Value),TimeGenerated, EventID, Computer, Account, AccountType, EventSourceName, Activity, SubjectAccount)\n// Where changes relate to Exchange OAB\n| extend ObjectClass = column_ifexists(\"ObjectClass\", \"\")\n| where ObjectClass =~ \"msExchOABVirtualDirectory\"\n// Look for InternalHostName or ExternalHostName properties being changed\n| extend AttributeLDAPDisplayName = column_ifexists(\"AttributeLDAPDisplayName\", \"\")\n| where AttributeLDAPDisplayName in~ (\"msExchExternalHostName\", \"msExchInternalHostName\")\n// Look for suspected webshell activity\n| extend AttributeValue = column_ifexists(\"AttributeValue\", \"\")\n| where AttributeValue has \"script\"\n| project-rename LastSeen = TimeGenerated\n| extend ObjectDN = column_ifexists(\"ObjectDN\", \"\")\n| project-reorder LastSeen, Computer, Account, ObjectDN, AttributeLDAPDisplayName, AttributeValue\n| extend timestamp = LastSeen, AccountCustomEntity = Account, HostCustomEntity = Computer",
+    "suppressionDuration": "PT5H",
+    "suppressionEnabled": false,
+    "incidentConfiguration": {
+      "createIncident": true,
+      "groupingConfiguration": {
+        "enabled": false,
+        "reopenClosedIncident": false,
+        "lookbackDuration": "PT5M",
+        "matchingMethod": "AllEntities",
+        "groupByEntities": [],
+        "groupByAlertDetails": null,
+        "groupByCustomDetails": null
+      }
+    },
+    "entityMappings": [
+      {
+        "entityType": "Account",
+        "fieldMappings": [
+          {
+            "identifier": "FullName",
+            "columnName": "AccountCustomEntity"
+          }
+        ]
+      },
+      {
+        "entityType": "Host",
+        "fieldMappings": [
+          {
+            "identifier": "FullName",
+            "columnName": "HostCustomEntity"
+          }
+        ]
+      }
+    ],
+    "eventGroupingSettings": {
+      "aggregationKind": "SingleAlert"
+    },
+    "tactics": [
+      "InitialAccess"
+    ],
+    "techniques": [
+      "T1190"
+    ],
+    "subTechniques": null,
+    "displayName": "Exchange OAB Virtual Directory Attribute Containing Potential Webshell",
+    "enabled": true,
+    "description": "This query uses Windows Event ID 5136 in order to detect potential webshell deployment by exploitation of CVE-2021-27065.\nThis query looks for changes to the InternalHostName or ExternalHostName properties of Exchange OAB Virtual Directory objects in AD Directory Services\nwhere the new objects contain potential webshell objects.",
+    "alertRuleTemplateName": "faf1a6ff-53b5-4f92-8c55-4b20e9957594",
+    "lastModifiedUtc": "2024-10-30T13:03:57.6616211Z"
+  }
+}

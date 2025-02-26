@@ -1,0 +1,87 @@
+{
+  "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourcegroups/rg-secops-n8n-us/providers/Microsoft.AlertsManagement/prometheusRuleGroups/NodeAndKubernetesRecordingRulesRuleGroup-Win-n8n-cluster",
+  "name": "NodeAndKubernetesRecordingRulesRuleGroup-Win-n8n-cluster",
+  "type": "Microsoft.AlertsManagement/prometheusRuleGroups",
+  "location": "eastus",
+  "tags": {},
+  "properties": {
+    "rules": [
+      {
+        "record": "node:windows_node_filesystem_usage:",
+        "expression": "max by (instance,volume)((windows_logical_disk_size_bytes{job=\"windows-exporter\"} - windows_logical_disk_free_bytes{job=\"windows-exporter\"}) / windows_logical_disk_size_bytes{job=\"windows-exporter\"})"
+      },
+      {
+        "record": "node:windows_node_filesystem_avail:",
+        "expression": "max by (instance, volume) (windows_logical_disk_free_bytes{job=\"windows-exporter\"} / windows_logical_disk_size_bytes{job=\"windows-exporter\"})"
+      },
+      {
+        "record": ":windows_node_net_utilisation:sum_irate",
+        "expression": "sum(irate(windows_net_bytes_total{job=\"windows-exporter\"}[5m]))"
+      },
+      {
+        "record": "node:windows_node_net_utilisation:sum_irate",
+        "expression": "sum by (instance) ((irate(windows_net_bytes_total{job=\"windows-exporter\"}[5m])))"
+      },
+      {
+        "record": ":windows_node_net_saturation:sum_irate",
+        "expression": "sum(irate(windows_net_packets_received_discarded_total{job=\"windows-exporter\"}[5m])) + sum(irate(windows_net_packets_outbound_discarded_total{job=\"windows-exporter\"}[5m]))"
+      },
+      {
+        "record": "node:windows_node_net_saturation:sum_irate",
+        "expression": "sum by (instance) ((irate(windows_net_packets_received_discarded_total{job=\"windows-exporter\"}[5m]) + irate(windows_net_packets_outbound_discarded_total{job=\"windows-exporter\"}[5m])))"
+      },
+      {
+        "record": "windows_pod_container_available",
+        "expression": "windows_container_available{job=\"windows-exporter\", container_id != \"\"} * on(container_id) group_left(container, pod, namespace) max(kube_pod_container_info{job=\"kube-state-metrics\", container_id != \"\"}) by(container, container_id, pod, namespace)"
+      },
+      {
+        "record": "windows_container_total_runtime",
+        "expression": "windows_container_cpu_usage_seconds_total{job=\"windows-exporter\", container_id != \"\"} * on(container_id) group_left(container, pod, namespace) max(kube_pod_container_info{job=\"kube-state-metrics\", container_id != \"\"}) by(container, container_id, pod, namespace)"
+      },
+      {
+        "record": "windows_container_memory_usage",
+        "expression": "windows_container_memory_usage_commit_bytes{job=\"windows-exporter\", container_id != \"\"} * on(container_id) group_left(container, pod, namespace) max(kube_pod_container_info{job=\"kube-state-metrics\", container_id != \"\"}) by(container, container_id, pod, namespace)"
+      },
+      {
+        "record": "windows_container_private_working_set_usage",
+        "expression": "windows_container_memory_usage_private_working_set_bytes{job=\"windows-exporter\", container_id != \"\"} * on(container_id) group_left(container, pod, namespace) max(kube_pod_container_info{job=\"kube-state-metrics\", container_id != \"\"}) by(container, container_id, pod, namespace)"
+      },
+      {
+        "record": "windows_container_network_received_bytes_total",
+        "expression": "windows_container_network_receive_bytes_total{job=\"windows-exporter\", container_id != \"\"} * on(container_id) group_left(container, pod, namespace) max(kube_pod_container_info{job=\"kube-state-metrics\", container_id != \"\"}) by(container, container_id, pod, namespace)"
+      },
+      {
+        "record": "windows_container_network_transmitted_bytes_total",
+        "expression": "windows_container_network_transmit_bytes_total{job=\"windows-exporter\", container_id != \"\"} * on(container_id) group_left(container, pod, namespace) max(kube_pod_container_info{job=\"kube-state-metrics\", container_id != \"\"}) by(container, container_id, pod, namespace)"
+      },
+      {
+        "record": "kube_pod_windows_container_resource_memory_request",
+        "expression": "max by (namespace, pod, container) (kube_pod_container_resource_requests{resource=\"memory\",job=\"kube-state-metrics\"}) * on(container,pod,namespace) (windows_pod_container_available)"
+      },
+      {
+        "record": "kube_pod_windows_container_resource_memory_limit",
+        "expression": "kube_pod_container_resource_limits{resource=\"memory\",job=\"kube-state-metrics\"} * on(container,pod,namespace) (windows_pod_container_available)"
+      },
+      {
+        "record": "kube_pod_windows_container_resource_cpu_cores_request",
+        "expression": "max by (namespace, pod, container) ( kube_pod_container_resource_requests{resource=\"cpu\",job=\"kube-state-metrics\"}) * on(container,pod,namespace) (windows_pod_container_available)"
+      },
+      {
+        "record": "kube_pod_windows_container_resource_cpu_cores_limit",
+        "expression": "kube_pod_container_resource_limits{resource=\"cpu\",job=\"kube-state-metrics\"} * on(container,pod,namespace) (windows_pod_container_available)"
+      },
+      {
+        "record": "namespace_pod_container:windows_container_cpu_usage_seconds_total:sum_rate",
+        "expression": "sum by (namespace, pod, container) (rate(windows_container_total_runtime{}[5m]))"
+      }
+    ],
+    "enabled": false,
+    "description": "Node and Kubernetes Recording Rules RuleGroup for Windows",
+    "clusterName": "n8n-cluster",
+    "scopes": [
+      "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourcegroups/rg-secops-n8n-us/providers/Microsoft.monitor/accounts/defaultazuremonitorworkspace-eus",
+      "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-secops-n8n-us/providers/Microsoft.ContainerService/managedClusters/n8n-cluster"
+    ],
+    "interval": "PT1M"
+  }
+}

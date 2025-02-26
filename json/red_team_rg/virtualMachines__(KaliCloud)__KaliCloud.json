@@ -1,0 +1,74 @@
+{
+  "name": "KaliCloud",
+  "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/Red_Team_RG/providers/Microsoft.Compute/virtualMachines/KaliCloud",
+  "type": "Microsoft.Compute/virtualMachines",
+  "location": "southafricanorth",
+  "plan": {
+    "name": "kali-2023-3",
+    "publisher": "kali-linux",
+    "product": "kali"
+  },
+  "properties": {
+    "hardwareProfile": {
+      "vmSize": "Standard_B2s"
+    },
+    "provisioningState": "Succeeded",
+    "vmId": "98e44957-e157-4c9b-b66a-db1485ff98c5",
+    "additionalCapabilities": {
+      "hibernationEnabled": false
+    },
+    "storageProfile": {
+      "imageReference": {
+        "publisher": "kali-linux",
+        "offer": "kali",
+        "sku": "kali-2023-3",
+        "version": "latest",
+        "exactVersion": "2023.3.0"
+      },
+      "osDisk": {
+        "osType": "Linux",
+        "name": "KaliCloud_OsDisk_1_42dbd374d57f4543bb572697badd6014",
+        "createOption": "FromImage",
+        "caching": "ReadWrite",
+        "managedDisk": {
+          "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/Red_Team_RG/providers/Microsoft.Compute/disks/KaliCloud_OsDisk_1_42dbd374d57f4543bb572697badd6014"
+        },
+        "deleteOption": "Delete"
+      },
+      "dataDisks": [],
+      "diskControllerType": "SCSI"
+    },
+    "osProfile": {
+      "computerName": "KaliCloud",
+      "adminUsername": "hackers",
+      "linuxConfiguration": {
+        "disablePasswordAuthentication": false,
+        "provisionVMAgent": true,
+        "patchSettings": {
+          "patchMode": "ImageDefault",
+          "assessmentMode": "ImageDefault"
+        }
+      },
+      "secrets": [],
+      "allowExtensionOperations": true,
+      "requireGuestProvisionSignal": true
+    },
+    "networkProfile": {
+      "networkInterfaces": [
+        {
+          "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/Red_Team_RG/providers/Microsoft.Network/networkInterfaces/kalicloud436",
+          "properties": {
+            "deleteOption": "Detach"
+          }
+        }
+      ]
+    },
+    "diagnosticsProfile": {
+      "bootDiagnostics": {
+        "enabled": true
+      }
+    },
+    "timeCreated": "2024-08-13T12:40:52.6764211+00:00"
+  },
+  "etag": "\"5\""
+}

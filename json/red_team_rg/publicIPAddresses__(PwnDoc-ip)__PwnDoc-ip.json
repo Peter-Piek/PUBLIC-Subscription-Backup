@@ -1,0 +1,22 @@
+{
+  "name": "PwnDoc-ip",
+  "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/Red_Team_RG/providers/Microsoft.Network/publicIPAddresses/PwnDoc-ip",
+  "location": "southafricanorth",
+  "zones": [
+    "1"
+  ],
+  "properties": {
+    "publicIPAddressVersion": "IPv4",
+    "publicIPAllocationMethod": "Static",
+    "idleTimeoutInMinutes": 4,
+    "ipTags": [],
+    "ipConfiguration": {
+      "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/Red_Team_RG/providers/Microsoft.Network/networkInterfaces/pwndoc2_z1/ipConfigurations/ipconfig1"
+    }
+  },
+  "type": "Microsoft.Network/publicIPAddresses",
+  "sku": {
+    "name": "Standard",
+    "tier": "Regional"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/Red_Team_RG/providers/Microsoft.Communication/emailServices/SMTPRelayTest1/domains/hackthefreestate.co.za",
+  "name": "hackthefreestate.co.za",
+  "type": "microsoft.communication/emailservices/domains",
+  "location": "global",
+  "systemData": {
+    "createdBy": "kobus@buisecops.onmicrosoft.com",
+    "createdByType": "User",
+    "createdAt": "2024-12-10T16:18:04.9972196Z",
+    "lastModifiedBy": "632ec9eb-fad7-4cbd-993a-e72973ba2acc",
+    "lastModifiedByType": "Application",
+    "lastModifiedAt": "2024-12-10T17:06:09.8950181Z"
+  },
+  "properties": {
+    "provisioningState": "Succeeded",
+    "dataLocation": "africa",
+    "fromSenderDomain": "hackthefreestate.co.za",
+    "mailFromSenderDomain": "hackthefreestate.co.za",
+    "domainManagement": "CustomerManaged",
+    "verificationStates": {
+      "Domain": {
+        "status": "VerificationFailed",
+        "errorCode": "DnsRecordsNotMatched"
+      },
+      "SPF": {
+        "status": "NotStarted"
+      },
+      "DKIM": {
+        "status": "NotStarted"
+      },
+      "DKIM2": {
+        "status": "NotStarted"
+      },
+      "DMARC": {
+        "status": "NotStarted"
+      }
+    },
+    "verificationRecords": {
+      "Domain": {
+        "type": "TXT",
+        "name": "hackthefreestate.co.za",
+        "value": "ms-domain-verification=3ef6aef4-1a7a-40c0-ae9c-42dedbe67880",
+        "ttl": 3600
+      },
+      "SPF": {
+        "type": "TXT",
+        "name": "hackthefreestate.co.za",
+        "value": "v=spf1 include:spf.protection.outlook.com -all",
+        "ttl": 3600
+      },
+      "DKIM": {
+        "type": "CNAME",
+        "name": "selector1-azurecomm-prod-net._domainkey",
+        "value": "selector1-azurecomm-prod-net._domainkey.azurecomm.net",
+        "ttl": 3600
+      },
+      "DKIM2": {
+        "type": "CNAME",
+        "name": "selector2-azurecomm-prod-net._domainkey",
+        "value": "selector2-azurecomm-prod-net._domainkey.azurecomm.net",
+        "ttl": 3600
+      }
+    },
+    "userEngagementTracking": "Disabled"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "location": "eastus",
+  "tags": {},
+  "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourcegroups/MC_rg-secops-n8n-us_n8n-cluster_eastus/providers/Microsoft.ManagedIdentity/userAssignedIdentities/n8n-cluster-agentpool",
+  "name": "n8n-cluster-agentpool",
+  "type": "Microsoft.ManagedIdentity/userAssignedIdentities",
+  "properties": {
+    "tenantId": "27909b42-a095-40f2-be50-76c52e13b8f3",
+    "principalId": "cc57efc4-a663-4a1f-b262-ce7d6d75ae87",
+    "clientId": "09221577-df66-4b5f-a136-2db4ee0e71a7"
+  }
+}

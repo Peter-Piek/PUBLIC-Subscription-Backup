@@ -1,0 +1,37 @@
+{
+  "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourcegroups/rg-secops-n8n-us/providers/microsoft.insights/metricAlerts/CPU Usage Percentage - n8n-cluster",
+  "name": "CPU Usage Percentage - n8n-cluster",
+  "type": "Microsoft.Insights/metricAlerts",
+  "location": "Global",
+  "tags": {},
+  "properties": {
+    "severity": 3,
+    "enabled": true,
+    "scopes": [
+      "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourcegroups/rg-secops-n8n-us/providers/Microsoft.ContainerService/managedClusters/n8n-cluster"
+    ],
+    "evaluationFrequency": "PT5M",
+    "windowSize": "PT5M",
+    "criteria": {
+      "allOf": [
+        {
+          "threshold": 95.0,
+          "name": "Metric1",
+          "metricNamespace": "Microsoft.ContainerService/managedClusters",
+          "metricName": "node_cpu_usage_percentage",
+          "operator": "GreaterThan",
+          "timeAggregation": "Average",
+          "criterionType": "StaticThresholdCriterion"
+        }
+      ],
+      "odata.type": "Microsoft.Azure.Monitor.MultipleResourceMultipleMetricCriteria"
+    },
+    "targetResourceType": "Microsoft.ContainerService/managedClusters",
+    "actions": [
+      {
+        "actionGroupId": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-secops-n8n-us/providers/Microsoft.Insights/ActionGroups/RecommendedAlertRules-AG-1",
+        "webHookProperties": {}
+      }
+    ]
+  }
+}

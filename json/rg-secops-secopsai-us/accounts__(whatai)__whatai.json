@@ -1,0 +1,198 @@
+{
+  "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-secops-secopsai-us/providers/Microsoft.CognitiveServices/accounts/whatai",
+  "name": "whatai",
+  "type": "Microsoft.CognitiveServices/accounts",
+  "location": "eastus",
+  "sku": {
+    "name": "S0"
+  },
+  "kind": "OpenAI",
+  "tags": {},
+  "properties": {
+    "endpoint": "https://whatai.openai.azure.com/",
+    "internalId": "f063f169c3554ccab48c4f7665f1f8cc",
+    "dateCreated": "2025-02-25T06:56:27.0378802Z",
+    "apiProperties": {},
+    "callRateLimit": {
+      "rules": [
+        {
+          "key": "openai.dalle.post",
+          "renewalPeriod": 1,
+          "count": 30,
+          "matchPatterns": [
+            {
+              "path": "dalle/*",
+              "method": "POST"
+            },
+            {
+              "path": "openai/images/*",
+              "method": "POST"
+            }
+          ]
+        },
+        {
+          "key": "openai.dalle.other",
+          "renewalPeriod": 1,
+          "count": 30,
+          "matchPatterns": [
+            {
+              "path": "dalle/*",
+              "method": "*"
+            },
+            {
+              "path": "openai/operations/images/*",
+              "method": "*"
+            }
+          ]
+        },
+        {
+          "key": "openai.assistants.default",
+          "renewalPeriod": 1,
+          "count": 100,
+          "matchPatterns": [
+            {
+              "path": "openai/assistants/*",
+              "method": "*"
+            },
+            {
+              "path": "openai/threads/*",
+              "method": "*"
+            },
+            {
+              "path": "openai/vector_stores/*",
+              "method": "*"
+            }
+          ]
+        },
+        {
+          "key": "openai.batches.post",
+          "renewalPeriod": 60,
+          "count": 30,
+          "matchPatterns": [
+            {
+              "path": "openai/batches",
+              "method": "POST"
+            }
+          ]
+        },
+        {
+          "key": "openai.batches.get",
+          "renewalPeriod": 60,
+          "count": 500,
+          "matchPatterns": [
+            {
+              "path": "openai/batches/*",
+              "method": "GET"
+            }
+          ]
+        },
+        {
+          "key": "openai.batches.list",
+          "renewalPeriod": 60,
+          "count": 100,
+          "matchPatterns": [
+            {
+              "path": "openai/batches",
+              "method": "GET"
+            }
+          ]
+        },
+        {
+          "key": "openai",
+          "renewalPeriod": 1,
+          "count": 30,
+          "matchPatterns": [
+            {
+              "path": "openai/*",
+              "method": "*"
+            }
+          ]
+        },
+        {
+          "key": "default",
+          "renewalPeriod": 1,
+          "count": 30,
+          "matchPatterns": [
+            {
+              "path": "*",
+              "method": "*"
+            }
+          ]
+        }
+      ]
+    },
+    "isMigrated": false,
+    "customSubDomainName": "whatai",
+    "networkAcls": {
+      "defaultAction": "Allow",
+      "virtualNetworkRules": [],
+      "ipRules": []
+    },
+    "privateEndpointConnections": [],
+    "publicNetworkAccess": "Enabled",
+    "capabilities": [
+      {
+        "name": "VirtualNetworks"
+      },
+      {
+        "name": "CustomerManagedKey"
+      },
+      {
+        "name": "MaxFineTuneCount",
+        "value": "100"
+      },
+      {
+        "name": "MaxRunningFineTuneCount",
+        "value": "3"
+      },
+      {
+        "name": "MaxUserFileCount",
+        "value": "50"
+      },
+      {
+        "name": "MaxTrainingFileSize",
+        "value": "512000000"
+      },
+      {
+        "name": "MaxUserFileImportDurationInHours",
+        "value": "1"
+      },
+      {
+        "name": "MaxFineTuneJobDurationInHours",
+        "value": "720"
+      },
+      {
+        "name": "MaxEvaluationRunDurationInHours",
+        "value": "5"
+      },
+      {
+        "name": "MaxRunningEvaluationCount",
+        "value": "5"
+      },
+      {
+        "name": "TrustedServices",
+        "value": "Microsoft.CognitiveServices,Microsoft.MachineLearningServices,Microsoft.Search,Microsoft.VideoIndexer"
+      },
+      {
+        "name": "RaiMonitor"
+      }
+    ],
+    "endpoints": {
+      "OpenAI Language Model Instance API": "https://whatai.openai.azure.com/",
+      "OpenAI Dall-E API": "https://whatai.openai.azure.com/",
+      "OpenAI Whisper API": "https://whatai.openai.azure.com/",
+      "OpenAI Model Scaleset API": "https://whatai.openai.azure.com/",
+      "OpenAI Realtime API": "https://whatai.openai.azure.com/",
+      "Token Service API": "https://whatai.openai.azure.com/"
+    },
+    "provisioningState": "Succeeded"
+  },
+  "systemData": {
+    "createdBy": "admin@buisecops.onmicrosoft.com",
+    "createdByType": "User",
+    "createdAt": "2025-02-25T06:56:26.5020393Z",
+    "lastModifiedBy": "admin@buisecops.onmicrosoft.com",
+    "lastModifiedByType": "User",
+    "lastModifiedAt": "2025-02-25T06:56:26.5020393Z"
+  }
+}

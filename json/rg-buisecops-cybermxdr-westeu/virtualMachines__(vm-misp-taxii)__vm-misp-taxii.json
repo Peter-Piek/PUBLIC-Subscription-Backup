@@ -1,0 +1,84 @@
+{
+  "name": "vm-misp-taxii",
+  "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-buisecops-cybermxdr-westeu/providers/Microsoft.Compute/virtualMachines/vm-misp-taxii",
+  "type": "Microsoft.Compute/virtualMachines",
+  "location": "westeurope",
+  "properties": {
+    "hardwareProfile": {
+      "vmSize": "Standard_B2s_v2"
+    },
+    "provisioningState": "Succeeded",
+    "vmId": "dab076b9-6f80-4818-8a38-f154015c0b3d",
+    "additionalCapabilities": {
+      "hibernationEnabled": false
+    },
+    "storageProfile": {
+      "imageReference": {
+        "publisher": "canonical",
+        "offer": "ubuntu-24_04-lts",
+        "sku": "server",
+        "version": "latest",
+        "exactVersion": "24.04.202502040"
+      },
+      "osDisk": {
+        "osType": "Linux",
+        "name": "vm-misp-taxii_OsDisk_1_1345caf0e88d4ac68a826aaf183e1a46",
+        "createOption": "FromImage",
+        "caching": "ReadWrite",
+        "managedDisk": {
+          "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-buisecops-cybermxdr-westeu/providers/Microsoft.Compute/disks/vm-misp-taxii_OsDisk_1_1345caf0e88d4ac68a826aaf183e1a46"
+        },
+        "deleteOption": "Delete"
+      },
+      "dataDisks": [],
+      "diskControllerType": "SCSI"
+    },
+    "osProfile": {
+      "computerName": "vm-misp-taxii",
+      "adminUsername": "azureuser",
+      "linuxConfiguration": {
+        "disablePasswordAuthentication": true,
+        "ssh": {
+          "publicKeys": [
+            {
+              "path": "/home/azureuser/.ssh/authorized_keys",
+              "keyData": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC3LXhxZCOyLQWDn9oR3rLr42xjrmMB/A9SduSOnfc5spyUgGBjk8BdtQLAsSZE4DRuNin/e6rnetZywPlkHTWNlekLVFf+SJh2b8RqOkC7kilYBihhBoKPdAUNVicRru+kKWXcq2YESyKloASMmxzqXQE2hWxwwO+NDHSgb4nsvkJ3wNAYt6mY5RKV0tJMW8WqHbjgsjcNX9ayW6Agn3J1bkWFu9xNijLHi+MlS9QiKzpFPXzXv/96aMpoNs8ZWLtFi4mRnA5rBhB1LmveZOCGsb3/+KOxNSBgyEhz9PJt7jqESsKyhNXCB5hWil+Uw7/byL2ym+w91J3bTHhrI4I5o7aD8/O5GVqRZvkYFk8LdtAJT30IFjVEtwIuKQZ8ZeYbKN60/UXTESx8cDeECx771N1fFt86E7c5w9K/TFk4aPtke/W3nozGDolU7Hi/e8H7i1RLq1i2SmRFhGJuDJl3sEr2Bt0o3V2PcBIq8JUMxf8oYfE/lW1DZNHr/5r4sA0= generated-by-azure"
+            }
+          ]
+        },
+        "provisionVMAgent": true,
+        "patchSettings": {
+          "patchMode": "ImageDefault",
+          "assessmentMode": "ImageDefault"
+        }
+      },
+      "secrets": [],
+      "allowExtensionOperations": true,
+      "requireGuestProvisionSignal": true
+    },
+    "securityProfile": {
+      "uefiSettings": {
+        "secureBootEnabled": true,
+        "vTpmEnabled": true
+      },
+      "securityType": "TrustedLaunch"
+    },
+    "networkProfile": {
+      "networkInterfaces": [
+        {
+          "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-buisecops-cybermxdr-westeu/providers/Microsoft.Network/networkInterfaces/vm-misp-taxii365",
+          "properties": {
+            "deleteOption": "Detach"
+          }
+        }
+      ]
+    },
+    "diagnosticsProfile": {
+      "bootDiagnostics": {
+        "enabled": true
+      }
+    },
+    "timeCreated": "2025-02-05T08:33:53.34109+00:00"
+  },
+  "etag": "\"4\""
+}

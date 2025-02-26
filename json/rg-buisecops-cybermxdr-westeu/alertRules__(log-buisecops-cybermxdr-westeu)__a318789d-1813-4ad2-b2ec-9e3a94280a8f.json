@@ -1,0 +1,65 @@
+{
+  "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-buisecops-cybermxdr-westeu/providers/Microsoft.OperationalInsights/workspaces/log-buisecops-cybermxdr-westeu/providers/Microsoft.SecurityInsights/alertRules/a318789d-1813-4ad2-b2ec-9e3a94280a8f",
+  "name": "a318789d-1813-4ad2-b2ec-9e3a94280a8f",
+  "type": "Microsoft.SecurityInsights/alertRules",
+  "kind": "Scheduled",
+  "properties": {
+    "queryFrequency": "PT30M",
+    "queryPeriod": "PT30M",
+    "triggerOperator": "GreaterThan",
+    "triggerThreshold": 0,
+    "severity": "High",
+    "query": "//V1//\nlet country_code = dynamic([\"RU\", \"UA\"]);\nunion \n    (SigninLogs\n    | where Location in (country_code)\n    | where ResultType == 0),\n    (AADNonInteractiveUserSignInLogs\n    | where Location in (country_code)\n    | where ResultType == 0)\n| summarize\n    StartTime = min(TimeGenerated),\n    EndTime = max(TimeGenerated),\n    IP_List=make_set(IPAddress),\n    Application_List=make_set(AppDisplayName),\n    Location_List=make_set(Location),\n    count()\n    by UserPrincipalName, UserAgent, ResultType\n| project FirstSeen=StartTime,LastSeen=EndTime , UserPrincipalName, UserAgent, Location=Location_List, IPAddress=IP_List, count_\n",
+    "suppressionDuration": "PT5H",
+    "suppressionEnabled": false,
+    "incidentConfiguration": {
+      "createIncident": true,
+      "groupingConfiguration": {
+        "enabled": false,
+        "reopenClosedIncident": false,
+        "lookbackDuration": "PT5H",
+        "matchingMethod": "AllEntities",
+        "groupByEntities": [],
+        "groupByAlertDetails": [],
+        "groupByCustomDetails": []
+      }
+    },
+    "customDetails": {
+      "UserAgent": "UserAgent",
+      "Country": "Location"
+    },
+    "entityMappings": [
+      {
+        "entityType": "Account",
+        "fieldMappings": [
+          {
+            "identifier": "FullName",
+            "columnName": "UserPrincipalName"
+          }
+        ]
+      },
+      {
+        "entityType": "IP",
+        "fieldMappings": [
+          {
+            "identifier": "Address",
+            "columnName": "IPAddress"
+          }
+        ]
+      }
+    ],
+    "eventGroupingSettings": {
+      "aggregationKind": "SingleAlert"
+    },
+    "tactics": [
+      "InitialAccess"
+    ],
+    "techniques": [],
+    "subTechniques": [],
+    "displayName": "Successful sign-in from Russia / Ukraine [custom]",
+    "enabled": true,
+    "description": "Detecting sign-ins from Russia / Ukraine in response to threat of attack",
+    "alertRuleTemplateName": null,
+    "lastModifiedUtc": "2024-10-30T13:02:03.6658616Z"
+  }
+}

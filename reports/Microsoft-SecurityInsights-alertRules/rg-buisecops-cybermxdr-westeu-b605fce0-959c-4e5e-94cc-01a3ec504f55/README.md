@@ -1,0 +1,83 @@
+# Explicit MFA Deny
+
+```
+--- 
+ id: >
+  /subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-buisecops-
+  cybermxdr-westeu/providers/Microsoft.OperationalInsights/workspaces/log-buisecop
+  s-cybermxdr-westeu/providers/Microsoft.SecurityInsights/alertRules/b605fce0-959c
+  -4e5e-94cc-01a3ec504f55
+ 
+ name: 'b605fce0-959c-4e5e-94cc-01a3ec504f55' 
+ type: 'Microsoft.SecurityInsights/alertRules' 
+ kind: 'Scheduled' 
+ properties: 
+   queryFrequency: 'P1D' 
+   queryPeriod: 'P1D' 
+   triggerOperator: 'GreaterThan' 
+   triggerThreshold: null 
+   severity: 'Medium' 
+   query: >
+    let aadFunc = (tableName:string){
+    table(tableName)
+    | where ResultType == 500121
+    | where Status has "MFA Denied; user declined the authentication" or Status has
+    "MFA denied; Phone App Reported Fraud"
+    | extend Type = Type
+    | extend timestamp = TimeGenerated, Name = tostring(split(UserPrincipalName,'@',
+    0)[0]), UPNSuffix = tostring(split(UserPrincipalName,'@',1)[0])
+    };
+    let aadSignin = aadFunc("SigninLogs");
+    let aadNonInt = aadFunc("AADNonInteractiveUserSignInLogs");
+    union isfuzzy=true aadSignin, aadNonInt
+ 
+   suppressionDuration: 'PT5H' 
+   suppressionEnabled: null 
+   incidentConfiguration: 
+     createIncident: true 
+     groupingConfiguration: 
+       enabled: null 
+       reopenClosedIncident: null 
+       lookbackDuration: 'PT5M' 
+       matchingMethod: 'AllEntities' 
+       groupByEntities: null 
+       groupByAlertDetails: null 
+       groupByCustomDetails: null 
+   entityMappings: 
+    - 
+      entityType: 'Account' 
+      fieldMappings: 
+       - 
+         identifier: 'Name' 
+         columnName: 'Name' 
+       - 
+         identifier: 'UPNSuffix' 
+         columnName: 'UPNSuffix' 
+    - 
+      entityType: 'IP' 
+      fieldMappings: 
+       - 
+         identifier: 'Address' 
+         columnName: 'IPAddress' 
+    - 
+      entityType: 'URL' 
+      fieldMappings: 
+       - 
+         identifier: 'Url' 
+         columnName: 'ClientAppUsed' 
+   eventGroupingSettings: 
+     aggregationKind: 'SingleAlert' 
+   tactics: 
+    - 'CredentialAccess' 
+   techniques: 
+    - 'T1110' 
+   subTechniques: null 
+   displayName: 'Explicit MFA Deny' 
+   enabled: true 
+   description: >
+    User explicitly denies MFA push, indicating that login was not expected and the
+    account's password may be compromised.
+ 
+   alertRuleTemplateName: 'a22740ec-fc1e-4c91-8de6-c29c6450ad00' 
+   lastModifiedUtc: 2024-10-30T13:03:57
+```

@@ -1,0 +1,35 @@
+{
+  "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-buisecops-cybermxdr-westeu/providers/Microsoft.OperationalInsights/workspaces/log-buisecops-cybermxdr-westeu/providers/Microsoft.SecurityInsights/dataConnectors/AzureAdvancedThreatProtection",
+  "name": "AzureAdvancedThreatProtection",
+  "type": "Microsoft.SecurityInsights/dataConnectors",
+  "kind": "StaticUI",
+  "properties": {
+    "connectorUiConfig": {
+      "title": "Microsoft Defender for Identity",
+      "publisher": "Microsoft",
+      "descriptionMarkdown": "Connect Microsoft Defender for Identity to gain visibility into the events and user analytics. Microsoft Defender for Identity identifies, detects, and helps you investigate advanced threats, compromised identities, and malicious insider actions directed at your organization. Microsoft Defender for Identity enables SecOp analysts and security professionals struggling to detect advanced attacks in hybrid environments to:\n\n-   Monitor users, entity behavior, and activities with learning-based analytics​\n-   Protect user identities and credentials stored in Active Directory\n-   Identify and investigate suspicious user activities and advanced attacks throughout the kill chain\n-   Provide clear incident information on a simple timeline for fast triage\n\n[Try now >](https://aka.ms/AtpTryNow)\n\n[Deploy now >](https://aka.ms/AzureATP_Deploy)\n\nFor more information, see the [Microsoft Sentinel documentation](https://go.microsoft.com/fwlink/p/?linkid=2220069&wt.mc_id=sentinel_dataconnectordocs_content_cnl_csasci).",
+      "graphQueries": [
+        {
+          "metricName": "Total data received",
+          "legend": "SecurityAlerts",
+          "baseQuery": "SecurityAlert\n    | where ProductName == \"Azure Advanced Threat Protection\"\n        | extend alertWasCustomized = bag_has_key(todynamic(ExtendedProperties), \"OriginalProductName\")\n        | where alertWasCustomized == false"
+        }
+      ],
+      "dataTypes": [
+        {
+          "name": "SecurityAlert (AATP)",
+          "lastDataReceivedQuery": "SecurityAlert\n    | where ProductName == \"Azure Advanced Threat Protection\"\n        | extend alertWasCustomized = bag_has_key(todynamic(ExtendedProperties), \"OriginalProductName\")\n        | where alertWasCustomized == false\n            | summarize Time = max(TimeGenerated)\n            | where isnotempty(Time)"
+        }
+      ],
+      "connectivityCriterias": [
+        {
+          "type": "SentinelKinds",
+          "value": [
+            "AzureAdvancedThreatProtection"
+          ]
+        }
+      ],
+      "id": "AzureAdvancedThreatProtection"
+    }
+  }
+}

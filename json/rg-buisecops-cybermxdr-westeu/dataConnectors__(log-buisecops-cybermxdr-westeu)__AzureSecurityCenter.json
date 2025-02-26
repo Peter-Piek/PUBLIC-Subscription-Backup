@@ -1,0 +1,35 @@
+{
+  "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-buisecops-cybermxdr-westeu/providers/Microsoft.OperationalInsights/workspaces/log-buisecops-cybermxdr-westeu/providers/Microsoft.SecurityInsights/dataConnectors/AzureSecurityCenter",
+  "name": "AzureSecurityCenter",
+  "type": "Microsoft.SecurityInsights/dataConnectors",
+  "kind": "StaticUI",
+  "properties": {
+    "connectorUiConfig": {
+      "title": "Subscription-based Microsoft Defender for Cloud (Legacy)",
+      "publisher": "Microsoft",
+      "descriptionMarkdown": "Microsoft Defender for Cloud is a security management tool that allows you to detect and quickly respond to threats across Azure, hybrid, and multi-cloud workloads. This connector allows you to stream your security alerts from Microsoft Defender for Cloud into Microsoft Sentinel, so you can view Defender data in workbooks, query it to produce alerts, and investigate and respond to incidents.\n\n[For more information>](https://aka.ms/ASC-Connector)",
+      "graphQueries": [
+        {
+          "metricName": "Total data received",
+          "legend": "SecurityAlerts",
+          "baseQuery": "SecurityAlert | where ProductName == \"Azure Security Center\""
+        }
+      ],
+      "dataTypes": [
+        {
+          "name": "SecurityAlert (ASC)",
+          "lastDataReceivedQuery": "SecurityAlert | where ProductName == \"Azure Security Center\"\n            | summarize Time = max(TimeGenerated)\n            | where isnotempty(Time)"
+        }
+      ],
+      "connectivityCriterias": [
+        {
+          "type": "SentinelKinds",
+          "value": [
+            "AzureSecurityCenter"
+          ]
+        }
+      ],
+      "id": "AzureSecurityCenter"
+    }
+  }
+}

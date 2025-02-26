@@ -1,0 +1,44 @@
+{
+  "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-buisecops-cybermxdr-westeu/providers/Microsoft.OperationalInsights/workspaces/log-buisecops-cybermxdr-westeu/providers/Microsoft.SecurityInsights/AutomationRules/ab4a1f36-fbb9-4ea0-beed-929f6d3efb2e",
+  "name": "ab4a1f36-fbb9-4ea0-beed-929f6d3efb2e",
+  "type": "Microsoft.SecurityInsights/AutomationRules",
+  "properties": {
+    "displayName": "Action | Block User & Reset Users Password",
+    "order": 31,
+    "triggeringLogic": {
+      "isEnabled": true,
+      "triggersOn": "Incidents",
+      "triggersWhen": "Created",
+      "conditions": []
+    },
+    "actions": [
+      {
+        "order": 1,
+        "actionType": "ModifyProperties",
+        "actionConfiguration": {
+          "severity": null,
+          "status": "Active",
+          "classification": null,
+          "classificationReason": null,
+          "classificationComment": null,
+          "owner": null,
+          "labels": null
+        }
+      }
+    ],
+    "lastModifiedTimeUtc": "2024-10-30T12:59:36Z",
+    "createdTimeUtc": "2024-10-30T12:59:36Z",
+    "lastModifiedBy": {
+      "objectId": "e034db27-21d6-434e-9fc5-8623a334f85e",
+      "email": "admin@buisecops.onmicrosoft.com",
+      "name": "SecOps Admin t",
+      "userPrincipalName": "admin@buisecops.onmicrosoft.com"
+    },
+    "createdBy": {
+      "objectId": "e034db27-21d6-434e-9fc5-8623a334f85e",
+      "email": "admin@buisecops.onmicrosoft.com",
+      "name": "SecOps Admin t",
+      "userPrincipalName": "admin@buisecops.onmicrosoft.com"
+    }
+  }
+}

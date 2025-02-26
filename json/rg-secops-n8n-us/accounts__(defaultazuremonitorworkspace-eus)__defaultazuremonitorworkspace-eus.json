@@ -1,0 +1,28 @@
+{
+  "properties": {
+    "accountId": "c3ed4357-d390-4feb-9db8-4ea46ca7d4ef",
+    "metrics": {
+      "prometheusQueryEndpoint": "https://defaultazuremonitorworkspace-eus-grgjhyadb4f0dkhv.eastus.prometheus.monitor.azure.com",
+      "internalId": "mac_c3ed4357-d390-4feb-9db8-4ea46ca7d4ef"
+    },
+    "provisioningState": "Succeeded",
+    "defaultIngestionSettings": {
+      "dataCollectionRuleResourceId": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/MA_defaultazuremonitorworkspace-eus_eastus_managed/providers/Microsoft.Insights/dataCollectionRules/defaultazuremonitorworkspace-eus",
+      "dataCollectionEndpointResourceId": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/MA_defaultazuremonitorworkspace-eus_eastus_managed/providers/Microsoft.Insights/dataCollectionEndpoints/defaultazuremonitorworkspace-eus"
+    },
+    "publicNetworkAccess": "Enabled"
+  },
+  "location": "eastus",
+  "tags": {},
+  "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourcegroups/rg-secops-n8n-us/providers/microsoft.monitor/accounts/defaultazuremonitorworkspace-eus",
+  "name": "defaultazuremonitorworkspace-eus",
+  "type": "Microsoft.Monitor/accounts",
+  "systemData": {
+    "createdBy": "admin@buisecops.onmicrosoft.com",
+    "createdByType": "User",
+    "createdAt": "2025-02-19T09:53:33.0811456Z",
+    "lastModifiedBy": "admin@buisecops.onmicrosoft.com",
+    "lastModifiedByType": "User",
+    "lastModifiedAt": "2025-02-19T09:53:33.0811456Z"
+  }
+}

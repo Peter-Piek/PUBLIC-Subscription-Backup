@@ -1,0 +1,18 @@
+{
+  "name": "aks-vnet-31923502",
+  "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/MC_rg-secops-n8n-us_n8n-cluster_eastus/providers/Microsoft.Network/virtualNetworks/aks-vnet-31923502",
+  "type": "Microsoft.Network/virtualNetworks",
+  "location": "eastus",
+  "tags": {},
+  "properties": {
+    "addressSpace": {
+      "addressPrefixes": [
+        "10.224.0.0/12"
+      ]
+    },
+    "privateEndpointVNetPolicies": "Disabled",
+    "subnets": [],
+    "virtualNetworkPeerings": [],
+    "enableDdosProtection": false
+  }
+}

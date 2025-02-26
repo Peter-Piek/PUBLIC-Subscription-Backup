@@ -1,0 +1,54 @@
+{
+  "properties": {
+    "immutableId": "dcr-672d1eddeb6a42e7b133c7133df2b055",
+    "dataSources": {
+      "windowsEventLogs": [
+        {
+          "streams": [
+            "Microsoft-WindowsEvent"
+          ],
+          "xPathQueries": [
+            "Application!*[System[EventID=33205]]"
+          ],
+          "name": "eventLogsDataSource"
+        }
+      ]
+    },
+    "destinations": {
+      "logAnalytics": [
+        {
+          "workspaceResourceId": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-buisecops-cybermxdr-westeu/providers/Microsoft.OperationalInsights/workspaces/log-buisecops-cybermxdr-westeu",
+          "workspaceId": "15942a08-a718-482f-bff0-0e8ac08c8ca0",
+          "name": "DataCollectionEvent"
+        }
+      ]
+    },
+    "dataFlows": [
+      {
+        "streams": [
+          "Microsoft-WindowsEvent"
+        ],
+        "destinations": [
+          "DataCollectionEvent"
+        ]
+      }
+    ],
+    "provisioningState": "Succeeded"
+  },
+  "location": "eastus",
+  "tags": {
+    "createdBy": "Sentinel"
+  },
+  "kind": "Windows",
+  "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-buisecops-cybermxdr-westeu/providers/Microsoft.Insights/dataCollectionRules/SQLEvent_Azure_VM",
+  "name": "SQLEvent_Azure_VM",
+  "type": "Microsoft.Insights/dataCollectionRules",
+  "systemData": {
+    "createdBy": "admin@buisecops.onmicrosoft.com",
+    "createdByType": "User",
+    "createdAt": "2024-09-05T07:35:21.3024409Z",
+    "lastModifiedBy": "admin@buisecops.onmicrosoft.com",
+    "lastModifiedByType": "User",
+    "lastModifiedAt": "2024-09-05T07:35:21.3024409Z"
+  }
+}

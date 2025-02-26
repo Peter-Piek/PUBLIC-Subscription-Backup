@@ -1,0 +1,53 @@
+{
+  "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-buisecops-cybermxdr-westeu/providers/Microsoft.OperationalInsights/workspaces/log-buisecops-cybermxdr-westeu/providers/Microsoft.SecurityInsights/dataConnectors/Office365",
+  "name": "Office365",
+  "type": "Microsoft.SecurityInsights/dataConnectors",
+  "kind": "StaticUI",
+  "properties": {
+    "connectorUiConfig": {
+      "id": "Office365",
+      "title": "Microsoft 365 (formerly, Office 365)",
+      "publisher": "Microsoft",
+      "descriptionMarkdown": "The Microsoft 365 (formerly, Office 365) activity log connector provides insight into ongoing user activities. You will get details of operations such as file downloads, access requests sent, changes to group events, set-mailbox and details of the user who performed the actions. By connecting Microsoft 365 logs into Microsoft Sentinel you can use this data to view dashboards, create custom alerts, and improve your investigation process. For more information, see the [Microsoft Sentinel documentation](https://go.microsoft.com/fwlink/p/?linkid=2219943&wt.mc_id=sentinel_dataconnectordocs_content_cnl_csasci).",
+      "graphQueries": [
+        {
+          "metricName": "Total data received",
+          "legend": "SharePoint",
+          "baseQuery": "OfficeActivity\n| where OfficeWorkload == \"SharePoint\" or OfficeWorkload == \"OneDrive\""
+        },
+        {
+          "metricName": "Total data received",
+          "legend": "Exchange",
+          "baseQuery": "OfficeActivity\n| where OfficeWorkload == \"Exchange\""
+        },
+        {
+          "metricName": "Total data received",
+          "legend": "Teams",
+          "baseQuery": "OfficeActivity\n| where OfficeWorkload == \"MicrosoftTeams\""
+        }
+      ],
+      "connectivityCriterias": [
+        {
+          "type": "SentinelKinds",
+          "value": [
+            "Office365"
+          ]
+        }
+      ],
+      "dataTypes": [
+        {
+          "name": "OfficeActivity (SharePoint)",
+          "lastDataReceivedQuery": "OfficeActivity\n| where OfficeWorkload == \"SharePoint\" or OfficeWorkload == \"OneDrive\"\n            | summarize Time = max(TimeGenerated)\n            | where isnotempty(Time)"
+        },
+        {
+          "name": "OfficeActivity (Exchange)",
+          "lastDataReceivedQuery": "OfficeActivity\n| where OfficeWorkload == \"Exchange\"\n            | summarize Time = max(TimeGenerated)\n            | where isnotempty(Time)"
+        },
+        {
+          "name": "OfficeActivity (Teams)",
+          "lastDataReceivedQuery": "OfficeActivity\n| where OfficeWorkload == \"MicrosoftTeams\"\n            | summarize Time = max(TimeGenerated)\n            | where isnotempty(Time)"
+        }
+      ]
+    }
+  }
+}

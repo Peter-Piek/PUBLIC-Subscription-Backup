@@ -1,0 +1,22 @@
+{
+  "name": "aks-subnet",
+  "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/MC_rg-secops-n8n-us_n8n-cluster_eastus/providers/Microsoft.Network/virtualNetworks/aks-vnet-31923502/subnets/aks-subnet",
+  "properties": {
+    "addressPrefix": "10.224.0.0/16",
+    "networkSecurityGroup": {
+      "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/MC_rg-secops-n8n-us_n8n-cluster_eastus/providers/Microsoft.Network/networkSecurityGroups/aks-agentpool-31923502-nsg"
+    },
+    "ipConfigurations": [
+      {
+        "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/MC_RG-SECOPS-N8N-US_N8N-CLUSTER_EASTUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-14453608-VMSS/VIRTUALMACHINES/0/NETWORKINTERFACES/AKS-AGENTPOOL-14453608-VMSS/ipConfigurations/IPCONFIG1"
+      },
+      {
+        "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/MC_RG-SECOPS-N8N-US_N8N-CLUSTER_EASTUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-14453608-VMSS/VIRTUALMACHINES/1/NETWORKINTERFACES/AKS-AGENTPOOL-14453608-VMSS/ipConfigurations/IPCONFIG1"
+      }
+    ],
+    "delegations": [],
+    "privateEndpointNetworkPolicies": "Disabled",
+    "privateLinkServiceNetworkPolicies": "Enabled"
+  },
+  "type": "Microsoft.Network/virtualNetworks/subnets"
+}

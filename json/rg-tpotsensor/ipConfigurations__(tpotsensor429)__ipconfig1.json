@@ -1,0 +1,17 @@
+{
+  "name": "ipconfig1",
+  "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-tpotsensor/providers/Microsoft.Network/networkInterfaces/tpotsensor429/ipConfigurations/ipconfig1",
+  "type": "Microsoft.Network/networkInterfaces/ipConfigurations",
+  "properties": {
+    "privateIPAddress": "10.3.0.4",
+    "privateIPAllocationMethod": "Dynamic",
+    "publicIPAddress": {
+      "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-tpotsensor/providers/Microsoft.Network/publicIPAddresses/tpotsensor-ip"
+    },
+    "subnet": {
+      "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-tpotsensor/providers/Microsoft.Network/virtualNetworks/tpotsensor-vnet/subnets/default"
+    },
+    "primary": true,
+    "privateIPAddressVersion": "IPv4"
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "name": "tpotsensor_OsDisk_1_d7f7a644e614422ea60813c76d008790",
+  "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/RG-TPOTSENSOR/providers/Microsoft.Compute/disks/tpotsensor_OsDisk_1_d7f7a644e614422ea60813c76d008790",
+  "type": "Microsoft.Compute/disks",
+  "location": "westeurope",
+  "managedBy": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-tpotsensor/providers/Microsoft.Compute/virtualMachines/tpotsensor",
+  "sku": {
+    "name": "StandardSSD_LRS",
+    "tier": "Standard"
+  },
+  "properties": {
+    "osType": "Linux",
+    "hyperVGeneration": "V2",
+    "supportsHibernation": true,
+    "supportedCapabilities": {
+      "diskControllerTypes": "SCSI, NVMe",
+      "acceleratedNetwork": true,
+      "architecture": "x64"
+    },
+    "creationData": {
+      "createOption": "FromImage",
+      "imageReference": {
+        "id": "/Subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/Providers/Microsoft.Compute/Locations/westeurope/Publishers/canonical/ArtifactTypes/VMImage/Offers/ubuntu-24_04-lts/Skus/server/Versions/24.04.202411030"
+      }
+    },
+    "diskSizeGB": 30,
+    "diskIOPSReadWrite": 500,
+    "diskMBpsReadWrite": 100,
+    "encryption": {
+      "type": "EncryptionAtRestWithPlatformKey"
+    },
+    "networkAccessPolicy": "AllowAll",
+    "securityProfile": {
+      "securityType": "TrustedLaunch"
+    },
+    "publicNetworkAccess": "Enabled",
+    "diskState": "Attached",
+    "LastOwnershipUpdateTime": "2025-01-09T08:45:14.2682734+00:00"
+  }
+}

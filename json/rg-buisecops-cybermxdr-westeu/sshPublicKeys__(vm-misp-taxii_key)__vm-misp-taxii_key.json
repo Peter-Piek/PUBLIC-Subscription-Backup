@@ -1,0 +1,9 @@
+{
+  "name": "vm-misp-taxii_key",
+  "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/RG-BUISECOPS-CYBERMXDR-WESTEU/providers/Microsoft.Compute/sshPublicKeys/vm-misp-taxii_key",
+  "location": "westeurope",
+  "tags": {},
+  "properties": {
+    "publicKey": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC3LXhxZCOyLQWDn9oR3rLr42xjrmMB/A9SduSOnfc5spyUgGBjk8BdtQLAsSZE4DRuNin/e6rnetZywPlkHTWNlekLVFf+SJh2b8RqOkC7kilYBihhBoKPdAUNVicRru+kKWXcq2YESyKloASMmxzqXQE2hWxwwO+NDHSgb4nsvkJ3wNAYt6mY5RKV0tJMW8WqHbjgsjcNX9ayW6Agn3J1bkWFu9xNijLHi+MlS9QiKzpFPXzXv/96aMpoNs8ZWLtFi4mRnA5rBhB1LmveZOCGsb3/+KOxNSBgyEhz9PJt7jqESsKyhNXCB5hWil+Uw7/byL2ym+w91J3bTHhrI4I5o7aD8/O5GVqRZvkYFk8LdtAJT30IFjVEtwIuKQZ8ZeYbKN60/UXTESx8cDeECx771N1fFt86E7c5w9K/TFk4aPtke/W3nozGDolU7Hi/e8H7i1RLq1i2SmRFhGJuDJl3sEr2Bt0o3V2PcBIq8JUMxf8oYfE/lW1DZNHr/5r4sA0= generated-by-azure"
+  }
+}

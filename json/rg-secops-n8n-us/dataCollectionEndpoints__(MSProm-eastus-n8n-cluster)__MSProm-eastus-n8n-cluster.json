@@ -1,0 +1,32 @@
+{
+  "properties": {
+    "immutableId": "dce-2e75a295d5ac40b68cbb5a2ebbc5ca43",
+    "configurationAccess": {
+      "endpoint": "https://msprom-eastus-n8n-cluster-y0zl.eastus-1.handler.control.monitor.azure.com"
+    },
+    "logsIngestion": {
+      "endpoint": "https://msprom-eastus-n8n-cluster-y0zl.eastus-1.ingest.monitor.azure.com"
+    },
+    "metricsIngestion": {
+      "endpoint": "https://msprom-eastus-n8n-cluster-y0zl.eastus-1.metrics.ingest.monitor.azure.com"
+    },
+    "networkAcls": {
+      "publicNetworkAccess": "Enabled"
+    },
+    "provisioningState": "Succeeded"
+  },
+  "location": "eastus",
+  "tags": {},
+  "kind": "Linux",
+  "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-secops-n8n-us/providers/Microsoft.Insights/dataCollectionEndpoints/MSProm-eastus-n8n-cluster",
+  "name": "MSProm-eastus-n8n-cluster",
+  "type": "Microsoft.Insights/dataCollectionEndpoints",
+  "systemData": {
+    "createdBy": "admin@buisecops.onmicrosoft.com",
+    "createdByType": "User",
+    "createdAt": "2025-02-19T09:53:28.0059999Z",
+    "lastModifiedBy": "admin@buisecops.onmicrosoft.com",
+    "lastModifiedByType": "User",
+    "lastModifiedAt": "2025-02-19T09:53:28.0059999Z"
+  }
+}

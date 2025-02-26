@@ -1,0 +1,17 @@
+{
+  "properties": {
+    "virtualMachineResourceId": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-buisecops-cybermxdr-westeu/providers/Microsoft.Compute/virtualMachines/SQLTest",
+    "sqlImageOffer": "SQL2019-WS2019",
+    "sqlServerLicenseType": "PAYG",
+    "sqlManagement": "Full",
+    "leastPrivilegeMode": "Enabled",
+    "sqlImageSku": "Standard",
+    "enableAutomaticUpgrade": true,
+    "additionalVmPatch": "WUMU",
+    "osType": "Windows"
+  },
+  "location": "westeurope",
+  "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-buisecops-cybermxdr-westeu/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachines/SQLTest",
+  "name": "SQLTest",
+  "type": "Microsoft.SqlVirtualMachine/sqlVirtualMachines"
+}

@@ -1,0 +1,25 @@
+# All Computers with their most recent data
+
+```
+--- 
+ properties: 
+   category: 'General Exploration' 
+   displayName: 'All Computers with their most recent data' 
+   version: 2 
+   query: >
+    search not(ObjectName == "Advisor Metrics" or ObjectName == "ManagedSpace") |
+    summarize AggregatedValue = max(TimeGenerated) by Computer | limit 500000 | sort
+    by Computer asc
+    // Oql: NOT(ObjectName="Advisor Metrics" OR ObjectName=ManagedSpace) | measure
+    max(TimeGenerated) by Computer | top 500000 | Sort Computer // Args: {OQ: True;
+    WorkspaceId: 00000000-0000-0000-0000-000000000000} // Settings: {PTT: True; SortI:
+    True; SortF: True} // Version: 0.1.122
+ 
+ id: >
+  /subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/Red_Team_RG/p
+  roviders/Microsoft.OperationalInsights/workspaces/KObusTest/savedSearches/LogMan
+  agement(KObusTest)_General|AlphabeticallySortedComputers
+ 
+ name: 'LogManagement(KObusTest)_General|AlphabeticallySortedComputers' 
+ type: 'Microsoft.OperationalInsights/savedSearches'
+```

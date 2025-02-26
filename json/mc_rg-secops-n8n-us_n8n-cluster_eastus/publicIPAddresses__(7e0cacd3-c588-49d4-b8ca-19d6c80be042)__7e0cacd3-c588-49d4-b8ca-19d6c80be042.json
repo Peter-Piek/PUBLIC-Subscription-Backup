@@ -1,0 +1,32 @@
+{
+  "name": "7e0cacd3-c588-49d4-b8ca-19d6c80be042",
+  "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/MC_rg-secops-n8n-us_n8n-cluster_eastus/providers/Microsoft.Network/publicIPAddresses/7e0cacd3-c588-49d4-b8ca-19d6c80be042",
+  "location": "eastus",
+  "tags": {
+    "aks-managed-cluster-name": "n8n-cluster",
+    "aks-managed-cluster-rg": "rg-secops-n8n-us",
+    "aks-managed-type": "aks-slb-managed-outbound-ip"
+  },
+  "zones": [
+    "3",
+    "1",
+    "2"
+  ],
+  "properties": {
+    "publicIPAddressVersion": "IPv4",
+    "publicIPAllocationMethod": "Static",
+    "idleTimeoutInMinutes": 4,
+    "ipTags": [],
+    "ipConfiguration": {
+      "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/MC_rg-secops-n8n-us_n8n-cluster_eastus/providers/Microsoft.Network/loadBalancers/kubernetes/frontendIPConfigurations/7e0cacd3-c588-49d4-b8ca-19d6c80be042"
+    },
+    "ddosSettings": {
+      "protectionMode": "VirtualNetworkInherited"
+    }
+  },
+  "type": "Microsoft.Network/publicIPAddresses",
+  "sku": {
+    "name": "Standard",
+    "tier": "Regional"
+  }
+}

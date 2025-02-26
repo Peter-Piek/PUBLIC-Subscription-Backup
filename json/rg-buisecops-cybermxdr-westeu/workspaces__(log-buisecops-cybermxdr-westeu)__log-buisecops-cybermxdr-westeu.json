@@ -1,0 +1,26 @@
+{
+  "properties": {
+    "customerId": "15942a08-a718-482f-bff0-0e8ac08c8ca0",
+    "sku": {
+      "name": "PerGB2018"
+    },
+    "retentionInDays": 90,
+    "features": {
+      "legacy": 0,
+      "searchVersion": 1,
+      "enableLogAccessUsingOnlyResourcePermissions": true,
+      "unifiedSentinelBillingOnly": true
+    },
+    "workspaceCapping": {
+      "dailyQuotaGb": 10.0,
+      "dataIngestionStatus": "RespectQuota"
+    },
+    "publicNetworkAccessForIngestion": "Enabled",
+    "publicNetworkAccessForQuery": "Enabled"
+  },
+  "location": "eastus",
+  "tags": {},
+  "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-buisecops-cybermxdr-westeu/providers/Microsoft.OperationalInsights/workspaces/log-buisecops-cybermxdr-westeu",
+  "name": "log-buisecops-cybermxdr-westeu",
+  "type": "Microsoft.OperationalInsights/workspaces"
+}

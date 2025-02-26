@@ -1,0 +1,121 @@
+# Attempt to bypass conditional access rule in Azure AD
+
+```
+--- 
+ id: >
+  /subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-buisecops-
+  cybermxdr-westeu/providers/Microsoft.OperationalInsights/workspaces/log-buisecop
+  s-cybermxdr-westeu/providers/Microsoft.SecurityInsights/alertRules/436f9575-bb1a
+  -4b51-b56c-d85310069bdf
+ 
+ name: '436f9575-bb1a-4b51-b56c-d85310069bdf' 
+ type: 'Microsoft.SecurityInsights/alertRules' 
+ kind: 'Scheduled' 
+ properties: 
+   queryFrequency: 'P1D' 
+   queryPeriod: 'P1D' 
+   triggerOperator: 'GreaterThan' 
+   triggerThreshold: null 
+   severity: 'Low' 
+   query: >
+    let threshold = 1; // Modify this threshold value to reduce false positives based
+    on your environment
+    let aadFunc = (tableName:string){
+    table(tableName)
+    | where ConditionalAccessStatus == 1 or ConditionalAccessStatus =~ "failure"
+    | mv-apply CAP = parse_json(ConditionalAccessPolicies) on (
+    project ConditionalAccessPoliciesName = CAP.displayName, result = CAP.result
+    | where result =~ "failure"
+    )
+    | extend DeviceDetail = todynamic(DeviceDetail), Status = todynamic(Status),
+    LocationDetails = todynamic(LocationDetails)
+    | extend OS = DeviceDetail.operatingSystem, Browser = DeviceDetail.browser
+    | extend State = tostring(LocationDetails.state), City = tostring(LocationDetail
+    s.city), Region = tostring(LocationDetails.countryOrRegion)
+    | extend StatusCode = tostring(Status.errorCode), StatusDetails = tostring(Statu
+    s.additionalDetails)
+    | extend Status = strcat(StatusCode, ": ", ResultDescription)
+    | summarize StartTime = min(TimeGenerated), EndTime = max(TimeGenerated), Status
+    = make_list(Status,10), StatusDetails = make_list(StatusDetails,50), IPAddresses
+    = make_list(IPAddress,100), IPAddressCount = dcount(IPAddress), CorrelationIds =
+    make_list(CorrelationId,100), ConditionalAccessPoliciesName = make_list(Conditi
+    onalAccessPoliciesName,100)
+    by UserPrincipalName, AppDisplayName, tostring(Browser), tostring(OS), City, State,
+    Region, Type
+    | where IPAddressCount > threshold and StatusDetails !has "MFA successfully comp
+    leted"
+    | mv-expand IPAddresses, Status, StatusDetails, CorrelationIds
+    | extend Status = strcat(Status, " ", StatusDetails)
+    | summarize IPAddresses = make_set(IPAddresses,100), Status = make_set(Status,10),
+    CorrelationIds = make_set(CorrelationIds,100), ConditionalAccessPoliciesName =
+    make_set(ConditionalAccessPoliciesName,100)
+    by StartTime, EndTime, UserPrincipalName, AppDisplayName, tostring(Browser),
+    tostring(OS), City, State, Region, IPAddressCount, Type
+    | extend timestamp = StartTime, IPAddresses = tostring(IPAddresses), Name = tost
+    ring(split(UserPrincipalName,'@',0)[0]), UPNSuffix = tostring(split(UserPrincipa
+    lName,'@',1)[0])
+    };
+    let aadSignin = aadFunc("SigninLogs");
+    let aadNonInt = aadFunc("AADNonInteractiveUserSignInLogs");
+    union isfuzzy=true aadSignin, aadNonInt
+ 
+   suppressionDuration: 'PT5H' 
+   suppressionEnabled: null 
+   incidentConfiguration: 
+     createIncident: true 
+     groupingConfiguration: 
+       enabled: null 
+       reopenClosedIncident: null 
+       lookbackDuration: 'PT5M' 
+       matchingMethod: 'AllEntities' 
+       groupByEntities: null 
+       groupByAlertDetails: null 
+       groupByCustomDetails: null 
+   entityMappings: 
+    - 
+      entityType: 'Account' 
+      fieldMappings: 
+       - 
+         identifier: 'Name' 
+         columnName: 'Name' 
+       - 
+         identifier: 'UPNSuffix' 
+         columnName: 'UPNSuffix' 
+    - 
+      entityType: 'IP' 
+      fieldMappings: 
+       - 
+         identifier: 'Address' 
+         columnName: 'IPAddresses' 
+   eventGroupingSettings: 
+     aggregationKind: 'SingleAlert' 
+   tactics: 
+    - 'InitialAccess' 
+    - 'Persistence' 
+   techniques: 
+    - 'T1078' 
+    - 'T1098' 
+   subTechniques: null 
+   displayName: 'Attempt to bypass conditional access rule in Azure AD' 
+   enabled: true 
+   description: >
+    Identifies an attempt to Bypass conditional access rule(s) in Azure Active Direc
+    tory.
+    The ConditionalAccessStatus column value details if there was an attempt to bypass
+    Conditional Access
+    or if the Conditional access rule was not satisfied (ConditionalAccessStatus ==
+    1).
+    References:
+    https://docs.microsoft.com/azure/active-directory/conditional-access/overview
+    https://docs.microsoft.com/azure/active-directory/reports-monitoring/concept-sig
+    n-ins
+    https://docs.microsoft.com/azure/active-directory/reports-monitoring/reference-s
+    ign-ins-error-codes
+    ConditionalAccessStatus == 0 // Success
+    ConditionalAccessStatus == 1 // Failure
+    ConditionalAccessStatus == 2 // Not Applied
+    ConditionalAccessStatus == 3 // unknown
+ 
+   alertRuleTemplateName: '3af9285d-bb98-4a35-ad29-5ea39ba0c628' 
+   lastModifiedUtc: 2024-10-30T13:03:57
+```

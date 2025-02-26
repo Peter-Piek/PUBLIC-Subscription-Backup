@@ -1,0 +1,14 @@
+{
+  "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-buisecops-cybermxdr-westeu/providers/Microsoft.OperationalInsights/workspaces/log-buisecops-cybermxdr-westeu/providers/Microsoft.SecurityInsights/dataConnectors/def71d65-4bb9-4df6-9507-b4a79def1037",
+  "name": "def71d65-4bb9-4df6-9507-b4a79def1037",
+  "type": "Microsoft.SecurityInsights/dataConnectors",
+  "kind": "AzureActiveDirectory",
+  "properties": {
+    "dataTypes": {
+      "alerts": {
+        "state": "enabled"
+      }
+    },
+    "tenantId": "27909b42-a095-40f2-be50-76c52e13b8f3"
+  }
+}

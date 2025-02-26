@@ -1,0 +1,91 @@
+# Changes to PIM Settings
+
+```
+--- 
+ id: >
+  /subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-buisecops-
+  cybermxdr-westeu/providers/Microsoft.OperationalInsights/workspaces/log-buisecop
+  s-cybermxdr-westeu/providers/Microsoft.SecurityInsights/alertRules/0fe3e061-fe26
+  -44e6-829c-4ebaa933f6a1
+ 
+ name: '0fe3e061-fe26-44e6-829c-4ebaa933f6a1' 
+ type: 'Microsoft.SecurityInsights/alertRules' 
+ kind: 'Scheduled' 
+ properties: 
+   queryFrequency: 'P1D' 
+   queryPeriod: 'P1D' 
+   triggerOperator: 'GreaterThan' 
+   triggerThreshold: null 
+   severity: 'High' 
+   query: >
+    AuditLogs
+    | where Category =~ "RoleManagement"
+    | where OperationName =~ "Update role setting in PIM"
+    | extend InitiatingUserPrincipalName = tostring(InitiatedBy.user.userPrincipal
+    Name)
+    | extend InitiatingAadUserId = tostring(InitiatedBy.user.id)
+    | extend InitiatingIPAddress = tostring(InitiatedBy.user.ipAddress)
+    | extend InitiatingAccountName = tostring(split(InitiatingUserPrincipalName,
+    "@")[0]), InitiatingAccountUPNSuffix = tostring(split(InitiatingUserPrincipalNa
+    me, "@")[1])
+    | project-reorder TimeGenerated, OperationName, ResultReason, InitiatingUserPrincipalName,
+    InitiatingAadUserId, InitiatingIPAddress, InitiatingAccountName, InitiatingAcco
+    untUPNSuffix
+ 
+   suppressionDuration: 'PT5H' 
+   suppressionEnabled: null 
+   incidentConfiguration: 
+     createIncident: true 
+     groupingConfiguration: 
+       enabled: null 
+       reopenClosedIncident: null 
+       lookbackDuration: 'PT5M' 
+       matchingMethod: 'AllEntities' 
+       groupByEntities: null 
+       groupByAlertDetails: null 
+       groupByCustomDetails: null 
+   entityMappings: 
+    - 
+      entityType: 'Account' 
+      fieldMappings: 
+       - 
+         identifier: 'FullName' 
+         columnName: 'InitiatingUserPrincipalName' 
+       - 
+         identifier: 'Name' 
+         columnName: 'InitiatingAccountName' 
+       - 
+         identifier: 'UPNSuffix' 
+         columnName: 'InitiatingAccountUPNSuffix' 
+    - 
+      entityType: 'Account' 
+      fieldMappings: 
+       - 
+         identifier: 'AadUserId' 
+         columnName: 'InitiatingAadUserId' 
+    - 
+      entityType: 'IP' 
+      fieldMappings: 
+       - 
+         identifier: 'Address' 
+         columnName: 'InitiatingIPAddress' 
+   eventGroupingSettings: 
+     aggregationKind: 'SingleAlert' 
+   tactics: 
+    - 'PrivilegeEscalation' 
+   techniques: 
+    - 'T1078' 
+   subTechniques: null 
+   displayName: 'Changes to PIM Settings' 
+   enabled: true 
+   description: >
+    PIM provides a key mechanism for assigning privileges to accounts, this query
+    detects changes to PIM role settings.
+    Monitor these changes to ensure they are being made legitimately and don't confer
+    more privileges than expected or reduce the security of a PIM elevation.
+    Ref: https://docs.microsoft.com/azure/active-directory/fundamentals/security-o
+    perations-privileged-accounts#changes-to-privileged-accounts
+ 
+   alertRuleTemplateName: '0ed0fe7c-af29-4990-af7f-bb5ccb231198' 
+   lastModifiedUtc: 2024-10-30T13:03:57
+```

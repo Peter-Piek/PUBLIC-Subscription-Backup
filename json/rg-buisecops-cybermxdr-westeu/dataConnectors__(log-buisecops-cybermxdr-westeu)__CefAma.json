@@ -1,0 +1,33 @@
+{
+  "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-buisecops-cybermxdr-westeu/providers/Microsoft.OperationalInsights/workspaces/log-buisecops-cybermxdr-westeu/providers/Microsoft.SecurityInsights/dataConnectors/CefAma",
+  "name": "CefAma",
+  "type": "Microsoft.SecurityInsights/dataConnectors",
+  "kind": "StaticUI",
+  "properties": {
+    "connectorUiConfig": {
+      "title": "Common Event Format (CEF) via AMA",
+      "publisher": "Microsoft",
+      "descriptionMarkdown": "Common Event Format (CEF) is an industry standard format on top of Syslog messages, used by many security vendors to allow event interoperability among different platforms. By connecting your CEF logs to Microsoft Sentinel, you can take advantage of search & correlation, alerting, and threat intelligence enrichment for each log. For more information, see the [Microsoft Sentinel documentation](https://go.microsoft.com/fwlink/p/?linkid=2223547&wt.mc_id=sentinel_dataconnectordocs_content_cnl_csasci).",
+      "graphQueries": [
+        {
+          "metricName": "Total data received",
+          "legend": "CommonSecurityLog",
+          "baseQuery": "CommonSecurityLog"
+        }
+      ],
+      "dataTypes": [
+        {
+          "name": "CommonSecurityLog",
+          "lastDataReceivedQuery": "CommonSecurityLog\n            | summarize Time = max(TimeGenerated)\n            | where isnotempty(Time)"
+        }
+      ],
+      "connectivityCriterias": [
+        {
+          "type": "CommonSecurityEvents",
+          "value": null
+        }
+      ],
+      "id": "CefAma"
+    }
+  }
+}

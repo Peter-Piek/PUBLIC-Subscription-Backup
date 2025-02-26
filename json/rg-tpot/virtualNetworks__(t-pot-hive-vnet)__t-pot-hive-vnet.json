@@ -1,0 +1,17 @@
+{
+  "name": "t-pot-hive-vnet",
+  "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-tpot/providers/Microsoft.Network/virtualNetworks/t-pot-hive-vnet",
+  "type": "Microsoft.Network/virtualNetworks",
+  "location": "westeurope",
+  "properties": {
+    "addressSpace": {
+      "addressPrefixes": [
+        "10.2.0.0/16"
+      ]
+    },
+    "privateEndpointVNetPolicies": "Disabled",
+    "subnets": [],
+    "virtualNetworkPeerings": [],
+    "enableDdosProtection": false
+  }
+}

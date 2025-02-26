@@ -1,0 +1,35 @@
+{
+  "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-buisecops-cybermxdr-westeu/providers/Microsoft.OperationalInsights/workspaces/log-buisecops-cybermxdr-westeu/providers/Microsoft.SecurityInsights/dataConnectors/IoT",
+  "name": "IoT",
+  "type": "Microsoft.SecurityInsights/dataConnectors",
+  "kind": "StaticUI",
+  "properties": {
+    "connectorUiConfig": {
+      "title": "Microsoft Defender for IoT",
+      "publisher": "Microsoft",
+      "descriptionMarkdown": "Gain insights into your IoT security by connecting Microsoft Defender for IoT alerts to Microsoft Sentinel.\nYou can get out-of-the-box alert metrics and data, including alert trends, top alerts, and alert breakdown by severity.\nYou can also get information about the recommendations provided for your IoT hubs including top recommendations and recommendations by severity. For more information, see the [Microsoft Sentinel documentation](https://go.microsoft.com/fwlink/p/?linkid=2224002&wt.mc_id=sentinel_dataconnectordocs_content_cnl_csasci).",
+      "graphQueries": [
+        {
+          "metricName": "Total data received",
+          "legend": "SecurityAlerts",
+          "baseQuery": "SecurityAlert | where ProductName == \"Azure Security Center for IoT\""
+        }
+      ],
+      "dataTypes": [
+        {
+          "name": "SecurityAlert (ASC for IoT)",
+          "lastDataReceivedQuery": "SecurityAlert | where ProductName == \"Azure Security Center for IoT\"\n            | summarize Time = max(TimeGenerated)\n            | where isnotempty(Time)"
+        }
+      ],
+      "connectivityCriterias": [
+        {
+          "type": "SentinelKinds",
+          "value": [
+            "IOT"
+          ]
+        }
+      ],
+      "id": "IoT"
+    }
+  }
+}

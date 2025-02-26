@@ -1,0 +1,44 @@
+{
+  "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-buisecops-cybermxdr-westeu/providers/Microsoft.OperationalInsights/workspaces/log-buisecops-cybermxdr-westeu/providers/Microsoft.SecurityInsights/AutomationRules/a54d2913-6897-40ae-b900-aa52b9da6abb",
+  "name": "a54d2913-6897-40ae-b900-aa52b9da6abb",
+  "type": "Microsoft.SecurityInsights/AutomationRules",
+  "properties": {
+    "displayName": "Notification | Email | High Severity Incidents",
+    "order": 150,
+    "triggeringLogic": {
+      "isEnabled": true,
+      "triggersOn": "Incidents",
+      "triggersWhen": "Created",
+      "conditions": []
+    },
+    "actions": [
+      {
+        "order": 1,
+        "actionType": "ModifyProperties",
+        "actionConfiguration": {
+          "severity": null,
+          "status": "Active",
+          "classification": null,
+          "classificationReason": null,
+          "classificationComment": null,
+          "owner": null,
+          "labels": null
+        }
+      }
+    ],
+    "lastModifiedTimeUtc": "2024-10-30T13:00:09Z",
+    "createdTimeUtc": "2024-10-30T13:00:09Z",
+    "lastModifiedBy": {
+      "objectId": "e034db27-21d6-434e-9fc5-8623a334f85e",
+      "email": "admin@buisecops.onmicrosoft.com",
+      "name": "SecOps Admin t",
+      "userPrincipalName": "admin@buisecops.onmicrosoft.com"
+    },
+    "createdBy": {
+      "objectId": "e034db27-21d6-434e-9fc5-8623a334f85e",
+      "email": "admin@buisecops.onmicrosoft.com",
+      "name": "SecOps Admin t",
+      "userPrincipalName": "admin@buisecops.onmicrosoft.com"
+    }
+  }
+}

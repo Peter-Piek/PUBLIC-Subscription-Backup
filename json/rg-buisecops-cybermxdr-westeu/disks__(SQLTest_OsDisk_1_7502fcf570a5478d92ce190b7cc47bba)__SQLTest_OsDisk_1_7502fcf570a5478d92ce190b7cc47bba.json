@@ -1,0 +1,44 @@
+{
+  "name": "SQLTest_OsDisk_1_7502fcf570a5478d92ce190b7cc47bba",
+  "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/RG-BUISECOPS-CYBERMXDR-WESTEU/providers/Microsoft.Compute/disks/SQLTest_OsDisk_1_7502fcf570a5478d92ce190b7cc47bba",
+  "type": "Microsoft.Compute/disks",
+  "location": "westeurope",
+  "zones": [
+    "2"
+  ],
+  "managedBy": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-buisecops-cybermxdr-westeu/providers/Microsoft.Compute/virtualMachines/SQLTest",
+  "sku": {
+    "name": "Premium_LRS",
+    "tier": "Premium"
+  },
+  "properties": {
+    "osType": "Windows",
+    "hyperVGeneration": "V2",
+    "supportsHibernation": false,
+    "supportedCapabilities": {
+      "diskControllerTypes": "SCSI, NVMe",
+      "acceleratedNetwork": true,
+      "architecture": "x64"
+    },
+    "creationData": {
+      "createOption": "FromImage",
+      "imageReference": {
+        "id": "/Subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/Providers/Microsoft.Compute/Locations/westeurope/Publishers/microsoftsqlserver/ArtifactTypes/VMImage/Offers/sql2019-ws2019/Skus/standard-gen2/Versions/15.0.240813"
+      }
+    },
+    "diskSizeGB": 127,
+    "diskIOPSReadWrite": 500,
+    "diskMBpsReadWrite": 100,
+    "encryption": {
+      "type": "EncryptionAtRestWithPlatformKey"
+    },
+    "networkAccessPolicy": "AllowAll",
+    "securityProfile": {
+      "securityType": "TrustedLaunch"
+    },
+    "publicNetworkAccess": "Enabled",
+    "diskState": "Reserved",
+    "LastOwnershipUpdateTime": "2024-09-05T07:58:05.1470999+00:00",
+    "tier": "P10"
+  }
+}

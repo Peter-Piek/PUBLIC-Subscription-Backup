@@ -1,0 +1,51 @@
+{
+  "properties": {
+    "immutableId": "dcr-23960deef6c14cf094c1116299d75de5",
+    "dataCollectionEndpointId": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-secops-n8n-us/providers/Microsoft.Insights/dataCollectionEndpoints/MSProm-eastus-n8n-cluster",
+    "dataSources": {
+      "prometheusForwarder": [
+        {
+          "streams": [
+            "Microsoft-PrometheusMetrics"
+          ],
+          "labelIncludeFilter": {},
+          "name": "PrometheusDataSource"
+        }
+      ]
+    },
+    "destinations": {
+      "monitoringAccounts": [
+        {
+          "accountResourceId": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourcegroups/rg-secops-n8n-us/providers/Microsoft.monitor/accounts/defaultazuremonitorworkspace-eus",
+          "accountId": "c3ed4357-d390-4feb-9db8-4ea46ca7d4ef",
+          "name": "MonitoringAccount1"
+        }
+      ]
+    },
+    "dataFlows": [
+      {
+        "streams": [
+          "Microsoft-PrometheusMetrics"
+        ],
+        "destinations": [
+          "MonitoringAccount1"
+        ]
+      }
+    ],
+    "provisioningState": "Succeeded"
+  },
+  "location": "eastus",
+  "tags": {},
+  "kind": "Linux",
+  "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-secops-n8n-us/providers/Microsoft.Insights/dataCollectionRules/MSProm-eastus-n8n-cluster",
+  "name": "MSProm-eastus-n8n-cluster",
+  "type": "Microsoft.Insights/dataCollectionRules",
+  "systemData": {
+    "createdBy": "admin@buisecops.onmicrosoft.com",
+    "createdByType": "User",
+    "createdAt": "2025-02-19T09:53:45.8793365Z",
+    "lastModifiedBy": "admin@buisecops.onmicrosoft.com",
+    "lastModifiedByType": "User",
+    "lastModifiedAt": "2025-02-19T09:53:45.8793365Z"
+  }
+}

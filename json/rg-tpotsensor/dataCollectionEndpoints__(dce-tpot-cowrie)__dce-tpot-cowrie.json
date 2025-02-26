@@ -1,0 +1,30 @@
+{
+  "properties": {
+    "immutableId": "dce-694f113c7d6a4931a2c24c8258a82b1a",
+    "configurationAccess": {
+      "endpoint": "https://dce-tpot-cowrie-ki9r.westeurope-1.handler.control.monitor.azure.com"
+    },
+    "logsIngestion": {
+      "endpoint": "https://dce-tpot-cowrie-ki9r.westeurope-1.ingest.monitor.azure.com"
+    },
+    "metricsIngestion": {
+      "endpoint": "https://dce-tpot-cowrie-ki9r.westeurope-1.metrics.ingest.monitor.azure.com"
+    },
+    "networkAcls": {
+      "publicNetworkAccess": "Enabled"
+    },
+    "provisioningState": "Succeeded"
+  },
+  "location": "westeurope",
+  "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-tpotsensor/providers/Microsoft.Insights/dataCollectionEndpoints/dce-tpot-cowrie",
+  "name": "dce-tpot-cowrie",
+  "type": "Microsoft.Insights/dataCollectionEndpoints",
+  "systemData": {
+    "createdBy": "admin@buisecops.onmicrosoft.com",
+    "createdByType": "User",
+    "createdAt": "2025-01-09T10:30:34.1216416Z",
+    "lastModifiedBy": "admin@buisecops.onmicrosoft.com",
+    "lastModifiedByType": "User",
+    "lastModifiedAt": "2025-01-09T10:30:34.1216416Z"
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "name": "SqlIaasExtension",
+  "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-buisecops-cybermxdr-westeu/providers/Microsoft.Compute/virtualMachines/SQLTest/extensions/SqlIaasExtension",
+  "type": "Microsoft.Compute/virtualMachines/extensions",
+  "location": "westeurope",
+  "properties": {
+    "autoUpgradeMinorVersion": true,
+    "enableAutomaticUpgrade": true,
+    "publisher": "Microsoft.SqlServer.Management",
+    "type": "SqlIaaSAgent",
+    "typeHandlerVersion": "2.0",
+    "settings": {
+      "AutoPatchingSettings": {
+        "Enable": false
+      },
+      "KeyVaultCredentialSettings": {
+        "Enable": false
+      },
+      "ServerConfigurationsManagementSettings": {
+        "SQLConnectivityUpdateSettings": {
+          "ConnectivityType": "PRIVATE",
+          "Port": "1433"
+        },
+        "SQLWorkloadTypeUpdateSettings": {
+          "SQLWorkloadType": 2
+        },
+        "SQLStorageUpdateSettingsV2": {
+          "DiskConfigurationType": "NEW",
+          "SQLDataSettings": {
+            "DefaultFilePath": "F:\\data",
+            "LUNs": [
+              0
+            ]
+          },
+          "SQLLogSettings": {
+            "DefaultFilePath": "G:\\log",
+            "LUNs": [
+              1
+            ]
+          },
+          "SQLTempDbSettings": {
+            "DataFileSize": "8",
+            "DataGrowth": "64",
+            "DataFileCount": "1",
+            "LogFileSize": "8",
+            "LogGrowth": "64",
+            "DefaultFilePath": "D:\\tempDb"
+          },
+          "SQLSystemDbOnDataDisk": false
+        },
+        "AdditionalFeaturesServerConfigurations": {
+          "IsRServicesEnabled": false
+        },
+        "SQLInstanceSettings": {
+          "Collation": "SQL_Latin1_General_CP1_CI_AS",
+          "MaxDop": 0,
+          "IsOptimizeForAdHocWorkloadsEnabled": false,
+          "MinServerMemoryMB": 0,
+          "MaxServerMemoryMB": 2147483647,
+          "IsLPIMEnabled": false,
+          "IsIFIEnabled": false
+        }
+      },
+      "SqlManagement": {
+        "IsEnabled": true
+      },
+      "DeploymentTokenSettings": {
+        "DeploymentToken": 1763667722
+      },
+      "LeastPrivilegeModeSettings": {
+        "IsEnabled": true
+      }
+    }
+  }
+}

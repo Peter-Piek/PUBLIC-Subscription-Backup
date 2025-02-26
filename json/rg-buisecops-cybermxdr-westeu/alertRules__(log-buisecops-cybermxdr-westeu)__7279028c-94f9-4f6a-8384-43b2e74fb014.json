@@ -1,0 +1,55 @@
+{
+  "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-buisecops-cybermxdr-westeu/providers/Microsoft.OperationalInsights/workspaces/log-buisecops-cybermxdr-westeu/providers/Microsoft.SecurityInsights/alertRules/7279028c-94f9-4f6a-8384-43b2e74fb014",
+  "name": "7279028c-94f9-4f6a-8384-43b2e74fb014",
+  "type": "Microsoft.SecurityInsights/alertRules",
+  "kind": "Scheduled",
+  "properties": {
+    "queryFrequency": "P1D",
+    "queryPeriod": "P1D",
+    "triggerOperator": "GreaterThan",
+    "triggerThreshold": 0,
+    "severity": "Medium",
+    "query": "// Retrieve Azure AD SigninLogs within the last day\nSigninLogs \n// Filter for specific AppDisplayNames, ResultType, and Risk Levels\n| where AppDisplayName in (\"Azure Portal\", \"ADFS Trust\", \"Microsoft Azure PowerShell\")\n    and RiskLevelAggregated == \"high\"\n    and RiskLevelDuringSignIn == \"high\"\n// Summarize AppDisplayNames by relevant attributes\n| extend Result = iff(ResultType == 0, \"Successful Signin\", \"Failed Signin\")\n| summarize make_set(AppDisplayName)\n    by\n    IPAddress,\n    signInTime=TimeGenerated,\n    UserPrincipalName,\n    RiskEventTypes,\n    RiskEventTypes_V2\n// Inner join with AWS CloudTrail events\n| join kind=inner (\n    AWSCloudTrail\n    | where isempty(ErrorMessage)\n    | where EventSource in (\"iam.amazonaws.com\", \"identitystore.amazonaws.com\", \"workmail.amazonaws.com\", \"workdocs.amazonaws.com\")\n    // List of AWS event names\n    | where EventName in~ (\"CreateRole\", \"DeleteRole\", \"CreateUser\", \"CreateAccessKey\", \"DeleteAccessKey\", \"CreateGroup\", \"AddUserToGroup\", \"ChangePassword\", \"DeleteGroup\", \"DeleteUser\", \"RemoveUserFromGroup\", \"CreateVirtualMFADevice\", \"DeleteLoginProfile\", \"CreateOrganization\", \"SetDefaultMailDomain\", \"SetMailUserDetails\", \"CreateMailUser\", \"ResetPassword\", \"RegisterToWorkMail\", \"DisableMailUsers\", \"EnableMailUsers\", \"DeleteServiceSpecificCredential\", \"CreateServiceSpecificCredential\", \"UpdateAccountEmailAddress\", \"DeleteGroupPolicy\", \"UploadServerCertificate\")  \n    // Summarize relevant attributes\n    | summarize make_set(RequestParameters), make_set(ResponseElements)\n        by\n        SourceIpAddress,\n        UserIdentityArn,\n        UserIdentityType,\n        EventName,\n        EventTime=TimeGenerated,\n        EventSource\n    )\n    on $left.IPAddress == $right.SourceIpAddress  \n// Calculate time difference in hours between AWS event and Azure sign-in\n| extend timedef = datetime_diff(\"hour\", EventTime, signInTime)\n// Filter for time differences within a certain range\n| where timedef between (0 .. 8)",
+    "suppressionDuration": "PT5H",
+    "suppressionEnabled": false,
+    "incidentConfiguration": {
+      "createIncident": true,
+      "groupingConfiguration": {
+        "enabled": false,
+        "reopenClosedIncident": false,
+        "lookbackDuration": "PT5M",
+        "matchingMethod": "AllEntities",
+        "groupByEntities": [],
+        "groupByAlertDetails": null,
+        "groupByCustomDetails": null
+      }
+    },
+    "entityMappings": [
+      {
+        "entityType": "IP",
+        "fieldMappings": [
+          {
+            "identifier": "Address",
+            "columnName": "SourceIpAddress"
+          }
+        ]
+      }
+    ],
+    "eventGroupingSettings": {
+      "aggregationKind": "SingleAlert"
+    },
+    "tactics": [
+      "PrivilegeEscalation"
+    ],
+    "techniques": [
+      "T1134",
+      "T1078"
+    ],
+    "subTechniques": null,
+    "displayName": "High-Risk Cross-Cloud User Impersonation",
+    "enabled": true,
+    "description": "This detection focuses on identifying high-risk cross-cloud activities and sign-in anomalies that may indicate potential security threats. The query starts by analyzing Microsoft Entra ID Signin Logs to pinpoint instances where specific applications, risk levels, and result types align. It then correlates this information with relevant AWS CloudTrail events to identify activities across Azure and AWS environments.",
+    "alertRuleTemplateName": "f4a28082-2808-4783-9736-33c1ae117475",
+    "lastModifiedUtc": "2024-10-30T13:03:57.7170015Z"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "name": "default",
+  "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-buisecops-cybermxdr-westeu/providers/Microsoft.Network/virtualNetworks/SQLTest-vnet/subnets/default",
+  "properties": {
+    "addressPrefix": "10.0.0.0/24",
+    "ipConfigurations": [
+      {
+        "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/RG-BUISECOPS-CYBERMXDR-WESTEU/providers/Microsoft.Network/networkInterfaces/SQLTEST778-EC4571E2/ipConfigurations/SQLTEST778-DEFAULTIPCONFIGURATION"
+      },
+      {
+        "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/RG-BUISECOPS-CYBERMXDR-WESTEU/providers/Microsoft.Network/networkInterfaces/VM-MISP-TAXII365/ipConfigurations/IPCONFIG1"
+      }
+    ],
+    "delegations": [],
+    "privateEndpointNetworkPolicies": "Disabled",
+    "privateLinkServiceNetworkPolicies": "Enabled"
+  },
+  "type": "Microsoft.Network/virtualNetworks/subnets"
+}

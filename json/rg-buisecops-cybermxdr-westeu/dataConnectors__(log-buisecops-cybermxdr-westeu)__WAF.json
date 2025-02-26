@@ -1,0 +1,55 @@
+{
+  "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-buisecops-cybermxdr-westeu/providers/Microsoft.OperationalInsights/workspaces/log-buisecops-cybermxdr-westeu/providers/Microsoft.SecurityInsights/dataConnectors/WAF",
+  "name": "WAF",
+  "type": "Microsoft.SecurityInsights/dataConnectors",
+  "kind": "StaticUI",
+  "properties": {
+    "connectorUiConfig": {
+      "title": "Azure Web Application Firewall (WAF)",
+      "publisher": "Microsoft",
+      "descriptionMarkdown": "Connect to the Azure Web Application Firewall (WAF) for Application Gateway, Front Door, or CDN. This WAF protects your applications from common web vulnerabilities such as SQL injection and cross-site scripting, and lets you customize rules to reduce false positives. Follow these instructions to stream your Microsoft Web application firewall logs into Microsoft Sentinel. For more information, see the [Microsoft Sentinel documentation](https://go.microsoft.com/fwlink/p/?linkid=2223546&wt.mc_id=sentinel_dataconnectordocs_content_cnl_csasci).",
+      "graphQueries": [
+        {
+          "metricName": "Total data received",
+          "legend": "Application Gateways",
+          "baseQuery": "AzureDiagnostics | where ResourceType == \"APPLICATIONGATEWAYS\""
+        },
+        {
+          "metricName": "Total data received",
+          "legend": "FrontDoors",
+          "baseQuery": "AzureDiagnostics | where ResourceType == \"FRONTDOORS\""
+        },
+        {
+          "metricName": "Total data received",
+          "legend": "CDN",
+          "baseQuery": "AzureDiagnostics | where ResourceType == \"CDNWEBAPPLICATIONFIREWALLPOLICIES\""
+        }
+      ],
+      "dataTypes": [
+        {
+          "name": "AzureDiagnostics (Application Gateways)",
+          "lastDataReceivedQuery": "AzureDiagnostics | where ResourceType == \"APPLICATIONGATEWAYS\"\n            | summarize Time = max(TimeGenerated)\n            | where isnotempty(Time)"
+        },
+        {
+          "name": "AzureDiagnostics (FrontDoors)",
+          "lastDataReceivedQuery": "AzureDiagnostics | where ResourceType == \"FRONTDOORS\"\n            | summarize Time = max(TimeGenerated)\n            | where isnotempty(Time)"
+        },
+        {
+          "name": "AzureDiagnostics (CDN)",
+          "lastDataReceivedQuery": "AzureDiagnostics | where ResourceType == \"CDNWEBAPPLICATIONFIREWALLPOLICIES\"\n            | summarize Time = max(TimeGenerated)\n            | where isnotempty(Time)"
+        }
+      ],
+      "connectivityCriterias": [
+        {
+          "type": "IsConnectedQuery",
+          "value": [
+            "AzureDiagnostics | where ResourceType == \"APPLICATIONGATEWAYS\"\n            | summarize LastLogReceived = max(TimeGenerated)\n            | project IsConnected = LastLogReceived > ago(7d)",
+            "AzureDiagnostics | where ResourceType == \"FRONTDOORS\"\n            | summarize LastLogReceived = max(TimeGenerated)\n            | project IsConnected = LastLogReceived > ago(7d)",
+            "AzureDiagnostics | where ResourceType == \"CDNWEBAPPLICATIONFIREWALLPOLICIES\"\n            | summarize LastLogReceived = max(TimeGenerated)\n            | project IsConnected = LastLogReceived > ago(7d)"
+          ]
+        }
+      ],
+      "id": "WAF"
+    }
+  }
+}

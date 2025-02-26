@@ -1,0 +1,17 @@
+{
+  "name": "vm-twingate-vnet",
+  "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-twingate/providers/Microsoft.Network/virtualNetworks/vm-twingate-vnet",
+  "type": "Microsoft.Network/virtualNetworks",
+  "location": "westeurope",
+  "properties": {
+    "addressSpace": {
+      "addressPrefixes": [
+        "10.1.0.0/16"
+      ]
+    },
+    "privateEndpointVNetPolicies": "Disabled",
+    "subnets": [],
+    "virtualNetworkPeerings": [],
+    "enableDdosProtection": false
+  }
+}

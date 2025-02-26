@@ -1,0 +1,76 @@
+{
+  "name": "t-pot-hive",
+  "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-tpot/providers/Microsoft.Compute/virtualMachines/t-pot-hive",
+  "type": "Microsoft.Compute/virtualMachines",
+  "location": "westeurope",
+  "properties": {
+    "hardwareProfile": {
+      "vmSize": "Standard_D2s_v3"
+    },
+    "provisioningState": "Succeeded",
+    "vmId": "2530125e-d68f-4789-83a7-1bde883ae8b5",
+    "additionalCapabilities": {
+      "hibernationEnabled": false
+    },
+    "storageProfile": {
+      "imageReference": {
+        "publisher": "canonical",
+        "offer": "ubuntu-24_04-lts",
+        "sku": "server",
+        "version": "latest",
+        "exactVersion": "24.04.202411030"
+      },
+      "osDisk": {
+        "osType": "Linux",
+        "name": "t-pot-hive_OsDisk_1_18583293e9994d69bdc07bee26d39319",
+        "createOption": "FromImage",
+        "caching": "ReadWrite",
+        "managedDisk": {
+          "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-tpot/providers/Microsoft.Compute/disks/t-pot-hive_OsDisk_1_18583293e9994d69bdc07bee26d39319"
+        },
+        "deleteOption": "Delete"
+      },
+      "dataDisks": [],
+      "diskControllerType": "SCSI"
+    },
+    "osProfile": {
+      "computerName": "t-pot-hive",
+      "adminUsername": "buiadmin",
+      "linuxConfiguration": {
+        "disablePasswordAuthentication": false,
+        "provisionVMAgent": true,
+        "patchSettings": {
+          "patchMode": "ImageDefault",
+          "assessmentMode": "ImageDefault"
+        }
+      },
+      "secrets": [],
+      "allowExtensionOperations": true,
+      "requireGuestProvisionSignal": true
+    },
+    "securityProfile": {
+      "uefiSettings": {
+        "secureBootEnabled": true,
+        "vTpmEnabled": true
+      },
+      "securityType": "TrustedLaunch"
+    },
+    "networkProfile": {
+      "networkInterfaces": [
+        {
+          "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-tpot/providers/Microsoft.Network/networkInterfaces/t-pot-hive28",
+          "properties": {
+            "deleteOption": "Detach"
+          }
+        }
+      ]
+    },
+    "diagnosticsProfile": {
+      "bootDiagnostics": {
+        "enabled": true
+      }
+    },
+    "timeCreated": "2025-01-09T06:38:48.0468379+00:00"
+  },
+  "etag": "\"5\""
+}

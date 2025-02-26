@@ -1,0 +1,58 @@
+{
+  "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-buisecops-cybermxdr-westeu/providers/Microsoft.OperationalInsights/workspaces/log-buisecops-cybermxdr-westeu/providers/Microsoft.SecurityInsights/alertRules/42b4c67b-1a33-456d-ae43-4b2cd41cc506",
+  "name": "42b4c67b-1a33-456d-ae43-4b2cd41cc506",
+  "type": "Microsoft.SecurityInsights/alertRules",
+  "kind": "Scheduled",
+  "properties": {
+    "queryFrequency": "PT1H",
+    "queryPeriod": "P7D",
+    "triggerOperator": "GreaterThan",
+    "triggerThreshold": 0,
+    "severity": "Medium",
+    "query": "let lookback = 7d; \nlet timeframe = 1h; \nlet GlobalAdminsRemoved = AuditLogs \n| where TimeGenerated > ago(timeframe) \n| where Category =~ \"RoleManagement\" \n| where AADOperationType in (\"Unassign\", \"RemoveEligibleRole\") \n| where ActivityDisplayName has_any (\"Remove member from role\", \"Remove eligible member from role\") \n| mv-apply TargetResource = TargetResources on \n  (\n      where TargetResource.type =~ \"User\"\n      | extend Target = tostring(TargetResource.userPrincipalName),\n               props = TargetResource.modifiedProperties\n  )\n| mv-apply Property = props on \n      (\n          where Property.displayName =~ \"Role.DisplayName\"\n          | extend RoleName = trim('\"',tostring(Property.oldValue))\n      )\n| where RoleName =~ \"Global Administrator\" // Add other Privileged role if applicable \n| extend InitiatingApp = tostring(InitiatedBy.app.displayName) \n| extend Initiator = iif(isnotempty(InitiatingApp), InitiatingApp, tostring(InitiatedBy.user.userPrincipalName)) \n| where Initiator != \"MS-PIM\"  // Filtering PIM events  \n| summarize RemovedGlobalAdminTime = max(TimeGenerated), TargetAdmins = make_set(Target,100) by OperationName,  RoleName, Initiator, Result; \nlet GlobalAdminsAdded = AuditLogs \n| where TimeGenerated > ago(lookback) \n| where Category =~ \"RoleManagement\" \n| where AADOperationType in (\"Assign\", \"AssignEligibleRole\") \n| where ActivityDisplayName has_any (\"Add eligible member to role\", \"Add member to role\") and Result == \"success\" \n| mv-apply TargetResource = TargetResources on \n  (\n      where TargetResource.type =~ \"User\"\n      | extend Target = tostring(TargetResource.userPrincipalName),\n               props = TargetResource.modifiedProperties\n  )\n| mv-apply Property = props on \n      (\n          where Property.displayName =~ \"Role.DisplayName\"\n          | extend RoleName = trim('\"',tostring(Property.newValue))\n      )\n| where RoleName =~ \"Global Administrator\" // Add other Privileged role if applicable \n| extend InitiatingApp = tostring(InitiatedBy.app.displayName) \n| extend Initiator = iif(isnotempty(InitiatingApp), InitiatingApp, tostring(InitiatedBy.user.userPrincipalName)) \n| where Initiator != \"MS-PIM\"  // Filtering PIM events \n| summarize AddedGlobalAdminTime = max(TimeGenerated) by OperationName,  RoleName, Target, Initiator, Result \n| extend AccountCustomEntity = Target; \nGlobalAdminsAdded \n| join kind= inner GlobalAdminsRemoved on $left.Target == $right.Initiator \n| where AddedGlobalAdminTime < RemovedGlobalAdminTime \n| extend NoofAdminsRemoved = array_length(TargetAdmins) \n| where NoofAdminsRemoved > 1\n| project AddedGlobalAdminTime, Initiator, Target, AccountCustomEntity, RemovedGlobalAdminTime, TargetAdmins, NoofAdminsRemoved\n| extend Name = tostring(split(AccountCustomEntity,'@',0)[0]), UPNSuffix = tostring(split(AccountCustomEntity,'@',1)[0])",
+    "suppressionDuration": "PT5H",
+    "suppressionEnabled": false,
+    "incidentConfiguration": {
+      "createIncident": true,
+      "groupingConfiguration": {
+        "enabled": false,
+        "reopenClosedIncident": false,
+        "lookbackDuration": "PT5M",
+        "matchingMethod": "AllEntities",
+        "groupByEntities": [],
+        "groupByAlertDetails": null,
+        "groupByCustomDetails": null
+      }
+    },
+    "entityMappings": [
+      {
+        "entityType": "Account",
+        "fieldMappings": [
+          {
+            "identifier": "Name",
+            "columnName": "Name"
+          },
+          {
+            "identifier": "UPNSuffix",
+            "columnName": "UPNSuffix"
+          }
+        ]
+      }
+    ],
+    "eventGroupingSettings": {
+      "aggregationKind": "SingleAlert"
+    },
+    "tactics": [
+      "Impact"
+    ],
+    "techniques": [
+      "T1531"
+    ],
+    "subTechniques": null,
+    "displayName": "Multiple admin membership removals from newly created admin.",
+    "enabled": true,
+    "description": "This query detects when newly created Global admin removes multiple existing global admins which can be an attempt by adversaries to lock down organization and retain sole access. \n Investigate reasoning and intention of multiple membership removal by new Global admins and take necessary actions accordingly.",
+    "alertRuleTemplateName": "cda5928c-2c1e-4575-9dfa-07568bc27a4f",
+    "lastModifiedUtc": "2024-10-30T13:03:57.71814Z"
+  }
+}

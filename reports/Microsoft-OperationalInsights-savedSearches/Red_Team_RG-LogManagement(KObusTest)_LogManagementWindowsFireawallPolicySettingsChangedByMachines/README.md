@@ -1,0 +1,31 @@
+# On which machines and how many times have Windows Firewall Policy settings changed
+
+```
+--- 
+ properties: 
+   category: 'Log Management' 
+   displayName: >
+    On which machines and how many times have Windows Firewall Policy settings chang
+    ed
+ 
+   version: 2 
+   query: >
+    Event | where EventLog == "Microsoft-Windows-Windows Firewall With Advanced
+    Security/Firewall" and EventID == 2008 | summarize AggregatedValue = count() by
+    Computer | limit 500000
+    // Oql: Type=Event EventLog="Microsoft-Windows-Windows Firewall With Advanced
+    Security/Firewall" EventID=2008 | measure count() by Computer | top 500000 //
+    Args: {OQ: True; WorkspaceId: 00000000-0000-0000-0000-000000000000} // Settings:
+    {PTT: True; SortI: True; SortF: True} // Version: 0.1.122
+ 
+ id: >
+  /subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/Red_Team_RG/p
+  roviders/Microsoft.OperationalInsights/workspaces/KObusTest/savedSearches/LogMan
+  agement(KObusTest)_LogManagement|WindowsFireawallPolicySettingsChangedByMachines
+ 
+ name: >
+  LogManagement(KObusTest)_LogManagement|WindowsFireawallPolicySettingsChangedByMa
+  chines
+ 
+ type: 'Microsoft.OperationalInsights/savedSearches'
+```

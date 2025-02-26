@@ -1,0 +1,19 @@
+{
+  "name": "vm-twingate-ip",
+  "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-twingate/providers/Microsoft.Network/publicIPAddresses/vm-twingate-ip",
+  "location": "westeurope",
+  "properties": {
+    "publicIPAddressVersion": "IPv4",
+    "publicIPAllocationMethod": "Static",
+    "idleTimeoutInMinutes": 4,
+    "ipTags": [],
+    "ipConfiguration": {
+      "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-twingate/providers/Microsoft.Network/networkInterfaces/vm-twingate257/ipConfigurations/ipconfig1"
+    }
+  },
+  "type": "Microsoft.Network/publicIPAddresses",
+  "sku": {
+    "name": "Standard",
+    "tier": "Regional"
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "name": "vm-misp-taxii_OsDisk_1_1345caf0e88d4ac68a826aaf183e1a46",
+  "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/RG-BUISECOPS-CYBERMXDR-WESTEU/providers/Microsoft.Compute/disks/vm-misp-taxii_OsDisk_1_1345caf0e88d4ac68a826aaf183e1a46",
+  "type": "Microsoft.Compute/disks",
+  "location": "westeurope",
+  "managedBy": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-buisecops-cybermxdr-westeu/providers/Microsoft.Compute/virtualMachines/vm-misp-taxii",
+  "sku": {
+    "name": "StandardSSD_LRS",
+    "tier": "Standard"
+  },
+  "properties": {
+    "osType": "Linux",
+    "hyperVGeneration": "V2",
+    "supportsHibernation": true,
+    "supportedCapabilities": {
+      "diskControllerTypes": "SCSI, NVMe",
+      "acceleratedNetwork": true,
+      "architecture": "x64"
+    },
+    "creationData": {
+      "createOption": "FromImage",
+      "imageReference": {
+        "id": "/Subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/Providers/Microsoft.Compute/Locations/westeurope/Publishers/canonical/ArtifactTypes/VMImage/Offers/ubuntu-24_04-lts/Skus/server/Versions/24.04.202502040"
+      }
+    },
+    "diskSizeGB": 256,
+    "diskIOPSReadWrite": 500,
+    "diskMBpsReadWrite": 100,
+    "encryption": {
+      "type": "EncryptionAtRestWithPlatformKey"
+    },
+    "networkAccessPolicy": "AllowAll",
+    "securityProfile": {
+      "securityType": "TrustedLaunch"
+    },
+    "publicNetworkAccess": "Enabled",
+    "diskState": "Reserved",
+    "LastOwnershipUpdateTime": "2025-02-05T14:49:06.268808+00:00"
+  }
+}

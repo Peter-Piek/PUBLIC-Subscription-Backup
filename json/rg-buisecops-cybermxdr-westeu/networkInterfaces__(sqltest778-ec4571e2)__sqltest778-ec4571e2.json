@@ -1,0 +1,54 @@
+{
+  "name": "sqltest778-ec4571e2",
+  "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-buisecops-cybermxdr-westeu/providers/Microsoft.Network/networkInterfaces/sqltest778-ec4571e2",
+  "properties": {
+    "ipConfigurations": [
+      {
+        "name": "sqltest778-defaultIpConfiguration",
+        "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-buisecops-cybermxdr-westeu/providers/Microsoft.Network/networkInterfaces/sqltest778-ec4571e2/ipConfigurations/sqltest778-defaultIpConfiguration",
+        "type": "Microsoft.Network/networkInterfaces/ipConfigurations",
+        "properties": {
+          "privateIPAddress": "10.0.0.4",
+          "privateIPAllocationMethod": "Dynamic",
+          "publicIPAddress": {
+            "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-buisecops-cybermxdr-westeu/providers/Microsoft.Network/publicIPAddresses/SQLTest-ip-ec4571e2",
+            "properties": {
+              "deleteOption": "Delete"
+            }
+          },
+          "subnet": {
+            "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-buisecops-cybermxdr-westeu/providers/Microsoft.Network/virtualNetworks/SQLTest-vnet/subnets/default"
+          },
+          "primary": true,
+          "privateIPAddressVersion": "IPv4"
+        }
+      }
+    ],
+    "dnsSettings": {
+      "dnsServers": [],
+      "appliedDnsServers": []
+    },
+    "enableAcceleratedNetworking": true,
+    "vnetEncryptionSupported": false,
+    "enableIPForwarding": false,
+    "disableTcpStateTracking": false,
+    "defaultOutboundAccess": false,
+    "networkSecurityGroup": {
+      "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-buisecops-cybermxdr-westeu/providers/Microsoft.Network/networkSecurityGroups/SQLTest-nsg"
+    },
+    "primary": true,
+    "virtualMachine": {
+      "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-buisecops-cybermxdr-westeu/providers/Microsoft.Compute/virtualMachines/SQLTest"
+    },
+    "hostedWorkloads": [],
+    "tapConfigurations": [],
+    "nicType": "Standard",
+    "allowPort25Out": false,
+    "defaultOutboundConnectivityEnabled": false,
+    "auxiliaryMode": "None",
+    "auxiliarySku": "None"
+  },
+  "type": "Microsoft.Network/networkInterfaces",
+  "location": "westeurope",
+  "kind": "Regular"
+}

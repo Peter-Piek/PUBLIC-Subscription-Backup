@@ -1,0 +1,35 @@
+{
+  "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-buisecops-cybermxdr-westeu/providers/Microsoft.OperationalInsights/workspaces/log-buisecops-cybermxdr-westeu/providers/Microsoft.SecurityInsights/dataConnectors/ThreatIntelligenceUploadIndicatorsAPI",
+  "name": "ThreatIntelligenceUploadIndicatorsAPI",
+  "type": "Microsoft.SecurityInsights/dataConnectors",
+  "kind": "StaticUI",
+  "properties": {
+    "connectorUiConfig": {
+      "id": "ThreatIntelligenceUploadIndicatorsAPI",
+      "title": "Threat Intelligence Upload Indicators API (Preview)",
+      "publisher": "Microsoft",
+      "descriptionMarkdown": "Microsoft Sentinel offers a data plane API to bring in threat intelligence from your Threat Intelligence Platform (TIP), such as Threat Connect, Palo Alto Networks MineMeld, MISP, or other integrated applications. Threat indicators can include IP addresses, domains, URLs, file hashes and email addresses.",
+      "graphQueries": [
+        {
+          "metricName": "Total indicators received",
+          "legend": "Connection Events",
+          "baseQuery": "ThreatIntelligenceIndicator | where SourceSystem != 'Microsoft Sentinel'"
+        }
+      ],
+      "connectivityCriterias": [
+        {
+          "type": "IsConnectedQuery",
+          "value": [
+            "ThreatIntelligenceIndicator| where SourceSystem !in ('SecurityGraph', 'Azure Sentinel', 'Microsoft Sentinel') | summarize LastLogReceived = max(TimeGenerated) | project IsConnected = LastLogReceived > ago(30d)"
+          ]
+        }
+      ],
+      "dataTypes": [
+        {
+          "name": "ThreatIntelligenceIndicator",
+          "lastDataReceivedQuery": "ThreatIntelligenceIndicator| where isnotempty(TimeGenerated) and SourceSystem !in ('SecurityGraph', 'Azure Sentinel', 'Microsoft Sentinel')| summarize Time = max(TimeGenerated)"
+        }
+      ]
+    }
+  }
+}

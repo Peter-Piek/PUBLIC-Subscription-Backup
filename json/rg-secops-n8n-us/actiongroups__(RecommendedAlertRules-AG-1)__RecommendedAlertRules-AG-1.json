@@ -1,0 +1,30 @@
+{
+  "id": "/subscriptions/D7425A42-E8C6-4A20-8D02-C2D534DC8A85/resourceGroups/rg-secops-n8n-us/providers/microsoft.insights/actionGroups/RecommendedAlertRules-AG-1",
+  "type": "Microsoft.Insights/ActionGroups",
+  "name": "RecommendedAlertRules-AG-1",
+  "location": "Global",
+  "kind": null,
+  "tags": null,
+  "properties": {
+    "groupShortName": "recalert1",
+    "enabled": true,
+    "emailReceivers": [
+      {
+        "name": "Email_-EmailAction-",
+        "emailAddress": "admin@buisecops.onmicrosoft.com",
+        "useCommonAlertSchema": true,
+        "status": "Enabled"
+      }
+    ],
+    "smsReceivers": [],
+    "webhookReceivers": [],
+    "eventHubReceivers": [],
+    "itsmReceivers": [],
+    "azureAppPushReceivers": [],
+    "automationRunbookReceivers": [],
+    "voiceReceivers": [],
+    "logicAppReceivers": [],
+    "azureFunctionReceivers": [],
+    "armRoleReceivers": []
+  }
+}

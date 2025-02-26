@@ -1,0 +1,42 @@
+{
+  "name": "KaliCloud_OsDisk_1_42dbd374d57f4543bb572697badd6014",
+  "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/RED_TEAM_RG/providers/Microsoft.Compute/disks/KaliCloud_OsDisk_1_42dbd374d57f4543bb572697badd6014",
+  "type": "Microsoft.Compute/disks",
+  "location": "southafricanorth",
+  "managedBy": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/Red_Team_RG/providers/Microsoft.Compute/virtualMachines/KaliCloud",
+  "sku": {
+    "name": "StandardSSD_LRS",
+    "tier": "Standard"
+  },
+  "properties": {
+    "osType": "Linux",
+    "hyperVGeneration": "V2",
+    "purchasePlan": {
+      "name": "kali-2023-3",
+      "publisher": "kali-linux",
+      "product": "kali"
+    },
+    "supportsHibernation": false,
+    "supportedCapabilities": {
+      "diskControllerTypes": "SCSI, NVMe",
+      "acceleratedNetwork": false,
+      "architecture": "x64"
+    },
+    "creationData": {
+      "createOption": "FromImage",
+      "imageReference": {
+        "id": "/Subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/Providers/Microsoft.Compute/Locations/SouthAfricaNorth/Publishers/kali-linux/ArtifactTypes/VMImage/Offers/kali/Skus/kali-2023-3/Versions/2023.3.0"
+      }
+    },
+    "diskSizeGB": 40,
+    "diskIOPSReadWrite": 500,
+    "diskMBpsReadWrite": 100,
+    "encryption": {
+      "type": "EncryptionAtRestWithPlatformKey"
+    },
+    "networkAccessPolicy": "AllowAll",
+    "publicNetworkAccess": "Enabled",
+    "diskState": "Reserved",
+    "LastOwnershipUpdateTime": "2024-10-21T10:36:31.7409603+00:00"
+  }
+}

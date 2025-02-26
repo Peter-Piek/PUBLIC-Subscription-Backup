@@ -1,0 +1,70 @@
+{
+  "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-buisecops-cybermxdr-westeu/providers/Microsoft.OperationalInsights/workspaces/log-buisecops-cybermxdr-westeu/providers/Microsoft.SecurityInsights/alertRules/97e01fa5-dbd0-4f4c-b522-916a71eaf7a9",
+  "name": "97e01fa5-dbd0-4f4c-b522-916a71eaf7a9",
+  "type": "Microsoft.SecurityInsights/alertRules",
+  "kind": "Scheduled",
+  "properties": {
+    "queryFrequency": "PT1H",
+    "queryPeriod": "P14D",
+    "triggerOperator": "GreaterThan",
+    "triggerThreshold": 0,
+    "severity": "Medium",
+    "query": "let dt_lookBack = 1h;\nlet ioc_lookBack = 14d;\nThreatIntelligenceIndicator\n// Picking up only IOC's that contain the entities we want\n| where isnotempty(Url)\n| where TimeGenerated >= ago(ioc_lookBack)\n| summarize LatestIndicatorTime = arg_max(TimeGenerated, *) by IndicatorId\n| where Active == true and ExpirationDateTime > now()\n// using innerunique to keep perf fast and result set low, we only need one match to indicate potential malicious activity that needs to be investigated\n| join kind=innerunique (\n  Syslog\n  | where TimeGenerated >= ago(dt_lookBack)\n  // Extract URL from the Syslog message but only take messages that include URLs\n  | extend Url = extract(\"(http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\\\\(\\\\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+)\", 1,SyslogMessage)\n  | where isnotempty(Url)\n  | extend Syslog_TimeGenerated = TimeGenerated\n) on Url\n| where Syslog_TimeGenerated < ExpirationDateTime\n| summarize Syslog_TimeGenerated  = arg_max(Syslog_TimeGenerated , *) by IndicatorId, Url\n| project timestamp = Syslog_TimeGenerated, Description, ActivityGroupNames, IndicatorId, ThreatType, ExpirationDateTime, ConfidenceScore, SyslogMessage, Computer, ProcessName, Url, HostIP",
+    "suppressionDuration": "PT5H",
+    "suppressionEnabled": false,
+    "incidentConfiguration": {
+      "createIncident": true,
+      "groupingConfiguration": {
+        "enabled": false,
+        "reopenClosedIncident": false,
+        "lookbackDuration": "PT5M",
+        "matchingMethod": "AllEntities",
+        "groupByEntities": [],
+        "groupByAlertDetails": null,
+        "groupByCustomDetails": null
+      }
+    },
+    "entityMappings": [
+      {
+        "entityType": "Host",
+        "fieldMappings": [
+          {
+            "identifier": "HostName",
+            "columnName": "Computer"
+          }
+        ]
+      },
+      {
+        "entityType": "IP",
+        "fieldMappings": [
+          {
+            "identifier": "Address",
+            "columnName": "HostIP"
+          }
+        ]
+      },
+      {
+        "entityType": "URL",
+        "fieldMappings": [
+          {
+            "identifier": "Url",
+            "columnName": "Url"
+          }
+        ]
+      }
+    ],
+    "eventGroupingSettings": {
+      "aggregationKind": "SingleAlert"
+    },
+    "tactics": [
+      "Impact"
+    ],
+    "techniques": [],
+    "subTechniques": null,
+    "displayName": "TI Map URL Entity to Syslog Data",
+    "enabled": true,
+    "description": "This query identifies any URL indicators of compromise (IOCs) from threat intelligence (TI) by searching for matches in Syslog data.",
+    "alertRuleTemplateName": "b31037ea-6f68-4fbd-bab2-d0d0f44c2fcf",
+    "lastModifiedUtc": "2024-10-30T13:02:29.3446787Z"
+  }
+}

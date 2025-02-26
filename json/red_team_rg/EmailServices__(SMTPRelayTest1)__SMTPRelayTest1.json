@@ -1,0 +1,19 @@
+{
+  "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/Red_Team_RG/providers/Microsoft.Communication/emailServices/SMTPRelayTest1",
+  "name": "SMTPRelayTest1",
+  "type": "microsoft.communication/emailservices",
+  "location": "global",
+  "tags": {},
+  "systemData": {
+    "createdBy": "kobus@buisecops.onmicrosoft.com",
+    "createdByType": "User",
+    "createdAt": "2024-12-10T16:14:38.2891846Z",
+    "lastModifiedBy": "kobus@buisecops.onmicrosoft.com",
+    "lastModifiedByType": "User",
+    "lastModifiedAt": "2024-12-10T16:14:38.2891846Z"
+  },
+  "properties": {
+    "provisioningState": "Succeeded",
+    "dataLocation": "Africa"
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-buisecops-cybermxdr-westeu/providers/Microsoft.OperationalInsights/workspaces/log-buisecops-cybermxdr-westeu/providers/Microsoft.SecurityInsights/AutomationRules/49d07ba5-861b-4a93-b651-f77d19b85b37",
+  "name": "49d07ba5-861b-4a93-b651-f77d19b85b37",
+  "type": "Microsoft.SecurityInsights/AutomationRules",
+  "properties": {
+    "displayName": "Notification | Email | Daily CAP reached (80% & 100%)",
+    "order": 152,
+    "triggeringLogic": {
+      "isEnabled": true,
+      "triggersOn": "Incidents",
+      "triggersWhen": "Created",
+      "conditions": []
+    },
+    "actions": [
+      {
+        "order": 1,
+        "actionType": "ModifyProperties",
+        "actionConfiguration": {
+          "severity": null,
+          "status": "Active",
+          "classification": null,
+          "classificationReason": null,
+          "classificationComment": null,
+          "owner": null,
+          "labels": null
+        }
+      }
+    ],
+    "lastModifiedTimeUtc": "2024-10-30T13:00:44Z",
+    "createdTimeUtc": "2024-10-30T13:00:44Z",
+    "lastModifiedBy": {
+      "objectId": "e034db27-21d6-434e-9fc5-8623a334f85e",
+      "email": "admin@buisecops.onmicrosoft.com",
+      "name": "SecOps Admin t",
+      "userPrincipalName": "admin@buisecops.onmicrosoft.com"
+    },
+    "createdBy": {
+      "objectId": "e034db27-21d6-434e-9fc5-8623a334f85e",
+      "email": "admin@buisecops.onmicrosoft.com",
+      "name": "SecOps Admin t",
+      "userPrincipalName": "admin@buisecops.onmicrosoft.com"
+    }
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "name": "EvilGinx_OsDisk_1_f48ef4fd8c9f491b9c0042f5dc83ca7f",
+  "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/RED_TEAM_RG/providers/Microsoft.Compute/disks/EvilGinx_OsDisk_1_f48ef4fd8c9f491b9c0042f5dc83ca7f",
+  "type": "Microsoft.Compute/disks",
+  "location": "southafricanorth",
+  "managedBy": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/Red_Team_RG/providers/Microsoft.Compute/virtualMachines/EvilGinx",
+  "sku": {
+    "name": "Premium_LRS",
+    "tier": "Premium"
+  },
+  "properties": {
+    "osType": "Linux",
+    "hyperVGeneration": "V2",
+    "supportsHibernation": true,
+    "supportedCapabilities": {
+      "diskControllerTypes": "SCSI, NVMe",
+      "acceleratedNetwork": true,
+      "architecture": "x64"
+    },
+    "creationData": {
+      "createOption": "FromImage",
+      "imageReference": {
+        "id": "/Subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/Providers/Microsoft.Compute/Locations/SouthAfricaNorth/Publishers/canonical/ArtifactTypes/VMImage/Offers/ubuntu-24_04-lts/Skus/server/Versions/24.04.202502040"
+      }
+    },
+    "diskSizeGB": 30,
+    "diskIOPSReadWrite": 120,
+    "diskMBpsReadWrite": 25,
+    "encryption": {
+      "type": "EncryptionAtRestWithPlatformKey"
+    },
+    "networkAccessPolicy": "AllowAll",
+    "securityProfile": {
+      "securityType": "TrustedLaunch"
+    },
+    "publicNetworkAccess": "Enabled",
+    "diskState": "Attached",
+    "LastOwnershipUpdateTime": "2025-02-05T13:43:55.5921205+00:00",
+    "tier": "P4"
+  }
+}

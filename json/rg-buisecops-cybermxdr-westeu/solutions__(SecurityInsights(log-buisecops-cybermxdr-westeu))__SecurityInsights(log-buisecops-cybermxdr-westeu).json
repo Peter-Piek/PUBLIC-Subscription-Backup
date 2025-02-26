@@ -1,0 +1,21 @@
+{
+  "plan": {
+    "name": "SecurityInsights(log-buisecops-cybermxdr-westeu)",
+    "publisher": "Microsoft",
+    "promotionCode": "",
+    "product": "OMSGallery/SecurityInsights"
+  },
+  "properties": {
+    "workspaceResourceId": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourcegroups/rg-buisecops-cybermxdr-westeu/providers/microsoft.operationalinsights/workspaces/log-buisecops-cybermxdr-westeu",
+    "sku": {
+      "name": "Unified"
+    },
+    "containedResources": [],
+    "workbookTemplates": []
+  },
+  "location": "eastus",
+  "tags": {},
+  "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-buisecops-cybermxdr-westeu/providers/Microsoft.OperationsManagement/solutions/SecurityInsights(log-buisecops-cybermxdr-westeu)",
+  "name": "SecurityInsights(log-buisecops-cybermxdr-westeu)",
+  "type": "Microsoft.OperationsManagement/solutions"
+}

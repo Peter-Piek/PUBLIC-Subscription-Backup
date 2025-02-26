@@ -1,0 +1,24 @@
+{
+  "properties": {
+    "status": "Enabled",
+    "taskType": "ComputeVmShutdownTask",
+    "dailyRecurrence": {
+      "time": "1900"
+    },
+    "timeZoneId": "UTC",
+    "notificationSettings": {
+      "status": "Enabled",
+      "timeInMinutes": 30,
+      "emailRecipient": "rynos@bui.co.za",
+      "notificationLocale": "en"
+    },
+    "createdDate": "2025-01-09T06:39:29.9275474+00:00",
+    "targetResourceId": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-tpot/providers/Microsoft.Compute/virtualMachines/t-pot-hive",
+    "provisioningState": "Succeeded",
+    "uniqueIdentifier": "da874a7c-ed1b-4a1f-827d-fd57bfcc2919"
+  },
+  "location": "westeurope",
+  "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourcegroups/rg-tpot/providers/microsoft.devtestlab/schedules/shutdown-computevm-t-pot-hive",
+  "name": "shutdown-computevm-t-pot-hive",
+  "type": "microsoft.devtestlab/schedules"
+}

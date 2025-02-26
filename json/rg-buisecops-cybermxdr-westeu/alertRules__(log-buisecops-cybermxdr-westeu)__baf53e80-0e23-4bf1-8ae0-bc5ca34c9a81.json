@@ -1,0 +1,73 @@
+{
+  "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-buisecops-cybermxdr-westeu/providers/Microsoft.OperationalInsights/workspaces/log-buisecops-cybermxdr-westeu/providers/Microsoft.SecurityInsights/alertRules/baf53e80-0e23-4bf1-8ae0-bc5ca34c9a81",
+  "name": "baf53e80-0e23-4bf1-8ae0-bc5ca34c9a81",
+  "type": "Microsoft.SecurityInsights/alertRules",
+  "kind": "Scheduled",
+  "properties": {
+    "queryFrequency": "PT1H",
+    "queryPeriod": "PT1H",
+    "triggerOperator": "GreaterThan",
+    "triggerThreshold": 0,
+    "severity": "Medium",
+    "query": "let OperationList = dynamic([\"Add member to role\",\"Add member to role in PIM requested (permanent)\"]);\nlet PrivilegedGroups = dynamic([\"UserAccountAdmins\",\"PrivilegedRoleAdmins\",\"TenantAdmins\"]);\nAuditLogs\n//| where LoggedByService =~ \"Core Directory\"\n| where Category =~ \"RoleManagement\"\n| where OperationName in~ (OperationList)\n| mv-apply TargetResource = TargetResources on \n  (\n      where TargetResource.type =~ \"User\"\n      | extend TargetUserPrincipalName = tostring(TargetResource.userPrincipalName),\n               modProps = TargetResource.modifiedProperties\n  )\n| mv-apply Property = modProps on \n  (\n      where Property.displayName =~ \"Role.WellKnownObjectName\"\n      | extend DisplayName = trim('\"',tostring(Property.displayName)),\n               GroupName = trim('\"',tostring(Property.newValue))\n  )\n| extend AppId = InitiatedBy.app.appId,\n      InitiatedByDisplayName = case(isnotempty(InitiatedBy.app.displayName), InitiatedBy.app.displayName, isnotempty(InitiatedBy.user.displayName), InitiatedBy.user.displayName, \"not available\"),\n      ServicePrincipalId = tostring(InitiatedBy.app.servicePrincipalId),\n      ServicePrincipalName = tostring(InitiatedBy.app.servicePrincipalName),\n      UserId = InitiatedBy.user.id,\n      UserIPAddress = InitiatedBy.user.ipAddress,\n      UserRoles = InitiatedBy.user.roles,\n      UserPrincipalName = tostring(InitiatedBy.user.userPrincipalName)\n| where GroupName in~ (PrivilegedGroups)\n// If you don't want to alert for operations from PIM, remove below filtering for MS-PIM.\n//| where InitiatedByDisplayName != \"MS-PIM\"\n| project TimeGenerated, AADOperationType, Category, OperationName, AADTenantId, AppId, InitiatedByDisplayName, ServicePrincipalId, ServicePrincipalName, DisplayName, GroupName, UserId, UserIPAddress, UserRoles, UserPrincipalName, TargetUserPrincipalName\n| extend AccountCustomEntity = case(isnotempty(ServicePrincipalName), ServicePrincipalName, \n                                    isnotempty(UserPrincipalName), UserPrincipalName,  \n                                    \"\")\n| extend AccountName = tostring(split(AccountCustomEntity,'@',0)[0]), AccountUPNSuffix = tostring(split(AccountCustomEntity,'@',1)[0])\n| extend TargetName = tostring(split(TargetUserPrincipalName,'@',0)[0]), TargetUPNSuffix = tostring(split(TargetUserPrincipalName,'@',1)[0])",
+    "suppressionDuration": "PT5H",
+    "suppressionEnabled": false,
+    "incidentConfiguration": {
+      "createIncident": true,
+      "groupingConfiguration": {
+        "enabled": false,
+        "reopenClosedIncident": false,
+        "lookbackDuration": "PT5M",
+        "matchingMethod": "AllEntities",
+        "groupByEntities": [],
+        "groupByAlertDetails": null,
+        "groupByCustomDetails": null
+      }
+    },
+    "entityMappings": [
+      {
+        "entityType": "Account",
+        "fieldMappings": [
+          {
+            "identifier": "Name",
+            "columnName": "AccountName"
+          },
+          {
+            "identifier": "UPNSuffix",
+            "columnName": "AccountUPNSuffix"
+          }
+        ]
+      },
+      {
+        "entityType": "Account",
+        "fieldMappings": [
+          {
+            "identifier": "Name",
+            "columnName": "TargetName"
+          },
+          {
+            "identifier": "UPNSuffix",
+            "columnName": "TargetUPNSuffix"
+          }
+        ]
+      }
+    ],
+    "eventGroupingSettings": {
+      "aggregationKind": "SingleAlert"
+    },
+    "tactics": [
+      "Persistence",
+      "PrivilegeEscalation"
+    ],
+    "techniques": [
+      "T1098",
+      "T1078"
+    ],
+    "subTechniques": null,
+    "displayName": "User added to Azure Active Directory Privileged Groups",
+    "enabled": true,
+    "description": "This will alert when a user is added to any of the Privileged Groups.\nFor further information on AuditLogs please see https://docs.microsoft.com/azure/active-directory/reports-monitoring/reference-audit-activities.\nFor Administrator role permissions in Azure Active Directory please see https://docs.microsoft.com/azure/active-directory/users-groups-roles/directory-assign-admin-roles",
+    "alertRuleTemplateName": "4d94d4a9-dc96-410a-8dea-4d4d4584188b",
+    "lastModifiedUtc": "2024-10-30T13:02:29.4438703Z"
+  }
+}

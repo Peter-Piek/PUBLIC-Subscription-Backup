@@ -1,0 +1,50 @@
+{
+  "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-cognitiveservices/providers/Microsoft.CognitiveServices/accounts/vision-experiment-with-ocr",
+  "name": "vision-experiment-with-ocr",
+  "type": "Microsoft.CognitiveServices/accounts",
+  "location": "westeurope",
+  "sku": {
+    "name": "F0"
+  },
+  "kind": "ComputerVision",
+  "tags": {},
+  "properties": {
+    "endpoint": "https://vision-experiment-with-ocr.cognitiveservices.azure.com/",
+    "internalId": "53e8ecb06f874cfea5550da9ffaa0aa2",
+    "dateCreated": "2024-11-10T12:48:00.2750613Z",
+    "isMigrated": false,
+    "customSubDomainName": "vision-experiment-with-ocr",
+    "networkAcls": {
+      "defaultAction": "Allow",
+      "virtualNetworkRules": [],
+      "ipRules": []
+    },
+    "privateEndpointConnections": [],
+    "publicNetworkAccess": "Enabled",
+    "capabilities": [
+      {
+        "name": "VirtualNetworks"
+      },
+      {
+        "name": "Container",
+        "value": "ComputerVision.VideoAnalytics,ComputerVision.ComputerVisionRead,ComputerVision.ocr,ComputerVision.readfile,ComputerVision.readfiledsd,ComputerVision.recognizetext,ComputerVision.ComputerVision,ComputerVision.ocrlayoutworker,ComputerVision.ocrcontroller,ComputerVision.ocrdispatcher,ComputerVision.ocrbillingprocessor,ComputerVision.ocranalyzer,ComputerVision.ocrpagesplitter,ComputerVision.ocrapi,ComputerVision.ocrengineworker"
+      }
+    ],
+    "endpoints": {
+      "Computer Vision": "https://vision-experiment-with-ocr.cognitiveservices.azure.com/",
+      "Container": "https://vision-experiment-with-ocr.cognitiveservices.azure.com/"
+    },
+    "provisioningState": "Succeeded"
+  },
+  "identity": {
+    "type": "None"
+  },
+  "systemData": {
+    "createdBy": "admin@buisecops.onmicrosoft.com",
+    "createdByType": "User",
+    "createdAt": "2024-11-10T12:47:58.9653396Z",
+    "lastModifiedBy": "admin@buisecops.onmicrosoft.com",
+    "lastModifiedByType": "User",
+    "lastModifiedAt": "2024-11-10T12:47:58.9653396Z"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "name": "ipconfig1",
+  "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-tpot/providers/Microsoft.Network/networkInterfaces/t-pot-hive28/ipConfigurations/ipconfig1",
+  "type": "Microsoft.Network/networkInterfaces/ipConfigurations",
+  "properties": {
+    "privateIPAddress": "10.2.0.4",
+    "privateIPAllocationMethod": "Dynamic",
+    "publicIPAddress": {
+      "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-tpot/providers/Microsoft.Network/publicIPAddresses/t-pot-hive-ip"
+    },
+    "subnet": {
+      "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-tpot/providers/Microsoft.Network/virtualNetworks/t-pot-hive-vnet/subnets/default"
+    },
+    "primary": true,
+    "privateIPAddressVersion": "IPv4"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "properties": {
+    "customerId": "b5ff6603-bcde-4a89-9f48-d403c817d958",
+    "sku": {
+      "name": "pergb2018"
+    },
+    "retentionInDays": 30,
+    "features": {
+      "legacy": 0,
+      "searchVersion": 1,
+      "enableLogAccessUsingOnlyResourcePermissions": true
+    },
+    "workspaceCapping": {
+      "dailyQuotaGb": -1.0,
+      "dataIngestionStatus": "RespectQuota"
+    },
+    "publicNetworkAccessForIngestion": "Enabled",
+    "publicNetworkAccessForQuery": "Enabled"
+  },
+  "location": "southafricanorth",
+  "tags": {},
+  "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/Red_Team_RG/providers/Microsoft.OperationalInsights/workspaces/KObusTest",
+  "name": "KObusTest",
+  "type": "Microsoft.OperationalInsights/workspaces"
+}

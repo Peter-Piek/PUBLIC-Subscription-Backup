@@ -1,0 +1,24 @@
+{
+  "properties": {
+    "status": "Enabled",
+    "taskType": "ComputeVmShutdownTask",
+    "dailyRecurrence": {
+      "time": "1900"
+    },
+    "timeZoneId": "UTC",
+    "notificationSettings": {
+      "status": "Enabled",
+      "timeInMinutes": 30,
+      "emailRecipient": "admin@buisecops.onmicrosoft.com",
+      "notificationLocale": "en"
+    },
+    "createdDate": "2024-10-24T07:58:44.2000415+00:00",
+    "targetResourceId": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-twingate/providers/Microsoft.Compute/virtualMachines/vm-twingate",
+    "provisioningState": "Succeeded",
+    "uniqueIdentifier": "2820a62d-f461-40bb-8fd7-548182c44836"
+  },
+  "location": "westeurope",
+  "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourcegroups/rg-twingate/providers/microsoft.devtestlab/schedules/shutdown-computevm-vm-twingate",
+  "name": "shutdown-computevm-vm-twingate",
+  "type": "microsoft.devtestlab/schedules"
+}

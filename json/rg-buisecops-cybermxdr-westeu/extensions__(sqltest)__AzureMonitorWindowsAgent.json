@@ -1,0 +1,12 @@
+{
+  "name": "AzureMonitorWindowsAgent",
+  "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-buisecops-cybermxdr-westeu/providers/Microsoft.Compute/virtualMachines/SQLTest/extensions/AzureMonitorWindowsAgent",
+  "type": "Microsoft.Compute/virtualMachines/extensions",
+  "location": "westeurope",
+  "properties": {
+    "autoUpgradeMinorVersion": true,
+    "publisher": "Microsoft.Azure.Monitor",
+    "type": "AzureMonitorWindowsAgent",
+    "typeHandlerVersion": "1.0"
+  }
+}
