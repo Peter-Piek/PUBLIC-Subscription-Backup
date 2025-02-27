@@ -1,0 +1,10 @@
+{
+  "name": "NetworkWatcher_eastus",
+  "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/NetworkWatcherRG/providers/Microsoft.Network/networkWatchers/NetworkWatcher_eastus",
+  "type": "Microsoft.Network/networkWatchers",
+  "location": "eastus",
+  "properties": {
+    "provisioningState": "Succeeded",
+    "runningOperationIds": []
+  }
+}

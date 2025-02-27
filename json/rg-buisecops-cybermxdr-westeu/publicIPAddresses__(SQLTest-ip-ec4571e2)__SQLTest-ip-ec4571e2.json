@@ -1,0 +1,25 @@
+{
+  "name": "SQLTest-ip-ec4571e2",
+  "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-buisecops-cybermxdr-westeu/providers/Microsoft.Network/publicIPAddresses/SQLTest-ip-ec4571e2",
+  "location": "westeurope",
+  "zones": [
+    "2"
+  ],
+  "properties": {
+    "publicIPAddressVersion": "IPv4",
+    "publicIPAllocationMethod": "Static",
+    "idleTimeoutInMinutes": 15,
+    "ipTags": [],
+    "ipConfiguration": {
+      "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-buisecops-cybermxdr-westeu/providers/Microsoft.Network/networkInterfaces/sqltest778-ec4571e2/ipConfigurations/sqltest778-defaultIpConfiguration"
+    },
+    "ddosSettings": {
+      "protectionMode": "VirtualNetworkInherited"
+    }
+  },
+  "type": "Microsoft.Network/publicIPAddresses",
+  "sku": {
+    "name": "Standard",
+    "tier": "Regional"
+  }
+}

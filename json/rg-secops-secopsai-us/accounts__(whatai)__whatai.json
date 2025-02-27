@@ -180,6 +180,7 @@
     "endpoints": {
       "OpenAI Language Model Instance API": "https://whatai.openai.azure.com/",
       "OpenAI Dall-E API": "https://whatai.openai.azure.com/",
+      "OpenAI Sora API": "https://whatai.openai.azure.com/",
       "OpenAI Whisper API": "https://whatai.openai.azure.com/",
       "OpenAI Model Scaleset API": "https://whatai.openai.azure.com/",
       "OpenAI Realtime API": "https://whatai.openai.azure.com/",

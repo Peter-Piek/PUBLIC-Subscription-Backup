@@ -1,0 +1,42 @@
+{
+  "name": "kubernetes",
+  "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/MC_rg-secops-n8n-us_n8n-cluster_eastus/providers/Microsoft.Network/loadBalancers/kubernetes/backendAddressPools/kubernetes",
+  "properties": {
+    "provisioningState": "Succeeded",
+    "loadBalancerBackendAddresses": [
+      {
+        "name": "826d5e1c-a2ae-44e4-b7f3-082e89fce59e",
+        "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/MC_rg-secops-n8n-us_n8n-cluster_eastus/providers/Microsoft.Network/loadBalancers/kubernetes/backendAddressPools/kubernetes/loadBalancerBackendAddresses/826d5e1c-a2ae-44e4-b7f3-082e89fce59e",
+        "etag": "W/\"e2362497-933f-4f08-80c5-02130896bb26\"",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "networkInterfaceIPConfiguration": {
+            "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/MC_rg-secops-n8n-us_n8n-cluster_eastus/providers/Microsoft.Compute/virtualMachineScaleSets/aks-agentpool-14453608-vmss/virtualMachines/1/networkInterfaces/aks-agentpool-14453608-vmss/ipConfigurations/ipconfig1"
+          }
+        },
+        "type": "Microsoft.Network/loadBalancers/backendAddressPools/loadBalancerBackendAddresses"
+      },
+      {
+        "name": "b7c4ed5a-12e5-48ce-b80c-5aa186cfe0a2",
+        "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/MC_rg-secops-n8n-us_n8n-cluster_eastus/providers/Microsoft.Network/loadBalancers/kubernetes/backendAddressPools/kubernetes/loadBalancerBackendAddresses/b7c4ed5a-12e5-48ce-b80c-5aa186cfe0a2",
+        "etag": "W/\"e2362497-933f-4f08-80c5-02130896bb26\"",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "networkInterfaceIPConfiguration": {
+            "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/MC_rg-secops-n8n-us_n8n-cluster_eastus/providers/Microsoft.Compute/virtualMachineScaleSets/aks-agentpool-14453608-vmss/virtualMachines/0/networkInterfaces/aks-agentpool-14453608-vmss/ipConfigurations/ipconfig1"
+          }
+        },
+        "type": "Microsoft.Network/loadBalancers/backendAddressPools/loadBalancerBackendAddresses"
+      }
+    ],
+    "backendIPConfigurations": [
+      {
+        "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/MC_rg-secops-n8n-us_n8n-cluster_eastus/providers/Microsoft.Compute/virtualMachineScaleSets/aks-agentpool-14453608-vmss/virtualMachines/1/networkInterfaces/aks-agentpool-14453608-vmss/ipConfigurations/ipconfig1"
+      },
+      {
+        "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/MC_rg-secops-n8n-us_n8n-cluster_eastus/providers/Microsoft.Compute/virtualMachineScaleSets/aks-agentpool-14453608-vmss/virtualMachines/0/networkInterfaces/aks-agentpool-14453608-vmss/ipConfigurations/ipconfig1"
+      }
+    ]
+  },
+  "type": "Microsoft.Network/loadBalancers/backendAddressPools"
+}

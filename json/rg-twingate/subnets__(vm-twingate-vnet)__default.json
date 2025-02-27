@@ -1,0 +1,16 @@
+{
+  "name": "default",
+  "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-twingate/providers/Microsoft.Network/virtualNetworks/vm-twingate-vnet/subnets/default",
+  "properties": {
+    "addressPrefix": "10.1.0.0/24",
+    "ipConfigurations": [
+      {
+        "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/RG-TWINGATE/providers/Microsoft.Network/networkInterfaces/VM-TWINGATE257/ipConfigurations/IPCONFIG1"
+      }
+    ],
+    "delegations": [],
+    "privateEndpointNetworkPolicies": "Disabled",
+    "privateLinkServiceNetworkPolicies": "Enabled"
+  },
+  "type": "Microsoft.Network/virtualNetworks/subnets"
+}
