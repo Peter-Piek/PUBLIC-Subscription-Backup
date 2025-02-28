@@ -21,7 +21,7 @@
      description: 'Cloud-native SIEM with a built-in AI so you can focus on what matters most' 
      iconUri: >
       https://conn-afd-prod-endpoint-bmc9bqahasf3grgk.b01.azurefd.net/releases/v1.0.17
-      27/1.0.1727.4021/azuresentinel/icon.png
+      35/1.0.1735.4103/azuresentinel/icon.png
 
  
      brandColor: '#0072C6' 

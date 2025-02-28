@@ -1,0 +1,35 @@
+{
+  "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-buisecops-cybermxdr-westeu/providers/Microsoft.OperationalInsights/workspaces/log-buisecops-cybermxdr-westeu/providers/Microsoft.SecurityInsights/dataConnectors/AzureKeyVault",
+  "name": "AzureKeyVault",
+  "type": "Microsoft.SecurityInsights/dataConnectors",
+  "kind": "StaticUI",
+  "properties": {
+    "connectorUiConfig": {
+      "title": "Azure Key Vault",
+      "publisher": "Microsoft",
+      "descriptionMarkdown": "Azure Key Vault is a cloud service for securely storing and accessing secrets. A secret is anything that you want to tightly control access to, such as API keys, passwords, certificates, or cryptographic keys.   This connector lets you stream your Azure Key Vault diagnostics logs into Microsoft Sentinel, allowing you to continuously monitor activity in all your instances. For more information, see the [Microsoft Sentinel documentation](https://go.microsoft.com/fwlink/p/?linkid=2220125&wt.mc_id=sentinel_dataconnectordocs_content_cnl_csasci).",
+      "graphQueries": [
+        {
+          "metricName": "Total data received",
+          "legend": "AzureDiagnostics",
+          "baseQuery": "AzureDiagnostics | where ResourceProvider == \"MICROSOFT.KEYVAULT\""
+        }
+      ],
+      "dataTypes": [
+        {
+          "name": "KeyVaultData",
+          "lastDataReceivedQuery": "AzureDiagnostics | where ResourceProvider == \"MICROSOFT.KEYVAULT\"\n            | summarize Time = max(TimeGenerated)\n            | where isnotempty(Time)"
+        }
+      ],
+      "connectivityCriterias": [
+        {
+          "type": "IsConnectedQuery",
+          "value": [
+            "AzureDiagnostics | where ResourceProvider == \"MICROSOFT.KEYVAULT\"\n            | summarize LastLogReceived = max(TimeGenerated)\n            | project IsConnected = LastLogReceived > ago(7d)"
+          ]
+        }
+      ],
+      "id": "AzureKeyVault"
+    }
+  }
+}

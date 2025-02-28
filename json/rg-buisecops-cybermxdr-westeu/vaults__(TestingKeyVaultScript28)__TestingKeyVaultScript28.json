@@ -1,0 +1,23 @@
+{
+  "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-buisecops-cybermxdr-westeu/providers/Microsoft.KeyVault/vaults/TestingKeyVaultScript28",
+  "name": "TestingKeyVaultScript28",
+  "type": "Microsoft.KeyVault/vaults",
+  "location": "westeurope",
+  "tags": {},
+  "properties": {
+    "sku": {
+      "family": "A",
+      "name": "Standard"
+    },
+    "tenantId": "27909b42-a095-40f2-be50-76c52e13b8f3",
+    "accessPolicies": [],
+    "enabledForDeployment": true,
+    "enabledForDiskEncryption": false,
+    "enabledForTemplateDeployment": true,
+    "enableSoftDelete": true,
+    "softDeleteRetentionInDays": 90,
+    "enableRbacAuthorization": true,
+    "vaultUri": "https://testingkeyvaultscript28.vault.azure.net/",
+    "publicNetworkAccess": "Enabled"
+  }
+}
