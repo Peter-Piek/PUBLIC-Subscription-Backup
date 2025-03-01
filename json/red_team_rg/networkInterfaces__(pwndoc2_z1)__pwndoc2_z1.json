@@ -1,0 +1,53 @@
+{
+  "name": "pwndoc2_z1",
+  "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/Red_Team_RG/providers/Microsoft.Network/networkInterfaces/pwndoc2_z1",
+  "properties": {
+    "ipConfigurations": [
+      {
+        "name": "ipconfig1",
+        "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/Red_Team_RG/providers/Microsoft.Network/networkInterfaces/pwndoc2_z1/ipConfigurations/ipconfig1",
+        "type": "Microsoft.Network/networkInterfaces/ipConfigurations",
+        "properties": {
+          "privateIPAddress": "10.0.0.5",
+          "privateIPAllocationMethod": "Dynamic",
+          "publicIPAddress": {
+            "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/Red_Team_RG/providers/Microsoft.Network/publicIPAddresses/PwnDoc-ip",
+            "properties": {
+              "deleteOption": "Detach"
+            }
+          },
+          "subnet": {
+            "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/Red_Team_RG/providers/Microsoft.Network/virtualNetworks/RedTeam/subnets/default"
+          },
+          "primary": true,
+          "privateIPAddressVersion": "IPv4"
+        }
+      }
+    ],
+    "dnsSettings": {
+      "dnsServers": [],
+      "appliedDnsServers": []
+    },
+    "enableAcceleratedNetworking": false,
+    "vnetEncryptionSupported": false,
+    "enableIPForwarding": false,
+    "disableTcpStateTracking": false,
+    "networkSecurityGroup": {
+      "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/Red_Team_RG/providers/Microsoft.Network/networkSecurityGroups/PwnDoc-nsg"
+    },
+    "primary": true,
+    "virtualMachine": {
+      "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/Red_Team_RG/providers/Microsoft.Compute/virtualMachines/PwnDoc"
+    },
+    "hostedWorkloads": [],
+    "tapConfigurations": [],
+    "nicType": "Standard",
+    "allowPort25Out": false,
+    "defaultOutboundConnectivityEnabled": false,
+    "auxiliaryMode": "None",
+    "auxiliarySku": "None"
+  },
+  "type": "Microsoft.Network/networkInterfaces",
+  "location": "southafricanorth",
+  "kind": "Regular"
+}
