@@ -16,20 +16,8 @@
    queryPeriod: 'P1D' 
    triggerOperator: 'GreaterThan' 
    triggerThreshold: null 
-   severity: 'High' 
-   query: >
-    DeviceEvents
-    | where ActionType has "ExploitGuardNonMicrosoftSignedBlocked"
-    | where InitiatingProcessFileName has "svchost.exe" and FileName has "NetSetupSv
-    c.dll"
-    | extend timestamp = TimeGenerated, AccountEntity = iff(isnotempty(InitiatingPro
-    cessAccountUpn), InitiatingProcessAccountUpn, InitiatingProcessAccountName),File
-    HashType = "SHA1"
-    | extend HostName = tostring(split(DeviceName, '.', 0)[0]), DnsDomain = tostring
-    (strcat_array(array_slice(split(DeviceName, '.'), 1, -1), '.'))
- 
-   suppressionDuration: 'PT5H' 
-   suppressionEnabled: null 
+   eventGroupingSettings: 
+     aggregationKind: 'SingleAlert' 
    incidentConfiguration: 
      createIncident: true 
      groupingConfiguration: 
@@ -65,8 +53,20 @@
        - 
          identifier: 'Value' 
          columnName: 'InitiatingProcessSHA1' 
-   eventGroupingSettings: 
-     aggregationKind: 'SingleAlert' 
+   severity: 'High' 
+   query: >
+    DeviceEvents
+    | where ActionType has "ExploitGuardNonMicrosoftSignedBlocked"
+    | where InitiatingProcessFileName has "svchost.exe" and FileName has "NetSetupSv
+    c.dll"
+    | extend timestamp = TimeGenerated, AccountEntity = iff(isnotempty(InitiatingPro
+    cessAccountUpn), InitiatingProcessAccountUpn, InitiatingProcessAccountName),File
+    HashType = "SHA1"
+    | extend HostName = tostring(split(DeviceName, '.', 0)[0]), DnsDomain = tostring
+    (strcat_array(array_slice(split(DeviceName, '.'), 1, -1), '.'))
+ 
+   suppressionDuration: 'PT5H' 
+   suppressionEnabled: null 
    tactics: 
     - 'Execution' 
     - 'Persistence' 
@@ -75,7 +75,6 @@
     - 'T1543' 
     - 'T1059' 
     - 'T1027' 
-   subTechniques: null 
    displayName: 'TEARDROP memory-only dropper' 
    enabled: true 
    description: >

@@ -16,30 +16,8 @@
    queryPeriod: 'P1D' 
    triggerOperator: 'GreaterThan' 
    triggerThreshold: null 
-   severity: 'Medium' 
-   query: >
-    OfficeActivity
-    | where OfficeWorkload =~ "Exchange"
-    | where UserType in~ ("Admin","DcAdmin")
-    // Only admin or global-admin can disable audit logging
-    | where Operation =~ "Set-AdminAuditLogConfig"
-    | extend AdminAuditLogEnabledValue = tostring(parse_json(tostring(parse_json(tos
-    tring(array_slice(parse_json(Parameters),3,3)))[0])).Value)
-    | where AdminAuditLogEnabledValue =~ "False"
-    | summarize StartTimeUtc = min(TimeGenerated), EndTimeUtc = max(TimeGenerated),
-    OperationCount = count() by Operation, UserType, UserId, ClientIP, ResultStatus,
-    Parameters, AdminAuditLogEnabledValue
-    | extend AccountName = iff(UserId contains '@', tostring(split(UserId, '@')[0]),
-    UserId)
-    | extend AccountUPNSuffix = iff(UserId contains '@', tostring(split(UserId, '@')[1]),
-    '')
-    | extend AccountName = iff(UserId contains '\\', tostring(split(UserId, '\\')[1]),
-    AccountName)
-    | extend AccountNTDomain = iff(UserId contains '\\', tostring(split(UserId,
-    '\\')[0]), '')
- 
-   suppressionDuration: 'PT5H' 
-   suppressionEnabled: null 
+   eventGroupingSettings: 
+     aggregationKind: 'SingleAlert' 
    incidentConfiguration: 
      createIncident: true 
      groupingConfiguration: 
@@ -69,13 +47,34 @@
        - 
          identifier: 'Address' 
          columnName: 'ClientIP' 
-   eventGroupingSettings: 
-     aggregationKind: 'SingleAlert' 
+   severity: 'Medium' 
+   query: >
+    OfficeActivity
+    | where OfficeWorkload =~ "Exchange"
+    | where UserType in~ ("Admin","DcAdmin")
+    // Only admin or global-admin can disable audit logging
+    | where Operation =~ "Set-AdminAuditLogConfig"
+    | extend AdminAuditLogEnabledValue = tostring(parse_json(tostring(parse_json(tos
+    tring(array_slice(parse_json(Parameters),3,3)))[0])).Value)
+    | where AdminAuditLogEnabledValue =~ "False"
+    | summarize StartTimeUtc = min(TimeGenerated), EndTimeUtc = max(TimeGenerated),
+    OperationCount = count() by Operation, UserType, UserId, ClientIP, ResultStatus,
+    Parameters, AdminAuditLogEnabledValue
+    | extend AccountName = iff(UserId contains '@', tostring(split(UserId, '@')[0]),
+    UserId)
+    | extend AccountUPNSuffix = iff(UserId contains '@', tostring(split(UserId, '@')[1]),
+    '')
+    | extend AccountName = iff(UserId contains '\\', tostring(split(UserId, '\\')[1]),
+    AccountName)
+    | extend AccountNTDomain = iff(UserId contains '\\', tostring(split(UserId,
+    '\\')[0]), '')
+ 
+   suppressionDuration: 'PT5H' 
+   suppressionEnabled: null 
    tactics: 
     - 'DefenseEvasion' 
    techniques: 
     - 'T1562' 
-   subTechniques: null 
    displayName: 'Exchange AuditLog Disabled' 
    enabled: true 
    description: >

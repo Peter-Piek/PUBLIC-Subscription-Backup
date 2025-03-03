@@ -16,6 +16,55 @@
    queryPeriod: 'P8D' 
    triggerOperator: 'GreaterThan' 
    triggerThreshold: null 
+   eventGroupingSettings: 
+     aggregationKind: 'SingleAlert' 
+   incidentConfiguration: 
+     createIncident: true 
+     groupingConfiguration: 
+       enabled: null 
+       reopenClosedIncident: null 
+       lookbackDuration: 'PT5M' 
+       matchingMethod: 'AllEntities' 
+       groupByEntities: null 
+       groupByAlertDetails: null 
+       groupByCustomDetails: null 
+   entityMappings: 
+    - 
+      entityType: 'Account' 
+      fieldMappings: 
+       - 
+         identifier: 'FullName' 
+         columnName: 'UserPrincipalName' 
+       - 
+         identifier: 'Name' 
+         columnName: 'AccountName' 
+       - 
+         identifier: 'UPNSuffix' 
+         columnName: 'AccountUPNSuffix' 
+    - 
+      entityType: 'IP' 
+      fieldMappings: 
+       - 
+         identifier: 'Address' 
+         columnName: 'JoinedOnIp' 
+    - 
+      entityType: 'IP' 
+      fieldMappings: 
+       - 
+         identifier: 'Address' 
+         columnName: 'IPAddress' 
+    - 
+      entityType: 'IP' 
+      fieldMappings: 
+       - 
+         identifier: 'Address' 
+         columnName: 'ClientIP' 
+    - 
+      entityType: 'CloudApplication' 
+      fieldMappings: 
+       - 
+         identifier: 'AppId' 
+         columnName: 'ApplicationId' 
    severity: 'Medium' 
    query: >
     let threshold = 100;
@@ -105,55 +154,6 @@
  
    suppressionDuration: 'PT5H' 
    suppressionEnabled: null 
-   incidentConfiguration: 
-     createIncident: true 
-     groupingConfiguration: 
-       enabled: null 
-       reopenClosedIncident: null 
-       lookbackDuration: 'PT5M' 
-       matchingMethod: 'AllEntities' 
-       groupByEntities: null 
-       groupByAlertDetails: null 
-       groupByCustomDetails: null 
-   entityMappings: 
-    - 
-      entityType: 'Account' 
-      fieldMappings: 
-       - 
-         identifier: 'FullName' 
-         columnName: 'UserPrincipalName' 
-       - 
-         identifier: 'Name' 
-         columnName: 'AccountName' 
-       - 
-         identifier: 'UPNSuffix' 
-         columnName: 'AccountUPNSuffix' 
-    - 
-      entityType: 'IP' 
-      fieldMappings: 
-       - 
-         identifier: 'Address' 
-         columnName: 'JoinedOnIp' 
-    - 
-      entityType: 'IP' 
-      fieldMappings: 
-       - 
-         identifier: 'Address' 
-         columnName: 'IPAddress' 
-    - 
-      entityType: 'IP' 
-      fieldMappings: 
-       - 
-         identifier: 'Address' 
-         columnName: 'ClientIP' 
-    - 
-      entityType: 'CloudApplication' 
-      fieldMappings: 
-       - 
-         identifier: 'AppId' 
-         columnName: 'ApplicationId' 
-   eventGroupingSettings: 
-     aggregationKind: 'SingleAlert' 
    tactics: 
     - 'InitialAccess' 
     - 'Persistence' 
@@ -162,7 +162,6 @@
     - 'T1078' 
     - 'T1098' 
     - 'T1114' 
-   subTechniques: null 
    displayName: >
     High risk Office operation conducted by IP Address that recently attempted to log
     into a disabled account

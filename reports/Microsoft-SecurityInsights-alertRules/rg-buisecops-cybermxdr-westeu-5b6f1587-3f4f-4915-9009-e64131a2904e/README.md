@@ -16,6 +16,37 @@
    queryPeriod: 'P1D' 
    triggerOperator: 'GreaterThan' 
    triggerThreshold: null 
+   eventGroupingSettings: 
+     aggregationKind: 'SingleAlert' 
+   incidentConfiguration: 
+     createIncident: true 
+     groupingConfiguration: 
+       enabled: null 
+       reopenClosedIncident: null 
+       lookbackDuration: 'PT5M' 
+       matchingMethod: 'AllEntities' 
+       groupByEntities: null 
+       groupByAlertDetails: null 
+       groupByCustomDetails: null 
+   entityMappings: 
+    - 
+      entityType: 'Account' 
+      fieldMappings: 
+       - 
+         identifier: 'FullName' 
+         columnName: 'AccountCustomEntity' 
+    - 
+      entityType: 'Host' 
+      fieldMappings: 
+       - 
+         identifier: 'FullName' 
+         columnName: 'HostCustomEntity' 
+    - 
+      entityType: 'IP' 
+      fieldMappings: 
+       - 
+         identifier: 'Address' 
+         columnName: 'IPCustomEntity' 
    severity: 'Medium' 
    query: >
     SecurityEvent
@@ -49,42 +80,10 @@
  
    suppressionDuration: 'PT5H' 
    suppressionEnabled: null 
-   incidentConfiguration: 
-     createIncident: true 
-     groupingConfiguration: 
-       enabled: null 
-       reopenClosedIncident: null 
-       lookbackDuration: 'PT5M' 
-       matchingMethod: 'AllEntities' 
-       groupByEntities: null 
-       groupByAlertDetails: null 
-       groupByCustomDetails: null 
-   entityMappings: 
-    - 
-      entityType: 'Account' 
-      fieldMappings: 
-       - 
-         identifier: 'FullName' 
-         columnName: 'AccountCustomEntity' 
-    - 
-      entityType: 'Host' 
-      fieldMappings: 
-       - 
-         identifier: 'FullName' 
-         columnName: 'HostCustomEntity' 
-    - 
-      entityType: 'IP' 
-      fieldMappings: 
-       - 
-         identifier: 'Address' 
-         columnName: 'IPCustomEntity' 
-   eventGroupingSettings: 
-     aggregationKind: 'SingleAlert' 
    tactics: 
     - 'DefenseEvasion' 
    techniques: 
     - 'T1562' 
-   subTechniques: null 
    displayName: 'Starting or Stopping HealthService to Avoid Detection' 
    enabled: true 
    description: >

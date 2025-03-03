@@ -16,6 +16,52 @@
    queryPeriod: 'P1D' 
    triggerOperator: 'GreaterThan' 
    triggerThreshold: null 
+   eventGroupingSettings: 
+     aggregationKind: 'SingleAlert' 
+   incidentConfiguration: 
+     createIncident: true 
+     groupingConfiguration: 
+       enabled: null 
+       reopenClosedIncident: null 
+       lookbackDuration: 'PT5M' 
+       matchingMethod: 'AllEntities' 
+       groupByEntities: null 
+       groupByAlertDetails: null 
+       groupByCustomDetails: null 
+   entityMappings: 
+    - 
+      entityType: 'Account' 
+      fieldMappings: 
+       - 
+         identifier: 'FullName' 
+         columnName: 'InitiatingUserPrincipalName' 
+       - 
+         identifier: 'Name' 
+         columnName: 'InitiatingAccountName' 
+       - 
+         identifier: 'UPNSuffix' 
+         columnName: 'InitiatingAccountUPNSuffix' 
+    - 
+      entityType: 'Account' 
+      fieldMappings: 
+       - 
+         identifier: 'AadUserId' 
+         columnName: 'InitiatingAadUserId' 
+    - 
+      entityType: 'Account' 
+      fieldMappings: 
+       - 
+         identifier: 'AadUserId' 
+         columnName: 'InitiatingAppServicePrincipalId' 
+       - 
+         identifier: 'ObjectGuid' 
+         columnName: 'ServicePrincipalObjectID' 
+    - 
+      entityType: 'IP' 
+      fieldMappings: 
+       - 
+         identifier: 'Address' 
+         columnName: 'InitiatingIPAddress' 
    severity: 'Medium' 
    query: >
     // Add other permissions to this list as needed
@@ -83,57 +129,10 @@
  
    suppressionDuration: 'PT5H' 
    suppressionEnabled: null 
-   incidentConfiguration: 
-     createIncident: true 
-     groupingConfiguration: 
-       enabled: null 
-       reopenClosedIncident: null 
-       lookbackDuration: 'PT5M' 
-       matchingMethod: 'AllEntities' 
-       groupByEntities: null 
-       groupByAlertDetails: null 
-       groupByCustomDetails: null 
-   entityMappings: 
-    - 
-      entityType: 'Account' 
-      fieldMappings: 
-       - 
-         identifier: 'FullName' 
-         columnName: 'InitiatingUserPrincipalName' 
-       - 
-         identifier: 'Name' 
-         columnName: 'InitiatingAccountName' 
-       - 
-         identifier: 'UPNSuffix' 
-         columnName: 'InitiatingAccountUPNSuffix' 
-    - 
-      entityType: 'Account' 
-      fieldMappings: 
-       - 
-         identifier: 'AadUserId' 
-         columnName: 'InitiatingAadUserId' 
-    - 
-      entityType: 'Account' 
-      fieldMappings: 
-       - 
-         identifier: 'AadUserId' 
-         columnName: 'InitiatingAppServicePrincipalId' 
-       - 
-         identifier: 'ObjectGuid' 
-         columnName: 'ServicePrincipalObjectID' 
-    - 
-      entityType: 'IP' 
-      fieldMappings: 
-       - 
-         identifier: 'Address' 
-         columnName: 'InitiatingIPAddress' 
-   eventGroupingSettings: 
-     aggregationKind: 'SingleAlert' 
    tactics: 
     - 'PrivilegeEscalation' 
    techniques: 
     - 'T1078' 
-   subTechniques: null 
    displayName: 'Service Principal Assigned App Role With Sensitive Access' 
    enabled: true 
    description: >

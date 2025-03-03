@@ -16,32 +16,8 @@
    queryPeriod: 'P1D' 
    triggerOperator: 'GreaterThan' 
    triggerThreshold: null 
-   severity: 'High' 
-   query: >
-    let Dev0530_threats = dynamic(["Trojan:Win32/SiennaPurple.A", "Ransom:Win32/SiennaBlue.A",
-    "Ransom:Win32/SiennaBlue.B"]);
-    SecurityAlert
-    | where ProviderName == "MDATP"
-    | extend ThreatName = tostring(parse_json(ExtendedProperties).ThreatName)
-    | extend ThreatFamilyName = tostring(parse_json(ExtendedProperties).ThreatFamily
-    Name)
-    | where ThreatName in~ (Dev0530_threats) or ThreatFamilyName in~ (Dev0530_threat
-    s)
-    | extend CompromisedEntity = tolower(CompromisedEntity)
-    | join kind=inner (DeviceInfo
-    | extend DeviceName = tolower(DeviceName)
-    ) on $left.CompromisedEntity == $right.DeviceName
-    | summarize by bin(TimeGenerated, 1d), DisplayName, ThreatName, ThreatFamilyName,
-    PublicIP, AlertSeverity, Description, tostring(LoggedOnUsers), DeviceId, TenantId,
-    CompromisedEntity, tostring(LoggedOnUsers), ProductName, Entities
-    | extend HostName = tostring(split(CompromisedEntity, ".")[0]), DomainIndex = to
-    int(indexof(CompromisedEntity, '.'))
-    | extend HostNameDomain = iff(DomainIndex != -1, substring(CompromisedEntity,
-    DomainIndex + 1), CompromisedEntity)
-    | project-away DomainIndex
- 
-   suppressionDuration: 'PT5H' 
-   suppressionEnabled: null 
+   eventGroupingSettings: 
+     aggregationKind: 'SingleAlert' 
    incidentConfiguration: 
      createIncident: true 
      groupingConfiguration: 
@@ -71,13 +47,36 @@
        - 
          identifier: 'Address' 
          columnName: 'PublicIP' 
-   eventGroupingSettings: 
-     aggregationKind: 'SingleAlert' 
+   severity: 'High' 
+   query: >
+    let Dev0530_threats = dynamic(["Trojan:Win32/SiennaPurple.A", "Ransom:Win32/SiennaBlue.A",
+    "Ransom:Win32/SiennaBlue.B"]);
+    SecurityAlert
+    | where ProviderName == "MDATP"
+    | extend ThreatName = tostring(parse_json(ExtendedProperties).ThreatName)
+    | extend ThreatFamilyName = tostring(parse_json(ExtendedProperties).ThreatFamily
+    Name)
+    | where ThreatName in~ (Dev0530_threats) or ThreatFamilyName in~ (Dev0530_threat
+    s)
+    | extend CompromisedEntity = tolower(CompromisedEntity)
+    | join kind=inner (DeviceInfo
+    | extend DeviceName = tolower(DeviceName)
+    ) on $left.CompromisedEntity == $right.DeviceName
+    | summarize by bin(TimeGenerated, 1d), DisplayName, ThreatName, ThreatFamilyName,
+    PublicIP, AlertSeverity, Description, tostring(LoggedOnUsers), DeviceId, TenantId,
+    CompromisedEntity, tostring(LoggedOnUsers), ProductName, Entities
+    | extend HostName = tostring(split(CompromisedEntity, ".")[0]), DomainIndex = to
+    int(indexof(CompromisedEntity, '.'))
+    | extend HostNameDomain = iff(DomainIndex != -1, substring(CompromisedEntity,
+    DomainIndex + 1), CompromisedEntity)
+    | project-away DomainIndex
+ 
+   suppressionDuration: 'PT5H' 
+   suppressionEnabled: null 
    tactics: 
     - 'Impact' 
    techniques: 
     - 'T1486' 
-   subTechniques: null 
    displayName: 'AV detections related to Dev-0530 actors' 
    enabled: true 
    description: >

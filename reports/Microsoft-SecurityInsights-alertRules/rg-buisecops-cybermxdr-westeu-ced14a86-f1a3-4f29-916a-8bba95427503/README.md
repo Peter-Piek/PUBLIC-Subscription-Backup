@@ -16,16 +16,8 @@
    queryPeriod: 'PT1H' 
    triggerOperator: 'GreaterThan' 
    triggerThreshold: null 
-   severity: 'Low' 
-   query: >
-    SecurityEvent
-    | where EventID == 4688
-    | where Process !~ "sdelete.exe"
-    | where CommandLine has_all ("accepteula", "-r", "-s", "-q", "c:/")
-    | where CommandLine !has ("sdelete")
- 
-   suppressionDuration: 'PT5H' 
-   suppressionEnabled: null 
+   eventGroupingSettings: 
+     aggregationKind: 'SingleAlert' 
    incidentConfiguration: 
      createIncident: true 
      groupingConfiguration: 
@@ -49,15 +41,22 @@
        - 
          identifier: 'FullName' 
          columnName: 'Computer' 
-   eventGroupingSettings: 
-     aggregationKind: 'SingleAlert' 
+   severity: 'Low' 
+   query: >
+    SecurityEvent
+    | where EventID == 4688
+    | where Process !~ "sdelete.exe"
+    | where CommandLine has_all ("accepteula", "-r", "-s", "-q", "c:/")
+    | where CommandLine !has ("sdelete")
+ 
+   suppressionDuration: 'PT5H' 
+   suppressionEnabled: null 
    tactics: 
     - 'DefenseEvasion' 
     - 'Impact' 
    techniques: 
     - 'T1485' 
     - 'T1036' 
-   subTechniques: null 
    displayName: 'Potential re-named sdelete usage' 
    enabled: true 
    description: >

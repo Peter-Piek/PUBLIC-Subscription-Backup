@@ -16,25 +16,8 @@
    queryPeriod: 'P1D' 
    triggerOperator: 'GreaterThan' 
    triggerThreshold: null 
-   severity: 'Medium' 
-   query: >
-    SecurityEvent
-    | where EventID == 4688
-    | where Process =~ "svchost.exe"
-    | where CommandLine has "-k GPSvcGroup" or CommandLine has "-s gpsvc"
-    | extend timekey = bin(TimeGenerated, 1m)
-    | project timekey, NewProcessId, Computer
-    | join kind=inner (SecurityEvent
-    | where EventID == 4688
-    | where Process =~ "sdelete.exe" or CommandLine has "sdelete"
-    | where ParentProcessName endswith "svchost.exe"
-    | where CommandLine has_all ("-s", "-r")
-    | extend newProcess = Process
-    | extend timekey = bin(TimeGenerated, 1m)
-    ) on $left.NewProcessId == $right.ProcessId, timekey, Computer
- 
-   suppressionDuration: 'PT5H' 
-   suppressionEnabled: null 
+   eventGroupingSettings: 
+     aggregationKind: 'SingleAlert' 
    incidentConfiguration: 
      createIncident: true 
      groupingConfiguration: 
@@ -58,13 +41,29 @@
        - 
          identifier: 'FullName' 
          columnName: 'Computer' 
-   eventGroupingSettings: 
-     aggregationKind: 'SingleAlert' 
+   severity: 'Medium' 
+   query: >
+    SecurityEvent
+    | where EventID == 4688
+    | where Process =~ "svchost.exe"
+    | where CommandLine has "-k GPSvcGroup" or CommandLine has "-s gpsvc"
+    | extend timekey = bin(TimeGenerated, 1m)
+    | project timekey, NewProcessId, Computer
+    | join kind=inner (SecurityEvent
+    | where EventID == 4688
+    | where Process =~ "sdelete.exe" or CommandLine has "sdelete"
+    | where ParentProcessName endswith "svchost.exe"
+    | where CommandLine has_all ("-s", "-r")
+    | extend newProcess = Process
+    | extend timekey = bin(TimeGenerated, 1m)
+    ) on $left.NewProcessId == $right.ProcessId, timekey, Computer
+ 
+   suppressionDuration: 'PT5H' 
+   suppressionEnabled: null 
    tactics: 
     - 'Impact' 
    techniques: 
     - 'T1485' 
-   subTechniques: null 
    displayName: 'Sdelete deployed via GPO and run recursively' 
    enabled: true 
    description: >

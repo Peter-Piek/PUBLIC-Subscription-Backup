@@ -8,10 +8,9 @@
     "queryPeriod": "PT2H",
     "triggerOperator": "GreaterThan",
     "triggerThreshold": 0,
-    "severity": "High",
-    "query": "Operation \r\n| where OperationCategory == 'Data Collection Status'\r\n| where Detail contains \"stopped\" or Detail contains \"OverQuota\"\r\n",
-    "suppressionDuration": "PT12H",
-    "suppressionEnabled": true,
+    "eventGroupingSettings": {
+      "aggregationKind": "SingleAlert"
+    },
     "incidentConfiguration": {
       "createIncident": true,
       "groupingConfiguration": {
@@ -24,12 +23,12 @@
         "groupByCustomDetails": []
       }
     },
-    "eventGroupingSettings": {
-      "aggregationKind": "SingleAlert"
-    },
+    "severity": "High",
+    "query": "Operation \r\n| where OperationCategory == 'Data Collection Status'\r\n| where Detail contains \"stopped\" or Detail contains \"OverQuota\"\r\n",
+    "suppressionDuration": "PT12H",
+    "suppressionEnabled": true,
     "tactics": [],
     "techniques": [],
-    "subTechniques": null,
     "displayName": "Daily Data Limit Reached [Custom]",
     "enabled": true,
     "description": "When data collection stops, the OperationStatus is Warning. When data collection starts, the OperationStatus is Succeeded. The following table describes reasons that data collection stops and a suggested action to resume data collection:\n\nDaily limit of legacy Free pricing tier reached\nWait until the following day for collection to automatically restart, or change to a paid pricing tier.\n\nDaily cap of your workspace was reached:\nWait for collection to automatically restart, or increase the daily data volume limit described in manage the maximum daily data volume. The daily cap reset time is shows on the Data volume management page.\n\nAzure subscription is in a suspended state due to:\nFree trial ended\nAzure pass expired\nMonthly spending limit reached (for example on an MSDN or Visual Studio subscription)\nConvert to a paid subscription\nRemove limit, or wait until limit resets.",

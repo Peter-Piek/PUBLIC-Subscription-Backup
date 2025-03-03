@@ -16,20 +16,8 @@
    queryPeriod: 'P1D' 
    triggerOperator: 'GreaterThan' 
    triggerThreshold: null 
-   severity: 'High' 
-   query: >
-    let SunburstMD5=dynamic(["b91ce2fa41029f6955bff20079468448","02af7cec58b9a5da1c5
-    42b5a32151ba1","2c4a910a1299cdae2a4e55988a2f102e","846e27a652a5e1bfbd0ddd38a16dc
-    865","4f2eb62fa529c0283b28d05ddd311fae"]);
-    let SupernovaMD5="56ceb6d0011d87b6e4d7023d7ef85676";
-    DeviceFileEvents
-    | where MD5 in(SunburstMD5) or MD5 in(SupernovaMD5)
-    | extend timestamp = TimeGenerated, Account = iff(isnotempty(InitiatingProcessAc
-    countUpn), InitiatingProcessAccountUpn, InitiatingProcessAccountName),AlgorithmE
-    ntity = "MD5" ,FileHashEntity = MD5
- 
-   suppressionDuration: 'PT5H' 
-   suppressionEnabled: null 
+   eventGroupingSettings: 
+     aggregationKind: 'SingleAlert' 
    incidentConfiguration: 
      createIncident: true 
      groupingConfiguration: 
@@ -62,8 +50,20 @@
        - 
          identifier: 'Value' 
          columnName: 'FileHashEntity' 
-   eventGroupingSettings: 
-     aggregationKind: 'SingleAlert' 
+   severity: 'High' 
+   query: >
+    let SunburstMD5=dynamic(["b91ce2fa41029f6955bff20079468448","02af7cec58b9a5da1c5
+    42b5a32151ba1","2c4a910a1299cdae2a4e55988a2f102e","846e27a652a5e1bfbd0ddd38a16dc
+    865","4f2eb62fa529c0283b28d05ddd311fae"]);
+    let SupernovaMD5="56ceb6d0011d87b6e4d7023d7ef85676";
+    DeviceFileEvents
+    | where MD5 in(SunburstMD5) or MD5 in(SupernovaMD5)
+    | extend timestamp = TimeGenerated, Account = iff(isnotempty(InitiatingProcessAc
+    countUpn), InitiatingProcessAccountUpn, InitiatingProcessAccountName),AlgorithmE
+    ntity = "MD5" ,FileHashEntity = MD5
+ 
+   suppressionDuration: 'PT5H' 
+   suppressionEnabled: null 
    tactics: 
     - 'Execution' 
     - 'Persistence' 
@@ -72,7 +72,6 @@
     - 'T1195' 
     - 'T1059' 
     - 'T1546' 
-   subTechniques: null 
    displayName: 'SUNBURST and SUPERNOVA backdoor hashes' 
    enabled: true 
    description: >

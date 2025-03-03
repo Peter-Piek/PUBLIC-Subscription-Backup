@@ -16,6 +16,28 @@
    queryPeriod: 'PT1H' 
    triggerOperator: 'GreaterThan' 
    triggerThreshold: null 
+   eventGroupingSettings: 
+     aggregationKind: 'SingleAlert' 
+   incidentConfiguration: 
+     createIncident: true 
+     groupingConfiguration: 
+       enabled: null 
+       reopenClosedIncident: null 
+       lookbackDuration: 'PT5M' 
+       matchingMethod: 'AllEntities' 
+       groupByEntities: null 
+       groupByAlertDetails: null 
+       groupByCustomDetails: null 
+   entityMappings: 
+    - 
+      entityType: 'Account' 
+      fieldMappings: 
+       - 
+         identifier: 'Name' 
+         columnName: 'AccountName' 
+       - 
+         identifier: 'UPNSuffix' 
+         columnName: 'AccountUPNSuffix' 
    severity: 'Low' 
    query: >
     let TeamsAddDel = (Op:string){
@@ -43,33 +65,10 @@
  
    suppressionDuration: 'PT5H' 
    suppressionEnabled: null 
-   incidentConfiguration: 
-     createIncident: true 
-     groupingConfiguration: 
-       enabled: null 
-       reopenClosedIncident: null 
-       lookbackDuration: 'PT5M' 
-       matchingMethod: 'AllEntities' 
-       groupByEntities: null 
-       groupByAlertDetails: null 
-       groupByCustomDetails: null 
-   entityMappings: 
-    - 
-      entityType: 'Account' 
-      fieldMappings: 
-       - 
-         identifier: 'Name' 
-         columnName: 'AccountName' 
-       - 
-         identifier: 'UPNSuffix' 
-         columnName: 'AccountUPNSuffix' 
-   eventGroupingSettings: 
-     aggregationKind: 'SingleAlert' 
    tactics: 
     - 'Persistence' 
    techniques: 
     - 'T1136' 
-   subTechniques: null 
    displayName: 'External user added and removed in short timeframe' 
    enabled: true 
    description: >

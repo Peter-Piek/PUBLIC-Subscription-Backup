@@ -16,22 +16,8 @@
    queryPeriod: 'P1D' 
    triggerOperator: 'GreaterThan' 
    triggerThreshold: null 
-   severity: 'High' 
-   query: >
-    let UA_threats = dynamic(["FoxBlade", "WhisperGate", "Lasainraw", "SonicVote",
-    "CaddyWiper", "AprilAxe", "FiberLake", "Industroyer", "DesertBlade"]);
-    SecurityAlert
-    | where ProviderName =~ "MDATP"
-    | extend ThreatFamilyName = tostring(parse_json(ExtendedProperties).ThreatFami
-    lyName)
-    | where ThreatFamilyName in~ (UA_threats)
-    | extend HostName = iff(CompromisedEntity has '.', substring(CompromisedEntity
-    ,0,indexof(CompromisedEntity,'.')),CompromisedEntity)
-    | extend DnsDomain = iff(CompromisedEntity has '.', substring(CompromisedEntit
-    y,indexof(CompromisedEntity,'.')+1),"")
- 
-   suppressionDuration: 'PT5H' 
-   suppressionEnabled: null 
+   eventGroupingSettings: 
+     aggregationKind: 'SingleAlert' 
    incidentConfiguration: 
      createIncident: true 
      groupingConfiguration: 
@@ -52,13 +38,26 @@
        - 
          identifier: 'DnsDomain' 
          columnName: 'DnsDomain' 
-   eventGroupingSettings: 
-     aggregationKind: 'SingleAlert' 
+   severity: 'High' 
+   query: >
+    let UA_threats = dynamic(["FoxBlade", "WhisperGate", "Lasainraw", "SonicVote",
+    "CaddyWiper", "AprilAxe", "FiberLake", "Industroyer", "DesertBlade"]);
+    SecurityAlert
+    | where ProviderName =~ "MDATP"
+    | extend ThreatFamilyName = tostring(parse_json(ExtendedProperties).ThreatFami
+    lyName)
+    | where ThreatFamilyName in~ (UA_threats)
+    | extend HostName = iff(CompromisedEntity has '.', substring(CompromisedEntity
+    ,0,indexof(CompromisedEntity,'.')),CompromisedEntity)
+    | extend DnsDomain = iff(CompromisedEntity has '.', substring(CompromisedEntit
+    y,indexof(CompromisedEntity,'.')+1),"")
+ 
+   suppressionDuration: 'PT5H' 
+   suppressionEnabled: null 
    tactics: 
     - 'Impact' 
    techniques: 
     - 'T1485' 
-   subTechniques: null 
    displayName: 'AV detections related to Ukraine threats' 
    enabled: true 
    description: >

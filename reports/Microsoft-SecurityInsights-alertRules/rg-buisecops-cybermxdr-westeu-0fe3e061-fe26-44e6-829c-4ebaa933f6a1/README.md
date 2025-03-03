@@ -16,24 +16,8 @@
    queryPeriod: 'P1D' 
    triggerOperator: 'GreaterThan' 
    triggerThreshold: null 
-   severity: 'High' 
-   query: >
-    AuditLogs
-    | where Category =~ "RoleManagement"
-    | where OperationName =~ "Update role setting in PIM"
-    | extend InitiatingUserPrincipalName = tostring(InitiatedBy.user.userPrincipal
-    Name)
-    | extend InitiatingAadUserId = tostring(InitiatedBy.user.id)
-    | extend InitiatingIPAddress = tostring(InitiatedBy.user.ipAddress)
-    | extend InitiatingAccountName = tostring(split(InitiatingUserPrincipalName,
-    "@")[0]), InitiatingAccountUPNSuffix = tostring(split(InitiatingUserPrincipalNa
-    me, "@")[1])
-    | project-reorder TimeGenerated, OperationName, ResultReason, InitiatingUserPrincipalName,
-    InitiatingAadUserId, InitiatingIPAddress, InitiatingAccountName, InitiatingAcco
-    untUPNSuffix
- 
-   suppressionDuration: 'PT5H' 
-   suppressionEnabled: null 
+   eventGroupingSettings: 
+     aggregationKind: 'SingleAlert' 
    incidentConfiguration: 
      createIncident: true 
      groupingConfiguration: 
@@ -69,13 +53,28 @@
        - 
          identifier: 'Address' 
          columnName: 'InitiatingIPAddress' 
-   eventGroupingSettings: 
-     aggregationKind: 'SingleAlert' 
+   severity: 'High' 
+   query: >
+    AuditLogs
+    | where Category =~ "RoleManagement"
+    | where OperationName =~ "Update role setting in PIM"
+    | extend InitiatingUserPrincipalName = tostring(InitiatedBy.user.userPrincipal
+    Name)
+    | extend InitiatingAadUserId = tostring(InitiatedBy.user.id)
+    | extend InitiatingIPAddress = tostring(InitiatedBy.user.ipAddress)
+    | extend InitiatingAccountName = tostring(split(InitiatingUserPrincipalName,
+    "@")[0]), InitiatingAccountUPNSuffix = tostring(split(InitiatingUserPrincipalNa
+    me, "@")[1])
+    | project-reorder TimeGenerated, OperationName, ResultReason, InitiatingUserPrincipalName,
+    InitiatingAadUserId, InitiatingIPAddress, InitiatingAccountName, InitiatingAcco
+    untUPNSuffix
+ 
+   suppressionDuration: 'PT5H' 
+   suppressionEnabled: null 
    tactics: 
     - 'PrivilegeEscalation' 
    techniques: 
     - 'T1078' 
-   subTechniques: null 
    displayName: 'Changes to PIM Settings' 
    enabled: true 
    description: >

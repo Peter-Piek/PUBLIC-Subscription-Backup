@@ -16,6 +16,37 @@
    queryPeriod: 'PT2H' 
    triggerOperator: 'GreaterThan' 
    triggerThreshold: null 
+   eventGroupingSettings: 
+     aggregationKind: 'SingleAlert' 
+   incidentConfiguration: 
+     createIncident: true 
+     groupingConfiguration: 
+       enabled: null 
+       reopenClosedIncident: null 
+       lookbackDuration: 'PT5M' 
+       matchingMethod: 'AllEntities' 
+       groupByEntities: null 
+       groupByAlertDetails: null 
+       groupByCustomDetails: null 
+   entityMappings: 
+    - 
+      entityType: 'Account' 
+      fieldMappings: 
+       - 
+         identifier: 'Name' 
+         columnName: 'TargetName' 
+       - 
+         identifier: 'UPNSuffix' 
+         columnName: 'TargetUPNSuffix' 
+    - 
+      entityType: 'Account' 
+      fieldMappings: 
+       - 
+         identifier: 'Name' 
+         columnName: 'InitiatedByUserName' 
+       - 
+         identifier: 'UPNSuffix' 
+         columnName: 'InitiatedByUserUPNSuffix' 
    severity: 'High' 
    query: >
     let AdminRecords = AuditLogs
@@ -50,42 +81,10 @@
  
    suppressionDuration: 'PT5H' 
    suppressionEnabled: null 
-   incidentConfiguration: 
-     createIncident: true 
-     groupingConfiguration: 
-       enabled: null 
-       reopenClosedIncident: null 
-       lookbackDuration: 'PT5M' 
-       matchingMethod: 'AllEntities' 
-       groupByEntities: null 
-       groupByAlertDetails: null 
-       groupByCustomDetails: null 
-   entityMappings: 
-    - 
-      entityType: 'Account' 
-      fieldMappings: 
-       - 
-         identifier: 'Name' 
-         columnName: 'TargetName' 
-       - 
-         identifier: 'UPNSuffix' 
-         columnName: 'TargetUPNSuffix' 
-    - 
-      entityType: 'Account' 
-      fieldMappings: 
-       - 
-         identifier: 'Name' 
-         columnName: 'InitiatedByUserName' 
-       - 
-         identifier: 'UPNSuffix' 
-         columnName: 'InitiatedByUserUPNSuffix' 
-   eventGroupingSettings: 
-     aggregationKind: 'SingleAlert' 
    tactics: 
     - 'PrivilegeEscalation' 
    techniques: 
     - 'T1078' 
-   subTechniques: null 
    displayName: 'Bulk Changes to Privileged Account Permissions' 
    enabled: true 
    description: >

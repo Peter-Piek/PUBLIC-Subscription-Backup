@@ -16,6 +16,40 @@
    queryPeriod: 'P14D' 
    triggerOperator: 'GreaterThan' 
    triggerThreshold: null 
+   eventGroupingSettings: 
+     aggregationKind: 'SingleAlert' 
+   incidentConfiguration: 
+     createIncident: true 
+     groupingConfiguration: 
+       enabled: null 
+       reopenClosedIncident: null 
+       lookbackDuration: 'PT5M' 
+       matchingMethod: 'AllEntities' 
+       groupByEntities: null 
+       groupByAlertDetails: null 
+       groupByCustomDetails: null 
+   entityMappings: 
+    - 
+      entityType: 'Account' 
+      fieldMappings: 
+       - 
+         identifier: 'Name' 
+         columnName: 'Name' 
+       - 
+         identifier: 'UPNSuffix' 
+         columnName: 'UPNSuffix' 
+    - 
+      entityType: 'IP' 
+      fieldMappings: 
+       - 
+         identifier: 'Address' 
+         columnName: 'GrantIpAddress' 
+    - 
+      entityType: 'CloudApplication' 
+      fieldMappings: 
+       - 
+         identifier: 'Name' 
+         columnName: 'AppDisplayName' 
    severity: 'High' 
    query: >
     let detectionTime = 1d;
@@ -112,47 +146,12 @@
  
    suppressionDuration: 'PT5H' 
    suppressionEnabled: null 
-   incidentConfiguration: 
-     createIncident: true 
-     groupingConfiguration: 
-       enabled: null 
-       reopenClosedIncident: null 
-       lookbackDuration: 'PT5M' 
-       matchingMethod: 'AllEntities' 
-       groupByEntities: null 
-       groupByAlertDetails: null 
-       groupByCustomDetails: null 
-   entityMappings: 
-    - 
-      entityType: 'Account' 
-      fieldMappings: 
-       - 
-         identifier: 'Name' 
-         columnName: 'Name' 
-       - 
-         identifier: 'UPNSuffix' 
-         columnName: 'UPNSuffix' 
-    - 
-      entityType: 'IP' 
-      fieldMappings: 
-       - 
-         identifier: 'Address' 
-         columnName: 'GrantIpAddress' 
-    - 
-      entityType: 'CloudApplication' 
-      fieldMappings: 
-       - 
-         identifier: 'Name' 
-         columnName: 'AppDisplayName' 
-   eventGroupingSettings: 
-     aggregationKind: 'SingleAlert' 
    tactics: 
     - 'CredentialAccess' 
     - 'DefenseEvasion' 
    techniques: 
     - 'T1528' 
     - 'T1550' 
-   subTechniques: null 
    displayName: 'Suspicious application consent similar to O365 Attack Toolkit' 
    enabled: true 
    description: >

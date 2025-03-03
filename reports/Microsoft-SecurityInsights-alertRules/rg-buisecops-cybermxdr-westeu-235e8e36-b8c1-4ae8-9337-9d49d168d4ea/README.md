@@ -16,6 +16,40 @@
    queryPeriod: 'P14D' 
    triggerOperator: 'GreaterThan' 
    triggerThreshold: null 
+   eventGroupingSettings: 
+     aggregationKind: 'SingleAlert' 
+   incidentConfiguration: 
+     createIncident: true 
+     groupingConfiguration: 
+       enabled: null 
+       reopenClosedIncident: null 
+       lookbackDuration: 'PT5M' 
+       matchingMethod: 'AllEntities' 
+       groupByEntities: null 
+       groupByAlertDetails: null 
+       groupByCustomDetails: null 
+   entityMappings: 
+    - 
+      entityType: 'Host' 
+      fieldMappings: 
+       - 
+         identifier: 'HostName' 
+         columnName: 'HostName' 
+       - 
+         identifier: 'DnsDomain' 
+         columnName: 'DnsDomain' 
+    - 
+      entityType: 'IP' 
+      fieldMappings: 
+       - 
+         identifier: 'Address' 
+         columnName: 'ClientIP' 
+    - 
+      entityType: 'URL' 
+      fieldMappings: 
+       - 
+         identifier: 'Url' 
+         columnName: 'Url' 
    severity: 'Medium' 
    query: >
     // Define the lookback periods for time-based filters
@@ -73,44 +107,9 @@
  
    suppressionDuration: 'PT5H' 
    suppressionEnabled: null 
-   incidentConfiguration: 
-     createIncident: true 
-     groupingConfiguration: 
-       enabled: null 
-       reopenClosedIncident: null 
-       lookbackDuration: 'PT5M' 
-       matchingMethod: 'AllEntities' 
-       groupByEntities: null 
-       groupByAlertDetails: null 
-       groupByCustomDetails: null 
-   entityMappings: 
-    - 
-      entityType: 'Host' 
-      fieldMappings: 
-       - 
-         identifier: 'HostName' 
-         columnName: 'HostName' 
-       - 
-         identifier: 'DnsDomain' 
-         columnName: 'DnsDomain' 
-    - 
-      entityType: 'IP' 
-      fieldMappings: 
-       - 
-         identifier: 'Address' 
-         columnName: 'ClientIP' 
-    - 
-      entityType: 'URL' 
-      fieldMappings: 
-       - 
-         identifier: 'Url' 
-         columnName: 'Url' 
-   eventGroupingSettings: 
-     aggregationKind: 'SingleAlert' 
    tactics: 
     - 'Impact' 
    techniques: null 
-   subTechniques: null 
    displayName: 'TI map Domain entity to DnsEvents' 
    enabled: true 
    description: 'Identifies a match in DnsEvents from any Domain IOC from TI' 

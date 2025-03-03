@@ -16,6 +16,37 @@
    queryPeriod: 'PT1H' 
    triggerOperator: 'GreaterThan' 
    triggerThreshold: null 
+   eventGroupingSettings: 
+     aggregationKind: 'SingleAlert' 
+   incidentConfiguration: 
+     createIncident: true 
+     groupingConfiguration: 
+       enabled: null 
+       reopenClosedIncident: null 
+       lookbackDuration: 'PT5M' 
+       matchingMethod: 'AllEntities' 
+       groupByEntities: null 
+       groupByAlertDetails: null 
+       groupByCustomDetails: null 
+   entityMappings: 
+    - 
+      entityType: 'Account' 
+      fieldMappings: 
+       - 
+         identifier: 'Name' 
+         columnName: 'TargetName' 
+       - 
+         identifier: 'UPNSuffix' 
+         columnName: 'TargetUPNSuffix' 
+    - 
+      entityType: 'Account' 
+      fieldMappings: 
+       - 
+         identifier: 'Name' 
+         columnName: 'InitiatorName' 
+       - 
+         identifier: 'UPNSuffix' 
+         columnName: 'InitiatorUPNSuffix' 
    severity: 'High' 
    query: >
     // Define the start and end times based on input values
@@ -71,42 +102,10 @@
  
    suppressionDuration: 'PT5H' 
    suppressionEnabled: null 
-   incidentConfiguration: 
-     createIncident: true 
-     groupingConfiguration: 
-       enabled: null 
-       reopenClosedIncident: null 
-       lookbackDuration: 'PT5M' 
-       matchingMethod: 'AllEntities' 
-       groupByEntities: null 
-       groupByAlertDetails: null 
-       groupByCustomDetails: null 
-   entityMappings: 
-    - 
-      entityType: 'Account' 
-      fieldMappings: 
-       - 
-         identifier: 'Name' 
-         columnName: 'TargetName' 
-       - 
-         identifier: 'UPNSuffix' 
-         columnName: 'TargetUPNSuffix' 
-    - 
-      entityType: 'Account' 
-      fieldMappings: 
-       - 
-         identifier: 'Name' 
-         columnName: 'InitiatorName' 
-       - 
-         identifier: 'UPNSuffix' 
-         columnName: 'InitiatorUPNSuffix' 
-   eventGroupingSettings: 
-     aggregationKind: 'SingleAlert' 
    tactics: 
     - 'Persistence' 
    techniques: 
     - 'T1078' 
-   subTechniques: null 
    displayName: 'New User Assigned to Privileged Role' 
    enabled: true 
    description: >

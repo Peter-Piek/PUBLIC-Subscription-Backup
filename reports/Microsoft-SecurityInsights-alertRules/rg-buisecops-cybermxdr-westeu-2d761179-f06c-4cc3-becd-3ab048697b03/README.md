@@ -16,6 +16,31 @@
    queryPeriod: 'P7D' 
    triggerOperator: 'GreaterThan' 
    triggerThreshold: null 
+   eventGroupingSettings: 
+     aggregationKind: 'SingleAlert' 
+   incidentConfiguration: 
+     createIncident: true 
+     groupingConfiguration: 
+       enabled: null 
+       reopenClosedIncident: null 
+       lookbackDuration: 'PT5M' 
+       matchingMethod: 'AllEntities' 
+       groupByEntities: null 
+       groupByAlertDetails: null 
+       groupByCustomDetails: null 
+   entityMappings: 
+    - 
+      entityType: 'Account' 
+      fieldMappings: 
+       - 
+         identifier: 'FullName' 
+         columnName: 'AccountCustomEntity' 
+    - 
+      entityType: 'Host' 
+      fieldMappings: 
+       - 
+         identifier: 'FullName' 
+         columnName: 'HostCustomEntity' 
    severity: 'Medium' 
    query: >
     let timeframe = 1d;
@@ -60,36 +85,10 @@
  
    suppressionDuration: 'PT5H' 
    suppressionEnabled: null 
-   incidentConfiguration: 
-     createIncident: true 
-     groupingConfiguration: 
-       enabled: null 
-       reopenClosedIncident: null 
-       lookbackDuration: 'PT5M' 
-       matchingMethod: 'AllEntities' 
-       groupByEntities: null 
-       groupByAlertDetails: null 
-       groupByCustomDetails: null 
-   entityMappings: 
-    - 
-      entityType: 'Account' 
-      fieldMappings: 
-       - 
-         identifier: 'FullName' 
-         columnName: 'AccountCustomEntity' 
-    - 
-      entityType: 'Host' 
-      fieldMappings: 
-       - 
-         identifier: 'FullName' 
-         columnName: 'HostCustomEntity' 
-   eventGroupingSettings: 
-     aggregationKind: 'SingleAlert' 
    tactics: 
     - 'LateralMovement' 
    techniques: 
     - 'T1210' 
-   subTechniques: null 
    displayName: 'Gain Code Execution on ADFS Server via SMB + Remote Service or Scheduled Task' 
    enabled: true 
    description: >

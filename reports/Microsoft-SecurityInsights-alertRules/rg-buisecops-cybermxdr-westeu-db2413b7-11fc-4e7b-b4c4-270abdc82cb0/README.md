@@ -16,6 +16,31 @@
    queryPeriod: 'PT1H' 
    triggerOperator: 'GreaterThan' 
    triggerThreshold: null 
+   eventGroupingSettings: 
+     aggregationKind: 'SingleAlert' 
+   incidentConfiguration: 
+     createIncident: true 
+     groupingConfiguration: 
+       enabled: null 
+       reopenClosedIncident: null 
+       lookbackDuration: 'PT5M' 
+       matchingMethod: 'AllEntities' 
+       groupByEntities: null 
+       groupByAlertDetails: null 
+       groupByCustomDetails: null 
+   entityMappings: 
+    - 
+      entityType: 'Account' 
+      fieldMappings: 
+       - 
+         identifier: 'FullName' 
+         columnName: 'AccountCustomEntity' 
+    - 
+      entityType: 'Host' 
+      fieldMappings: 
+       - 
+         identifier: 'FullName' 
+         columnName: 'HostCustomEntity' 
    severity: 'High' 
    query: >
     SecurityEvent
@@ -48,36 +73,10 @@
  
    suppressionDuration: 'PT5H' 
    suppressionEnabled: null 
-   incidentConfiguration: 
-     createIncident: true 
-     groupingConfiguration: 
-       enabled: null 
-       reopenClosedIncident: null 
-       lookbackDuration: 'PT5M' 
-       matchingMethod: 'AllEntities' 
-       groupByEntities: null 
-       groupByAlertDetails: null 
-       groupByCustomDetails: null 
-   entityMappings: 
-    - 
-      entityType: 'Account' 
-      fieldMappings: 
-       - 
-         identifier: 'FullName' 
-         columnName: 'AccountCustomEntity' 
-    - 
-      entityType: 'Host' 
-      fieldMappings: 
-       - 
-         identifier: 'FullName' 
-         columnName: 'HostCustomEntity' 
-   eventGroupingSettings: 
-     aggregationKind: 'SingleAlert' 
    tactics: 
     - 'InitialAccess' 
    techniques: 
     - 'T1190' 
-   subTechniques: null 
    displayName: 'Exchange OAB Virtual Directory Attribute Containing Potential Webshell' 
    enabled: true 
    description: >

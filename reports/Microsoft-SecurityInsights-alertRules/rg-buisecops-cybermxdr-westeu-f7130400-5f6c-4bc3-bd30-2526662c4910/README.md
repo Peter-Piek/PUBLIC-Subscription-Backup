@@ -16,31 +16,8 @@
    queryPeriod: 'P1D' 
    triggerOperator: 'GreaterThan' 
    triggerThreshold: null 
-   severity: 'Medium' 
-   query: >
-    OfficeActivity
-    | where OfficeWorkload == "Exchange"
-    | where Operation in~ ("New-TransportRule", "Set-TransportRule")
-    | mv-apply DynamicParameters = todynamic(Parameters) on (summarize ParsedParameters
-    = make_bag(pack(tostring(DynamicParameters.Name), DynamicParameters.Value)))
-    | extend RuleName = case(
-    Operation =~ "Set-TransportRule", OfficeObjectId,
-    Operation =~ "New-TransportRule", ParsedParameters.Name,
-    "Unknown")
-    | mv-expand ExpandedParameters = todynamic(Parameters)
-    | where ExpandedParameters.Name in~ ("BlindCopyTo", "RedirectMessageTo") and isn
-    otempty(ExpandedParameters.Value)
-    | extend RedirectTo = ExpandedParameters.Value
-    | extend ClientIPValues = extract_all(@'\[?(::ffff:)?(?P<IPAddress>(\d+\.\d+\.\d
-    +\.\d+)|[^\]]+)\]?([-:](?P<Port>\d+))?', dynamic(["IPAddress", "Port"]), ClientI
-    P)[0]
-    | project TimeGenerated, RedirectTo, IPAddress = tostring(ClientIPValues[0]), Port
-    = tostring(ClientIPValues[1]), UserId, Operation, RuleName, Parameters
-    | extend AccountName = tostring(split(UserId, "@")[0]), AccountUPNSuffix =
-    tostring(split(UserId, "@")[1])
- 
-   suppressionDuration: 'PT5H' 
-   suppressionEnabled: null 
+   eventGroupingSettings: 
+     aggregationKind: 'SingleAlert' 
    incidentConfiguration: 
      createIncident: true 
      groupingConfiguration: 
@@ -67,15 +44,37 @@
        - 
          identifier: 'Address' 
          columnName: 'IPAddress' 
-   eventGroupingSettings: 
-     aggregationKind: 'SingleAlert' 
+   severity: 'Medium' 
+   query: >
+    OfficeActivity
+    | where OfficeWorkload == "Exchange"
+    | where Operation in~ ("New-TransportRule", "Set-TransportRule")
+    | mv-apply DynamicParameters = todynamic(Parameters) on (summarize ParsedParameters
+    = make_bag(pack(tostring(DynamicParameters.Name), DynamicParameters.Value)))
+    | extend RuleName = case(
+    Operation =~ "Set-TransportRule", OfficeObjectId,
+    Operation =~ "New-TransportRule", ParsedParameters.Name,
+    "Unknown")
+    | mv-expand ExpandedParameters = todynamic(Parameters)
+    | where ExpandedParameters.Name in~ ("BlindCopyTo", "RedirectMessageTo") and isn
+    otempty(ExpandedParameters.Value)
+    | extend RedirectTo = ExpandedParameters.Value
+    | extend ClientIPValues = extract_all(@'\[?(::ffff:)?(?P<IPAddress>(\d+\.\d+\.\d
+    +\.\d+)|[^\]]+)\]?([-:](?P<Port>\d+))?', dynamic(["IPAddress", "Port"]), ClientI
+    P)[0]
+    | project TimeGenerated, RedirectTo, IPAddress = tostring(ClientIPValues[0]), Port
+    = tostring(ClientIPValues[1]), UserId, Operation, RuleName, Parameters
+    | extend AccountName = tostring(split(UserId, "@")[0]), AccountUPNSuffix =
+    tostring(split(UserId, "@")[1])
+ 
+   suppressionDuration: 'PT5H' 
+   suppressionEnabled: null 
    tactics: 
     - 'Collection' 
     - 'Exfiltration' 
    techniques: 
     - 'T1114' 
     - 'T1020' 
-   subTechniques: null 
    displayName: 'Mail redirect via ExO transport rule' 
    enabled: true 
    description: >

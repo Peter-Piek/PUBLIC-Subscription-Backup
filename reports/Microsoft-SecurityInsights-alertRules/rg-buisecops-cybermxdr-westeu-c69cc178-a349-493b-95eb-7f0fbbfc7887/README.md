@@ -16,15 +16,8 @@
    queryPeriod: 'PT1H' 
    triggerOperator: 'GreaterThan' 
    triggerThreshold: null 
-   severity: 'High' 
-   query: >
-    Usage
-    | where IsBillable
-    | summarize DataGB = sum(Quantity /1000.)
-    | where DataGB > 8.
- 
-   suppressionDuration: 'PT12H' 
-   suppressionEnabled: true 
+   eventGroupingSettings: 
+     aggregationKind: 'SingleAlert' 
    incidentConfiguration: 
      createIncident: true 
      groupingConfiguration: 
@@ -35,11 +28,17 @@
        groupByEntities: null 
        groupByAlertDetails: null 
        groupByCustomDetails: null 
-   eventGroupingSettings: 
-     aggregationKind: 'SingleAlert' 
+   severity: 'High' 
+   query: >
+    Usage
+    | where IsBillable
+    | summarize DataGB = sum(Quantity /1000.)
+    | where DataGB > 8.
+ 
+   suppressionDuration: 'PT12H' 
+   suppressionEnabled: true 
    tactics: null 
    techniques: null 
-   subTechniques: null 
    displayName: 'Daily Data Limit At 80% [Custom]' 
    enabled: true 
    description: >

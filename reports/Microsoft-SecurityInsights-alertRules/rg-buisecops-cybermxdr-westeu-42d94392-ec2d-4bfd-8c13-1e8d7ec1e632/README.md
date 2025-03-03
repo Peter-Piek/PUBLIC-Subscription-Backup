@@ -16,21 +16,8 @@
    queryPeriod: 'P1D' 
    triggerOperator: 'GreaterThan' 
    triggerThreshold: null 
-   severity: 'Medium' 
-   query: >
-    let SunburstURL=dynamic(["panhardware.com","databasegalore.com","avsvmcloud.com"
-    ,"freescanonline.com","thedoccloud.com","deftsecurity.com"]);
-    DeviceNetworkEvents
-    | where ActionType == "ConnectionSuccess"
-    | where RemoteUrl in(SunburstURL)
-    | extend timestamp = TimeGenerated,AccountEntity = iff(isnotempty(InitiatingProc
-    essAccountUpn), InitiatingProcessAccountUpn, InitiatingProcessAccountName),HashA
-    lgorithm = 'MD5'
-    | extend HostName = tostring(split(DeviceName, '.', 0)[0]), DnsDomain = tostring
-    (strcat_array(array_slice(split(DeviceName, '.'), 1, -1), '.'))
- 
-   suppressionDuration: 'PT5H' 
-   suppressionEnabled: null 
+   eventGroupingSettings: 
+     aggregationKind: 'SingleAlert' 
    incidentConfiguration: 
      createIncident: true 
      groupingConfiguration: 
@@ -78,8 +65,21 @@
        - 
          identifier: 'Value' 
          columnName: 'InitiatingProcessMD5' 
-   eventGroupingSettings: 
-     aggregationKind: 'SingleAlert' 
+   severity: 'Medium' 
+   query: >
+    let SunburstURL=dynamic(["panhardware.com","databasegalore.com","avsvmcloud.com"
+    ,"freescanonline.com","thedoccloud.com","deftsecurity.com"]);
+    DeviceNetworkEvents
+    | where ActionType == "ConnectionSuccess"
+    | where RemoteUrl in(SunburstURL)
+    | extend timestamp = TimeGenerated,AccountEntity = iff(isnotempty(InitiatingProc
+    essAccountUpn), InitiatingProcessAccountUpn, InitiatingProcessAccountName),HashA
+    lgorithm = 'MD5'
+    | extend HostName = tostring(split(DeviceName, '.', 0)[0]), DnsDomain = tostring
+    (strcat_array(array_slice(split(DeviceName, '.'), 1, -1), '.'))
+ 
+   suppressionDuration: 'PT5H' 
+   suppressionEnabled: null 
    tactics: 
     - 'Execution' 
     - 'Persistence' 
@@ -88,7 +88,6 @@
     - 'T1195' 
     - 'T1059' 
     - 'T1546' 
-   subTechniques: null 
    displayName: 'SUNBURST network beacons' 
    enabled: true 
    description: >

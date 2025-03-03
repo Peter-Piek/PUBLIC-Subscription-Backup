@@ -8,10 +8,9 @@
     "queryPeriod": "P1D",
     "triggerOperator": "GreaterThan",
     "triggerThreshold": 0,
-    "severity": "High",
-    "query": "AuditLogs\n  | where Category =~ \"RoleManagement\"\n  | where OperationName =~ \"Update role setting in PIM\"\n  | extend InitiatingUserPrincipalName = tostring(InitiatedBy.user.userPrincipalName)\n  | extend InitiatingAadUserId = tostring(InitiatedBy.user.id)\n  | extend InitiatingIPAddress = tostring(InitiatedBy.user.ipAddress)\n  | extend InitiatingAccountName = tostring(split(InitiatingUserPrincipalName, \"@\")[0]), InitiatingAccountUPNSuffix = tostring(split(InitiatingUserPrincipalName, \"@\")[1])\n  | project-reorder TimeGenerated, OperationName, ResultReason, InitiatingUserPrincipalName, InitiatingAadUserId, InitiatingIPAddress, InitiatingAccountName, InitiatingAccountUPNSuffix",
-    "suppressionDuration": "PT5H",
-    "suppressionEnabled": false,
+    "eventGroupingSettings": {
+      "aggregationKind": "SingleAlert"
+    },
     "incidentConfiguration": {
       "createIncident": true,
       "groupingConfiguration": {
@@ -61,16 +60,16 @@
         ]
       }
     ],
-    "eventGroupingSettings": {
-      "aggregationKind": "SingleAlert"
-    },
+    "severity": "High",
+    "query": "AuditLogs\n  | where Category =~ \"RoleManagement\"\n  | where OperationName =~ \"Update role setting in PIM\"\n  | extend InitiatingUserPrincipalName = tostring(InitiatedBy.user.userPrincipalName)\n  | extend InitiatingAadUserId = tostring(InitiatedBy.user.id)\n  | extend InitiatingIPAddress = tostring(InitiatedBy.user.ipAddress)\n  | extend InitiatingAccountName = tostring(split(InitiatingUserPrincipalName, \"@\")[0]), InitiatingAccountUPNSuffix = tostring(split(InitiatingUserPrincipalName, \"@\")[1])\n  | project-reorder TimeGenerated, OperationName, ResultReason, InitiatingUserPrincipalName, InitiatingAadUserId, InitiatingIPAddress, InitiatingAccountName, InitiatingAccountUPNSuffix",
+    "suppressionDuration": "PT5H",
+    "suppressionEnabled": false,
     "tactics": [
       "PrivilegeEscalation"
     ],
     "techniques": [
       "T1078"
     ],
-    "subTechniques": null,
     "displayName": "Changes to PIM Settings",
     "enabled": true,
     "description": "PIM provides a key mechanism for assigning privileges to accounts, this query detects changes to PIM role settings.\n  Monitor these changes to ensure they are being made legitimately and don't confer more privileges than expected or reduce the security of a PIM elevation.\n  Ref: https://docs.microsoft.com/azure/active-directory/fundamentals/security-operations-privileged-accounts#changes-to-privileged-accounts",

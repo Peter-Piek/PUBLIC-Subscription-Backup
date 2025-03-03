@@ -16,31 +16,8 @@
    queryPeriod: 'P1D' 
    triggerOperator: 'GreaterThan' 
    triggerThreshold: null 
-   severity: 'High' 
-   query: >
-    let SpringShell_threats = dynamic(["Trojan:Python/SpringShellExpl",
-    "Exploit:Python/SpringShell", "Backdoor:PHP/Remoteshell.V", "SpringShell"]);
-    DeviceInfo
-    | extend DeviceName = tolower(DeviceName)
-    | join kind=inner ( SecurityAlert
-    | where ProviderName =~ "MDATP"
-    | extend ThreatName = tostring(parse_json(ExtendedProperties).ThreatName)
-    | extend ThreatFamilyName = tostring(parse_json(ExtendedProperties).ThreatFamily
-    Name)
-    | where ThreatName in~ (SpringShell_threats) or ThreatFamilyName in~ (SpringShel
-    l_threats)
-    | extend CompromisedEntity = tolower(CompromisedEntity)
-    ) on $left.DeviceName == $right.CompromisedEntity
-    | summarize by DisplayName, ThreatName, ThreatFamilyName, PublicIP, AlertSeverity,
-    Description, tostring(LoggedOnUsers), DeviceId, TenantId , bin(TimeGenerated,
-    1d), CompromisedEntity, tostring(LoggedOnUsers), ProductName, Entities
-    | extend HostName = iff(CompromisedEntity has '.', substring(CompromisedEntity,0
-    ,indexof(CompromisedEntity,'.')),CompromisedEntity)
-    | extend DnsDomain = iff(CompromisedEntity has '.', substring(CompromisedEntity,
-    indexof(CompromisedEntity,'.')+1),"")
- 
-   suppressionDuration: 'PT5H' 
-   suppressionEnabled: null 
+   eventGroupingSettings: 
+     aggregationKind: 'SingleAlert' 
    incidentConfiguration: 
      createIncident: true 
      groupingConfiguration: 
@@ -67,13 +44,35 @@
        - 
          identifier: 'Address' 
          columnName: 'PublicIP' 
-   eventGroupingSettings: 
-     aggregationKind: 'SingleAlert' 
+   severity: 'High' 
+   query: >
+    let SpringShell_threats = dynamic(["Trojan:Python/SpringShellExpl",
+    "Exploit:Python/SpringShell", "Backdoor:PHP/Remoteshell.V", "SpringShell"]);
+    DeviceInfo
+    | extend DeviceName = tolower(DeviceName)
+    | join kind=inner ( SecurityAlert
+    | where ProviderName =~ "MDATP"
+    | extend ThreatName = tostring(parse_json(ExtendedProperties).ThreatName)
+    | extend ThreatFamilyName = tostring(parse_json(ExtendedProperties).ThreatFamily
+    Name)
+    | where ThreatName in~ (SpringShell_threats) or ThreatFamilyName in~ (SpringShel
+    l_threats)
+    | extend CompromisedEntity = tolower(CompromisedEntity)
+    ) on $left.DeviceName == $right.CompromisedEntity
+    | summarize by DisplayName, ThreatName, ThreatFamilyName, PublicIP, AlertSeverity,
+    Description, tostring(LoggedOnUsers), DeviceId, TenantId , bin(TimeGenerated,
+    1d), CompromisedEntity, tostring(LoggedOnUsers), ProductName, Entities
+    | extend HostName = iff(CompromisedEntity has '.', substring(CompromisedEntity,0
+    ,indexof(CompromisedEntity,'.')),CompromisedEntity)
+    | extend DnsDomain = iff(CompromisedEntity has '.', substring(CompromisedEntity,
+    indexof(CompromisedEntity,'.')+1),"")
+ 
+   suppressionDuration: 'PT5H' 
+   suppressionEnabled: null 
    tactics: 
     - 'InitialAccess' 
    techniques: 
     - 'T1190' 
-   subTechniques: null 
    displayName: 'AV detections related to SpringShell Vulnerability' 
    enabled: true 
    description: >

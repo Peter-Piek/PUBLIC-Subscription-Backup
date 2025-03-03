@@ -16,6 +16,37 @@
    queryPeriod: 'P1D' 
    triggerOperator: 'GreaterThan' 
    triggerThreshold: null 
+   eventGroupingSettings: 
+     aggregationKind: 'SingleAlert' 
+   incidentConfiguration: 
+     createIncident: true 
+     groupingConfiguration: 
+       enabled: null 
+       reopenClosedIncident: null 
+       lookbackDuration: 'PT5M' 
+       matchingMethod: 'AllEntities' 
+       groupByEntities: null 
+       groupByAlertDetails: null 
+       groupByCustomDetails: null 
+   entityMappings: 
+    - 
+      entityType: 'Account' 
+      fieldMappings: 
+       - 
+         identifier: 'FullName' 
+         columnName: 'UserPrincipalName' 
+       - 
+         identifier: 'Name' 
+         columnName: 'AccountName' 
+       - 
+         identifier: 'UPNSuffix' 
+         columnName: 'AccountUPNSuffix' 
+    - 
+      entityType: 'IP' 
+      fieldMappings: 
+       - 
+         identifier: 'Address' 
+         columnName: 'IPAddress' 
    severity: 'Medium' 
    query: >
     let query_frequency = 1h;
@@ -57,42 +88,10 @@
  
    suppressionDuration: 'PT5H' 
    suppressionEnabled: null 
-   incidentConfiguration: 
-     createIncident: true 
-     groupingConfiguration: 
-       enabled: null 
-       reopenClosedIncident: null 
-       lookbackDuration: 'PT5M' 
-       matchingMethod: 'AllEntities' 
-       groupByEntities: null 
-       groupByAlertDetails: null 
-       groupByCustomDetails: null 
-   entityMappings: 
-    - 
-      entityType: 'Account' 
-      fieldMappings: 
-       - 
-         identifier: 'FullName' 
-         columnName: 'UserPrincipalName' 
-       - 
-         identifier: 'Name' 
-         columnName: 'AccountName' 
-       - 
-         identifier: 'UPNSuffix' 
-         columnName: 'AccountUPNSuffix' 
-    - 
-      entityType: 'IP' 
-      fieldMappings: 
-       - 
-         identifier: 'Address' 
-         columnName: 'IPAddress' 
-   eventGroupingSettings: 
-     aggregationKind: 'SingleAlert' 
    tactics: 
     - 'PrivilegeEscalation' 
    techniques: 
     - 'T1078' 
-   subTechniques: null 
    displayName: 'Suspicious Login from deleted guest account' 
    enabled: true 
    description: >

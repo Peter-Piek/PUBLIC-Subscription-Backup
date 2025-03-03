@@ -16,58 +16,8 @@
    queryPeriod: 'P7D' 
    triggerOperator: 'GreaterThan' 
    triggerThreshold: null 
-   severity: 'Medium' 
-   query: >
-    let core_domains = (SigninLogs
-    | where TimeGenerated > ago(7d)
-    | where ResultType == 0
-    | extend domain = tolower(split(UserPrincipalName, "@")[1])
-    | summarize by tostring(domain));
-    let alternative_domains = (SigninLogs
-    | where TimeGenerated > ago(7d)
-    | where isnotempty(AlternateSignInName)
-    | where ResultType == 0
-    | extend domain = tolower(split(AlternateSignInName, "@")[1])
-    | summarize by tostring(domain));
-    AuditLogs
-    | where TimeGenerated > ago(1d)
-    | where OperationName =~ "Add User"
-    | extend InitiatingAppName = tostring(InitiatedBy.app.displayName)
-    | extend InitiatingAppServicePrincipalId = tostring(InitiatedBy.app.servicePri
-    ncipalId)
-    | extend InitiatingUserPrincipalName = tostring(InitiatedBy.user.userPrincipal
-    Name)
-    | extend InitiatingAadUserId = tostring(InitiatedBy.user.id)
-    | extend InitiatingIpAddress = tostring(iff(isnotempty(InitiatedBy.user.ipAddr
-    ess), InitiatedBy.user.ipAddress, InitiatedBy.app.ipAddress))
-    | extend UserAdded = tostring(TargetResources[0].userPrincipalName)
-    | extend UserAddedDomain = case(
-    UserAdded has "#EXT#", tostring(split(tostring(split(UserAdded, "#EXT#")[0]),
-    "_")[1]),
-    UserAdded !has "#EXT#", tostring(split(UserAdded, "@")[1]),
-    UserAdded)
-    | where UserAddedDomain !in (core_domains) and UserAddedDomain !in (alternativ
-    e_domains)
-    | extend AddedByName = case(
-    InitiatingUserPrincipalName has "#EXT#", tostring(split(tostring(split(Initiat
-    ingUserPrincipalName, "#EXT#")[0]), "_")[0]),
-    InitiatingUserPrincipalName !has "#EXT#", tostring(split(InitiatingUserPrincip
-    alName, "@")[0]),
-    InitiatingUserPrincipalName)
-    | extend AddedByUPNSuffix = case(
-    InitiatingUserPrincipalName has "#EXT#", tostring(split(tostring(split(Initiat
-    ingUserPrincipalName, "#EXT#")[0]), "_")[1]),
-    InitiatingUserPrincipalName !has "#EXT#", tostring(split(InitiatingUserPrincip
-    alName, "@")[1]),
-    InitiatingUserPrincipalName)
-    | extend UserAddedName = case(
-    UserAdded has "#EXT#", tostring(split(tostring(split(UserAdded, "#EXT#")[0]),
-    "_")[0]),
-    UserAdded !has "#EXT#", tostring(split(UserAdded, "@")[0]),
-    UserAdded)
- 
-   suppressionDuration: 'PT5H' 
-   suppressionEnabled: null 
+   eventGroupingSettings: 
+     aggregationKind: 'SingleAlert' 
    incidentConfiguration: 
      createIncident: true 
      groupingConfiguration: 
@@ -124,13 +74,62 @@
        - 
          identifier: 'UPNSuffix' 
          columnName: 'UserAddedDomain' 
-   eventGroupingSettings: 
-     aggregationKind: 'SingleAlert' 
+   severity: 'Medium' 
+   query: >
+    let core_domains = (SigninLogs
+    | where TimeGenerated > ago(7d)
+    | where ResultType == 0
+    | extend domain = tolower(split(UserPrincipalName, "@")[1])
+    | summarize by tostring(domain));
+    let alternative_domains = (SigninLogs
+    | where TimeGenerated > ago(7d)
+    | where isnotempty(AlternateSignInName)
+    | where ResultType == 0
+    | extend domain = tolower(split(AlternateSignInName, "@")[1])
+    | summarize by tostring(domain));
+    AuditLogs
+    | where TimeGenerated > ago(1d)
+    | where OperationName =~ "Add User"
+    | extend InitiatingAppName = tostring(InitiatedBy.app.displayName)
+    | extend InitiatingAppServicePrincipalId = tostring(InitiatedBy.app.servicePri
+    ncipalId)
+    | extend InitiatingUserPrincipalName = tostring(InitiatedBy.user.userPrincipal
+    Name)
+    | extend InitiatingAadUserId = tostring(InitiatedBy.user.id)
+    | extend InitiatingIpAddress = tostring(iff(isnotempty(InitiatedBy.user.ipAddr
+    ess), InitiatedBy.user.ipAddress, InitiatedBy.app.ipAddress))
+    | extend UserAdded = tostring(TargetResources[0].userPrincipalName)
+    | extend UserAddedDomain = case(
+    UserAdded has "#EXT#", tostring(split(tostring(split(UserAdded, "#EXT#")[0]),
+    "_")[1]),
+    UserAdded !has "#EXT#", tostring(split(UserAdded, "@")[1]),
+    UserAdded)
+    | where UserAddedDomain !in (core_domains) and UserAddedDomain !in (alternativ
+    e_domains)
+    | extend AddedByName = case(
+    InitiatingUserPrincipalName has "#EXT#", tostring(split(tostring(split(Initiat
+    ingUserPrincipalName, "#EXT#")[0]), "_")[0]),
+    InitiatingUserPrincipalName !has "#EXT#", tostring(split(InitiatingUserPrincip
+    alName, "@")[0]),
+    InitiatingUserPrincipalName)
+    | extend AddedByUPNSuffix = case(
+    InitiatingUserPrincipalName has "#EXT#", tostring(split(tostring(split(Initiat
+    ingUserPrincipalName, "#EXT#")[0]), "_")[1]),
+    InitiatingUserPrincipalName !has "#EXT#", tostring(split(InitiatingUserPrincip
+    alName, "@")[1]),
+    InitiatingUserPrincipalName)
+    | extend UserAddedName = case(
+    UserAdded has "#EXT#", tostring(split(tostring(split(UserAdded, "#EXT#")[0]),
+    "_")[0]),
+    UserAdded !has "#EXT#", tostring(split(UserAdded, "@")[0]),
+    UserAdded)
+ 
+   suppressionDuration: 'PT5H' 
+   suppressionEnabled: null 
    tactics: 
     - 'Persistence' 
    techniques: 
     - 'T1136' 
-   subTechniques: null 
    displayName: 'Account created from non-approved sources' 
    enabled: true 
    description: >

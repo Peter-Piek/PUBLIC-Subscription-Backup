@@ -16,15 +16,8 @@
    queryPeriod: 'PT2H' 
    triggerOperator: 'GreaterThan' 
    triggerThreshold: null 
-   severity: 'High' 
-   query: >
-    Operation
-    | where OperationCategory == 'Data Collection Status'
-    | where Detail contains "stopped" or Detail contains "OverQuota"
-
- 
-   suppressionDuration: 'PT12H' 
-   suppressionEnabled: true 
+   eventGroupingSettings: 
+     aggregationKind: 'SingleAlert' 
    incidentConfiguration: 
      createIncident: true 
      groupingConfiguration: 
@@ -35,11 +28,17 @@
        groupByEntities: null 
        groupByAlertDetails: null 
        groupByCustomDetails: null 
-   eventGroupingSettings: 
-     aggregationKind: 'SingleAlert' 
+   severity: 'High' 
+   query: >
+    Operation
+    | where OperationCategory == 'Data Collection Status'
+    | where Detail contains "stopped" or Detail contains "OverQuota"
+
+ 
+   suppressionDuration: 'PT12H' 
+   suppressionEnabled: true 
    tactics: null 
    techniques: null 
-   subTechniques: null 
    displayName: 'Daily Data Limit Reached [Custom]' 
    enabled: true 
    description: >

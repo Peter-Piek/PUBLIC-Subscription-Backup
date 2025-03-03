@@ -16,25 +16,8 @@
    queryPeriod: 'P1D' 
    triggerOperator: 'GreaterThan' 
    triggerThreshold: null 
-   severity: 'Low' 
-   query: >
-    DnsEvents
-    | where Name contains "."
-    | where Name has_any ("tor2web.org", "tor2web.com", "torlink.co", "onion.to",
-    "onion.ink", "onion.cab", "onion.nu", "onion.link",
-    "onion.it", "onion.city", "onion.direct", "onion.top", "onion.casa", "onion.plus",
-    "onion.rip", "onion.dog", "tor2web.fi",
-    "tor2web.blutmagie.de", "onion.sh", "onion.lu", "onion.pet", "t2w.pw", "tor2web.ae.org",
-    "tor2web.io", "tor2web.xyz", "onion.lt",
-    "s1.tor-gateways.de", "s2.tor-gateways.de", "s3.tor-gateways.de", "s4.tor-gateways.de",
-    "s5.tor-gateways.de", "hiddenservice.net")
-    | extend HostName = iff(Computer has '.', substring(Computer,0,indexof(Computer,
-    '.')),Computer)
-    | extend DnsDomain = iff(Computer has '.', substring(Computer,indexof(Computer,'
-    .')+1),"")
- 
-   suppressionDuration: 'PT5H' 
-   suppressionEnabled: null 
+   eventGroupingSettings: 
+     aggregationKind: 'SingleAlert' 
    incidentConfiguration: 
      createIncident: true 
      groupingConfiguration: 
@@ -61,13 +44,29 @@
        - 
          identifier: 'Address' 
          columnName: 'ClientIP' 
-   eventGroupingSettings: 
-     aggregationKind: 'SingleAlert' 
+   severity: 'Low' 
+   query: >
+    DnsEvents
+    | where Name contains "."
+    | where Name has_any ("tor2web.org", "tor2web.com", "torlink.co", "onion.to",
+    "onion.ink", "onion.cab", "onion.nu", "onion.link",
+    "onion.it", "onion.city", "onion.direct", "onion.top", "onion.casa", "onion.plus",
+    "onion.rip", "onion.dog", "tor2web.fi",
+    "tor2web.blutmagie.de", "onion.sh", "onion.lu", "onion.pet", "t2w.pw", "tor2web.ae.org",
+    "tor2web.io", "tor2web.xyz", "onion.lt",
+    "s1.tor-gateways.de", "s2.tor-gateways.de", "s3.tor-gateways.de", "s4.tor-gateways.de",
+    "s5.tor-gateways.de", "hiddenservice.net")
+    | extend HostName = iff(Computer has '.', substring(Computer,0,indexof(Computer,
+    '.')),Computer)
+    | extend DnsDomain = iff(Computer has '.', substring(Computer,indexof(Computer,'
+    .')+1),"")
+ 
+   suppressionDuration: 'PT5H' 
+   suppressionEnabled: null 
    tactics: 
     - 'Exfiltration' 
    techniques: 
     - 'T1048' 
-   subTechniques: null 
    displayName: 'DNS events related to ToR proxies' 
    enabled: true 
    description: >

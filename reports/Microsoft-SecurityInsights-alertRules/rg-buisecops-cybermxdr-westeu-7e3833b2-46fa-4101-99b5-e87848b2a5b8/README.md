@@ -16,22 +16,8 @@
    queryPeriod: 'P1D' 
    triggerOperator: 'GreaterThan' 
    triggerThreshold: null 
-   severity: 'Medium' 
-   query: >
-    let SUNSPOT_Hashes = dynamic(["c45c9bda8db1d470f1fd0dcc346dc449839eb5ce9a948c703
-    69230af0b3ef168", "0819db19be479122c1d48743e644070a8dc9a1c852df9a8c0dc2343e904da
-    389"]);
-    union isfuzzy=true(
-    DeviceEvents
-    | where InitiatingProcessSHA256 in (SUNSPOT_Hashes)),
-    (DeviceImageLoadEvents
-    | where InitiatingProcessSHA256 in (SUNSPOT_Hashes))
-    | extend timestamp=TimeGenerated
-    | extend HostName = tostring(split(DeviceName, '.', 0)[0]), DnsDomain = tostring
-    (strcat_array(array_slice(split(DeviceName, '.'), 1, -1), '.'))
- 
-   suppressionDuration: 'PT5H' 
-   suppressionEnabled: null 
+   eventGroupingSettings: 
+     aggregationKind: 'SingleAlert' 
    incidentConfiguration: 
      createIncident: true 
      groupingConfiguration: 
@@ -52,13 +38,26 @@
        - 
          identifier: 'DnsDomain' 
          columnName: 'DnsDomain' 
-   eventGroupingSettings: 
-     aggregationKind: 'SingleAlert' 
+   severity: 'Medium' 
+   query: >
+    let SUNSPOT_Hashes = dynamic(["c45c9bda8db1d470f1fd0dcc346dc449839eb5ce9a948c703
+    69230af0b3ef168", "0819db19be479122c1d48743e644070a8dc9a1c852df9a8c0dc2343e904da
+    389"]);
+    union isfuzzy=true(
+    DeviceEvents
+    | where InitiatingProcessSHA256 in (SUNSPOT_Hashes)),
+    (DeviceImageLoadEvents
+    | where InitiatingProcessSHA256 in (SUNSPOT_Hashes))
+    | extend timestamp=TimeGenerated
+    | extend HostName = tostring(split(DeviceName, '.', 0)[0]), DnsDomain = tostring
+    (strcat_array(array_slice(split(DeviceName, '.'), 1, -1), '.'))
+ 
+   suppressionDuration: 'PT5H' 
+   suppressionEnabled: null 
    tactics: 
     - 'Persistence' 
    techniques: 
     - 'T1554' 
-   subTechniques: null 
    displayName: 'SUNSPOT malware hashes' 
    enabled: true 
    description: >

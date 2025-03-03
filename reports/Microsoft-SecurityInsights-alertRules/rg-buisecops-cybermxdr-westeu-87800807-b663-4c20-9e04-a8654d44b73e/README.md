@@ -16,31 +16,8 @@
    queryPeriod: 'P1D' 
    triggerOperator: 'GreaterThan' 
    triggerThreshold: null 
-   severity: 'High' 
-   query: >
-    let Tarrask_threats = dynamic(["HackTool:Win64/Tarrask!MS", "HackTool:Win64/Ligolo!MSR",
-    "Behavior:Win32/ScheduledTaskHide.A", "Tarrask"]);
-    DeviceInfo
-    | extend DeviceName = tolower(DeviceName)
-    | join kind=rightouter ( SecurityAlert
-    | where ProviderName =~ "MDATP"
-    | extend ThreatName = tostring(parse_json(ExtendedProperties).ThreatName)
-    | extend ThreatFamilyName = tostring(parse_json(ExtendedProperties).ThreatFamily
-    Name)
-    | where ThreatName in~ (Tarrask_threats) or ThreatFamilyName in~ (Tarrask_threat
-    s)
-    | extend CompromisedEntity = tolower(CompromisedEntity)
-    ) on $left.DeviceName == $right.CompromisedEntity
-    | summarize by DisplayName, ThreatName, ThreatFamilyName, PublicIP, AlertSeverity,
-    Description, tostring(LoggedOnUsers), DeviceId, TenantId , bin(TimeGenerated,
-    1d), CompromisedEntity, tostring(LoggedOnUsers), ProductName, Entities
-    | extend HostName = iff(CompromisedEntity has '.', substring(CompromisedEntity,0
-    ,indexof(CompromisedEntity,'.')),CompromisedEntity)
-    | extend DnsDomain = iff(CompromisedEntity has '.', substring(CompromisedEntity,
-    indexof(CompromisedEntity,'.')+1),"")
- 
-   suppressionDuration: 'PT5H' 
-   suppressionEnabled: null 
+   eventGroupingSettings: 
+     aggregationKind: 'SingleAlert' 
    incidentConfiguration: 
      createIncident: true 
      groupingConfiguration: 
@@ -67,13 +44,35 @@
        - 
          identifier: 'Address' 
          columnName: 'PublicIP' 
-   eventGroupingSettings: 
-     aggregationKind: 'SingleAlert' 
+   severity: 'High' 
+   query: >
+    let Tarrask_threats = dynamic(["HackTool:Win64/Tarrask!MS", "HackTool:Win64/Ligolo!MSR",
+    "Behavior:Win32/ScheduledTaskHide.A", "Tarrask"]);
+    DeviceInfo
+    | extend DeviceName = tolower(DeviceName)
+    | join kind=rightouter ( SecurityAlert
+    | where ProviderName =~ "MDATP"
+    | extend ThreatName = tostring(parse_json(ExtendedProperties).ThreatName)
+    | extend ThreatFamilyName = tostring(parse_json(ExtendedProperties).ThreatFamily
+    Name)
+    | where ThreatName in~ (Tarrask_threats) or ThreatFamilyName in~ (Tarrask_threat
+    s)
+    | extend CompromisedEntity = tolower(CompromisedEntity)
+    ) on $left.DeviceName == $right.CompromisedEntity
+    | summarize by DisplayName, ThreatName, ThreatFamilyName, PublicIP, AlertSeverity,
+    Description, tostring(LoggedOnUsers), DeviceId, TenantId , bin(TimeGenerated,
+    1d), CompromisedEntity, tostring(LoggedOnUsers), ProductName, Entities
+    | extend HostName = iff(CompromisedEntity has '.', substring(CompromisedEntity,0
+    ,indexof(CompromisedEntity,'.')),CompromisedEntity)
+    | extend DnsDomain = iff(CompromisedEntity has '.', substring(CompromisedEntity,
+    indexof(CompromisedEntity,'.')+1),"")
+ 
+   suppressionDuration: 'PT5H' 
+   suppressionEnabled: null 
    tactics: 
     - 'Persistence' 
    techniques: 
     - 'T1053' 
-   subTechniques: null 
    displayName: 'AV detections related to Tarrask malware' 
    enabled: true 
    description: >

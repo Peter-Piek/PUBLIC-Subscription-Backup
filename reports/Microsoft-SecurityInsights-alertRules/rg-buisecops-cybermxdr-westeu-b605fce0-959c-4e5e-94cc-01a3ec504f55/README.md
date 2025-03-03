@@ -16,23 +16,8 @@
    queryPeriod: 'P1D' 
    triggerOperator: 'GreaterThan' 
    triggerThreshold: null 
-   severity: 'Medium' 
-   query: >
-    let aadFunc = (tableName:string){
-    table(tableName)
-    | where ResultType == 500121
-    | where Status has "MFA Denied; user declined the authentication" or Status has
-    "MFA denied; Phone App Reported Fraud"
-    | extend Type = Type
-    | extend timestamp = TimeGenerated, Name = tostring(split(UserPrincipalName,'@',
-    0)[0]), UPNSuffix = tostring(split(UserPrincipalName,'@',1)[0])
-    };
-    let aadSignin = aadFunc("SigninLogs");
-    let aadNonInt = aadFunc("AADNonInteractiveUserSignInLogs");
-    union isfuzzy=true aadSignin, aadNonInt
- 
-   suppressionDuration: 'PT5H' 
-   suppressionEnabled: null 
+   eventGroupingSettings: 
+     aggregationKind: 'SingleAlert' 
    incidentConfiguration: 
      createIncident: true 
      groupingConfiguration: 
@@ -65,13 +50,27 @@
        - 
          identifier: 'Url' 
          columnName: 'ClientAppUsed' 
-   eventGroupingSettings: 
-     aggregationKind: 'SingleAlert' 
+   severity: 'Medium' 
+   query: >
+    let aadFunc = (tableName:string){
+    table(tableName)
+    | where ResultType == 500121
+    | where Status has "MFA Denied; user declined the authentication" or Status has
+    "MFA denied; Phone App Reported Fraud"
+    | extend Type = Type
+    | extend timestamp = TimeGenerated, Name = tostring(split(UserPrincipalName,'@',
+    0)[0]), UPNSuffix = tostring(split(UserPrincipalName,'@',1)[0])
+    };
+    let aadSignin = aadFunc("SigninLogs");
+    let aadNonInt = aadFunc("AADNonInteractiveUserSignInLogs");
+    union isfuzzy=true aadSignin, aadNonInt
+ 
+   suppressionDuration: 'PT5H' 
+   suppressionEnabled: null 
    tactics: 
     - 'CredentialAccess' 
    techniques: 
     - 'T1110' 
-   subTechniques: null 
    displayName: 'Explicit MFA Deny' 
    enabled: true 
    description: >

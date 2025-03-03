@@ -16,33 +16,8 @@
    queryPeriod: 'PT2H' 
    triggerOperator: 'GreaterThan' 
    triggerThreshold: null 
-   severity: 'High' 
-   query: >
-    AuditLogs
-    | where ActivityDisplayName =~'Add member to role request denied (PIM activation
-    )'
-    | mv-apply ResourceItem = TargetResources on
-    (
-    where ResourceItem.type =~ "Role"
-    | extend Role = trim(@'"',tostring(ResourceItem.displayName))
-    )
-    | mv-apply ResourceItem = TargetResources on
-    (
-    where ResourceItem.type =~ "User"
-    | extend User = trim(@'"',tostring(ResourceItem.userPrincipalName))
-    )
-    | project-reorder TimeGenerated, User, Role, OperationName, Result, ResultDescri
-    ption
-    | where isnotempty(InitiatedBy.user)
-    | extend InitiatingUser = tostring(InitiatedBy.user.userPrincipalName),
-    InitiatingIpAddress = tostring(InitiatedBy.user.ipAddress)
-    | extend InitiatingName = tostring(split(InitiatingUser,'@',0)[0]), InitiatingUPNSuffix
-    = tostring(split(InitiatingUser,'@',1)[0])
-    | extend UserName = tostring(split(User,'@',0)[0]), UserUPNSuffix = tostring(spl
-    it(User,'@',1)[0])
- 
-   suppressionDuration: 'PT5H' 
-   suppressionEnabled: null 
+   eventGroupingSettings: 
+     aggregationKind: 'SingleAlert' 
    incidentConfiguration: 
      createIncident: true 
      groupingConfiguration: 
@@ -78,13 +53,37 @@
        - 
          identifier: 'Address' 
          columnName: 'InitiatingIpAddress' 
-   eventGroupingSettings: 
-     aggregationKind: 'SingleAlert' 
+   severity: 'High' 
+   query: >
+    AuditLogs
+    | where ActivityDisplayName =~'Add member to role request denied (PIM activation
+    )'
+    | mv-apply ResourceItem = TargetResources on
+    (
+    where ResourceItem.type =~ "Role"
+    | extend Role = trim(@'"',tostring(ResourceItem.displayName))
+    )
+    | mv-apply ResourceItem = TargetResources on
+    (
+    where ResourceItem.type =~ "User"
+    | extend User = trim(@'"',tostring(ResourceItem.userPrincipalName))
+    )
+    | project-reorder TimeGenerated, User, Role, OperationName, Result, ResultDescri
+    ption
+    | where isnotempty(InitiatedBy.user)
+    | extend InitiatingUser = tostring(InitiatedBy.user.userPrincipalName),
+    InitiatingIpAddress = tostring(InitiatedBy.user.ipAddress)
+    | extend InitiatingName = tostring(split(InitiatingUser,'@',0)[0]), InitiatingUPNSuffix
+    = tostring(split(InitiatingUser,'@',1)[0])
+    | extend UserName = tostring(split(User,'@',0)[0]), UserUPNSuffix = tostring(spl
+    it(User,'@',1)[0])
+ 
+   suppressionDuration: 'PT5H' 
+   suppressionEnabled: null 
    tactics: 
     - 'Persistence' 
    techniques: 
     - 'T1078' 
-   subTechniques: null 
    displayName: 'PIM Elevation Request Rejected' 
    enabled: true 
    description: >

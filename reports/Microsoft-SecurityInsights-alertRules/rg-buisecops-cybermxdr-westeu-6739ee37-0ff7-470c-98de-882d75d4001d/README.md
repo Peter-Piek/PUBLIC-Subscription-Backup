@@ -16,6 +16,25 @@
    queryPeriod: 'P14D' 
    triggerOperator: 'GreaterThan' 
    triggerThreshold: null 
+   eventGroupingSettings: 
+     aggregationKind: 'SingleAlert' 
+   incidentConfiguration: 
+     createIncident: true 
+     groupingConfiguration: 
+       enabled: null 
+       reopenClosedIncident: null 
+       lookbackDuration: 'PT5M' 
+       matchingMethod: 'AllEntities' 
+       groupByEntities: null 
+       groupByAlertDetails: null 
+       groupByCustomDetails: null 
+   entityMappings: 
+    - 
+      entityType: 'Host' 
+      fieldMappings: 
+       - 
+         identifier: 'FullName' 
+         columnName: 'Computer' 
    severity: 'High' 
    query: >
     let known_processes = (
@@ -39,32 +58,12 @@
  
    suppressionDuration: 'PT5H' 
    suppressionEnabled: null 
-   incidentConfiguration: 
-     createIncident: true 
-     groupingConfiguration: 
-       enabled: null 
-       reopenClosedIncident: null 
-       lookbackDuration: 'PT5M' 
-       matchingMethod: 'AllEntities' 
-       groupByEntities: null 
-       groupByAlertDetails: null 
-       groupByCustomDetails: null 
-   entityMappings: 
-    - 
-      entityType: 'Host' 
-      fieldMappings: 
-       - 
-         identifier: 'FullName' 
-         columnName: 'Computer' 
-   eventGroupingSettings: 
-     aggregationKind: 'SingleAlert' 
    tactics: 
     - 'Execution' 
     - 'LateralMovement' 
    techniques: 
     - 'T1072' 
     - 'T1570' 
-   subTechniques: null 
    displayName: 'New EXE deployed via Default Domain or Default Domain Controller Policies' 
    enabled: true 
    description: >

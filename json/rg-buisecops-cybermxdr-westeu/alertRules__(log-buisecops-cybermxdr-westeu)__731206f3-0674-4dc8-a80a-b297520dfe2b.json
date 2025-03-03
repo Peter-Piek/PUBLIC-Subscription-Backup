@@ -8,10 +8,9 @@
     "queryPeriod": "P2D",
     "triggerOperator": "GreaterThan",
     "triggerThreshold": 0,
-    "severity": "Medium",
-    "query": "Heartbeat\r\n| where TimeGenerated > ago(24hr)\r\n|extend LocalIP = iff(isnotempty(parse_json(ComputerPrivateIPs.[0])),parse_json(ComputerPrivateIPs.[0]),\"\")\r\n| summarize LastHeartbeat=max(TimeGenerated) by Computer, LocalIP\r\n| where LastHeartbeat < ago(1h)\r\n| project LastHeartbeat, Computer, LocalIP",
-    "suppressionDuration": "PT5H",
-    "suppressionEnabled": false,
+    "eventGroupingSettings": {
+      "aggregationKind": "SingleAlert"
+    },
     "incidentConfiguration": {
       "createIncident": true,
       "groupingConfiguration": {
@@ -35,12 +34,12 @@
         ]
       }
     ],
-    "eventGroupingSettings": {
-      "aggregationKind": "SingleAlert"
-    },
+    "severity": "Medium",
+    "query": "Heartbeat\r\n| where TimeGenerated > ago(24hr)\r\n|extend LocalIP = iff(isnotempty(parse_json(ComputerPrivateIPs.[0])),parse_json(ComputerPrivateIPs.[0]),\"\")\r\n| summarize LastHeartbeat=max(TimeGenerated) by Computer, LocalIP\r\n| where LastHeartbeat < ago(1h)\r\n| project LastHeartbeat, Computer, LocalIP",
+    "suppressionDuration": "PT5H",
+    "suppressionEnabled": false,
     "tactics": [],
     "techniques": [],
-    "subTechniques": null,
     "displayName": "Heartbeat stopped [custom]",
     "enabled": true,
     "description": "A computer has stopped sending heartbeats to the workspace. Please check the Host is up and that the Microsoft Monitoring Agent service is running",

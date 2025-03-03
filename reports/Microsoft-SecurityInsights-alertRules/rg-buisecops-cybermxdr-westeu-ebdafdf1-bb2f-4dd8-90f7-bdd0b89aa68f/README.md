@@ -16,25 +16,8 @@
    queryPeriod: 'P1D' 
    triggerOperator: 'GreaterThan' 
    triggerThreshold: null 
-   severity: 'Medium' 
-   query: >
-    // Add non-approved user principal names to the list below to search for their
-    account creation/deletion activity
-    // ex: dynamic(["UPN1", "upn123"])
-    let nonapproved_users = dynamic([]);
-    AuditLogs
-    | where OperationName =~ "Add user" or OperationName =~ "Delete user"
-    | where Result =~ "success"
-    | extend InitiatingUser = tostring(InitiatedBy.user.userPrincipalName)
-    | where InitiatingUser has_any (nonapproved_users)
-    | project-reorder TimeGenerated, ResourceId, OperationName, InitiatingUser, Targ
-    etResources
-    | extend InitiatedUserIpAddress = tostring(InitiatedBy.user.ipAddress)
-    | extend Name = tostring(split(InitiatingUser,'@',0)[0]), UPNSuffix = tostring(s
-    plit(InitiatingUser,'@',1)[0])
- 
-   suppressionDuration: 'PT5H' 
-   suppressionEnabled: null 
+   eventGroupingSettings: 
+     aggregationKind: 'SingleAlert' 
    incidentConfiguration: 
      createIncident: true 
      groupingConfiguration: 
@@ -61,13 +44,29 @@
        - 
          identifier: 'Address' 
          columnName: 'InitiatedUserIpAddress' 
-   eventGroupingSettings: 
-     aggregationKind: 'SingleAlert' 
+   severity: 'Medium' 
+   query: >
+    // Add non-approved user principal names to the list below to search for their
+    account creation/deletion activity
+    // ex: dynamic(["UPN1", "upn123"])
+    let nonapproved_users = dynamic([]);
+    AuditLogs
+    | where OperationName =~ "Add user" or OperationName =~ "Delete user"
+    | where Result =~ "success"
+    | extend InitiatingUser = tostring(InitiatedBy.user.userPrincipalName)
+    | where InitiatingUser has_any (nonapproved_users)
+    | project-reorder TimeGenerated, ResourceId, OperationName, InitiatingUser, Targ
+    etResources
+    | extend InitiatedUserIpAddress = tostring(InitiatedBy.user.ipAddress)
+    | extend Name = tostring(split(InitiatingUser,'@',0)[0]), UPNSuffix = tostring(s
+    plit(InitiatingUser,'@',1)[0])
+ 
+   suppressionDuration: 'PT5H' 
+   suppressionEnabled: null 
    tactics: 
     - 'InitialAccess' 
    techniques: 
     - 'T1078' 
-   subTechniques: null 
    displayName: 'Account created or deleted by non-approved user' 
    enabled: true 
    description: >

@@ -8,10 +8,9 @@
     "queryPeriod": "PT1H",
     "triggerOperator": "GreaterThan",
     "triggerThreshold": 0,
-    "severity": "High",
-    "query": "Usage\r\n| where IsBillable\r\n| summarize DataGB = sum(Quantity /1000.)\r\n| where DataGB > 8.",
-    "suppressionDuration": "PT12H",
-    "suppressionEnabled": true,
+    "eventGroupingSettings": {
+      "aggregationKind": "SingleAlert"
+    },
     "incidentConfiguration": {
       "createIncident": true,
       "groupingConfiguration": {
@@ -24,12 +23,12 @@
         "groupByCustomDetails": []
       }
     },
-    "eventGroupingSettings": {
-      "aggregationKind": "SingleAlert"
-    },
+    "severity": "High",
+    "query": "Usage\r\n| where IsBillable\r\n| summarize DataGB = sum(Quantity /1000.)\r\n| where DataGB > 8.",
+    "suppressionDuration": "PT12H",
+    "suppressionEnabled": true,
     "tactics": [],
     "techniques": [],
-    "subTechniques": null,
     "displayName": "Daily Data Limit At 80% [Custom]",
     "enabled": true,
     "description": "To alert if the billable data volume ingested in the last 24 hours was greater than 80% of daily data limit. ",

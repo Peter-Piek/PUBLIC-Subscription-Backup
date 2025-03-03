@@ -8,10 +8,9 @@
     "queryPeriod": "P1D",
     "triggerOperator": "GreaterThan",
     "triggerThreshold": 0,
-    "severity": "Medium",
-    "query": "let SunburstURL=dynamic([\"panhardware.com\",\"databasegalore.com\",\"avsvmcloud.com\",\"freescanonline.com\",\"thedoccloud.com\",\"deftsecurity.com\"]);\nDeviceNetworkEvents\n| where ActionType == \"ConnectionSuccess\"\n| where RemoteUrl in(SunburstURL)\n| extend timestamp = TimeGenerated,AccountEntity = iff(isnotempty(InitiatingProcessAccountUpn), InitiatingProcessAccountUpn, InitiatingProcessAccountName),HashAlgorithm = 'MD5'\n| extend HostName = tostring(split(DeviceName, '.', 0)[0]), DnsDomain = tostring(strcat_array(array_slice(split(DeviceName, '.'), 1, -1), '.'))",
-    "suppressionDuration": "PT5H",
-    "suppressionEnabled": false,
+    "eventGroupingSettings": {
+      "aggregationKind": "SingleAlert"
+    },
     "incidentConfiguration": {
       "createIncident": true,
       "groupingConfiguration": {
@@ -79,9 +78,10 @@
         ]
       }
     ],
-    "eventGroupingSettings": {
-      "aggregationKind": "SingleAlert"
-    },
+    "severity": "Medium",
+    "query": "let SunburstURL=dynamic([\"panhardware.com\",\"databasegalore.com\",\"avsvmcloud.com\",\"freescanonline.com\",\"thedoccloud.com\",\"deftsecurity.com\"]);\nDeviceNetworkEvents\n| where ActionType == \"ConnectionSuccess\"\n| where RemoteUrl in(SunburstURL)\n| extend timestamp = TimeGenerated,AccountEntity = iff(isnotempty(InitiatingProcessAccountUpn), InitiatingProcessAccountUpn, InitiatingProcessAccountName),HashAlgorithm = 'MD5'\n| extend HostName = tostring(split(DeviceName, '.', 0)[0]), DnsDomain = tostring(strcat_array(array_slice(split(DeviceName, '.'), 1, -1), '.'))",
+    "suppressionDuration": "PT5H",
+    "suppressionEnabled": false,
     "tactics": [
       "Execution",
       "Persistence",
@@ -92,7 +92,6 @@
       "T1059",
       "T1546"
     ],
-    "subTechniques": null,
     "displayName": "SUNBURST network beacons",
     "enabled": true,
     "description": "Identifies SolarWinds SUNBURST domain beacon IOCs in DeviceNetworkEvents\nReferences:\n- https://www.fireeye.com/blog/threat-research/2020/12/evasive-attacker-leverages-solarwinds-supply-chain-compromises-with-sunburst-backdoor.html\n- https://gist.github.com/olafhartong/71ffdd4cab4b6acd5cbcd1a0691ff82f",

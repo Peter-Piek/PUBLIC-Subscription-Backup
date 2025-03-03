@@ -16,30 +16,8 @@
    queryPeriod: 'P1D' 
    triggerOperator: 'GreaterThan' 
    triggerThreshold: null 
-   severity: 'High' 
-   query: >
-    let Hive_threats = dynamic(["Ransom:Win64/Hive", "Ransom:Win32/Hive"]);
-    DeviceInfo
-    | extend DeviceName = tolower(DeviceName)
-    | join kind=inner ( SecurityAlert
-    | where ProviderName == "MDATP"
-    | extend ThreatName = tostring(parse_json(ExtendedProperties).ThreatName)
-    | extend ThreatFamilyName = tostring(parse_json(ExtendedProperties).ThreatFamily
-    Name)
-    | where ThreatName in~ (Hive_threats) or ThreatFamilyName in~ (Hive_threats)
-    | extend CompromisedEntity = tolower(CompromisedEntity)
-    ) on $left.DeviceName == $right.CompromisedEntity
-    | summarize by bin(TimeGenerated, 1d), DisplayName, ThreatName, ThreatFamilyName,
-    PublicIP, AlertSeverity, Description, tostring(LoggedOnUsers), DeviceId, TenantId
-    , CompromisedEntity, tostring(LoggedOnUsers), ProductName, Entities
-    | extend HostName = tostring(split(CompromisedEntity, ".")[0]), DomainIndex = to
-    int(indexof(CompromisedEntity, '.'))
-    | extend HostNameDomain = iff(DomainIndex != -1, substring(CompromisedEntity,
-    DomainIndex + 1), CompromisedEntity)
-    | project-away DomainIndex
- 
-   suppressionDuration: 'PT5H' 
-   suppressionEnabled: null 
+   eventGroupingSettings: 
+     aggregationKind: 'SingleAlert' 
    incidentConfiguration: 
      createIncident: true 
      groupingConfiguration: 
@@ -69,13 +47,34 @@
        - 
          identifier: 'Address' 
          columnName: 'PublicIP' 
-   eventGroupingSettings: 
-     aggregationKind: 'SingleAlert' 
+   severity: 'High' 
+   query: >
+    let Hive_threats = dynamic(["Ransom:Win64/Hive", "Ransom:Win32/Hive"]);
+    DeviceInfo
+    | extend DeviceName = tolower(DeviceName)
+    | join kind=inner ( SecurityAlert
+    | where ProviderName == "MDATP"
+    | extend ThreatName = tostring(parse_json(ExtendedProperties).ThreatName)
+    | extend ThreatFamilyName = tostring(parse_json(ExtendedProperties).ThreatFamily
+    Name)
+    | where ThreatName in~ (Hive_threats) or ThreatFamilyName in~ (Hive_threats)
+    | extend CompromisedEntity = tolower(CompromisedEntity)
+    ) on $left.DeviceName == $right.CompromisedEntity
+    | summarize by bin(TimeGenerated, 1d), DisplayName, ThreatName, ThreatFamilyName,
+    PublicIP, AlertSeverity, Description, tostring(LoggedOnUsers), DeviceId, TenantId
+    , CompromisedEntity, tostring(LoggedOnUsers), ProductName, Entities
+    | extend HostName = tostring(split(CompromisedEntity, ".")[0]), DomainIndex = to
+    int(indexof(CompromisedEntity, '.'))
+    | extend HostNameDomain = iff(DomainIndex != -1, substring(CompromisedEntity,
+    DomainIndex + 1), CompromisedEntity)
+    | project-away DomainIndex
+ 
+   suppressionDuration: 'PT5H' 
+   suppressionEnabled: null 
    tactics: 
     - 'Impact' 
    techniques: 
     - 'T1486' 
-   subTechniques: null 
    displayName: 'AV detections related to Hive Ransomware' 
    enabled: true 
    description: >

@@ -16,6 +16,28 @@
    queryPeriod: 'P1D' 
    triggerOperator: 'GreaterThan' 
    triggerThreshold: null 
+   eventGroupingSettings: 
+     aggregationKind: 'SingleAlert' 
+   incidentConfiguration: 
+     createIncident: true 
+     groupingConfiguration: 
+       enabled: null 
+       reopenClosedIncident: null 
+       lookbackDuration: 'PT5M' 
+       matchingMethod: 'AllEntities' 
+       groupByEntities: null 
+       groupByAlertDetails: null 
+       groupByCustomDetails: null 
+   entityMappings: 
+    - 
+      entityType: 'Host' 
+      fieldMappings: 
+       - 
+         identifier: 'HostName' 
+         columnName: 'HostName' 
+       - 
+         identifier: 'DnsDomain' 
+         columnName: 'DnsDomain' 
    severity: 'Medium' 
    query: >
     // How far back to look for events from
@@ -61,33 +83,10 @@
  
    suppressionDuration: 'PT5H' 
    suppressionEnabled: null 
-   incidentConfiguration: 
-     createIncident: true 
-     groupingConfiguration: 
-       enabled: null 
-       reopenClosedIncident: null 
-       lookbackDuration: 'PT5M' 
-       matchingMethod: 'AllEntities' 
-       groupByEntities: null 
-       groupByAlertDetails: null 
-       groupByCustomDetails: null 
-   entityMappings: 
-    - 
-      entityType: 'Host' 
-      fieldMappings: 
-       - 
-         identifier: 'HostName' 
-         columnName: 'HostName' 
-       - 
-         identifier: 'DnsDomain' 
-         columnName: 'DnsDomain' 
-   eventGroupingSettings: 
-     aggregationKind: 'SingleAlert' 
    tactics: 
     - 'Persistence' 
    techniques: 
     - 'T1554' 
-   subTechniques: null 
    displayName: 'Potential Build Process Compromise - MDE' 
    enabled: true 
    description: >

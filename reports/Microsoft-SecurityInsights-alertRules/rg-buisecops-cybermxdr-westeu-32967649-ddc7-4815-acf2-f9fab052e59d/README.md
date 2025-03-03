@@ -16,22 +16,8 @@
    queryPeriod: 'P1D' 
    triggerOperator: 'GreaterThan' 
    triggerThreshold: null 
-   severity: 'Low' 
-   query: >
-    // Adjust this value to change how many Teams should be deleted before including
-    let max_delete_count = 3;
-    // Adjust this value to change the timewindow the query runs over
-    OfficeActivity
-    | where OfficeWorkload =~ "MicrosoftTeams"
-    | where Operation =~ "TeamDeleted"
-    | summarize StartTime = min(TimeGenerated), EndTime = max(TimeGenerated), DeletedTeams
-    = make_set(TeamName, 1000) by UserId
-    | where array_length(DeletedTeams) > max_delete_count
-    | extend AccountName = tostring(split(UserId, "@")[0]), AccountUPNSuffix =
-    tostring(split(UserId, "@")[1])
- 
-   suppressionDuration: 'PT5H' 
-   suppressionEnabled: null 
+   eventGroupingSettings: 
+     aggregationKind: 'SingleAlert' 
    incidentConfiguration: 
      createIncident: true 
      groupingConfiguration: 
@@ -52,14 +38,27 @@
        - 
          identifier: 'UPNSuffix' 
          columnName: 'AccountUPNSuffix' 
-   eventGroupingSettings: 
-     aggregationKind: 'SingleAlert' 
+   severity: 'Low' 
+   query: >
+    // Adjust this value to change how many Teams should be deleted before including
+    let max_delete_count = 3;
+    // Adjust this value to change the timewindow the query runs over
+    OfficeActivity
+    | where OfficeWorkload =~ "MicrosoftTeams"
+    | where Operation =~ "TeamDeleted"
+    | summarize StartTime = min(TimeGenerated), EndTime = max(TimeGenerated), DeletedTeams
+    = make_set(TeamName, 1000) by UserId
+    | where array_length(DeletedTeams) > max_delete_count
+    | extend AccountName = tostring(split(UserId, "@")[0]), AccountUPNSuffix =
+    tostring(split(UserId, "@")[1])
+ 
+   suppressionDuration: 'PT5H' 
+   suppressionEnabled: null 
    tactics: 
     - 'Impact' 
    techniques: 
     - 'T1485' 
     - 'T1489' 
-   subTechniques: null 
    displayName: 'Multiple Teams deleted by a single user' 
    enabled: true 
    description: >

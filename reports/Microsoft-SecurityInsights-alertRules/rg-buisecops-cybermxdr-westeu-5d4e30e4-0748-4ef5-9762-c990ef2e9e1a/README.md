@@ -16,40 +16,8 @@
    queryPeriod: 'P14D' 
    triggerOperator: 'GreaterThan' 
    triggerThreshold: null 
-   severity: 'Medium' 
-   query: >
-    let known_users = (AuditLogs
-    | where TimeGenerated between(ago(14d)..ago(1d))
-    | where OperationName has "conditional access policy"
-    | where Result =~ "success"
-    | extend InitiatingUserPrincipalName = tostring(InitiatedBy.user.userPrincipal
-    Name)
-    | summarize by InitiatingUserPrincipalName);
-    AuditLogs
-    | where TimeGenerated > ago(1d)
-    | where OperationName has "conditional access policy"
-    | where Result =~ "success"
-    | extend InitiatingAppName = tostring(InitiatedBy.app.displayName)
-    | extend InitiatingAppId = tostring(InitiatedBy.app.appId)
-    | extend InitiatingAppServicePrincipalId = tostring(InitiatedBy.app.servicePri
-    ncipalId)
-    | extend InitiatingUserPrincipalName = tostring(InitiatedBy.user.userPrincipal
-    Name)
-    | extend InitiatingAadUserId = tostring(InitiatedBy.user.id)
-    | extend InitiatingIPAddress = tostring(InitiatedBy.user.ipAddress)
-    | extend CAPolicyName = tostring(TargetResources[0].displayName)
-    | where InitiatingUserPrincipalName !in (known_users)
-    | extend NewPolicyValues = TargetResources[0].modifiedProperties[0].newValue
-    | extend OldPolicyValues = TargetResources[0].modifiedProperties[0].oldValue
-    | extend InitiatingAccountName = tostring(split(InitiatingUserPrincipalName,
-    "@")[0]), InitiatingAccountUPNSuffix = tostring(split(InitiatingUserPrincipalNa
-    me, "@")[1])
-    | project-reorder TimeGenerated, OperationName, CAPolicyName, InitiatingAppId,
-    InitiatingAppName, InitiatingAppServicePrincipalId, InitiatingUserPrincipalName,
-    InitiatingAadUserId, InitiatingIPAddress, NewPolicyValues, OldPolicyValues
- 
-   suppressionDuration: 'PT5H' 
-   suppressionEnabled: null 
+   eventGroupingSettings: 
+     aggregationKind: 'SingleAlert' 
    incidentConfiguration: 
      createIncident: true 
      groupingConfiguration: 
@@ -94,13 +62,44 @@
        - 
          identifier: 'Name' 
          columnName: 'InitiatingAppName' 
-   eventGroupingSettings: 
-     aggregationKind: 'SingleAlert' 
+   severity: 'Medium' 
+   query: >
+    let known_users = (AuditLogs
+    | where TimeGenerated between(ago(14d)..ago(1d))
+    | where OperationName has "conditional access policy"
+    | where Result =~ "success"
+    | extend InitiatingUserPrincipalName = tostring(InitiatedBy.user.userPrincipal
+    Name)
+    | summarize by InitiatingUserPrincipalName);
+    AuditLogs
+    | where TimeGenerated > ago(1d)
+    | where OperationName has "conditional access policy"
+    | where Result =~ "success"
+    | extend InitiatingAppName = tostring(InitiatedBy.app.displayName)
+    | extend InitiatingAppId = tostring(InitiatedBy.app.appId)
+    | extend InitiatingAppServicePrincipalId = tostring(InitiatedBy.app.servicePri
+    ncipalId)
+    | extend InitiatingUserPrincipalName = tostring(InitiatedBy.user.userPrincipal
+    Name)
+    | extend InitiatingAadUserId = tostring(InitiatedBy.user.id)
+    | extend InitiatingIPAddress = tostring(InitiatedBy.user.ipAddress)
+    | extend CAPolicyName = tostring(TargetResources[0].displayName)
+    | where InitiatingUserPrincipalName !in (known_users)
+    | extend NewPolicyValues = TargetResources[0].modifiedProperties[0].newValue
+    | extend OldPolicyValues = TargetResources[0].modifiedProperties[0].oldValue
+    | extend InitiatingAccountName = tostring(split(InitiatingUserPrincipalName,
+    "@")[0]), InitiatingAccountUPNSuffix = tostring(split(InitiatingUserPrincipalNa
+    me, "@")[1])
+    | project-reorder TimeGenerated, OperationName, CAPolicyName, InitiatingAppId,
+    InitiatingAppName, InitiatingAppServicePrincipalId, InitiatingUserPrincipalName,
+    InitiatingAadUserId, InitiatingIPAddress, NewPolicyValues, OldPolicyValues
+ 
+   suppressionDuration: 'PT5H' 
+   suppressionEnabled: null 
    tactics: 
     - 'DefenseEvasion' 
    techniques: 
     - 'T1078' 
-   subTechniques: null 
    displayName: 'Conditional Access Policy Modified by New User' 
    enabled: true 
    description: >

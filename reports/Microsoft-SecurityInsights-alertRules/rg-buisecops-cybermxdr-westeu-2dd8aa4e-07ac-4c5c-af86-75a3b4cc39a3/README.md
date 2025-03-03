@@ -16,6 +16,43 @@
    queryPeriod: 'P1D' 
    triggerOperator: 'GreaterThan' 
    triggerThreshold: null 
+   eventGroupingSettings: 
+     aggregationKind: 'SingleAlert' 
+   incidentConfiguration: 
+     createIncident: true 
+     groupingConfiguration: 
+       enabled: null 
+       reopenClosedIncident: null 
+       lookbackDuration: 'PT5M' 
+       matchingMethod: 'AllEntities' 
+       groupByEntities: null 
+       groupByAlertDetails: null 
+       groupByCustomDetails: null 
+   entityMappings: 
+    - 
+      entityType: 'Account' 
+      fieldMappings: 
+       - 
+         identifier: 'Name' 
+         columnName: 'InvitedUserName' 
+       - 
+         identifier: 'UPNSuffix' 
+         columnName: 'InvitedUserUPNSuffix' 
+    - 
+      entityType: 'Account' 
+      fieldMappings: 
+       - 
+         identifier: 'Name' 
+         columnName: 'InitiatedByName' 
+       - 
+         identifier: 'UPNSuffix' 
+         columnName: 'InitiatedByUPNSuffix' 
+    - 
+      entityType: 'IP' 
+      fieldMappings: 
+       - 
+         identifier: 'Address' 
+         columnName: 'IPAddress' 
    severity: 'Medium' 
    query: >
     let queryfrequency = 1h;
@@ -82,43 +119,6 @@
  
    suppressionDuration: 'PT5H' 
    suppressionEnabled: null 
-   incidentConfiguration: 
-     createIncident: true 
-     groupingConfiguration: 
-       enabled: null 
-       reopenClosedIncident: null 
-       lookbackDuration: 'PT5M' 
-       matchingMethod: 'AllEntities' 
-       groupByEntities: null 
-       groupByAlertDetails: null 
-       groupByCustomDetails: null 
-   entityMappings: 
-    - 
-      entityType: 'Account' 
-      fieldMappings: 
-       - 
-         identifier: 'Name' 
-         columnName: 'InvitedUserName' 
-       - 
-         identifier: 'UPNSuffix' 
-         columnName: 'InvitedUserUPNSuffix' 
-    - 
-      entityType: 'Account' 
-      fieldMappings: 
-       - 
-         identifier: 'Name' 
-         columnName: 'InitiatedByName' 
-       - 
-         identifier: 'UPNSuffix' 
-         columnName: 'InitiatedByUPNSuffix' 
-    - 
-      entityType: 'IP' 
-      fieldMappings: 
-       - 
-         identifier: 'Address' 
-         columnName: 'IPAddress' 
-   eventGroupingSettings: 
-     aggregationKind: 'SingleAlert' 
    tactics: 
     - 'InitialAccess' 
     - 'Persistence' 
@@ -127,7 +127,6 @@
     - 'T1078' 
     - 'T1136' 
     - 'T1087' 
-   subTechniques: null 
    displayName: 'External guest invitation followed by Azure AD PowerShell signin' 
    enabled: true 
    description: >

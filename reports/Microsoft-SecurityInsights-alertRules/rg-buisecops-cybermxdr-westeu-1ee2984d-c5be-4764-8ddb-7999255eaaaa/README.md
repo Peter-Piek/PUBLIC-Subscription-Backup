@@ -16,6 +16,49 @@
    queryPeriod: 'P14D' 
    triggerOperator: 'GreaterThan' 
    triggerThreshold: null 
+   eventGroupingSettings: 
+     aggregationKind: 'SingleAlert' 
+   incidentConfiguration: 
+     createIncident: true 
+     groupingConfiguration: 
+       enabled: null 
+       reopenClosedIncident: null 
+       lookbackDuration: 'PT5M' 
+       matchingMethod: 'AllEntities' 
+       groupByEntities: null 
+       groupByAlertDetails: null 
+       groupByCustomDetails: null 
+   entityMappings: 
+    - 
+      entityType: 'Account' 
+      fieldMappings: 
+       - 
+         identifier: 'Name' 
+         columnName: 'Name' 
+       - 
+         identifier: 'UPNSuffix' 
+         columnName: 'UPNSuffix' 
+       - 
+         identifier: 'AadUserId' 
+         columnName: 'AadUserId' 
+    - 
+      entityType: 'IP' 
+      fieldMappings: 
+       - 
+         identifier: 'Address' 
+         columnName: 'CallerIpAddress' 
+    - 
+      entityType: 'URL' 
+      fieldMappings: 
+       - 
+         identifier: 'Url' 
+         columnName: 'Url' 
+    - 
+      entityType: 'AzureResource' 
+      fieldMappings: 
+       - 
+         identifier: 'ResourceId' 
+         columnName: 'ResourceId' 
    severity: 'Medium' 
    query: >
     let dt_lookBack = 1h; // Look back 1 hour for AzureActivity logs
@@ -65,53 +108,9 @@
  
    suppressionDuration: 'PT5H' 
    suppressionEnabled: null 
-   incidentConfiguration: 
-     createIncident: true 
-     groupingConfiguration: 
-       enabled: null 
-       reopenClosedIncident: null 
-       lookbackDuration: 'PT5M' 
-       matchingMethod: 'AllEntities' 
-       groupByEntities: null 
-       groupByAlertDetails: null 
-       groupByCustomDetails: null 
-   entityMappings: 
-    - 
-      entityType: 'Account' 
-      fieldMappings: 
-       - 
-         identifier: 'Name' 
-         columnName: 'Name' 
-       - 
-         identifier: 'UPNSuffix' 
-         columnName: 'UPNSuffix' 
-       - 
-         identifier: 'AadUserId' 
-         columnName: 'AadUserId' 
-    - 
-      entityType: 'IP' 
-      fieldMappings: 
-       - 
-         identifier: 'Address' 
-         columnName: 'CallerIpAddress' 
-    - 
-      entityType: 'URL' 
-      fieldMappings: 
-       - 
-         identifier: 'Url' 
-         columnName: 'Url' 
-    - 
-      entityType: 'AzureResource' 
-      fieldMappings: 
-       - 
-         identifier: 'ResourceId' 
-         columnName: 'ResourceId' 
-   eventGroupingSettings: 
-     aggregationKind: 'SingleAlert' 
    tactics: 
     - 'Impact' 
    techniques: null 
-   subTechniques: null 
    displayName: 'TI Map IP Entity to AzureActivity' 
    enabled: true 
    description: >

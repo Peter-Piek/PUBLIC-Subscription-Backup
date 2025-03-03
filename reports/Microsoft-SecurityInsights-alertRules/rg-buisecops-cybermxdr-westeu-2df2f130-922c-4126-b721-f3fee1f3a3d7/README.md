@@ -16,29 +16,8 @@
    queryPeriod: 'P1D' 
    triggerOperator: 'GreaterThan' 
    triggerThreshold: null 
-   severity: 'Low' 
-   query: >
-    let match_window = 3m;
-    AzureActivity
-    | where ResourceGroup has "cloud-shell"
-    | where (OperationNameValue =~ "Microsoft.Storage/storageAccounts/listKeys/actio
-    n")
-    | where ActivityStatusValue =~ "Success"
-    | extend TimeKey = bin(TimeGenerated, match_window), AzureIP = CallerIpAddress
-    | join kind = inner
-    (AzureActivity
-    | where ResourceGroup has "cloud-shell"
-    | where (OperationNameValue =~ "Microsoft.Storage/storageAccounts/write")
-    | extend TimeKey = bin(TimeGenerated, match_window), UserIP = CallerIpAddress
-    ) on Caller, TimeKey
-    | summarize count() by TimeKey, Caller, ResourceGroup, SubscriptionId, TenantId,
-    AzureIP, UserIP, HTTPRequest, Type, Properties, CategoryValue, OperationList =
-    strcat(OperationNameValue, ' , ', OperationNameValue1)
-    | extend Name = tostring(split(Caller,'@',0)[0]), UPNSuffix = tostring(split(Cal
-    ler,'@',1)[0])
- 
-   suppressionDuration: 'PT5H' 
-   suppressionEnabled: null 
+   eventGroupingSettings: 
+     aggregationKind: 'SingleAlert' 
    incidentConfiguration: 
      createIncident: true 
      groupingConfiguration: 
@@ -68,13 +47,33 @@
        - 
          identifier: 'Address' 
          columnName: 'UserIP' 
-   eventGroupingSettings: 
-     aggregationKind: 'SingleAlert' 
+   severity: 'Low' 
+   query: >
+    let match_window = 3m;
+    AzureActivity
+    | where ResourceGroup has "cloud-shell"
+    | where (OperationNameValue =~ "Microsoft.Storage/storageAccounts/listKeys/actio
+    n")
+    | where ActivityStatusValue =~ "Success"
+    | extend TimeKey = bin(TimeGenerated, match_window), AzureIP = CallerIpAddress
+    | join kind = inner
+    (AzureActivity
+    | where ResourceGroup has "cloud-shell"
+    | where (OperationNameValue =~ "Microsoft.Storage/storageAccounts/write")
+    | extend TimeKey = bin(TimeGenerated, match_window), UserIP = CallerIpAddress
+    ) on Caller, TimeKey
+    | summarize count() by TimeKey, Caller, ResourceGroup, SubscriptionId, TenantId,
+    AzureIP, UserIP, HTTPRequest, Type, Properties, CategoryValue, OperationList =
+    strcat(OperationNameValue, ' , ', OperationNameValue1)
+    | extend Name = tostring(split(Caller,'@',0)[0]), UPNSuffix = tostring(split(Cal
+    ler,'@',1)[0])
+ 
+   suppressionDuration: 'PT5H' 
+   suppressionEnabled: null 
    tactics: 
     - 'Execution' 
    techniques: 
     - 'T1059' 
-   subTechniques: null 
    displayName: 'New CloudShell User' 
    enabled: true 
    description: >

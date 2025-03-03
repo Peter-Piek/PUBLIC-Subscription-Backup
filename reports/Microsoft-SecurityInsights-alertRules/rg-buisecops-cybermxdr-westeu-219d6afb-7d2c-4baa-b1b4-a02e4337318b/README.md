@@ -16,29 +16,8 @@
    queryPeriod: 'P1D' 
    triggerOperator: 'GreaterThan' 
    triggerThreshold: null 
-   severity: 'High' 
-   query: >
-    let Zinc_threats = dynamic(["Trojan:Win32/ZetaNile.A", "Trojan:Win32/EventHorizo
-    n.A", "Trojan:Win32/FoggyBrass.A", "Trojan:Win32/FoggyBrass.B", "Trojan:Win32/Ph
-    antomStar.A","Trojan:Win32/PhantomStar.C","TrojanDropper:Win32/PhantomStar.A"]);
-    DeviceInfo
-    | extend DeviceName = tolower(DeviceName)
-    | join kind=inner ( SecurityAlert
-    | where ProviderName == "MDATP"
-    | extend ThreatName = tostring(parse_json(ExtendedProperties).ThreatName)
-    | extend ThreatFamilyName = tostring(parse_json(ExtendedProperties).ThreatFamily
-    Name)
-    | where ThreatName in~ (Zinc_threats) or ThreatFamilyName in~ (Zinc_threats)
-    | extend CompromisedEntity = tolower(CompromisedEntity)
-    ) on $left.DeviceName == $right.CompromisedEntity
-    | summarize by DisplayName, ThreatName, ThreatFamilyName, PublicIP, AlertSeverity,
-    Description, tostring(LoggedOnUsers), DeviceId, TenantId , bin(TimeGenerated,
-    1d), CompromisedEntity, tostring(LoggedOnUsers), ProductName, Entities
-    | extend HostName = tostring(split(CompromisedEntity, '.', 0)[0]), DnsDomain = t
-    ostring(strcat_array(array_slice(split(CompromisedEntity, '.'), 1, -1), '.'))
- 
-   suppressionDuration: 'PT5H' 
-   suppressionEnabled: null 
+   eventGroupingSettings: 
+     aggregationKind: 'SingleAlert' 
    incidentConfiguration: 
      createIncident: true 
      groupingConfiguration: 
@@ -65,13 +44,33 @@
        - 
          identifier: 'Address' 
          columnName: 'PublicIP' 
-   eventGroupingSettings: 
-     aggregationKind: 'SingleAlert' 
+   severity: 'High' 
+   query: >
+    let Zinc_threats = dynamic(["Trojan:Win32/ZetaNile.A", "Trojan:Win32/EventHorizo
+    n.A", "Trojan:Win32/FoggyBrass.A", "Trojan:Win32/FoggyBrass.B", "Trojan:Win32/Ph
+    antomStar.A","Trojan:Win32/PhantomStar.C","TrojanDropper:Win32/PhantomStar.A"]);
+    DeviceInfo
+    | extend DeviceName = tolower(DeviceName)
+    | join kind=inner ( SecurityAlert
+    | where ProviderName == "MDATP"
+    | extend ThreatName = tostring(parse_json(ExtendedProperties).ThreatName)
+    | extend ThreatFamilyName = tostring(parse_json(ExtendedProperties).ThreatFamily
+    Name)
+    | where ThreatName in~ (Zinc_threats) or ThreatFamilyName in~ (Zinc_threats)
+    | extend CompromisedEntity = tolower(CompromisedEntity)
+    ) on $left.DeviceName == $right.CompromisedEntity
+    | summarize by DisplayName, ThreatName, ThreatFamilyName, PublicIP, AlertSeverity,
+    Description, tostring(LoggedOnUsers), DeviceId, TenantId , bin(TimeGenerated,
+    1d), CompromisedEntity, tostring(LoggedOnUsers), ProductName, Entities
+    | extend HostName = tostring(split(CompromisedEntity, '.', 0)[0]), DnsDomain = t
+    ostring(strcat_array(array_slice(split(CompromisedEntity, '.'), 1, -1), '.'))
+ 
+   suppressionDuration: 'PT5H' 
+   suppressionEnabled: null 
    tactics: 
     - 'Impact' 
    techniques: 
     - 'T1486' 
-   subTechniques: null 
    displayName: 'AV detections related to Zinc actors' 
    enabled: true 
    description: >

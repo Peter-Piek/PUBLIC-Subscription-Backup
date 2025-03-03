@@ -16,28 +16,8 @@
    queryPeriod: 'P7D' 
    triggerOperator: 'GreaterThan' 
    triggerThreshold: null 
-   severity: 'Low' 
-   query: >
-    let known_locations = (SigninLogs
-    | where TimeGenerated between(ago(7d)..ago(1d))
-    | where ResultType == 0
-    | extend LocationDetail = strcat(Location, "-", LocationDetails.state)
-    | summarize by LocationDetail);
-    let known_asn = (SigninLogs
-    | where TimeGenerated between(ago(7d)..ago(1d))
-    | where ResultType == 0
-    | summarize by AutonomousSystemNumber);
-    SigninLogs
-    | where TimeGenerated > ago(1d)
-    | where ResultType == 0
-    | where isempty(DeviceDetail.deviceId)
-    | where AuthenticationRequirement == "singleFactorAuthentication"
-    | extend LocationDetail = strcat(Location, "-", LocationDetails.state)
-    | where AutonomousSystemNumber !in (known_asn) and LocationDetail !in (known_l
-    ocations)
- 
-   suppressionDuration: 'PT5H' 
-   suppressionEnabled: null 
+   eventGroupingSettings: 
+     aggregationKind: 'SingleAlert' 
    incidentConfiguration: 
      createIncident: true 
      groupingConfiguration: 
@@ -61,13 +41,32 @@
        - 
          identifier: 'Address' 
          columnName: 'IPAddress' 
-   eventGroupingSettings: 
-     aggregationKind: 'SingleAlert' 
+   severity: 'Low' 
+   query: >
+    let known_locations = (SigninLogs
+    | where TimeGenerated between(ago(7d)..ago(1d))
+    | where ResultType == 0
+    | extend LocationDetail = strcat(Location, "-", LocationDetails.state)
+    | summarize by LocationDetail);
+    let known_asn = (SigninLogs
+    | where TimeGenerated between(ago(7d)..ago(1d))
+    | where ResultType == 0
+    | summarize by AutonomousSystemNumber);
+    SigninLogs
+    | where TimeGenerated > ago(1d)
+    | where ResultType == 0
+    | where isempty(DeviceDetail.deviceId)
+    | where AuthenticationRequirement == "singleFactorAuthentication"
+    | extend LocationDetail = strcat(Location, "-", LocationDetails.state)
+    | where AutonomousSystemNumber !in (known_asn) and LocationDetail !in (known_l
+    ocations)
+ 
+   suppressionDuration: 'PT5H' 
+   suppressionEnabled: null 
    tactics: 
     - 'InitialAccess' 
    techniques: 
     - 'T1078' 
-   subTechniques: null 
    displayName: 'Anomolous Single Factor Signin' 
    enabled: true 
    description: >

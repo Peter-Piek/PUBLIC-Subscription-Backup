@@ -16,18 +16,8 @@
    queryPeriod: 'P2D' 
    triggerOperator: 'GreaterThan' 
    triggerThreshold: null 
-   severity: 'Medium' 
-   query: >
-    Heartbeat
-    | where TimeGenerated > ago(24hr)
-    |extend LocalIP = iff(isnotempty(parse_json(ComputerPrivateIPs.[0])),parse_json(
-    ComputerPrivateIPs.[0]),"")
-    | summarize LastHeartbeat=max(TimeGenerated) by Computer, LocalIP
-    | where LastHeartbeat < ago(1h)
-    | project LastHeartbeat, Computer, LocalIP
- 
-   suppressionDuration: 'PT5H' 
-   suppressionEnabled: null 
+   eventGroupingSettings: 
+     aggregationKind: 'SingleAlert' 
    incidentConfiguration: 
      createIncident: true 
      groupingConfiguration: 
@@ -45,11 +35,20 @@
        - 
          identifier: 'HostName' 
          columnName: 'Computer' 
-   eventGroupingSettings: 
-     aggregationKind: 'SingleAlert' 
+   severity: 'Medium' 
+   query: >
+    Heartbeat
+    | where TimeGenerated > ago(24hr)
+    |extend LocalIP = iff(isnotempty(parse_json(ComputerPrivateIPs.[0])),parse_json(
+    ComputerPrivateIPs.[0]),"")
+    | summarize LastHeartbeat=max(TimeGenerated) by Computer, LocalIP
+    | where LastHeartbeat < ago(1h)
+    | project LastHeartbeat, Computer, LocalIP
+ 
+   suppressionDuration: 'PT5H' 
+   suppressionEnabled: null 
    tactics: null 
    techniques: null 
-   subTechniques: null 
    displayName: 'Heartbeat stopped [custom]' 
    enabled: true 
    description: >

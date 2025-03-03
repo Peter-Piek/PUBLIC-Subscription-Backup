@@ -8,10 +8,9 @@
     "queryPeriod": "PT1H",
     "triggerOperator": "GreaterThan",
     "triggerThreshold": 0,
-    "severity": "High",
-    "query": "// Query focus on zeroday exploit for springshell\r\nlet regx_value_1 = @'(http\\:\\/\\/[0-9]{1,4}\\.[0-9]{1,4}\\.[0-9]{1,4}\\.[0-9]{1,4}\\:\\d{1,4})shell\\.jsp?cmd\\=w{1,}';\r\nlet regx_value_2 = @'(http\\:\\/\\/[0-9]{1,4}\\.[0-9]{1,4}\\.[0-9]{1,4}\\.[0-9]{1,4}\\:\\d{1,4})\\/\\w{1,}\\.\\w{1,3}\\?\\w{1,3}\\=w{1,}';\r\nlet regx_value_3 = @'\\/w+\\.\\w{1,}\\?[a-zA-Z]{1,}\\=w{1,}\\&\\w{1,}\\={1,}';\r\nlet regx_value_4= @'(http\\:\\/\\/[0-9]{1,4}\\.[0-9]{1,4}\\.[0-9]{1,4}\\.[0-9]{1,4})';\r\n// you can add regex_value_4 if you would like to see malicious requestin\r\nunion\r\n(CommonSecurityLog\r\n| extend ComLogs = Type\r\n| extend ComLogs_TimeGenerated = TimeGenerated\r\n| where RequestURL matches regex regx_value_1\r\nor RequestURL matches regex regx_value_2\r\nor RequestURL matches regex regx_value_3\r\n// uncomment this line if you are interested in request with IPs\r\n// or RequestURL matches regex regx_value_4\r\n),\r\n(DeviceNetworkEvents\r\n| extend DeviceNetworkLog_TimeGenerated = TimeGenerated\r\n| extend DeviceNetworkLog= Type\r\n| extend DeviceNet = DeviceName\r\n| where RemoteUrl matches regex regx_value_1\r\nor RemoteUrl matches regex regx_value_2\r\nor RemoteUrl matches regex regx_value_3),\r\n(DnsEvents\r\n| extend DnsLog = Type\r\n| extend DnsLog_TimeGenerated = TimeGenerated\r\n| where Name matches regex regx_value_1\r\nor Name matches regex regx_value_2\r\nor Name matches regex regx_value_3)\r\n| project ComLogs_TimeGenerated,ComLogs,\r\nSourceIP,\r\nDestinationIP,\r\nDestinationPort,\r\nRequestURL,\r\nDeviceNetworkLog_TimeGenerated,\r\nDeviceNetworkLog,\r\nDeviceNet,\r\nLocalIP,\r\nRemoteIP,\r\nRemoteUrl,\r\nDnsLog_TimeGenerated,\r\nDnsLog,\r\nClientIP,\r\nIPAddresses,\r\nName",
-    "suppressionDuration": "PT5H",
-    "suppressionEnabled": false,
+    "eventGroupingSettings": {
+      "aggregationKind": "SingleAlert"
+    },
     "incidentConfiguration": {
       "createIncident": true,
       "groupingConfiguration": {
@@ -35,16 +34,16 @@
         ]
       }
     ],
-    "eventGroupingSettings": {
-      "aggregationKind": "SingleAlert"
-    },
+    "severity": "High",
+    "query": "// Query focus on zeroday exploit for springshell\r\nlet regx_value_1 = @'(http\\:\\/\\/[0-9]{1,4}\\.[0-9]{1,4}\\.[0-9]{1,4}\\.[0-9]{1,4}\\:\\d{1,4})shell\\.jsp?cmd\\=w{1,}';\r\nlet regx_value_2 = @'(http\\:\\/\\/[0-9]{1,4}\\.[0-9]{1,4}\\.[0-9]{1,4}\\.[0-9]{1,4}\\:\\d{1,4})\\/\\w{1,}\\.\\w{1,3}\\?\\w{1,3}\\=w{1,}';\r\nlet regx_value_3 = @'\\/w+\\.\\w{1,}\\?[a-zA-Z]{1,}\\=w{1,}\\&\\w{1,}\\={1,}';\r\nlet regx_value_4= @'(http\\:\\/\\/[0-9]{1,4}\\.[0-9]{1,4}\\.[0-9]{1,4}\\.[0-9]{1,4})';\r\n// you can add regex_value_4 if you would like to see malicious requestin\r\nunion\r\n(CommonSecurityLog\r\n| extend ComLogs = Type\r\n| extend ComLogs_TimeGenerated = TimeGenerated\r\n| where RequestURL matches regex regx_value_1\r\nor RequestURL matches regex regx_value_2\r\nor RequestURL matches regex regx_value_3\r\n// uncomment this line if you are interested in request with IPs\r\n// or RequestURL matches regex regx_value_4\r\n),\r\n(DeviceNetworkEvents\r\n| extend DeviceNetworkLog_TimeGenerated = TimeGenerated\r\n| extend DeviceNetworkLog= Type\r\n| extend DeviceNet = DeviceName\r\n| where RemoteUrl matches regex regx_value_1\r\nor RemoteUrl matches regex regx_value_2\r\nor RemoteUrl matches regex regx_value_3),\r\n(DnsEvents\r\n| extend DnsLog = Type\r\n| extend DnsLog_TimeGenerated = TimeGenerated\r\n| where Name matches regex regx_value_1\r\nor Name matches regex regx_value_2\r\nor Name matches regex regx_value_3)\r\n| project ComLogs_TimeGenerated,ComLogs,\r\nSourceIP,\r\nDestinationIP,\r\nDestinationPort,\r\nRequestURL,\r\nDeviceNetworkLog_TimeGenerated,\r\nDeviceNetworkLog,\r\nDeviceNet,\r\nLocalIP,\r\nRemoteIP,\r\nRemoteUrl,\r\nDnsLog_TimeGenerated,\r\nDnsLog,\r\nClientIP,\r\nIPAddresses,\r\nName",
+    "suppressionDuration": "PT5H",
+    "suppressionEnabled": false,
     "tactics": [
       "Execution"
     ],
     "techniques": [
       "T0853"
     ],
-    "subTechniques": [],
     "displayName": "Security vulnerability to CVE-2022-22963/65 [Custom]",
     "enabled": true,
     "description": "The new vulnerability CVE-2022-22963 found on Spring Cloud Function would permit attackers to execute arbitrary code on the machine and compromise the entire host. Using routing functionality, it is possible for a user to provide a specially crafted Spring Expression Language (SpEL) as a routing-expression to access local resources and execute commands in the host. Since Spring Cloud Function can be used in Cloud serverless functions like AWS lambda or Google Cloud Functions, those functions might be impacted as well.",

@@ -16,6 +16,40 @@
    queryPeriod: 'P1D' 
    triggerOperator: 'GreaterThan' 
    triggerThreshold: null 
+   eventGroupingSettings: 
+     aggregationKind: 'SingleAlert' 
+   incidentConfiguration: 
+     createIncident: true 
+     groupingConfiguration: 
+       enabled: null 
+       reopenClosedIncident: null 
+       lookbackDuration: 'PT5M' 
+       matchingMethod: 'AllEntities' 
+       groupByEntities: null 
+       groupByAlertDetails: null 
+       groupByCustomDetails: null 
+   entityMappings: 
+    - 
+      entityType: 'Account' 
+      fieldMappings: 
+       - 
+         identifier: 'Name' 
+         columnName: 'AccountName' 
+       - 
+         identifier: 'UPNSuffix' 
+         columnName: 'AccountUPNSuffix' 
+    - 
+      entityType: 'Host' 
+      fieldMappings: 
+       - 
+         identifier: 'FullName' 
+         columnName: 'OriginatingServer' 
+    - 
+      entityType: 'IP' 
+      fieldMappings: 
+       - 
+         identifier: 'Address' 
+         columnName: 'ClientIPAddress' 
    severity: 'Medium' 
    query: >
     let Keywords = dynamic(["helpdesk", " alert", " suspicious", "fake", "malicious",
@@ -50,47 +84,12 @@
  
    suppressionDuration: 'PT5H' 
    suppressionEnabled: null 
-   incidentConfiguration: 
-     createIncident: true 
-     groupingConfiguration: 
-       enabled: null 
-       reopenClosedIncident: null 
-       lookbackDuration: 'PT5M' 
-       matchingMethod: 'AllEntities' 
-       groupByEntities: null 
-       groupByAlertDetails: null 
-       groupByCustomDetails: null 
-   entityMappings: 
-    - 
-      entityType: 'Account' 
-      fieldMappings: 
-       - 
-         identifier: 'Name' 
-         columnName: 'AccountName' 
-       - 
-         identifier: 'UPNSuffix' 
-         columnName: 'AccountUPNSuffix' 
-    - 
-      entityType: 'Host' 
-      fieldMappings: 
-       - 
-         identifier: 'FullName' 
-         columnName: 'OriginatingServer' 
-    - 
-      entityType: 'IP' 
-      fieldMappings: 
-       - 
-         identifier: 'Address' 
-         columnName: 'ClientIPAddress' 
-   eventGroupingSettings: 
-     aggregationKind: 'SingleAlert' 
    tactics: 
     - 'Persistence' 
     - 'DefenseEvasion' 
    techniques: 
     - 'T1098' 
     - 'T1078' 
-   subTechniques: null 
    displayName: 'Malicious Inbox Rule' 
    enabled: true 
    description: >

@@ -16,43 +16,8 @@
    queryPeriod: 'P14D' 
    triggerOperator: 'GreaterThan' 
    triggerThreshold: null 
-   severity: 'Medium' 
-   query: >
-    let dt_lookBack = 1h;
-    let ioc_lookBack = 14d;
-    let fileHashIndicators = ThreatIntelligenceIndicator
-    | where isnotempty(FileHashValue)
-    | where TimeGenerated >= ago(ioc_lookBack)
-    | summarize LatestIndicatorTime = arg_max(TimeGenerated, *) by IndicatorId
-    | where Active == true and ExpirationDateTime > now();
-    // Handle matches against both lower case and uppercase versions of the hash:
-    (fileHashIndicators | extend  FileHashValue = tolower(FileHashValue)
-    | union (fileHashIndicators | extend FileHashValue = toupper(FileHashValue)))
-    // using innerunique to keep perf fast and result set low, we only need one match
-    to indicate potential malicious activity that needs to be investigated
-    |  join kind=innerunique (
-    CommonSecurityLog | where TimeGenerated >= ago(dt_lookBack)
-    | where isnotempty(FileHash)
-    | extend CommonSecurityLog_TimeGenerated = TimeGenerated
-    )
-    on $left.FileHashValue == $right.FileHash
-    | where CommonSecurityLog_TimeGenerated < ExpirationDateTime
-    | summarize CommonSecurityLog_TimeGenerated = arg_max(CommonSecurityLog_TimeGene
-    rated, *) by IndicatorId, FileHashValue
-    | project CommonSecurityLog_TimeGenerated, Description, ActivityGroupNames,
-    IndicatorId, ThreatType, Url, ExpirationDateTime, ConfidenceScore,
-    SourceIP, SourcePort, DestinationIP, DestinationPort, SourceUserID, SourceUserName,
-    DeviceName, DeviceAction,
-    RequestURL, DestinationUserName, DestinationUserID, ApplicationProtocol, Activity,
-    FileHashValue, FileHashType
-    | extend HostName = tostring(split(DeviceName, '.', 0)[0]), DnsDomain = tostring
-    (strcat_array(array_slice(split(DeviceName, '.'), 1, -1), '.'))
-    | extend Name = tostring(split(SourceUserName, '@', 0)[0]), UPNSuffix = tostring
-    (split(SourceUserName, '@', 1)[0])
-    | extend timestamp = CommonSecurityLog_TimeGenerated
- 
-   suppressionDuration: 'PT5H' 
-   suppressionEnabled: null 
+   eventGroupingSettings: 
+     aggregationKind: 'SingleAlert' 
    incidentConfiguration: 
      createIncident: true 
      groupingConfiguration: 
@@ -103,12 +68,46 @@
        - 
          identifier: 'Algorithm' 
          columnName: 'FileHashType' 
-   eventGroupingSettings: 
-     aggregationKind: 'SingleAlert' 
+   severity: 'Medium' 
+   query: >
+    let dt_lookBack = 1h;
+    let ioc_lookBack = 14d;
+    let fileHashIndicators = ThreatIntelligenceIndicator
+    | where isnotempty(FileHashValue)
+    | where TimeGenerated >= ago(ioc_lookBack)
+    | summarize LatestIndicatorTime = arg_max(TimeGenerated, *) by IndicatorId
+    | where Active == true and ExpirationDateTime > now();
+    // Handle matches against both lower case and uppercase versions of the hash:
+    (fileHashIndicators | extend  FileHashValue = tolower(FileHashValue)
+    | union (fileHashIndicators | extend FileHashValue = toupper(FileHashValue)))
+    // using innerunique to keep perf fast and result set low, we only need one match
+    to indicate potential malicious activity that needs to be investigated
+    |  join kind=innerunique (
+    CommonSecurityLog | where TimeGenerated >= ago(dt_lookBack)
+    | where isnotempty(FileHash)
+    | extend CommonSecurityLog_TimeGenerated = TimeGenerated
+    )
+    on $left.FileHashValue == $right.FileHash
+    | where CommonSecurityLog_TimeGenerated < ExpirationDateTime
+    | summarize CommonSecurityLog_TimeGenerated = arg_max(CommonSecurityLog_TimeGene
+    rated, *) by IndicatorId, FileHashValue
+    | project CommonSecurityLog_TimeGenerated, Description, ActivityGroupNames,
+    IndicatorId, ThreatType, Url, ExpirationDateTime, ConfidenceScore,
+    SourceIP, SourcePort, DestinationIP, DestinationPort, SourceUserID, SourceUserName,
+    DeviceName, DeviceAction,
+    RequestURL, DestinationUserName, DestinationUserID, ApplicationProtocol, Activity,
+    FileHashValue, FileHashType
+    | extend HostName = tostring(split(DeviceName, '.', 0)[0]), DnsDomain = tostring
+    (strcat_array(array_slice(split(DeviceName, '.'), 1, -1), '.'))
+    | extend Name = tostring(split(SourceUserName, '@', 0)[0]), UPNSuffix = tostring
+    (split(SourceUserName, '@', 1)[0])
+    | extend timestamp = CommonSecurityLog_TimeGenerated
+ 
+   suppressionDuration: 'PT5H' 
+   suppressionEnabled: null 
    tactics: 
     - 'Impact' 
    techniques: null 
-   subTechniques: null 
    displayName: 'TI map File Hash to CommonSecurityLog Event' 
    enabled: true 
    description: 'Identifies a match in CommonSecurityLog Event data from any FileHash IOC from TI' 

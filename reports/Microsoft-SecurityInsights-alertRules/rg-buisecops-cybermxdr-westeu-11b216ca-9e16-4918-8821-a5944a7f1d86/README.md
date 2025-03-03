@@ -16,6 +16,40 @@
    queryPeriod: 'P14D' 
    triggerOperator: 'GreaterThan' 
    triggerThreshold: null 
+   eventGroupingSettings: 
+     aggregationKind: 'SingleAlert' 
+   incidentConfiguration: 
+     createIncident: true 
+     groupingConfiguration: 
+       enabled: null 
+       reopenClosedIncident: null 
+       lookbackDuration: 'PT5M' 
+       matchingMethod: 'AllEntities' 
+       groupByEntities: null 
+       groupByAlertDetails: null 
+       groupByCustomDetails: null 
+   entityMappings: 
+    - 
+      entityType: 'Host' 
+      fieldMappings: 
+       - 
+         identifier: 'HostName' 
+         columnName: 'HostName' 
+       - 
+         identifier: 'DnsDomain' 
+         columnName: 'DnsDomain' 
+    - 
+      entityType: 'IP' 
+      fieldMappings: 
+       - 
+         identifier: 'Address' 
+         columnName: 'RemoteIp' 
+    - 
+      entityType: 'URL' 
+      fieldMappings: 
+       - 
+         identifier: 'Url' 
+         columnName: 'Url' 
    severity: 'Medium' 
    query: >
     let dt_lookBack = 1h; // Look back 1 hour for VMConnection events
@@ -64,44 +98,9 @@
  
    suppressionDuration: 'PT5H' 
    suppressionEnabled: null 
-   incidentConfiguration: 
-     createIncident: true 
-     groupingConfiguration: 
-       enabled: null 
-       reopenClosedIncident: null 
-       lookbackDuration: 'PT5M' 
-       matchingMethod: 'AllEntities' 
-       groupByEntities: null 
-       groupByAlertDetails: null 
-       groupByCustomDetails: null 
-   entityMappings: 
-    - 
-      entityType: 'Host' 
-      fieldMappings: 
-       - 
-         identifier: 'HostName' 
-         columnName: 'HostName' 
-       - 
-         identifier: 'DnsDomain' 
-         columnName: 'DnsDomain' 
-    - 
-      entityType: 'IP' 
-      fieldMappings: 
-       - 
-         identifier: 'Address' 
-         columnName: 'RemoteIp' 
-    - 
-      entityType: 'URL' 
-      fieldMappings: 
-       - 
-         identifier: 'Url' 
-         columnName: 'Url' 
-   eventGroupingSettings: 
-     aggregationKind: 'SingleAlert' 
    tactics: 
     - 'Impact' 
    techniques: null 
-   subTechniques: null 
    displayName: 'TI Map IP Entity to VMConnection' 
    enabled: true 
    description: >

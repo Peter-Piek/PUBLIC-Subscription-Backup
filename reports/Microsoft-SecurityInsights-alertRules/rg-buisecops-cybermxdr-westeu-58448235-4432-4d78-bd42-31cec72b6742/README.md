@@ -16,31 +16,8 @@
    queryPeriod: 'P1D' 
    triggerOperator: 'GreaterThan' 
    triggerThreshold: null 
-   severity: 'High' 
-   query: >
-    let Europium_threats = dynamic(["TrojanDropper:ASP/WebShell!MSR", "Trojan:Win32/BatRunGoXml",
-    "DoS:Win64/WprJooblash", "Ransom:Win32/Eagle!MSR", "Trojan:Win32/Debitom.A"]);
-    DeviceInfo
-    | extend DeviceName = tolower(DeviceName)
-    | join kind=inner ( SecurityAlert
-    | where ProviderName == "MDATP"
-    | extend ThreatName = tostring(parse_json(ExtendedProperties).ThreatName)
-    | extend ThreatFamilyName = tostring(parse_json(ExtendedProperties).ThreatFamily
-    Name)
-    | where ThreatName in~ (Europium_threats) or ThreatFamilyName in~ (Europium_thre
-    ats)
-    | extend CompromisedEntity = tolower(CompromisedEntity)
-    ) on $left.DeviceName == $right.CompromisedEntity
-    | summarize by DisplayName, ThreatName, ThreatFamilyName, PublicIP, AlertSeverity,
-    Description, tostring(LoggedOnUsers), DeviceId, TenantId, bin(TimeGenerated, 1d),
-    CompromisedEntity, tostring(LoggedOnUsers), ProductName, Entities
-    | extend HostName = tostring(split(CompromisedEntity, ".")[0]), DomainIndex = to
-    int(indexof(CompromisedEntity, '.'))
-    | extend HostNameDomain = iff(CompromisedEntity != -1, substring(CompromisedEntity,
-    DomainIndex + 1), CompromisedEntity)
- 
-   suppressionDuration: 'PT5H' 
-   suppressionEnabled: null 
+   eventGroupingSettings: 
+     aggregationKind: 'SingleAlert' 
    incidentConfiguration: 
      createIncident: true 
      groupingConfiguration: 
@@ -70,13 +47,35 @@
        - 
          identifier: 'Address' 
          columnName: 'PublicIP' 
-   eventGroupingSettings: 
-     aggregationKind: 'SingleAlert' 
+   severity: 'High' 
+   query: >
+    let Europium_threats = dynamic(["TrojanDropper:ASP/WebShell!MSR", "Trojan:Win32/BatRunGoXml",
+    "DoS:Win64/WprJooblash", "Ransom:Win32/Eagle!MSR", "Trojan:Win32/Debitom.A"]);
+    DeviceInfo
+    | extend DeviceName = tolower(DeviceName)
+    | join kind=inner ( SecurityAlert
+    | where ProviderName == "MDATP"
+    | extend ThreatName = tostring(parse_json(ExtendedProperties).ThreatName)
+    | extend ThreatFamilyName = tostring(parse_json(ExtendedProperties).ThreatFamily
+    Name)
+    | where ThreatName in~ (Europium_threats) or ThreatFamilyName in~ (Europium_thre
+    ats)
+    | extend CompromisedEntity = tolower(CompromisedEntity)
+    ) on $left.DeviceName == $right.CompromisedEntity
+    | summarize by DisplayName, ThreatName, ThreatFamilyName, PublicIP, AlertSeverity,
+    Description, tostring(LoggedOnUsers), DeviceId, TenantId, bin(TimeGenerated, 1d),
+    CompromisedEntity, tostring(LoggedOnUsers), ProductName, Entities
+    | extend HostName = tostring(split(CompromisedEntity, ".")[0]), DomainIndex = to
+    int(indexof(CompromisedEntity, '.'))
+    | extend HostNameDomain = iff(CompromisedEntity != -1, substring(CompromisedEntity,
+    DomainIndex + 1), CompromisedEntity)
+ 
+   suppressionDuration: 'PT5H' 
+   suppressionEnabled: null 
    tactics: 
     - 'Impact' 
    techniques: 
     - 'T1486' 
-   subTechniques: null 
    displayName: 'AV detections related to Europium actors' 
    enabled: true 
    description: >

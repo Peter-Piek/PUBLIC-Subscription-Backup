@@ -16,32 +16,8 @@
    queryPeriod: 'P1D' 
    triggerOperator: 'GreaterThan' 
    triggerThreshold: null 
-   severity: 'Medium' 
-   query: >
-    AuditLogs
-    | where LoggedByService =~ "PIM"
-    | where Category =~ "RoleManagement"
-    | where ActivityDisplayName has "Disable PIM Alert"
-    | extend IpAddress = case(
-    isnotempty(tostring(parse_json(tostring(InitiatedBy.user)).ipAddress)) and tos
-    tring(parse_json(tostring(InitiatedBy.user)).ipAddress) != 'null', tostring(pars
-    e_json(tostring(InitiatedBy.user)).ipAddress),
-    isnotempty(tostring(parse_json(tostring(InitiatedBy.app)).ipAddress)) and tost
-    ring(parse_json(tostring(InitiatedBy.app)).ipAddress) != 'null', tostring(parse_
-    json(tostring(InitiatedBy.app)).ipAddress),
-    'Not Available')
-    | extend InitiatedBy = iff(isnotempty(tostring(parse_json(tostring(InitiatedBy.u
-    ser)).userPrincipalName)),
-    tostring(parse_json(tostring(InitiatedBy.user)).userPrincipalName), tostring(p
-    arse_json(tostring(InitiatedBy.app)).displayName)), UserRoles = tostring(parse_j
-    son(tostring(InitiatedBy.user)).ipAddress)
-    | project InitiatedBy, ActivityDateTime, ActivityDisplayName, IpAddress,
-    AADOperationType, AADTenantId, ResourceId, CorrelationId, Identity
-    | extend AccountName = tostring(split(InitiatedBy, "@")[0]), AccountUPNSuffix =
-    tostring(split(InitiatedBy, "@")[1])
- 
-   suppressionDuration: 'PT5H' 
-   suppressionEnabled: null 
+   eventGroupingSettings: 
+     aggregationKind: 'SingleAlert' 
    incidentConfiguration: 
      createIncident: true 
      groupingConfiguration: 
@@ -77,15 +53,38 @@
        - 
          identifier: 'ResourceId' 
          columnName: 'ResourceId' 
-   eventGroupingSettings: 
-     aggregationKind: 'SingleAlert' 
+   severity: 'Medium' 
+   query: >
+    AuditLogs
+    | where LoggedByService =~ "PIM"
+    | where Category =~ "RoleManagement"
+    | where ActivityDisplayName has "Disable PIM Alert"
+    | extend IpAddress = case(
+    isnotempty(tostring(parse_json(tostring(InitiatedBy.user)).ipAddress)) and tos
+    tring(parse_json(tostring(InitiatedBy.user)).ipAddress) != 'null', tostring(pars
+    e_json(tostring(InitiatedBy.user)).ipAddress),
+    isnotempty(tostring(parse_json(tostring(InitiatedBy.app)).ipAddress)) and tost
+    ring(parse_json(tostring(InitiatedBy.app)).ipAddress) != 'null', tostring(parse_
+    json(tostring(InitiatedBy.app)).ipAddress),
+    'Not Available')
+    | extend InitiatedBy = iff(isnotempty(tostring(parse_json(tostring(InitiatedBy.u
+    ser)).userPrincipalName)),
+    tostring(parse_json(tostring(InitiatedBy.user)).userPrincipalName), tostring(p
+    arse_json(tostring(InitiatedBy.app)).displayName)), UserRoles = tostring(parse_j
+    son(tostring(InitiatedBy.user)).ipAddress)
+    | project InitiatedBy, ActivityDateTime, ActivityDisplayName, IpAddress,
+    AADOperationType, AADTenantId, ResourceId, CorrelationId, Identity
+    | extend AccountName = tostring(split(InitiatedBy, "@")[0]), AccountUPNSuffix =
+    tostring(split(InitiatedBy, "@")[1])
+ 
+   suppressionDuration: 'PT5H' 
+   suppressionEnabled: null 
    tactics: 
     - 'Persistence' 
     - 'PrivilegeEscalation' 
    techniques: 
     - 'T1098' 
     - 'T1078' 
-   subTechniques: null 
    displayName: 'Detect PIM Alert Disabling activity' 
    enabled: true 
    description: >

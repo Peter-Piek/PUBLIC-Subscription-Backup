@@ -16,28 +16,8 @@
    queryPeriod: 'P1D' 
    triggerOperator: 'GreaterThan' 
    triggerThreshold: 1 
-   severity: 'Low' 
-   query: >
-    let tokens = dynamic(["416","208","192","128","120","96","80","72","64","48","44
-    ","40","nc12","nc24","nv24"]);
-    let operationList = dynamic(["microsoft.compute/virtualmachines/write", "microso
-    ft.resources/deployments/write"]);
-    AzureActivity
-    | where OperationNameValue in~ (operationList)
-    | where ActivityStatusValue startswith "Accept"
-    | where Properties has 'vmSize'
-    | extend parsed_property= parse_json(tostring((parse_json(Properties).responseBo
-    dy))).properties
-    | extend vmSize = tostring((parsed_property.hardwareProfile).vmSize)
-    | mv-apply token=tokens to typeof(string) on (where vmSize contains token)
-    | extend ComputerName = tostring((parsed_property.osProfile).computerName)
-    | project TimeGenerated, OperationNameValue, ActivityStatusValue, Caller,
-    CallerIpAddress, ComputerName, vmSize
-    | extend Name = tostring(split(Caller,'@',0)[0]), UPNSuffix = tostring(split(Cal
-    ler,'@',1)[0])
- 
-   suppressionDuration: 'PT5H' 
-   suppressionEnabled: null 
+   eventGroupingSettings: 
+     aggregationKind: 'SingleAlert' 
    incidentConfiguration: 
      createIncident: true 
      groupingConfiguration: 
@@ -70,13 +50,32 @@
        - 
          identifier: 'Address' 
          columnName: 'CallerIpAddress' 
-   eventGroupingSettings: 
-     aggregationKind: 'SingleAlert' 
+   severity: 'Low' 
+   query: >
+    let tokens = dynamic(["416","208","192","128","120","96","80","72","64","48","44
+    ","40","nc12","nc24","nv24"]);
+    let operationList = dynamic(["microsoft.compute/virtualmachines/write", "microso
+    ft.resources/deployments/write"]);
+    AzureActivity
+    | where OperationNameValue in~ (operationList)
+    | where ActivityStatusValue startswith "Accept"
+    | where Properties has 'vmSize'
+    | extend parsed_property= parse_json(tostring((parse_json(Properties).responseBo
+    dy))).properties
+    | extend vmSize = tostring((parsed_property.hardwareProfile).vmSize)
+    | mv-apply token=tokens to typeof(string) on (where vmSize contains token)
+    | extend ComputerName = tostring((parsed_property.osProfile).computerName)
+    | project TimeGenerated, OperationNameValue, ActivityStatusValue, Caller,
+    CallerIpAddress, ComputerName, vmSize
+    | extend Name = tostring(split(Caller,'@',0)[0]), UPNSuffix = tostring(split(Cal
+    ler,'@',1)[0])
+ 
+   suppressionDuration: 'PT5H' 
+   suppressionEnabled: null 
    tactics: 
     - 'DefenseEvasion' 
    techniques: 
     - 'T1578' 
-   subTechniques: null 
    displayName: 'Creation of expensive computes in Azure' 
    enabled: true 
    description: >

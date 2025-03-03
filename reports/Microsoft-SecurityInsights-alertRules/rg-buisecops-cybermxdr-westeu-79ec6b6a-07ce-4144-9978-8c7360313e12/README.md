@@ -16,35 +16,8 @@
    queryPeriod: 'P1D' 
    triggerOperator: 'GreaterThan' 
    triggerThreshold: null 
-   severity: 'Low' 
-   query: >
-    AuditLogs
-    | where Category =~ "RoleManagement"
-    | where OperationName has "Add member to role outside of PIM"
-    or (LoggedByService =~ "Core Directory" and OperationName =~ "Add member
-    to role" and Identity != "MS-PIM")
-    | mv-apply TargetResource = TargetResources on
-    (
-    where TargetResource.type =~ "User"
-    | extend TargetUserPrincipalName = tostring(TargetResource.userPrincipalNa
-    me)
-    )
-    | extend InitiatingAppName = tostring(InitiatedBy.app.displayName)
-    | extend InitiatingAppServicePrincipalId = tostring(InitiatedBy.app.servicePrinc
-    ipalId)
-    | extend InitiatingUserPrincipalName = tostring(InitiatedBy.user.userPrincipalNa
-    me)
-    | extend InitiatingAadUserId = tostring(InitiatedBy.user.id)
-    | extend InitiatingIpAddress = tostring(iff(isnotempty(InitiatedBy.user.ipAddres
-    s), InitiatedBy.user.ipAddress, InitiatedBy.app.ipAddress))
-    | extend TargetName = tostring(split(TargetUserPrincipalName,'@',0)[0]), TargetUPNSuffix
-    = tostring(split(TargetUserPrincipalName,'@',1)[0])
-    | extend InitiatedByName = tostring(split(InitiatingUserPrincipalName,'@',0)[0])
-    , InitiatedByUPNSuffix = tostring(split(InitiatingUserPrincipalName,'@',1)[0])
-
- 
-   suppressionDuration: 'PT1H' 
-   suppressionEnabled: null 
+   eventGroupingSettings: 
+     aggregationKind: 'SingleAlert' 
    incidentConfiguration: 
      createIncident: true 
      groupingConfiguration: 
@@ -99,13 +72,39 @@
          identifier: 'Address' 
          columnName: 'InitiatingIpAddress' 
    templateVersion: '1.0.5' 
-   eventGroupingSettings: 
-     aggregationKind: 'SingleAlert' 
+   severity: 'Low' 
+   query: >
+    AuditLogs
+    | where Category =~ "RoleManagement"
+    | where OperationName has "Add member to role outside of PIM"
+    or (LoggedByService =~ "Core Directory" and OperationName =~ "Add member
+    to role" and Identity != "MS-PIM")
+    | mv-apply TargetResource = TargetResources on
+    (
+    where TargetResource.type =~ "User"
+    | extend TargetUserPrincipalName = tostring(TargetResource.userPrincipalNa
+    me)
+    )
+    | extend InitiatingAppName = tostring(InitiatedBy.app.displayName)
+    | extend InitiatingAppServicePrincipalId = tostring(InitiatedBy.app.servicePrinc
+    ipalId)
+    | extend InitiatingUserPrincipalName = tostring(InitiatedBy.user.userPrincipalNa
+    me)
+    | extend InitiatingAadUserId = tostring(InitiatedBy.user.id)
+    | extend InitiatingIpAddress = tostring(iff(isnotempty(InitiatedBy.user.ipAddres
+    s), InitiatedBy.user.ipAddress, InitiatedBy.app.ipAddress))
+    | extend TargetName = tostring(split(TargetUserPrincipalName,'@',0)[0]), TargetUPNSuffix
+    = tostring(split(TargetUserPrincipalName,'@',1)[0])
+    | extend InitiatedByName = tostring(split(InitiatingUserPrincipalName,'@',0)[0])
+    , InitiatedByUPNSuffix = tostring(split(InitiatingUserPrincipalName,'@',1)[0])
+
+ 
+   suppressionDuration: 'PT1H' 
+   suppressionEnabled: null 
    tactics: 
     - 'PrivilegeEscalation' 
    techniques: 
     - 'T1078' 
-   subTechniques: null 
    displayName: 'Privileged Role Assigned Outside PIM' 
    enabled: true 
    description: >
