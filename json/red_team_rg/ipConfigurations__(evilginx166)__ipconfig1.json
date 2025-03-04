@@ -1,12 +1,12 @@
 {
   "name": "ipconfig1",
-  "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/Red_Team_RG/providers/Microsoft.Network/networkInterfaces/kalicloud436/ipConfigurations/ipconfig1",
+  "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/Red_Team_RG/providers/Microsoft.Network/networkInterfaces/evilginx166/ipConfigurations/ipconfig1",
   "type": "Microsoft.Network/networkInterfaces/ipConfigurations",
   "properties": {
-    "privateIPAddress": "10.0.0.4",
+    "privateIPAddress": "10.0.0.7",
     "privateIPAllocationMethod": "Dynamic",
     "publicIPAddress": {
-      "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/Red_Team_RG/providers/Microsoft.Network/publicIPAddresses/KaliCloud-ip"
+      "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/Red_Team_RG/providers/Microsoft.Network/publicIPAddresses/EvilGinx-ip"
     },
     "subnet": {
       "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/Red_Team_RG/providers/Microsoft.Network/virtualNetworks/RedTeam/subnets/default"
