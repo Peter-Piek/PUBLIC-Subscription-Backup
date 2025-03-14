@@ -1,0 +1,26 @@
+# Stale Computers (data older than 24 hours)
+
+```
+--- 
+ properties: 
+   category: 'General Exploration' 
+   displayName: 'Stale Computers (data older than 24 hours)' 
+   version: 2 
+   query: >
+    search not(ObjectName == "Advisor Metrics" or ObjectName == "ManagedSpace") |
+    summarize lastdata = max(TimeGenerated) by Computer | limit 500000 | where lastdata
+    < ago(24h)
+    // Oql: NOT(ObjectName="Advisor Metrics" OR ObjectName=ManagedSpace) | measure
+    max(TimeGenerated) as lastdata by Computer | top 500000 | where lastdata <
+    NOW-24HOURS // Args: {OQ: True; WorkspaceId: 00000000-0000-0000-0000-0000000000
+    00} // Settings: {PTT: True; SortI: True; SortF: True} // Version: 0.1.122
+ 
+ id: >
+  /subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-buisecops-
+  cybermxdr-westeu/providers/Microsoft.OperationalInsights/workspaces/log-buisecop
+  s-cybermxdr-westeu/savedSearches/LogManagement(log-buisecops-cybermxdr-westeu)_G
+  eneral|StaleComputers
+ 
+ name: 'LogManagement(log-buisecops-cybermxdr-westeu)_General|StaleComputers' 
+ type: 'Microsoft.OperationalInsights/savedSearches'
+```

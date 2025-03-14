@@ -1,0 +1,23 @@
+# Count of IIS Log Entries by HTTP User Agent
+
+```
+--- 
+ properties: 
+   category: 'Log Management' 
+   displayName: 'Count of IIS Log Entries by HTTP User Agent' 
+   version: 2 
+   query: >
+    search * | extend Type = $table | where Type == W3CIISLog | summarize AggregatedValue
+    = count() by csUserAgent
+    // Oql: Type=W3CIISLog | Measure count() by csUserAgent // Args: {OQ: True;
+    WorkspaceId: 00000000-0000-0000-0000-000000000000} // Settings: {PEF: True; SortI:
+    True; SortF: True} // Version: 0.1.122
+ 
+ id: >
+  /subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/Red_Team_RG/p
+  roviders/Microsoft.OperationalInsights/workspaces/KObusTest/savedSearches/LogMan
+  agement(KObusTest)_LogManagement|CountIISLogEntriesHTTPUserAgent
+ 
+ name: 'LogManagement(KObusTest)_LogManagement|CountIISLogEntriesHTTPUserAgent' 
+ type: 'Microsoft.OperationalInsights/savedSearches'
+```

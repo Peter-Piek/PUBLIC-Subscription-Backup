@@ -1,0 +1,18 @@
+{
+  "properties": {
+    "category": "Microsoft Sentinel Parser",
+    "displayName": "Parser for AssignedIPAddress",
+    "version": 2,
+    "functionAlias": "AssignedIPAddress",
+    "query": "let AssignedIPAddresses = (Device:string, Timestamp:datetime = datetime(null))\n{\nlet t = coalesce(Timestamp, now());\nlet adapters = materialize(\n    DeviceNetworkInfo \n    | where Timestamp between(max_of(t - 1d, ago(30d)) .. t)\n    | where DeviceId == Device or DeviceName == Device\n    | top 500 by Timestamp);\nlet lastReportId = tolong(toscalar(adapters | summarize arg_max(Timestamp, ReportId) | project ReportId));\nadapters | where ReportId == lastReportId\n| project Timestamp, NetworkAdapterType, IpAddresses = todynamic(tostring(IPAddresses)), ConnectedNetworks\n| mv-expand IpAddresses\n| project Timestamp, IPAddress = tostring(IpAddresses.IPAddress), IPType = tostring(IpAddresses.AddressType), NetworkAdapterType, ConnectedNetworks\n};\n",
+    "tags": [
+      {
+        "name": "description",
+        "value": ""
+      }
+    ]
+  },
+  "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-buisecops-cybermxdr-westeu/providers/Microsoft.OperationalInsights/workspaces/log-buisecops-cybermxdr-westeu/savedSearches/assignedipaddress",
+  "name": "assignedipaddress",
+  "type": "Microsoft.OperationalInsights/savedSearches"
+}
