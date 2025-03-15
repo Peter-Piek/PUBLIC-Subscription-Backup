@@ -140,7 +140,7 @@
               "suppressFailures": false,
               "publisher": "Microsoft.AKS",
               "type": "Compute.AKS.Linux.AKSNode",
-              "typeHandlerVersion": "1.208",
+              "typeHandlerVersion": "1.210",
               "settings": {
                 "disable-uu": "true",
                 "enable-uu": "false",
@@ -151,7 +151,7 @@
         ],
         "extensionsTimeBudget": "PT16M"
       },
-      "timeCreated": "2025-03-11T00:57:21.1081279+00:00"
+      "timeCreated": "2025-03-15T01:21:02.791551+00:00"
     },
     "provisioningState": "Succeeded",
     "overprovision": false,
