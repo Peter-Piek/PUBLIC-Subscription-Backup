@@ -38,7 +38,7 @@
         "mode": "System",
         "osType": "Linux",
         "osSKU": "Ubuntu",
-        "nodeImageVersion": "AKSUbuntu-2204gen2containerd-202502.09.0",
+        "nodeImageVersion": "AKSUbuntu-2204gen2containerd-202503.02.0",
         "upgradeSettings": {
           "maxSurge": "10%",
           "maxUnavailable": "0"
@@ -49,7 +49,7 @@
           "enableVTPM": false,
           "enableSecureBoot": false
         },
-        "eTag": "f670ed95-f9d2-4c40-8e49-7f9a00cfaa0e"
+        "eTag": "c552a3f4-43c1-46a1-90a8-bcee948ac8b6"
       }
     ],
     "windowsProfile": {

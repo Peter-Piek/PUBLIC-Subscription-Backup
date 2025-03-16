@@ -7,7 +7,7 @@
       {
         "name": "826d5e1c-a2ae-44e4-b7f3-082e89fce59e",
         "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/MC_rg-secops-n8n-us_n8n-cluster_eastus/providers/Microsoft.Network/loadBalancers/kubernetes/backendAddressPools/kubernetes/loadBalancerBackendAddresses/826d5e1c-a2ae-44e4-b7f3-082e89fce59e",
-        "etag": "W/\"978a0f7e-e5ef-47ce-a11c-6bc8d8d654b8\"",
+        "etag": "W/\"d3077a1f-99b3-495c-a614-f6e857daaa82\"",
         "properties": {
           "provisioningState": "Succeeded",
           "networkInterfaceIPConfiguration": {
@@ -19,7 +19,7 @@
       {
         "name": "b7c4ed5a-12e5-48ce-b80c-5aa186cfe0a2",
         "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/MC_rg-secops-n8n-us_n8n-cluster_eastus/providers/Microsoft.Network/loadBalancers/kubernetes/backendAddressPools/kubernetes/loadBalancerBackendAddresses/b7c4ed5a-12e5-48ce-b80c-5aa186cfe0a2",
-        "etag": "W/\"978a0f7e-e5ef-47ce-a11c-6bc8d8d654b8\"",
+        "etag": "W/\"d3077a1f-99b3-495c-a614-f6e857daaa82\"",
         "properties": {
           "provisioningState": "Succeeded",
           "networkInterfaceIPConfiguration": {

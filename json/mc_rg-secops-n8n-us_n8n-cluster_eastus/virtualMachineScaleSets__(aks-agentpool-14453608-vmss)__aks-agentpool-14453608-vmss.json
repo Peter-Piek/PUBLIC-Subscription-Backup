@@ -5,12 +5,12 @@
   "location": "eastus",
   "tags": {
     "aks-managed-azure-cni-overlay": "true",
-    "aks-managed-consolidated-additional-properties": "e346b212-f6fe-11ef-9250-4af77d50fbc7",
+    "aks-managed-consolidated-additional-properties": "ac695493-01fe-11f0-96aa-6268fadc462d",
     "aks-managed-createOperationID": "",
     "aks-managed-creationSource": "vmssclient-aks-agentpool-14453608-vmss",
     "aks-managed-enable-imds-restriction": "false",
     "aks-managed-kubeletIdentityClientID": "09221577-df66-4b5f-a136-2db4ee0e71a7",
-    "aks-managed-operationID": "139ddb33-d07c-434f-98fe-22163a07b629",
+    "aks-managed-operationID": "96b2196a-5146-4bf7-8a8b-218dc84f7964",
     "aks-managed-orchestrator": "Kubernetes:1.30.9",
     "aks-managed-poolName": "agentpool",
     "aks-managed-resourceNameSuffix": "31923502",
@@ -71,7 +71,7 @@
           "diskSizeGB": 128
         },
         "imageReference": {
-          "id": "/subscriptions/109a5e88-712a-48ae-9078-9ca8b3c81345/resourceGroups/AKS-Ubuntu/providers/Microsoft.Compute/galleries/AKSUbuntu/images/2204gen2containerd/versions/202502.09.0"
+          "id": "/subscriptions/109a5e88-712a-48ae-9078-9ca8b3c81345/resourceGroups/AKS-Ubuntu/providers/Microsoft.Compute/galleries/AKSUbuntu/images/2204gen2containerd/versions/202503.02.0"
         },
         "diskControllerType": "SCSI"
       },
@@ -151,7 +151,7 @@
         ],
         "extensionsTimeBudget": "PT16M"
       },
-      "timeCreated": "2025-03-15T01:21:02.791551+00:00"
+      "timeCreated": "2025-03-16T00:36:24.478316+00:00"
     },
     "provisioningState": "Succeeded",
     "overprovision": false,
