@@ -48,10 +48,18 @@
         {
           "key": "openai.assistants.default",
           "renewalPeriod": 1,
-          "count": 100,
+          "count": 100000,
           "matchPatterns": [
             {
+              "path": "openai/assistants",
+              "method": "*"
+            },
+            {
               "path": "openai/assistants/*",
+              "method": "*"
+            },
+            {
+              "path": "openai/threads",
               "method": "*"
             },
             {
@@ -59,7 +67,26 @@
               "method": "*"
             },
             {
+              "path": "openai/vector_stores",
+              "method": "*"
+            },
+            {
               "path": "openai/vector_stores/*",
+              "method": "*"
+            }
+          ]
+        },
+        {
+          "key": "openai.responses.default",
+          "renewalPeriod": 1,
+          "count": 100000,
+          "matchPatterns": [
+            {
+              "path": "openai/responses",
+              "method": "*"
+            },
+            {
+              "path": "openai/responses/*",
               "method": "*"
             }
           ]
