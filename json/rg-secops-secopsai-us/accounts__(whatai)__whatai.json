@@ -46,6 +46,39 @@
           ]
         },
         {
+          "key": "openai.assistants.list",
+          "renewalPeriod": 60,
+          "count": 120,
+          "matchPatterns": [
+            {
+              "path": "openai/assistants",
+              "method": "GET"
+            }
+          ]
+        },
+        {
+          "key": "openai.threads.list",
+          "renewalPeriod": 60,
+          "count": 120,
+          "matchPatterns": [
+            {
+              "path": "openai/threads",
+              "method": "GET"
+            }
+          ]
+        },
+        {
+          "key": "openai.vectorstores.list",
+          "renewalPeriod": 60,
+          "count": 120,
+          "matchPatterns": [
+            {
+              "path": "openai/vector_stores",
+              "method": "GET"
+            }
+          ]
+        },
+        {
           "key": "openai.assistants.default",
           "renewalPeriod": 1,
           "count": 100000,
