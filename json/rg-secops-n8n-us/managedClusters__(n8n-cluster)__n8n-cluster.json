@@ -9,8 +9,8 @@
     "powerState": {
       "code": "Running"
     },
-    "kubernetesVersion": "1.30.9",
-    "currentKubernetesVersion": "1.30.9",
+    "kubernetesVersion": "1.30.10",
+    "currentKubernetesVersion": "1.30.10",
     "dnsPrefix": "n8n-cluster-dns",
     "fqdn": "n8n-cluster-dns-7lp24z3g.hcp.eastus.azmk8s.io",
     "azurePortalFQDN": "n8n-cluster-dns-7lp24z3g.portal.hcp.eastus.azmk8s.io",
@@ -32,8 +32,8 @@
         "powerState": {
           "code": "Running"
         },
-        "orchestratorVersion": "1.30.9",
-        "currentOrchestratorVersion": "1.30.9",
+        "orchestratorVersion": "1.30.10",
+        "currentOrchestratorVersion": "1.30.10",
         "enableNodePublicIP": false,
         "mode": "System",
         "osType": "Linux",
@@ -49,7 +49,7 @@
           "enableVTPM": false,
           "enableSecureBoot": false
         },
-        "eTag": "c552a3f4-43c1-46a1-90a8-bcee948ac8b6"
+        "eTag": "ab58eb6a-2991-4c30-a9d7-5ce088f19084"
       }
     ],
     "windowsProfile": {

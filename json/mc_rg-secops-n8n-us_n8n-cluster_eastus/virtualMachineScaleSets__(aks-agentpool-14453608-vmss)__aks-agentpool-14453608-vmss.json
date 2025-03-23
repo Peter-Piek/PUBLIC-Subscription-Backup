@@ -5,13 +5,13 @@
   "location": "eastus",
   "tags": {
     "aks-managed-azure-cni-overlay": "true",
-    "aks-managed-consolidated-additional-properties": "ac695493-01fe-11f0-96aa-6268fadc462d",
+    "aks-managed-consolidated-additional-properties": "adc82203-077f-11f0-858e-564b4e5d12e7",
     "aks-managed-createOperationID": "",
     "aks-managed-creationSource": "vmssclient-aks-agentpool-14453608-vmss",
     "aks-managed-enable-imds-restriction": "false",
     "aks-managed-kubeletIdentityClientID": "09221577-df66-4b5f-a136-2db4ee0e71a7",
-    "aks-managed-operationID": "96b2196a-5146-4bf7-8a8b-218dc84f7964",
-    "aks-managed-orchestrator": "Kubernetes:1.30.9",
+    "aks-managed-operationID": "32381127-014f-4d25-b590-6af53086cca0",
+    "aks-managed-orchestrator": "Kubernetes:1.30.10",
     "aks-managed-poolName": "agentpool",
     "aks-managed-resourceNameSuffix": "31923502",
     "aks-managed-ssh-access": "LocalUser"
@@ -151,7 +151,7 @@
         ],
         "extensionsTimeBudget": "PT16M"
       },
-      "timeCreated": "2025-03-16T00:36:24.478316+00:00"
+      "timeCreated": "2025-03-23T00:42:27.0952326+00:00"
     },
     "provisioningState": "Succeeded",
     "overprovision": false,
