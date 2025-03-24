@@ -18,6 +18,9 @@
       },
       {
         "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/RED_TEAM_RG/providers/Microsoft.Network/networkInterfaces/RDGATEWAY345/ipConfigurations/IPCONFIG1"
+      },
+      {
+        "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/RED_TEAM_RG/providers/Microsoft.Network/networkInterfaces/TEAMSC2441/ipConfigurations/IPCONFIG1"
       }
     ],
     "delegations": [],
