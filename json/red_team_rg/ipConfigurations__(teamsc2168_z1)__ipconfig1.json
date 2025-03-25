@@ -1,10 +1,13 @@
 {
   "name": "ipconfig1",
-  "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/Red_Team_RG/providers/Microsoft.Network/networkInterfaces/teamsc2441/ipConfigurations/ipconfig1",
+  "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/Red_Team_RG/providers/Microsoft.Network/networkInterfaces/teamsc2168_z1/ipConfigurations/ipconfig1",
   "type": "Microsoft.Network/networkInterfaces/ipConfigurations",
   "properties": {
-    "privateIPAddress": "10.0.0.9",
+    "privateIPAddress": "10.0.0.10",
     "privateIPAllocationMethod": "Dynamic",
+    "publicIPAddress": {
+      "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/Red_Team_RG/providers/Microsoft.Network/publicIPAddresses/TeamsC2ip627"
+    },
     "subnet": {
       "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/Red_Team_RG/providers/Microsoft.Network/virtualNetworks/RedTeam/subnets/default"
     },

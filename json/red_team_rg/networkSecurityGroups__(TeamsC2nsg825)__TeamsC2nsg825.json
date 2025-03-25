@@ -1,13 +1,13 @@
 {
-  "name": "TeamsC2-nsg",
-  "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/Red_Team_RG/providers/Microsoft.Network/networkSecurityGroups/TeamsC2-nsg",
+  "name": "TeamsC2nsg825",
+  "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/Red_Team_RG/providers/Microsoft.Network/networkSecurityGroups/TeamsC2nsg825",
   "type": "Microsoft.Network/networkSecurityGroups",
   "location": "southafricanorth",
   "properties": {
     "securityRules": [
       {
         "name": "SSH",
-        "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/Red_Team_RG/providers/Microsoft.Network/networkSecurityGroups/TeamsC2-nsg/securityRules/SSH",
+        "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/Red_Team_RG/providers/Microsoft.Network/networkSecurityGroups/TeamsC2nsg825/securityRules/SSH",
         "type": "Microsoft.Network/networkSecurityGroups/securityRules",
         "properties": {
           "protocol": "TCP",
@@ -25,36 +25,17 @@
         }
       },
       {
-        "name": "AllowAnyCustom8080Inbound",
-        "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/Red_Team_RG/providers/Microsoft.Network/networkSecurityGroups/TeamsC2-nsg/securityRules/AllowAnyCustom8080Inbound",
+        "name": "AllowAnyCustom3389Inbound",
+        "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/Red_Team_RG/providers/Microsoft.Network/networkSecurityGroups/TeamsC2nsg825/securityRules/AllowAnyCustom3389Inbound",
         "type": "Microsoft.Network/networkSecurityGroups/securityRules",
         "properties": {
           "protocol": "*",
           "sourcePortRange": "*",
-          "destinationPortRange": "80",
+          "destinationPortRange": "33389",
           "sourceAddressPrefix": "*",
           "destinationAddressPrefix": "*",
-          "access": "Allow",
+          "access": "Deny",
           "priority": 310,
-          "direction": "Inbound",
-          "sourcePortRanges": [],
-          "destinationPortRanges": [],
-          "sourceAddressPrefixes": [],
-          "destinationAddressPrefixes": []
-        }
-      },
-      {
-        "name": "AllowAnyCustom50000Inbound",
-        "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/Red_Team_RG/providers/Microsoft.Network/networkSecurityGroups/TeamsC2-nsg/securityRules/AllowAnyCustom50000Inbound",
-        "type": "Microsoft.Network/networkSecurityGroups/securityRules",
-        "properties": {
-          "protocol": "*",
-          "sourcePortRange": "*",
-          "destinationPortRange": "50000",
-          "sourceAddressPrefix": "*",
-          "destinationAddressPrefix": "*",
-          "access": "Allow",
-          "priority": 320,
           "direction": "Inbound",
           "sourcePortRanges": [],
           "destinationPortRanges": [],
@@ -66,7 +47,7 @@
     "defaultSecurityRules": [
       {
         "name": "AllowVnetInBound",
-        "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/Red_Team_RG/providers/Microsoft.Network/networkSecurityGroups/TeamsC2-nsg/defaultSecurityRules/AllowVnetInBound",
+        "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/Red_Team_RG/providers/Microsoft.Network/networkSecurityGroups/TeamsC2nsg825/defaultSecurityRules/AllowVnetInBound",
         "type": "Microsoft.Network/networkSecurityGroups/defaultSecurityRules",
         "properties": {
           "description": "Allow inbound traffic from all VMs in VNET",
@@ -86,7 +67,7 @@
       },
       {
         "name": "AllowAzureLoadBalancerInBound",
-        "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/Red_Team_RG/providers/Microsoft.Network/networkSecurityGroups/TeamsC2-nsg/defaultSecurityRules/AllowAzureLoadBalancerInBound",
+        "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/Red_Team_RG/providers/Microsoft.Network/networkSecurityGroups/TeamsC2nsg825/defaultSecurityRules/AllowAzureLoadBalancerInBound",
         "type": "Microsoft.Network/networkSecurityGroups/defaultSecurityRules",
         "properties": {
           "description": "Allow inbound traffic from azure load balancer",
@@ -106,7 +87,7 @@
       },
       {
         "name": "DenyAllInBound",
-        "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/Red_Team_RG/providers/Microsoft.Network/networkSecurityGroups/TeamsC2-nsg/defaultSecurityRules/DenyAllInBound",
+        "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/Red_Team_RG/providers/Microsoft.Network/networkSecurityGroups/TeamsC2nsg825/defaultSecurityRules/DenyAllInBound",
         "type": "Microsoft.Network/networkSecurityGroups/defaultSecurityRules",
         "properties": {
           "description": "Deny all inbound traffic",
@@ -126,7 +107,7 @@
       },
       {
         "name": "AllowVnetOutBound",
-        "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/Red_Team_RG/providers/Microsoft.Network/networkSecurityGroups/TeamsC2-nsg/defaultSecurityRules/AllowVnetOutBound",
+        "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/Red_Team_RG/providers/Microsoft.Network/networkSecurityGroups/TeamsC2nsg825/defaultSecurityRules/AllowVnetOutBound",
         "type": "Microsoft.Network/networkSecurityGroups/defaultSecurityRules",
         "properties": {
           "description": "Allow outbound traffic from all VMs to all VMs in VNET",
@@ -146,7 +127,7 @@
       },
       {
         "name": "AllowInternetOutBound",
-        "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/Red_Team_RG/providers/Microsoft.Network/networkSecurityGroups/TeamsC2-nsg/defaultSecurityRules/AllowInternetOutBound",
+        "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/Red_Team_RG/providers/Microsoft.Network/networkSecurityGroups/TeamsC2nsg825/defaultSecurityRules/AllowInternetOutBound",
         "type": "Microsoft.Network/networkSecurityGroups/defaultSecurityRules",
         "properties": {
           "description": "Allow outbound traffic from all VMs to Internet",
@@ -166,7 +147,7 @@
       },
       {
         "name": "DenyAllOutBound",
-        "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/Red_Team_RG/providers/Microsoft.Network/networkSecurityGroups/TeamsC2-nsg/defaultSecurityRules/DenyAllOutBound",
+        "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/Red_Team_RG/providers/Microsoft.Network/networkSecurityGroups/TeamsC2nsg825/defaultSecurityRules/DenyAllOutBound",
         "type": "Microsoft.Network/networkSecurityGroups/defaultSecurityRules",
         "properties": {
           "description": "Deny all outbound traffic",
@@ -187,7 +168,7 @@
     ],
     "networkInterfaces": [
       {
-        "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/Red_Team_RG/providers/Microsoft.Network/networkInterfaces/teamsc2441"
+        "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/Red_Team_RG/providers/Microsoft.Network/networkInterfaces/teamsc2168_z1"
       }
     ]
   }

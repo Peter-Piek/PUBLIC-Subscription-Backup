@@ -1,8 +1,11 @@
 {
-  "name": "TeamsC2_OsDisk_1_d6c7aacbfc414db4a51eb5c9f31cd6b7",
-  "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/RED_TEAM_RG/providers/Microsoft.Compute/disks/TeamsC2_OsDisk_1_d6c7aacbfc414db4a51eb5c9f31cd6b7",
+  "name": "TeamsC2_OsDisk_1_0852ef3515974e5d88cd14b889376b55",
+  "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/RED_TEAM_RG/providers/Microsoft.Compute/disks/TeamsC2_OsDisk_1_0852ef3515974e5d88cd14b889376b55",
   "type": "Microsoft.Compute/disks",
   "location": "southafricanorth",
+  "zones": [
+    "1"
+  ],
   "managedBy": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/Red_Team_RG/providers/Microsoft.Compute/virtualMachines/TeamsC2",
   "sku": {
     "name": "Standard_LRS",
@@ -11,19 +14,24 @@
   "properties": {
     "osType": "Linux",
     "hyperVGeneration": "V2",
-    "supportsHibernation": true,
+    "purchasePlan": {
+      "name": "kali-2024-2",
+      "publisher": "kali-linux",
+      "product": "kali"
+    },
+    "supportsHibernation": false,
     "supportedCapabilities": {
       "diskControllerTypes": "SCSI, NVMe",
-      "acceleratedNetwork": true,
+      "acceleratedNetwork": false,
       "architecture": "x64"
     },
     "creationData": {
       "createOption": "FromImage",
       "imageReference": {
-        "id": "/Subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/Providers/Microsoft.Compute/Locations/SouthAfricaNorth/Publishers/canonical/ArtifactTypes/VMImage/Offers/0001-com-ubuntu-server-jammy/Skus/22_04-lts-gen2/Versions/22.04.202502280"
+        "id": "/Subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/Providers/Microsoft.Compute/Locations/SouthAfricaNorth/Publishers/kali-linux/ArtifactTypes/VMImage/Offers/kali/Skus/kali-2024-2/Versions/2024.2.0"
       }
     },
-    "diskSizeGB": 30,
+    "diskSizeGB": 40,
     "diskIOPSReadWrite": 500,
     "diskMBpsReadWrite": 60,
     "encryption": {
@@ -32,6 +40,6 @@
     "networkAccessPolicy": "AllowAll",
     "publicNetworkAccess": "Enabled",
     "diskState": "Attached",
-    "LastOwnershipUpdateTime": "2025-03-24T16:53:10.7294264+00:00"
+    "LastOwnershipUpdateTime": "2025-03-24T18:56:02.0141741+00:00"
   }
 }

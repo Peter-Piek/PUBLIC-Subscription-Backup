@@ -1,15 +1,21 @@
 {
-  "name": "teamsc2441",
-  "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/Red_Team_RG/providers/Microsoft.Network/networkInterfaces/teamsc2441",
+  "name": "teamsc2168_z1",
+  "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/Red_Team_RG/providers/Microsoft.Network/networkInterfaces/teamsc2168_z1",
   "properties": {
     "ipConfigurations": [
       {
         "name": "ipconfig1",
-        "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/Red_Team_RG/providers/Microsoft.Network/networkInterfaces/teamsc2441/ipConfigurations/ipconfig1",
+        "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/Red_Team_RG/providers/Microsoft.Network/networkInterfaces/teamsc2168_z1/ipConfigurations/ipconfig1",
         "type": "Microsoft.Network/networkInterfaces/ipConfigurations",
         "properties": {
-          "privateIPAddress": "10.0.0.9",
+          "privateIPAddress": "10.0.0.10",
           "privateIPAllocationMethod": "Dynamic",
+          "publicIPAddress": {
+            "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/Red_Team_RG/providers/Microsoft.Network/publicIPAddresses/TeamsC2ip627",
+            "properties": {
+              "deleteOption": "Delete"
+            }
+          },
           "subnet": {
             "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/Red_Team_RG/providers/Microsoft.Network/virtualNetworks/RedTeam/subnets/default"
           },
@@ -23,12 +29,16 @@
       "appliedDnsServers": [],
       "internalDomainNameSuffix": "q4kgeaq4c0xexiema20p1enxvh.jnbx.internal.cloudapp.net"
     },
-    "enableAcceleratedNetworking": true,
+    "enableAcceleratedNetworking": false,
     "vnetEncryptionSupported": false,
     "enableIPForwarding": false,
     "disableTcpStateTracking": false,
     "networkSecurityGroup": {
-      "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/Red_Team_RG/providers/Microsoft.Network/networkSecurityGroups/TeamsC2-nsg"
+      "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/Red_Team_RG/providers/Microsoft.Network/networkSecurityGroups/TeamsC2nsg825"
+    },
+    "primary": true,
+    "virtualMachine": {
+      "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/Red_Team_RG/providers/Microsoft.Compute/virtualMachines/TeamsC2"
     },
     "hostedWorkloads": [],
     "tapConfigurations": [],

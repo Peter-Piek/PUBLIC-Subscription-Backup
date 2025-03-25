@@ -3,34 +3,39 @@
   "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/Red_Team_RG/providers/Microsoft.Compute/virtualMachines/TeamsC2",
   "type": "Microsoft.Compute/virtualMachines",
   "location": "southafricanorth",
+  "plan": {
+    "name": "kali-2024-2",
+    "publisher": "kali-linux",
+    "product": "kali"
+  },
   "properties": {
     "hardwareProfile": {
       "vmSize": "Standard_D2s_v3"
     },
     "provisioningState": "Succeeded",
-    "vmId": "6079cba8-3f74-483f-8414-1cb05ca55402",
+    "vmId": "b241c067-1bf9-4ce9-905f-ac474c770238",
     "additionalCapabilities": {
       "hibernationEnabled": false
     },
     "storageProfile": {
       "imageReference": {
-        "publisher": "canonical",
-        "offer": "0001-com-ubuntu-server-jammy",
-        "sku": "22_04-lts-gen2",
+        "publisher": "kali-linux",
+        "offer": "kali",
+        "sku": "kali-2024-2",
         "version": "latest",
-        "exactVersion": "22.04.202502280"
+        "exactVersion": "2024.2.0"
       },
       "osDisk": {
         "osType": "Linux",
-        "name": "TeamsC2_OsDisk_1_d6c7aacbfc414db4a51eb5c9f31cd6b7",
+        "name": "TeamsC2_OsDisk_1_0852ef3515974e5d88cd14b889376b55",
         "createOption": "FromImage",
         "caching": "ReadWrite",
         "managedDisk": {
           "storageAccountType": "Standard_LRS",
-          "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/Red_Team_RG/providers/Microsoft.Compute/disks/TeamsC2_OsDisk_1_d6c7aacbfc414db4a51eb5c9f31cd6b7"
+          "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/Red_Team_RG/providers/Microsoft.Compute/disks/TeamsC2_OsDisk_1_0852ef3515974e5d88cd14b889376b55"
         },
         "deleteOption": "Delete",
-        "diskSizeGB": 30
+        "diskSizeGB": 40
       },
       "dataDisks": [],
       "diskControllerType": "SCSI"
@@ -42,10 +47,7 @@
         "disablePasswordAuthentication": false,
         "provisionVMAgent": true,
         "patchSettings": {
-          "patchMode": "AutomaticByPlatform",
-          "automaticByPlatformSettings": {
-            "rebootSetting": "IfRequired"
-          },
+          "patchMode": "ImageDefault",
           "assessmentMode": "ImageDefault"
         }
       },
@@ -56,9 +58,9 @@
     "networkProfile": {
       "networkInterfaces": [
         {
-          "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/Red_Team_RG/providers/Microsoft.Network/networkInterfaces/teamsc2441",
+          "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/Red_Team_RG/providers/Microsoft.Network/networkInterfaces/teamsc2168_z1",
           "properties": {
-            "deleteOption": "Detach"
+            "deleteOption": "Delete"
           }
         }
       ]
@@ -68,7 +70,10 @@
         "enabled": true
       }
     },
-    "timeCreated": "2025-03-24T16:53:07.0197277+00:00"
+    "timeCreated": "2025-03-24T18:56:00.7607079+00:00"
   },
-  "etag": "\"2\""
+  "etag": "\"2\"",
+  "zones": [
+    "1"
+  ]
 }
