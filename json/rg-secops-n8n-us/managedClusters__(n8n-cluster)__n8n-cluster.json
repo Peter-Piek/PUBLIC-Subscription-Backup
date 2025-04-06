@@ -9,8 +9,8 @@
     "powerState": {
       "code": "Running"
     },
-    "kubernetesVersion": "1.30.10",
-    "currentKubernetesVersion": "1.30.10",
+    "kubernetesVersion": "1.30.11",
+    "currentKubernetesVersion": "1.30.11",
     "dnsPrefix": "n8n-cluster-dns",
     "fqdn": "n8n-cluster-dns-7lp24z3g.hcp.eastus.azmk8s.io",
     "azurePortalFQDN": "n8n-cluster-dns-7lp24z3g.portal.hcp.eastus.azmk8s.io",
@@ -32,13 +32,13 @@
         "powerState": {
           "code": "Running"
         },
-        "orchestratorVersion": "1.30.10",
-        "currentOrchestratorVersion": "1.30.10",
+        "orchestratorVersion": "1.30.11",
+        "currentOrchestratorVersion": "1.30.11",
         "enableNodePublicIP": false,
         "mode": "System",
         "osType": "Linux",
         "osSKU": "Ubuntu",
-        "nodeImageVersion": "AKSUbuntu-2204gen2containerd-202503.13.0",
+        "nodeImageVersion": "AKSUbuntu-2204gen2containerd-202503.21.0",
         "upgradeSettings": {
           "maxSurge": "10%",
           "maxUnavailable": "0"
@@ -49,7 +49,7 @@
           "enableVTPM": false,
           "enableSecureBoot": false
         },
-        "eTag": "0dea9fc4-8230-4645-a18a-4f7f744f8ad4"
+        "eTag": "808a1336-742e-48af-92cc-caad6633997e"
       }
     ],
     "windowsProfile": {
