@@ -7,6 +7,7 @@ View an archive of the repository as a point in time from the previous 60 days
 
 | Name                 | Day         |View Archive              |
 | -------------------- |-------------|-------------------------|
+| 10 April 2025    | Thursday    | [view repo](https://github.com/Peter-Piek/PUBLIC-Subscription-Backup/tree/HEAD@%7B2025-4-10%7D)    |
 | 9 April 2025    | Wednesday    | [view repo](https://github.com/Peter-Piek/PUBLIC-Subscription-Backup/tree/HEAD@%7B2025-4-9%7D)    |
 | 8 April 2025    | Tuesday    | [view repo](https://github.com/Peter-Piek/PUBLIC-Subscription-Backup/tree/HEAD@%7B2025-4-8%7D)    |
 | 7 April 2025    | Monday    | [view repo](https://github.com/Peter-Piek/PUBLIC-Subscription-Backup/tree/HEAD@%7B2025-4-7%7D)    |
@@ -67,6 +68,5 @@ View an archive of the repository as a point in time from the previous 60 days
 | 11 February 2025    | Tuesday    | [view repo](https://github.com/Peter-Piek/PUBLIC-Subscription-Backup/tree/HEAD@%7B2025-2-11%7D)    |
 | 10 February 2025    | Monday    | [view repo](https://github.com/Peter-Piek/PUBLIC-Subscription-Backup/tree/HEAD@%7B2025-2-10%7D)    |
 | 9 February 2025    | Sunday    | [view repo](https://github.com/Peter-Piek/PUBLIC-Subscription-Backup/tree/HEAD@%7B2025-2-9%7D)    |
-| 8 February 2025    | Saturday    | [view repo](https://github.com/Peter-Piek/PUBLIC-Subscription-Backup/tree/HEAD@%7B2025-2-8%7D)    |
 
 ![](../../reports/img/logo.jpg)
