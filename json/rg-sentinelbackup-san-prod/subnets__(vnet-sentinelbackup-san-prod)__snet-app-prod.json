@@ -1,0 +1,13 @@
+{
+  "name": "snet-app-prod",
+  "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-sentinelbackup-san-prod/providers/Microsoft.Network/virtualNetworks/vnet-sentinelbackup-san-prod/subnets/snet-app-prod",
+  "properties": {
+    "addressPrefixes": [
+      "10.0.0.0/29"
+    ],
+    "delegations": [],
+    "privateEndpointNetworkPolicies": "Disabled",
+    "privateLinkServiceNetworkPolicies": "Enabled"
+  },
+  "type": "Microsoft.Network/virtualNetworks/subnets"
+}
