@@ -1,0 +1,30 @@
+{
+  "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-sentinelbackup-san-prod/providers/Microsoft.DevCenter/devcenters/dc-sentinelbackup-san-prod/devBoxDefinitions/default",
+  "name": "default",
+  "type": "microsoft.devcenter/devcenters/devboxdefinitions",
+  "location": "southafricanorth",
+  "systemData": {
+    "createdBy": "JohnsonS@bui.co.za",
+    "createdByType": "User",
+    "createdAt": "2025-04-14T08:14:11.0582348Z",
+    "lastModifiedBy": "JohnsonS@bui.co.za",
+    "lastModifiedByType": "User",
+    "lastModifiedAt": "2025-04-14T08:14:11.0582348Z"
+  },
+  "properties": {
+    "provisioningState": "Succeeded",
+    "imageReference": {
+      "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-sentinelbackup-san-prod/providers/Microsoft.DevCenter/devcenters/dc-sentinelbackup-san-prod/galleries/Default/images/microsoftvisualstudio_visualstudioplustools_vs-2022-ent-general-win11-m365-gen2",
+      "exactVersion": "1.0.0"
+    },
+    "sku": {
+      "name": "general_i_8c32gb256ssd_v2"
+    },
+    "hibernateSupport": "Disabled",
+    "imageValidationStatus": "Succeeded",
+    "activeImageReference": {
+      "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-sentinelbackup-san-prod/providers/Microsoft.DevCenter/devcenters/dc-sentinelbackup-san-prod/galleries/Default/images/microsoftvisualstudio_visualstudioplustools_vs-2022-ent-general-win11-m365-gen2",
+      "exactVersion": "1.0.0"
+    }
+  }
+}

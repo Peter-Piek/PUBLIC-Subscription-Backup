@@ -1,0 +1,68 @@
+{
+  "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-sentinelbackup-san-prod/providers/Microsoft.DevOpsInfrastructure/pools/SentinelBackup-Managed-DevOps-Pool",
+  "name": "SentinelBackup-Managed-DevOps-Pool",
+  "type": "microsoft.devopsinfrastructure/pools",
+  "location": "westeurope",
+  "tags": {
+    "app": " sentinel backup",
+    "env": "prod"
+  },
+  "systemData": {
+    "createdBy": "JohnsonS@bui.co.za",
+    "createdByType": "User",
+    "createdAt": "2025-04-14T12:29:24.7685545Z",
+    "lastModifiedBy": "JohnsonS@bui.co.za",
+    "lastModifiedByType": "User",
+    "lastModifiedAt": "2025-04-14T13:45:22.6606051Z"
+  },
+  "properties": {
+    "provisioningState": "Succeeded",
+    "organizationProfile": {
+      "organizations": [
+        {
+          "url": "https://dev.azure.com/bui-sentinelbackup",
+          "projects": [],
+          "parallelism": 2,
+          "openAccess": false
+        }
+      ],
+      "permissionProfile": {
+        "kind": "Inherit"
+      },
+      "kind": "AzureDevOps"
+    },
+    "devCenterProjectResourceId": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-sentinelbackup-san-prod/providers/Microsoft.DevCenter/projects/dc-sentinelbackup-san-prod",
+    "maximumConcurrency": 2,
+    "agentProfile": {
+      "maxAgentLifetime": "7.00:00:00",
+      "gracePeriodTimeSpan": "00:00:00",
+      "kind": "Stateful"
+    },
+    "fabricProfile": {
+      "sku": {
+        "name": "Standard_B2ms"
+      },
+      "images": [
+        {
+          "aliases": [
+            "windows-2022"
+          ],
+          "buffer": "*",
+          "wellKnownImageName": "windows-2022/latest"
+        }
+      ],
+      "osProfile": {
+        "secretsManagementSettings": {
+          "observedCertificates": [],
+          "keyExportable": false
+        },
+        "logonType": "Service"
+      },
+      "storageProfile": {
+        "osDiskStorageAccountType": "Standard",
+        "dataDisks": []
+      },
+      "kind": "Vmss"
+    }
+  }
+}

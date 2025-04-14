@@ -1,0 +1,23 @@
+{
+  "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-sentinelbackup-san-prod/providers/Microsoft.DevCenter/projects/dc-sentinelbackup-san-prod",
+  "name": "dc-sentinelbackup-san-prod",
+  "type": "microsoft.devcenter/projects",
+  "location": "southafricanorth",
+  "tags": {
+    "app": " sentinel backup",
+    "env": "prod"
+  },
+  "systemData": {
+    "createdBy": "JohnsonS@bui.co.za",
+    "createdByType": "User",
+    "createdAt": "2025-04-14T12:28:39.8025116Z",
+    "lastModifiedBy": "JohnsonS@bui.co.za",
+    "lastModifiedByType": "User",
+    "lastModifiedAt": "2025-04-14T12:28:39.8025116Z"
+  },
+  "properties": {
+    "provisioningState": "Succeeded",
+    "devCenterId": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-sentinelbackup-san-prod/providers/Microsoft.DevCenter/devcenters/dc-sentinelbackup-san-prod",
+    "devCenterUri": "https://27909b42-a095-40f2-be50-76c52e13b8f3-dc-sentinelbackup-san-prod.southafricanorth.devcenter.azure.com/"
+  }
+}
