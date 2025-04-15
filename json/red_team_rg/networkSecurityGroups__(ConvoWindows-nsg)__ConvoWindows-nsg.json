@@ -1,79 +1,22 @@
 {
-  "name": "TeamsC2nsg825",
-  "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/Red_Team_RG/providers/Microsoft.Network/networkSecurityGroups/TeamsC2nsg825",
+  "name": "ConvoWindows-nsg",
+  "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/Red_Team_RG/providers/Microsoft.Network/networkSecurityGroups/ConvoWindows-nsg",
   "type": "Microsoft.Network/networkSecurityGroups",
   "location": "southafricanorth",
   "properties": {
     "securityRules": [
       {
-        "name": "SSH",
-        "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/Red_Team_RG/providers/Microsoft.Network/networkSecurityGroups/TeamsC2nsg825/securityRules/SSH",
+        "name": "RDP",
+        "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/Red_Team_RG/providers/Microsoft.Network/networkSecurityGroups/ConvoWindows-nsg/securityRules/RDP",
         "type": "Microsoft.Network/networkSecurityGroups/securityRules",
         "properties": {
           "protocol": "TCP",
           "sourcePortRange": "*",
-          "destinationPortRange": "22",
+          "destinationPortRange": "3389",
           "sourceAddressPrefix": "102.220.210.237",
           "destinationAddressPrefix": "*",
           "access": "Allow",
           "priority": 300,
-          "direction": "Inbound",
-          "sourcePortRanges": [],
-          "destinationPortRanges": [],
-          "sourceAddressPrefixes": [],
-          "destinationAddressPrefixes": []
-        }
-      },
-      {
-        "name": "AllowAnyCustom3389Inbound",
-        "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/Red_Team_RG/providers/Microsoft.Network/networkSecurityGroups/TeamsC2nsg825/securityRules/AllowAnyCustom3389Inbound",
-        "type": "Microsoft.Network/networkSecurityGroups/securityRules",
-        "properties": {
-          "protocol": "*",
-          "sourcePortRange": "*",
-          "destinationPortRange": "33389",
-          "sourceAddressPrefix": "102.220.210.237",
-          "destinationAddressPrefix": "*",
-          "access": "Allow",
-          "priority": 310,
-          "direction": "Inbound",
-          "sourcePortRanges": [],
-          "destinationPortRanges": [],
-          "sourceAddressPrefixes": [],
-          "destinationAddressPrefixes": []
-        }
-      },
-      {
-        "name": "AllowAnyCustom80Inbound",
-        "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/Red_Team_RG/providers/Microsoft.Network/networkSecurityGroups/TeamsC2nsg825/securityRules/AllowAnyCustom80Inbound",
-        "type": "Microsoft.Network/networkSecurityGroups/securityRules",
-        "properties": {
-          "protocol": "TCP",
-          "sourcePortRange": "80",
-          "destinationPortRange": "80",
-          "sourceAddressPrefix": "*",
-          "destinationAddressPrefix": "*",
-          "access": "Allow",
-          "priority": 320,
-          "direction": "Inbound",
-          "sourcePortRanges": [],
-          "destinationPortRanges": [],
-          "sourceAddressPrefixes": [],
-          "destinationAddressPrefixes": []
-        }
-      },
-      {
-        "name": "AllowAnyCustomAnyInbound",
-        "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/Red_Team_RG/providers/Microsoft.Network/networkSecurityGroups/TeamsC2nsg825/securityRules/AllowAnyCustomAnyInbound",
-        "type": "Microsoft.Network/networkSecurityGroups/securityRules",
-        "properties": {
-          "protocol": "*",
-          "sourcePortRange": "*",
-          "destinationPortRange": "*",
-          "sourceAddressPrefix": "*",
-          "destinationAddressPrefix": "*",
-          "access": "Deny",
-          "priority": 350,
           "direction": "Inbound",
           "sourcePortRanges": [],
           "destinationPortRanges": [],
@@ -85,7 +28,7 @@
     "defaultSecurityRules": [
       {
         "name": "AllowVnetInBound",
-        "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/Red_Team_RG/providers/Microsoft.Network/networkSecurityGroups/TeamsC2nsg825/defaultSecurityRules/AllowVnetInBound",
+        "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/Red_Team_RG/providers/Microsoft.Network/networkSecurityGroups/ConvoWindows-nsg/defaultSecurityRules/AllowVnetInBound",
         "type": "Microsoft.Network/networkSecurityGroups/defaultSecurityRules",
         "properties": {
           "description": "Allow inbound traffic from all VMs in VNET",
@@ -105,7 +48,7 @@
       },
       {
         "name": "AllowAzureLoadBalancerInBound",
-        "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/Red_Team_RG/providers/Microsoft.Network/networkSecurityGroups/TeamsC2nsg825/defaultSecurityRules/AllowAzureLoadBalancerInBound",
+        "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/Red_Team_RG/providers/Microsoft.Network/networkSecurityGroups/ConvoWindows-nsg/defaultSecurityRules/AllowAzureLoadBalancerInBound",
         "type": "Microsoft.Network/networkSecurityGroups/defaultSecurityRules",
         "properties": {
           "description": "Allow inbound traffic from azure load balancer",
@@ -125,7 +68,7 @@
       },
       {
         "name": "DenyAllInBound",
-        "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/Red_Team_RG/providers/Microsoft.Network/networkSecurityGroups/TeamsC2nsg825/defaultSecurityRules/DenyAllInBound",
+        "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/Red_Team_RG/providers/Microsoft.Network/networkSecurityGroups/ConvoWindows-nsg/defaultSecurityRules/DenyAllInBound",
         "type": "Microsoft.Network/networkSecurityGroups/defaultSecurityRules",
         "properties": {
           "description": "Deny all inbound traffic",
@@ -145,7 +88,7 @@
       },
       {
         "name": "AllowVnetOutBound",
-        "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/Red_Team_RG/providers/Microsoft.Network/networkSecurityGroups/TeamsC2nsg825/defaultSecurityRules/AllowVnetOutBound",
+        "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/Red_Team_RG/providers/Microsoft.Network/networkSecurityGroups/ConvoWindows-nsg/defaultSecurityRules/AllowVnetOutBound",
         "type": "Microsoft.Network/networkSecurityGroups/defaultSecurityRules",
         "properties": {
           "description": "Allow outbound traffic from all VMs to all VMs in VNET",
@@ -165,7 +108,7 @@
       },
       {
         "name": "AllowInternetOutBound",
-        "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/Red_Team_RG/providers/Microsoft.Network/networkSecurityGroups/TeamsC2nsg825/defaultSecurityRules/AllowInternetOutBound",
+        "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/Red_Team_RG/providers/Microsoft.Network/networkSecurityGroups/ConvoWindows-nsg/defaultSecurityRules/AllowInternetOutBound",
         "type": "Microsoft.Network/networkSecurityGroups/defaultSecurityRules",
         "properties": {
           "description": "Allow outbound traffic from all VMs to Internet",
@@ -185,7 +128,7 @@
       },
       {
         "name": "DenyAllOutBound",
-        "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/Red_Team_RG/providers/Microsoft.Network/networkSecurityGroups/TeamsC2nsg825/defaultSecurityRules/DenyAllOutBound",
+        "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/Red_Team_RG/providers/Microsoft.Network/networkSecurityGroups/ConvoWindows-nsg/defaultSecurityRules/DenyAllOutBound",
         "type": "Microsoft.Network/networkSecurityGroups/defaultSecurityRules",
         "properties": {
           "description": "Deny all outbound traffic",
@@ -206,7 +149,7 @@
     ],
     "networkInterfaces": [
       {
-        "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/Red_Team_RG/providers/Microsoft.Network/networkInterfaces/teamsc2168_z1"
+        "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/Red_Team_RG/providers/Microsoft.Network/networkInterfaces/convowindows499"
       }
     ]
   }

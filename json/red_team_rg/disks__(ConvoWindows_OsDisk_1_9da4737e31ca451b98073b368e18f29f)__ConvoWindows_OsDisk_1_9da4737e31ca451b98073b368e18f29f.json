@@ -1,0 +1,37 @@
+{
+  "name": "ConvoWindows_OsDisk_1_9da4737e31ca451b98073b368e18f29f",
+  "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/RED_TEAM_RG/providers/Microsoft.Compute/disks/ConvoWindows_OsDisk_1_9da4737e31ca451b98073b368e18f29f",
+  "type": "Microsoft.Compute/disks",
+  "location": "southafricanorth",
+  "managedBy": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/Red_Team_RG/providers/Microsoft.Compute/virtualMachines/ConvoWindows",
+  "sku": {
+    "name": "StandardSSD_LRS",
+    "tier": "Standard"
+  },
+  "properties": {
+    "osType": "Windows",
+    "hyperVGeneration": "V2",
+    "supportsHibernation": true,
+    "supportedCapabilities": {
+      "diskControllerTypes": "SCSI, NVMe",
+      "acceleratedNetwork": true,
+      "architecture": "x64"
+    },
+    "creationData": {
+      "createOption": "FromImage",
+      "imageReference": {
+        "id": "/Subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/Providers/Microsoft.Compute/Locations/SouthAfricaNorth/Publishers/microsoftwindowsdesktop/ArtifactTypes/VMImage/Offers/windows-11/Skus/win11-24h2-pro/Versions/26100.3775.250406"
+      }
+    },
+    "diskSizeGB": 127,
+    "diskIOPSReadWrite": 500,
+    "diskMBpsReadWrite": 100,
+    "encryption": {
+      "type": "EncryptionAtRestWithPlatformKey"
+    },
+    "networkAccessPolicy": "AllowAll",
+    "publicNetworkAccess": "Enabled",
+    "diskState": "Attached",
+    "LastOwnershipUpdateTime": "2025-04-15T12:16:13.0471018+00:00"
+  }
+}

@@ -5,6 +5,9 @@
     "addressPrefix": "10.0.0.0/24",
     "ipConfigurations": [
       {
+        "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/RED_TEAM_RG/providers/Microsoft.Network/networkInterfaces/CONVOWINDOWS499/ipConfigurations/IPCONFIG1"
+      },
+      {
         "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/RED_TEAM_RG/providers/Microsoft.Network/networkInterfaces/EVILGINX166/ipConfigurations/IPCONFIG1"
       },
       {

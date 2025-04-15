@@ -1,0 +1,54 @@
+{
+  "name": "convowindows499",
+  "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/Red_Team_RG/providers/Microsoft.Network/networkInterfaces/convowindows499",
+  "properties": {
+    "ipConfigurations": [
+      {
+        "name": "ipconfig1",
+        "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/Red_Team_RG/providers/Microsoft.Network/networkInterfaces/convowindows499/ipConfigurations/ipconfig1",
+        "type": "Microsoft.Network/networkInterfaces/ipConfigurations",
+        "properties": {
+          "privateIPAddress": "10.0.0.11",
+          "privateIPAllocationMethod": "Dynamic",
+          "publicIPAddress": {
+            "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/Red_Team_RG/providers/Microsoft.Network/publicIPAddresses/ConvoWindows-ip",
+            "properties": {
+              "deleteOption": "Detach"
+            }
+          },
+          "subnet": {
+            "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/Red_Team_RG/providers/Microsoft.Network/virtualNetworks/RedTeam/subnets/default"
+          },
+          "primary": true,
+          "privateIPAddressVersion": "IPv4"
+        }
+      }
+    ],
+    "dnsSettings": {
+      "dnsServers": [],
+      "appliedDnsServers": [],
+      "internalDomainNameSuffix": "q4kgeaq4c0xexiema20p1enxvh.jnbx.internal.cloudapp.net"
+    },
+    "enableAcceleratedNetworking": true,
+    "vnetEncryptionSupported": false,
+    "enableIPForwarding": false,
+    "disableTcpStateTracking": false,
+    "networkSecurityGroup": {
+      "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/Red_Team_RG/providers/Microsoft.Network/networkSecurityGroups/ConvoWindows-nsg"
+    },
+    "primary": true,
+    "virtualMachine": {
+      "id": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/Red_Team_RG/providers/Microsoft.Compute/virtualMachines/ConvoWindows"
+    },
+    "hostedWorkloads": [],
+    "tapConfigurations": [],
+    "nicType": "Standard",
+    "allowPort25Out": false,
+    "defaultOutboundConnectivityEnabled": false,
+    "auxiliaryMode": "None",
+    "auxiliarySku": "None"
+  },
+  "type": "Microsoft.Network/networkInterfaces",
+  "location": "southafricanorth",
+  "kind": "Regular"
+}

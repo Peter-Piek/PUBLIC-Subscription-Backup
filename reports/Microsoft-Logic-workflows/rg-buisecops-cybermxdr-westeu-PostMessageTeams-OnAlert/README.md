@@ -1,0 +1,142 @@
+# 
+
+```
+---
+
+ properties: 
+   state: 'Enabled' 
+   accessEndpoint: >
+    https://prod-09.eastus.logic.azure.com:443/workflows/616acc7feeea4d6ba9c6f5a94c8
+    77ecc
+
+ 
+   definition: 
+     $schema: >
+      https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01
+      /workflowdefinition.json#
+
+ 
+     contentVersion: '1.0.0.0' 
+     parameters: 
+       $connections: 
+         defaultValue:  
+         type: 'Object' 
+     triggers: 
+       Microsoft_Sentinel_alert: 
+         type: 'ApiConnectionWebhook' 
+         inputs: 
+           host: 
+             connection: 
+               name: '@parameters(''$connections'')[''azuresentinel''][''connectionId'']' 
+           body: 
+             callback_url: '@{listCallbackUrl()}' 
+           path: '/subscribe' 
+     actions: 
+       Alert_-_Get_incident: 
+         runAfter:  
+         type: 'ApiConnection' 
+         inputs: 
+           host: 
+             connection: 
+               name: '@parameters(''$connections'')[''azuresentinel''][''connectionId'']' 
+           method: 'get' 
+           path: >
+            /Incidents/subscriptions/@{encodeURIComponent(triggerBody()?['WorkspaceSubscript
+            ionId'])}/resourceGroups/@{encodeURIComponent(triggerBody()?['WorkspaceResourceG
+            roup'])}/workspaces/@{encodeURIComponent(triggerBody()?['WorkspaceId'])}/alerts/
+            @{encodeURIComponent(triggerBody()?['SystemAlertId'])}
+
+ 
+       Post_a_message_(V3): 
+         runAfter: 
+           Alert_-_Get_incident: 
+            - 'Succeeded' 
+         type: 'ApiConnection' 
+         inputs: 
+           host: 
+             connection: 
+               name: '@parameters(''$connections'')[''teams-1''][''connectionId'']' 
+           method: 'post' 
+           body: 
+             body: 
+               content: >
+                <p>Severity@{body('Alert_-_Get_incident')?['properties']?['severity']}:<br>
+
+                <br>
+
+                Microsoft Sentinel Alert;<br>
+
+                TItle:@{body('Alert_-_Get_incident')?['properties']?['title']}<br>
+
+                Status:@{body('Alert_-_Get_incident')?['properties']?['status']}<br>
+
+                Number:@{body('Alert_-_Get_incident')?['properties']?['incidentNumber']}<br>
+
+                Created Time (UTC):@{body('Alert_-_Get_incident')?['properties']?['createdTimeUt
+                c']}<br>
+
+                Url:@{body('Alert_-_Get_incident')?['properties']?['incidentUrl']}<br>
+
+                Entities:@{triggerBody()?['Entities']}</p>
+
+ 
+               contentType: 'html' 
+           path: >
+            /v3/beta/teams/@{encodeURIComponent('d05ba55c-593e-4bfa-8011-26e0626b5c14')}/cha
+            nnels/@{encodeURIComponent('19:8e52aee721394ab78563596463c067dc@thread.skype')}/
+            messages
+
+ 
+   parameters: 
+     $connections: 
+       value: 
+         azuresentinel: 
+           id: >
+            /subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/providers/Microsoft.Web/loca
+            tions/eastus/managedApis/azuresentinel
+
+ 
+           connectionId: >
+            /subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-buisecops-
+            cybermxdr-westeu/providers/Microsoft.Web/connections/azuresentinel-PostMessageTe
+            ams-OnAlert
+
+ 
+           connectionName: 'azuresentinel-PostMessageTeams-OnAlert' 
+           connectionProperties: 
+             authentication: 
+               type: 'ManagedServiceIdentity' 
+         teams-1: 
+           id: >
+            /subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/providers/Microsoft.Web/loca
+            tions/eastus/managedApis/teams
+
+ 
+           connectionId: >
+            /subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-buisecops-
+            cybermxdr-westeu/providers/Microsoft.Web/connections/teams-1
+
+ 
+           connectionName: 'teams-1' 
+ id: >
+  /subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-buisecops-
+  cybermxdr-westeu/providers/Microsoft.Logic/workflows/PostMessageTeams-OnAlert
+
+ 
+ name: 'PostMessageTeams-OnAlert' 
+ type: 'Microsoft.Logic/workflows' 
+ location: 'eastus' 
+ tags: 
+   hidden-SentinelTemplateName: 'PostMessageTeams' 
+   hidden-SentinelTemplateVersion: '1.0' 
+   hidden-SentinelWorkspaceId: >
+    /subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-buisecops-
+    cybermxdr-westeu/providers/microsoft.OperationalInsights/Workspaces/log-buisecop
+    s-cybermxdr-westeu
+
+ 
+ identity: 
+   type: 'SystemAssigned' 
+   principalId: '197e5d9f-2fdb-4b5c-bd86-2d4b396acbe7' 
+   tenantId: '27909b42-a095-40f2-be50-76c52e13b8f3'
+```
