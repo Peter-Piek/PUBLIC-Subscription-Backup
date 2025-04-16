@@ -13,7 +13,7 @@
     "createdAt": "2025-04-14T12:29:24.7685545Z",
     "lastModifiedBy": "JohnsonS@bui.co.za",
     "lastModifiedByType": "User",
-    "lastModifiedAt": "2025-04-14T13:45:22.6606051Z"
+    "lastModifiedAt": "2025-04-16T12:04:13.0618707Z"
   },
   "properties": {
     "provisioningState": "Succeeded",
@@ -35,7 +35,7 @@
     "maximumConcurrency": 2,
     "agentProfile": {
       "maxAgentLifetime": "7.00:00:00",
-      "gracePeriodTimeSpan": "00:00:00",
+      "gracePeriodTimeSpan": "00:10:00",
       "kind": "Stateful"
     },
     "fabricProfile": {

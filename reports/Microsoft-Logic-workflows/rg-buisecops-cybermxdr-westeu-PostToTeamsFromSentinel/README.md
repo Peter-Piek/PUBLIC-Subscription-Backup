@@ -6,8 +6,8 @@
  properties: 
    state: 'Enabled' 
    accessEndpoint: >
-    https://prod-09.eastus.logic.azure.com:443/workflows/616acc7feeea4d6ba9c6f5a94c8
-    77ecc
+    https://prod-62.eastus.logic.azure.com:443/workflows/ea67edf556784123ad60549924b
+    31271
 
  
    definition: 
@@ -22,33 +22,35 @@
          defaultValue:  
          type: 'Object' 
      triggers: 
-       Microsoft_Sentinel_alert: 
+       Microsoft_Sentinel_incident: 
          type: 'ApiConnectionWebhook' 
          inputs: 
            host: 
              connection: 
-               name: '@parameters(''$connections'')[''azuresentinel-2''][''connectionId'']' 
+               name: '@parameters(''$connections'')[''azuresentinel''][''connectionId'']' 
            body: 
              callback_url: '@{listCallbackUrl()}' 
-           path: '/subscribe' 
+           path: '/incident-creation' 
      actions: 
        Post_message_in_a_chat_or_channel: 
-         runAfter: 
-           Get_incident: 
-            - 'Succeeded' 
+         runAfter:  
          type: 'ApiConnection' 
          inputs: 
            host: 
              connection: 
-               name: '@parameters(''$connections'')[''teams-1''][''connectionId'']' 
+               name: '@parameters(''$connections'')[''teams''][''connectionId'']' 
            method: 'post' 
            body: 
              recipient: 
                groupId: 'c68cb720-6f90-4914-b2ca-eaca01472151' 
-               channelId: '19:lw-6PBOyhVdNAloLXheL124I_5YJWpix44JB6klvMRs1@thread.tacv2' 
+               channelId: '19:7092d30d96a241398bbc5fedb92232c9@thread.tacv2' 
              messageBody: >
-              <p class="editor-paragraph"></p><p class="editor-paragraph">@{triggerBody()?['Se
-              verity']}</p><p class="editor-paragraph"></p><br>
+              <p class="editor-paragraph">New Sentinel Incident</p><p class="editor-paragraph"
+              >@{triggerBody()?['object']?['properties']?['title']}</p><p class="editor-paragr
+              aph">@{triggerBody()?['object']?['properties']?['description']}</p><p class="edi
+              tor-paragraph">@{triggerBody()?['object']?['properties']?['severity']}</p><p cla
+              ss="editor-paragraph">@{triggerBody()?['object']?['properties']?['relatedEntitie
+              s']}</p>
 
  
            path: >
@@ -56,28 +58,11 @@
             Channel')}
 
  
-       Get_incident: 
-         runAfter:  
-         type: 'ApiConnection' 
-         inputs: 
-           host: 
-             connection: 
-               name: '@parameters(''$connections'')[''azuresentinel-2''][''connectionId'']' 
-           method: 'post' 
-           body: 
-             incidentArmId: >
-              @{triggerBody()?['AlertDisplayName']}
-
-              @{triggerBody()?['Severity']}
-
-              @{triggerBody()?['Entities']}
-
- 
-           path: '/Incidents' 
+     outputs:  
    parameters: 
      $connections: 
        value: 
-         azuresentinel-2: 
+         azuresentinel: 
            id: >
             /subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/providers/Microsoft.Web/loca
             tions/eastus/managedApis/azuresentinel
@@ -89,7 +74,7 @@
 
  
            connectionName: 'azuresentinel-2' 
-         teams-1: 
+         teams: 
            id: >
             /subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/providers/Microsoft.Web/loca
             tions/eastus/managedApis/teams
@@ -103,23 +88,14 @@
            connectionName: 'teams-1' 
  id: >
   /subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-buisecops-
-  cybermxdr-westeu/providers/Microsoft.Logic/workflows/PostMessageTeams-OnAlert
+  cybermxdr-westeu/providers/Microsoft.Logic/workflows/PostToTeamsFromSentinel
 
  
- name: 'PostMessageTeams-OnAlert' 
+ name: 'PostToTeamsFromSentinel' 
  type: 'Microsoft.Logic/workflows' 
  location: 'eastus' 
- tags: 
-   hidden-SentinelTemplateName: 'PostMessageTeams' 
-   hidden-SentinelTemplateVersion: '1.0' 
-   hidden-SentinelWorkspaceId: >
-    /subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-buisecops-
-    cybermxdr-westeu/providers/microsoft.OperationalInsights/Workspaces/log-buisecop
-    s-cybermxdr-westeu
-
- 
  identity: 
    type: 'SystemAssigned' 
-   principalId: '197e5d9f-2fdb-4b5c-bd86-2d4b396acbe7' 
+   principalId: '9fc4f765-be80-400f-ac0f-ea59fd2ec8d2' 
    tenantId: '27909b42-a095-40f2-be50-76c52e13b8f3'
 ```

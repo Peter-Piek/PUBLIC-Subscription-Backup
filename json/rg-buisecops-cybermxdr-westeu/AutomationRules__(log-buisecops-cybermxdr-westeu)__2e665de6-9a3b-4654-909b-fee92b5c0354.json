@@ -4,18 +4,20 @@
   "type": "Microsoft.SecurityInsights/AutomationRules",
   "properties": {
     "displayName": "Notification | Teams | High Severity Incidents",
-    "order": 1,
+    "order": 2,
     "triggeringLogic": {
       "isEnabled": true,
-      "triggersOn": "Alerts",
+      "triggersOn": "Incidents",
       "triggersWhen": "Created",
       "conditions": [
         {
           "conditionType": "Property",
           "conditionProperties": {
-            "propertyName": "AlertAnalyticRuleIds",
-            "operator": "Contains",
-            "propertyValues": []
+            "propertyName": "IncidentSeverity",
+            "operator": "Equals",
+            "propertyValues": [
+              "High"
+            ]
           }
         }
       ]
@@ -25,12 +27,12 @@
         "order": 1,
         "actionType": "RunPlaybook",
         "actionConfiguration": {
-          "logicAppResourceId": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-buisecops-cybermxdr-westeu/providers/Microsoft.Logic/workflows/PostMessageTeams-OnAlert",
+          "logicAppResourceId": "/subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-buisecops-cybermxdr-westeu/providers/Microsoft.Logic/workflows/PostToTeamsFromSentinel",
           "tenantId": "27909b42-a095-40f2-be50-76c52e13b8f3"
         }
       }
     ],
-    "lastModifiedTimeUtc": "2025-04-15T08:06:03Z",
+    "lastModifiedTimeUtc": "2025-04-16T06:43:28Z",
     "createdTimeUtc": "2024-10-30T13:01:10Z",
     "lastModifiedBy": {
       "objectId": "e034db27-21d6-434e-9fc5-8623a334f85e",

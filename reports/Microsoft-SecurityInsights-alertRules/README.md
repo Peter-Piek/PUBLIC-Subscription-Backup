@@ -74,7 +74,6 @@
 | [TEARDROP memory-only dropper](rg-buisecops-cybermxdr-westeu-97e6cdb9-08c5-4d4c-95c7-171633672628/README.md)      | 97e6cdb9-08c5-4d4c-95c7-171633672628     | rg-buisecops-cybermxdr-westeu   | True   |
 | [TI map Domain entity to Dns Events (ASIM DNS Schema)](rg-buisecops-cybermxdr-westeu-8d06f1ad-29ba-4c91-9add-089fc25f1479/README.md)      | 8d06f1ad-29ba-4c91-9add-089fc25f1479     | rg-buisecops-cybermxdr-westeu   | True   |
 | [TI map Domain entity to DnsEvents](rg-buisecops-cybermxdr-westeu-235e8e36-b8c1-4ae8-9337-9d49d168d4ea/README.md)      | 235e8e36-b8c1-4ae8-9337-9d49d168d4ea     | rg-buisecops-cybermxdr-westeu   | True   |
-| [TI map Domain entity to PaloAlto](rg-buisecops-cybermxdr-westeu-33c33df4-d0c9-4253-a7b0-68a2468d1718/README.md)      | 33c33df4-d0c9-4253-a7b0-68a2468d1718     | rg-buisecops-cybermxdr-westeu   | True   |
 | [TI map Domain entity to PaloAlto CommonSecurityLog](rg-buisecops-cybermxdr-westeu-8d4f9e53-9ad0-4550-9f6c-0f89312f6805/README.md)      | 8d4f9e53-9ad0-4550-9f6c-0f89312f6805     | rg-buisecops-cybermxdr-westeu   | True   |
 | [TI map Domain entity to SecurityAlert](rg-buisecops-cybermxdr-westeu-117d852f-1def-4482-93d5-d4652b278b21/README.md)      | 117d852f-1def-4482-93d5-d4652b278b21     | rg-buisecops-cybermxdr-westeu   | True   |
 | [TI map Domain entity to Syslog](rg-buisecops-cybermxdr-westeu-5cad4863-85ee-4ca5-8d5b-f892fbf851f7/README.md)      | 5cad4863-85ee-4ca5-8d5b-f892fbf851f7     | rg-buisecops-cybermxdr-westeu   | True   |

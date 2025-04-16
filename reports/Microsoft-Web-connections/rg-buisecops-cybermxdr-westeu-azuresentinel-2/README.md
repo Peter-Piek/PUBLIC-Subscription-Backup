@@ -1,0 +1,47 @@
+# azuresentinel-2
+
+```
+---
+
+ kind: 'V1' 
+ properties: 
+   displayName: 'admin@buisecops.onmicrosoft.com' 
+   authenticatedUser: 
+     name: 'admin@buisecops.onmicrosoft.com' 
+   overallStatus: 'Connected' 
+   statuses: 
+    - 
+      status: 'Connected' 
+   connectionState: 'Enabled' 
+   parameterValues: 
+     token:tenantId: '27909b42-a095-40f2-be50-76c52e13b8f3' 
+     token:grantType: 'code' 
+   customParameterValues:  
+   api: 
+     name: 'azuresentinel' 
+     displayName: 'Microsoft Sentinel' 
+     description: 'Cloud-native SIEM with a built-in AI so you can focus on what matters most' 
+     iconUri: >
+      https://conn-afd-prod-endpoint-bmc9bqahasf3grgk.b01.azurefd.net/releases/v1.0.17
+      35/1.0.1735.4103/azuresentinel/icon.png
+
+ 
+     brandColor: '#0072C6' 
+     category: 'Standard' 
+     id: >
+      /subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/providers/Microsoft.Web/loca
+      tions/eastus/managedApis/azuresentinel
+
+ 
+     type: 'Microsoft.Web/locations/managedApis' 
+   testLinks: null 
+   testRequests: null 
+ id: >
+  /subscriptions/d7425a42-e8c6-4a20-8d02-c2d534dc8a85/resourceGroups/rg-buisecops-
+  cybermxdr-westeu/providers/Microsoft.Web/connections/azuresentinel-2
+
+ 
+ name: 'azuresentinel-2' 
+ type: 'Microsoft.Web/connections' 
+ location: 'eastus'
+```
